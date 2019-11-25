@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="FjC的个人博客">
 <meta property="og:description" content="环境搭建 node.js安装官网 npm或cnpmnpm install -g cnpm --registry-https:&#x2F;&#x2F;registry.npm.taobao.org 验证版本node -v&#96;&#96;npm -v或cnpm -v 安装hexocnpm install -g hexo-cli  创建本地Blog 建立空文件夹作为博客地址，mkdir Blog 然后前往该文件夹 cd Blog&#x2F; 初">
 <meta property="og:locale" content="cn">
-<meta property="og:updated_time" content="2019-11-25T14:48:42.372Z">
+<meta property="og:updated_time" content="2019-11-25T15:13:44.255Z">
 <meta name="twitter:card" content="summary">
 
 
@@ -324,7 +324,20 @@
 <li>本地启动hexo测试效果 <code>hexo s</code></li>
 </ol>
 <h2 id="部署至Github个人主页"><a href="#部署至Github个人主页" class="headerlink" title="部署至Github个人主页"></a>部署至Github个人主页</h2><ol>
-<li>设置Github</li>
+<li><p>设置Github的个人主页</p>
+</li>
+<li><p>在Blog目录下安装git部署插件 <code>cnpm install --save hexo-deployer-git</code></p>
+</li>
+<li><p>在博客配置文件中修改信息 <code>vim _config.yml</code> 在最底部添加：</p>
+ <figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">  <span class="attribute">deploy</span>:</span><br><span class="line"><span class="attribute">type</span>: git</span><br><span class="line"><span class="attribute">repo</span>: <span class="attribute">https</span>:<span class="comment">//github.com/GitHub用户名/GitHub用户名.github.io.git</span></span><br><span class="line"><span class="attribute">branch</span>: master</span><br></pre></td></tr></table></figure></li>
+<li><p>部署到GitHub <code>hexo d</code>，访问<code>https://GitHub用户名.github.io/</code>查看效果</p>
+</li>
+</ol>
+<h2 id="更改主题"><a href="#更改主题" class="headerlink" title="更改主题"></a>更改主题</h2><ol>
+<li>在网上挑选好看的hexo主题</li>
+<li>通过git clone克隆到本地Blog中的theme文件夹内 <code>git clone https://github.com/iissnan/hexo-theme-next themes/next</code></li>
+<li>修改博客配置文件 <code>vim _config.yml</code>，更改主题 <code>theme: 主题文件夹名称</code></li>
+<li>清理<code>hexo clean</code>然后<code>hexo d -g</code>，或者本地查看效果<code>hexo s</code></li>
 </ol>
 
       
@@ -511,7 +524,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#环境搭建"><span class="nav-number">1.</span> <span class="nav-text">环境搭建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建本地Blog"><span class="nav-number">2.</span> <span class="nav-text">创建本地Blog</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署至Github个人主页"><span class="nav-number">3.</span> <span class="nav-text">部署至Github个人主页</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#环境搭建"><span class="nav-number">1.</span> <span class="nav-text">环境搭建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建本地Blog"><span class="nav-number">2.</span> <span class="nav-text">创建本地Blog</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署至Github个人主页"><span class="nav-number">3.</span> <span class="nav-text">部署至Github个人主页</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更改主题"><span class="nav-number">4.</span> <span class="nav-text">更改主题</span></a></li></ol></div>
             
 
           </div>
