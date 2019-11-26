@@ -179,7 +179,7 @@
       
         
         <li class="menu-item menu-item-home">
-          <a href="/%20" rel="section">
+          <a href="/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
@@ -189,7 +189,7 @@
       
         
         <li class="menu-item menu-item-about">
-          <a href="/about/%20" rel="section">
+          <a href="/about/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
@@ -199,7 +199,7 @@
       
         
         <li class="menu-item menu-item-tags">
-          <a href="/tags/%20" rel="section">
+          <a href="/tags/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
@@ -209,7 +209,7 @@
       
         
         <li class="menu-item menu-item-categories">
-          <a href="/categories/%20" rel="section">
+          <a href="/categories/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
@@ -219,7 +219,7 @@
       
         
         <li class="menu-item menu-item-archives">
-          <a href="/archives/%20" rel="section">
+          <a href="/archives/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
@@ -279,7 +279,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/11/25/Linux%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/" itemprop="url">Linux常用指令</a></h1>
+                <a class="post-title-link" href="/2019/11/25/Linux%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/" itemprop="url">Linux/Mac OS常用指令</a></h1>
         
 
         <div class="post-meta">
@@ -353,7 +353,19 @@
       
         
           
-            
+            <h2 id="常用指令"><a href="#常用指令" class="headerlink" title="常用指令"></a>常用指令</h2><ul>
+<li>查看当前地址<code>pwd</code></li>
+<li>查看当前位置内所有文件<code>ls</code></li>
+<li>查看当前位置内所有文件及详细信息<code>ls -s</code></li>
+<li>前往某地址<code>cd 前往的地址目录</code></li>
+</ul>
+<h2 id="vim编辑常用指令"><a href="#vim编辑常用指令" class="headerlink" title="vim编辑常用指令"></a>vim编辑常用指令</h2><ul>
+<li>行号显示</li>
+<li>关键词查找</li>
+<li>修改</li>
+<li>保存退出</li>
+</ul>
+
           
         
       
@@ -502,7 +514,7 @@
 </ol>
 <h2 id="创建本地Blog"><a href="#创建本地Blog" class="headerlink" title="创建本地Blog"></a>创建本地Blog</h2><ol>
 <li>建立空文件夹作为博客地址，<code>mkdir Blog</code></li>
-<li>然后前往该文件夹 <code>cd Blog/</code></li>
+<li>前往该文件夹 <code>cd Blog/</code></li>
 <li>初始化hexo <code>hexo init</code> 这里使用命令创建文件夹是因为我通过<code>cmd + N</code>方式创建文件夹会提示为非空导致无法初始化hexo</li>
 <li>启动hexo 服务 <code>hexo s</code> 成功后可访问<code>http://localhost:4000/</code>，使用<code>ctl+C</code>结束服务</li>
 <li>创建一篇Blog <code>hexo n &quot;文件名&quot;</code>，生成的Blog是markdown格式，会在<code>source/_posts/</code>这个文件夹下</li>
@@ -522,9 +534,36 @@
 <h2 id="更改主题"><a href="#更改主题" class="headerlink" title="更改主题"></a>更改主题</h2><ol>
 <li>在网上挑选好看的hexo主题</li>
 <li>通过git clone克隆到本地Blog中的theme文件夹内 <code>git clone https://github.com/iissnan/hexo-theme-next themes/next</code></li>
-<li>修改博客配置文件 <code>vim _config.yml</code>，更改主题 <code>theme: 主题文件夹名称</code></li>
+<li>修改博客配置文件 <code>vim _config.yml</code><ul>
+<li>更改主题 <code>theme: 主题文件夹名称</code></li>
+</ul>
+</li>
 <li>清理<code>hexo clean</code>然后<code>hexo d -g</code>，或者本地查看效果<code>hexo s</code></li>
 </ol>
+<h2 id="自定义主题配置"><a href="#自定义主题配置" class="headerlink" title="自定义主题配置"></a>自定义主题配置</h2><ol>
+<li>前往博客地址 <code>cd Blog/</code></li>
+<li>修改主题配置文件 <code>vim themes/next/_config.yml</code><ul>
+<li>修改样式查找关键词<code>scheme:</code></li>
+<li>修改侧边栏查找关键词<code>menu:</code><ul>
+<li>需要添加单独页面<code>hexo new page &quot;tags&quot;</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>保存后清理<code>hexo clean</code>，本地运行debug模式测试<code>hexo s --debug</code></li>
+</ol>
+<h2 id="遇到的坑"><a href="#遇到的坑" class="headerlink" title="遇到的坑"></a>遇到的坑</h2><ul>
+<li>使用<code>sudo su</code>即系统角色进行操作后无法再使用管理者或普通用户修改文件<ul>
+<li>严格的权限管理是Liunx系统的优点，所以在进行hexo配置时需要保证权限统一，若平时使用普通用户或管理者权限进行blog创作，请在<code>hexo init</code>及后续操作时不要使用<code>sudo su</code></li>
+</ul>
+</li>
+<li>修改menu后找不到对应页面，提示<code>Cannot GET XXX/%20/</code><ul>
+<li>在主题配置文件中找到<code>menu:</code>对应内容，将所需功能的<code>/ ||</code>之间的空格删除</li>
+</ul>
+</li>
+<li>修改主题后部署到GitHub上主题不改变</li>
+<li>先清理<code>hexo clean</code>，后部署生成<code>hexo d -g</code>，主题改变可能需要等一点时间，不会立刻修改完毕</li>
+</ul>
 
           
         
@@ -740,7 +779,7 @@
             
               <div class="site-state-item site-state-posts">
               
-                <a href="/archives/%20%7C%7C%20archive">
+                <a href="/archives/%7C%7C%20archive">
               
                   <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">posts</span>
