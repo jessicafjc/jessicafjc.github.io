@@ -260,6 +260,155 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://jessicafu.cn/2019/12/03/HTML5-JS-CSS%E4%B8%8EBmob%E4%BA%91%E5%90%8E%E5%8F%B0%E5%AE%9E%E8%B7%B5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jiachen Fu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://aktools.graueneko.xyz/assets/icons/icon-192x192.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FjC的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/12/03/HTML5-JS-CSS%E4%B8%8EBmob%E4%BA%91%E5%90%8E%E5%8F%B0%E5%AE%9E%E8%B7%B5/" itemprop="url">HTML5+JS+CSS与Bmob云后台实践</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-12-03T13:23:12+08:00">
+                2019-12-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web/" itemprop="url" rel="index">
+                    <span itemprop="name">Web</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="前置环境"><a href="#前置环境" class="headerlink" title="前置环境"></a>前置环境</h2><ol>
+<li>代码编译器我选择Hbulider X <a href="https://www.dcloud.io/hbuilderx.html" target="_blank" rel="noopener">官网下载</a></li>
+<li>在Hbuilder新建一个空白项目test_demo，包含index.html、css文件夹、js文件夹、img文件夹</li>
+<li>前往Bmob官网<a href="http://doc.bmob.cn/data/wechat_app_new/index.html#_17" target="_blank" rel="noopener">查看文档</a>并下载对应SDK<a href="https://github.com/bmob/hydrogen-js-sdk/" target="_blank" rel="noopener">GitHub源码地址</a></li>
+<li>在Bmob的控制台云数据库新建项目、新建表、设计数据结构并导入数据</li>
+</ol>
+<h2 id="在项目中接入Bmob云数据库"><a href="#在项目中接入Bmob云数据库" class="headerlink" title="在项目中接入Bmob云数据库"></a>在项目中接入Bmob云数据库</h2><p>将sdk中的<code>dist/Bmob-2.2.1.min.js</code>导入项目的js文件夹下<br>在index.html中引入    <code>&lt;script src=&quot;js/dist/Bmob-2.2.1.min.js&quot;&gt;&lt;/script&gt;</code><br>新建一个js文件<code>main.js</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Bmob.initialize(<span class="string">"你的Secret Key"</span>, <span class="string">"你的API 安全码"</span>);</span><br><span class="line"><span class="comment">//获取_User列表内所有数据，因为_User是系统内置用户表，出于隐私安全考虑，是获取不到密码的</span></span><br><span class="line"><span class="comment">// var query = Bmob.Query("_User");</span></span><br><span class="line"><span class="comment">// query.find().then(res =&gt; &#123;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 	console.log(res)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// &#125;);</span></span><br><span class="line">	<span class="keyword">var</span> text = <span class="string">""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> query = Bmob.Query(<span class="string">'TestData'</span>);</span><br><span class="line"></span><br><span class="line">query.find().then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">console</span>.log(res.length)</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; res.length; i++) &#123; </span><br><span class="line">	    text += res[i].name + <span class="string">"&lt;br&gt;"</span>;</span><br><span class="line">		<span class="built_in">document</span>.getElementById(<span class="string">"name"</span>).innerHTML = text;</span><br><span class="line"></span><br><span class="line">	 &#125;</span><br><span class="line">	</span><br><span class="line"></span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// query.get('khxyHHHZ').then(res =&gt; &#123;</span></span><br><span class="line"><span class="comment">// 	console.log(res.name)</span></span><br><span class="line"><span class="comment">// 	for (i in res)&#123;</span></span><br><span class="line"><span class="comment">// 		text += res[i]</span></span><br><span class="line"><span class="comment">// 		console.log(text)</span></span><br><span class="line">		</span><br><span class="line"><span class="comment">// 	&#125;</span></span><br><span class="line"><span class="comment">// &#125;).catch(err =&gt; &#123;</span></span><br><span class="line"><span class="comment">//   console.log(err)</span></span><br><span class="line"><span class="comment">// &#125;)</span></span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://jessicafu.cn/2019/12/02/Swift5-0-UI%E4%BB%A3%E7%A0%81Tips/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -450,6 +599,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web/" itemprop="url" rel="index">
+                    <span itemprop="name">Web</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -1229,7 +1400,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
