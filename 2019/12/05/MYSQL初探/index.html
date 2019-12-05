@@ -79,15 +79,15 @@
 
 
 
-<meta name="description" content="环境搭建 node.js安装官网 npm或cnpmnpm install -g cnpm --registry-https:&#x2F;&#x2F;registry.npm.taobao.org 验证版本node -v&#96;&#96;npm -v或cnpm -v 安装hexocnpm install -g hexo-cli  创建本地Blog 建立空文件夹作为博客地址，mkdir Blog 前往该文件夹 cd Blog&#x2F; 初始化">
+<meta name="description" content="目标在阿里云服务器上配置MYSQL数据库，并通过软件进行远程连接和图形化操作 前期操作购买好ECS，我这里选择的CentOS按步骤安装MYSQL，设置root及其密码生月日星座六位数">
 <meta name="keywords" content="实践">
 <meta property="og:type" content="article">
-<meta property="og:title" content="搭建hexo个人博客">
-<meta property="og:url" content="http:&#x2F;&#x2F;jessicafu.cn&#x2F;2019&#x2F;11&#x2F;25&#x2F;%E6%90%AD%E5%BB%BAhexo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2&#x2F;index.html">
+<meta property="og:title" content="MYSQL初探">
+<meta property="og:url" content="http:&#x2F;&#x2F;jessicafu.cn&#x2F;2019&#x2F;12&#x2F;05&#x2F;MYSQL%E5%88%9D%E6%8E%A2&#x2F;index.html">
 <meta property="og:site_name" content="FjC的个人博客">
-<meta property="og:description" content="环境搭建 node.js安装官网 npm或cnpmnpm install -g cnpm --registry-https:&#x2F;&#x2F;registry.npm.taobao.org 验证版本node -v&#96;&#96;npm -v或cnpm -v 安装hexocnpm install -g hexo-cli  创建本地Blog 建立空文件夹作为博客地址，mkdir Blog 前往该文件夹 cd Blog&#x2F; 初始化">
+<meta property="og:description" content="目标在阿里云服务器上配置MYSQL数据库，并通过软件进行远程连接和图形化操作 前期操作购买好ECS，我这里选择的CentOS按步骤安装MYSQL，设置root及其密码生月日星座六位数">
 <meta property="og:locale" content="cn">
-<meta property="og:updated_time" content="2019-11-27T03:48:42.979Z">
+<meta property="og:updated_time" content="2019-12-05T08:36:24.414Z">
 <meta name="twitter:card" content="summary">
 
 
@@ -118,13 +118,13 @@
 
 
 
-  <link rel="canonical" href="http://jessicafu.cn/2019/11/25/搭建hexo个人博客/"/>
+  <link rel="canonical" href="http://jessicafu.cn/2019/12/05/MYSQL初探/"/>
 
 
 
 
 
-  <title>搭建hexo个人博客 | FjC的个人博客</title>
+  <title>MYSQL初探 | FjC的个人博客</title>
   
 
 
@@ -261,7 +261,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://jessicafu.cn/2019/11/25/%E6%90%AD%E5%BB%BAhexo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">
+    <link itemprop="mainEntityOfPage" href="http://jessicafu.cn/2019/12/05/MYSQL%E5%88%9D%E6%8E%A2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jiachen Fu">
@@ -278,7 +278,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">搭建hexo个人博客</h1>
+          <h1 class="post-title" itemprop="name headline">MYSQL初探</h1>
         
 
         <div class="post-meta">
@@ -290,8 +290,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-11-25T15:36:36+08:00">
-                2019-11-25
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-12-05T16:32:24+08:00">
+                2019-12-05
               </time>
             
 
@@ -313,8 +313,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Web/" itemprop="url" rel="index">
-                    <span itemprop="name">Web</span>
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
                   </a>
                 </span>
 
@@ -350,64 +350,8 @@
       
 
       
-        <h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><ol>
-<li>node.js安装<a href="https://nodejs.org/" target="_blank" rel="noopener">官网</a></li>
-<li>npm或cnpm<code>npm install -g cnpm --registry-https://registry.npm.taobao.org</code></li>
-<li>验证版本<code>node -v``npm -v</code>或<code>cnpm -v</code></li>
-<li>安装hexo<code>cnpm install -g hexo-cli</code></li>
-</ol>
-<h2 id="创建本地Blog"><a href="#创建本地Blog" class="headerlink" title="创建本地Blog"></a>创建本地Blog</h2><ol>
-<li>建立空文件夹作为博客地址，<code>mkdir Blog</code></li>
-<li>前往该文件夹 <code>cd Blog/</code></li>
-<li>初始化hexo <code>hexo init</code> 这里使用命令创建文件夹是因为我通过<code>cmd + N</code>方式创建文件夹会提示为非空导致无法初始化hexo</li>
-<li>启动hexo 服务 <code>hexo s</code> 成功后可访问<code>http://localhost:4000/</code>，使用<code>ctl+C</code>结束服务</li>
-<li>创建一篇Blog <code>hexo n &quot;文件名&quot;</code>，生成的Blog是markdown格式，会在<code>source/_posts/</code>这个文件夹下</li>
-<li>清理缓存<code>hexo clean</code>，生成博客 <code>hexo g</code></li>
-<li>本地启动hexo测试效果 <code>hexo s</code></li>
-</ol>
-<h2 id="部署至Github个人主页"><a href="#部署至Github个人主页" class="headerlink" title="部署至Github个人主页"></a>部署至Github个人主页</h2><ol>
-<li><p>设置Github的个人主页</p>
-</li>
-<li><p>在Blog目录下安装git部署插件 <code>cnpm install --save hexo-deployer-git</code></p>
-</li>
-<li><p>在博客配置文件中修改信息 <code>vim _config.yml</code> 在最底部添加：</p>
- <figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">  <span class="attribute">deploy</span>:</span><br><span class="line"><span class="attribute">type</span>: git</span><br><span class="line"><span class="attribute">repo</span>: <span class="attribute">https</span>:<span class="comment">//github.com/GitHub用户名/GitHub用户名.github.io.git</span></span><br><span class="line"><span class="attribute">branch</span>: master</span><br></pre></td></tr></table></figure></li>
-<li><p>部署到GitHub <code>hexo d</code>，访问<code>https://GitHub用户名.github.io/</code>查看效果</p>
-</li>
-</ol>
-<h2 id="更改主题"><a href="#更改主题" class="headerlink" title="更改主题"></a>更改主题</h2><ol>
-<li>在网上挑选好看的hexo主题</li>
-<li>通过git clone克隆到本地Blog中的theme文件夹内 <code>git clone https://github.com/iissnan/hexo-theme-next themes/next</code></li>
-<li>修改博客配置文件 <code>vim _config.yml</code><ul>
-<li>更改主题 <code>theme: 主题文件夹名称</code></li>
-</ul>
-</li>
-<li>清理<code>hexo clean</code>然后<code>hexo d -g</code>，或者本地查看效果<code>hexo s</code></li>
-</ol>
-<h2 id="自定义主题配置"><a href="#自定义主题配置" class="headerlink" title="自定义主题配置"></a>自定义主题配置</h2><ol>
-<li>前往博客地址 <code>cd Blog/</code></li>
-<li>修改主题配置文件 <code>vim themes/next/_config.yml</code><ul>
-<li>修改样式查找关键词<code>scheme:</code></li>
-<li>修改侧边栏查找关键词<code>menu:</code><ul>
-<li>需要添加单独页面<code>hexo new page &quot;tags&quot;</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>保存后清理<code>hexo clean</code>，本地运行debug模式测试<code>hexo s --debug</code></li>
-</ol>
-<h2 id="遇到的坑"><a href="#遇到的坑" class="headerlink" title="遇到的坑"></a>遇到的坑</h2><ul>
-<li>使用<code>sudo su</code>即系统角色进行操作后无法再使用管理者或普通用户修改文件<ul>
-<li>严格的权限管理是Liunx系统的优点，所以在进行hexo配置时需要保证权限统一，若平时使用普通用户或管理者权限进行blog创作，请在<code>hexo init</code>及后续操作时不要使用<code>sudo su</code></li>
-</ul>
-</li>
-<li>修改menu后找不到对应页面，提示<code>Cannot GET XXX/%20/</code><ul>
-<li>在主题配置文件中找到<code>menu:</code>对应内容，将所需功能的<code>/ ||</code>之间的空格删除</li>
-</ul>
-</li>
-<li>修改主题后部署到GitHub上主题不改变</li>
-<li>先清理<code>hexo clean</code>，后部署生成<code>hexo d -g</code>，主题改变可能需要等一点时间，不会立刻修改完毕</li>
-</ul>
+        <h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>在阿里云服务器上配置MYSQL数据库，并通过软件进行远程连接和图形化操作</p>
+<h2 id="前期操作"><a href="#前期操作" class="headerlink" title="前期操作"></a>前期操作</h2><p>购买好ECS，我这里选择的CentOS<br>按步骤安装MYSQL，设置root及其密码<code>生月日星座六位数</code></p>
 
       
     </div>
@@ -438,8 +382,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/11/25/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2019/12/03/HTML5-JS-CSS%E4%B8%8EBmob%E4%BA%91%E5%90%8E%E5%8F%B0%E5%AE%9E%E8%B7%B5/" rel="next" title="HTML5+JS+CSS与Bmob云后台实践">
+                <i class="fa fa-chevron-left"></i> HTML5+JS+CSS与Bmob云后台实践
               </a>
             
           </div>
@@ -447,10 +391,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/11/25/Linux%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/" rel="prev" title="Linux/Mac OS常用指令">
-                Linux/Mac OS常用指令 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -602,7 +542,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#环境搭建"><span class="nav-number">1.</span> <span class="nav-text">环境搭建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建本地Blog"><span class="nav-number">2.</span> <span class="nav-text">创建本地Blog</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署至Github个人主页"><span class="nav-number">3.</span> <span class="nav-text">部署至Github个人主页</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更改主题"><span class="nav-number">4.</span> <span class="nav-text">更改主题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义主题配置"><span class="nav-number">5.</span> <span class="nav-text">自定义主题配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#遇到的坑"><span class="nav-number">6.</span> <span class="nav-text">遇到的坑</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#目标"><span class="nav-number">1.</span> <span class="nav-text">目标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前期操作"><span class="nav-number">2.</span> <span class="nav-text">前期操作</span></a></li></ol></div>
             
 
           </div>
