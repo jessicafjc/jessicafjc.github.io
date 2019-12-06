@@ -354,7 +354,14 @@
         
           
             <h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>在阿里云服务器上配置MYSQL数据库，并通过软件进行远程连接和图形化操作</p>
-<h2 id="前期操作"><a href="#前期操作" class="headerlink" title="前期操作"></a>前期操作</h2><p>购买好ECS，我这里选择的CentOS<br>按步骤安装MYSQL，设置root及其密码<code>生月日星座六位数</code></p>
+<h2 id="前期操作"><a href="#前期操作" class="headerlink" title="前期操作"></a>前期操作</h2><p>购买好ECS，我这里选择的CentOS<br>远程连接ECS需要配置安全组——自行百度<br>设置SSH密码<code>首字母大写+生月日星座六位数</code><br>按步骤安装MYSQL，设置root及其密码<code>生月日星座六位数</code></p>
+<h2 id="MYSQL语句"><a href="#MYSQL语句" class="headerlink" title="MYSQL语句"></a>MYSQL语句</h2><h3 id="创建-删除数据库"><a href="#创建-删除数据库" class="headerlink" title="创建/删除数据库"></a>创建/删除数据库</h3><p>用root用户创建一个W3CSCHOOL数据库<br><code>mysqladmin -u root -p create W3CSCHOOL</code><br>用root用户删除一个W3CSCHOOL数据库<br><code>mysqladmin -u root -p drop W3CSCHOOL</code><br>在你连接到 MySQL 数据库后，可能有多个可以操作的数据库，所以你需要选择你要操作的数据库。在 mysql&gt; 提示窗口中可以很简单的选择特定的数据库。你可以使用SQL命令来选择指定的数据库。</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root<span class="variable">@host</span>]<span class="comment"># mysql -u root -p</span></span><br><span class="line">Enter <span class="symbol">password:</span>******</span><br><span class="line">mysql&gt; <span class="keyword">use</span> W3CSCHOOL;</span><br><span class="line">Database changed</span><br></pre></td></tr></table></figure>
+
+
+
+
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="https://www.w3cschool.cn/mysql/mysql-create-database.html" target="_blank" rel="noopener">W3C MYSQL教程</a></p>
 
           
         
