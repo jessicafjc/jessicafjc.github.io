@@ -279,7 +279,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/12/05/MYSQL%E5%88%9D%E6%8E%A2/" itemprop="url">MYSQL初探</a></h1>
+                <a class="post-title-link" href="/2019/12/05/MYSQL%E5%88%9D%E6%8E%A2/" itemprop="url">服务器配置MYSQL并远程连接</a></h1>
         
 
         <div class="post-meta">
@@ -358,7 +358,34 @@
 <h2 id="MYSQL语句"><a href="#MYSQL语句" class="headerlink" title="MYSQL语句"></a>MYSQL语句</h2><h3 id="创建-删除数据库"><a href="#创建-删除数据库" class="headerlink" title="创建/删除数据库"></a>创建/删除数据库</h3><p>用root用户创建一个W3CSCHOOL数据库<br><code>mysqladmin -u root -p create W3CSCHOOL</code><br>用root用户删除一个W3CSCHOOL数据库<br><code>mysqladmin -u root -p drop W3CSCHOOL</code><br>在你连接到 MySQL 数据库后，可能有多个可以操作的数据库，所以你需要选择你要操作的数据库。在 mysql&gt; 提示窗口中可以很简单的选择特定的数据库。你可以使用SQL命令来选择指定的数据库。</p>
 <figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root<span class="variable">@host</span>]<span class="comment"># mysql -u root -p</span></span><br><span class="line">Enter <span class="symbol">password:</span>******</span><br><span class="line">mysql&gt; <span class="keyword">use</span> W3CSCHOOL;</span><br><span class="line">Database changed</span><br></pre></td></tr></table></figure>
 
+<h3 id="创建-删除数据表"><a href="#创建-删除数据表" class="headerlink" title="创建/删除数据表"></a>创建/删除数据表</h3><p>创建MySQL数据表需要以下信息：</p>
+<ul>
+<li><p>表名</p>
+</li>
+<li><p>表字段名</p>
+</li>
+<li><p>定义每个表字段<br><code>CREATE TABLE table_name (column_name column_type);</code></p>
+</li>
+<li><p>如果你不想字段为 NULL 可以设置字段的属性为 NOT NULL， 在操作数据库时如果输入该字段的数据为NULL ，就会报错。</p>
+</li>
+<li><p>AUTO_INCREMENT定义列为自增的属性，一般用于主键，数值会自动加1。</p>
+</li>
+<li><p>PRIMARY KEY关键字用于定义列为主键。 您可以使用多列来定义主键，列间以逗号分隔。</p>
+</li>
+<li><p>MySQL命令终止符为分号</p>
+</li>
+<li><p>示例代码：</p>
+  <figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; <span class="keyword">CREATE</span> <span class="keyword">TABLE</span> w3cschool_tbl(</span><br><span class="line">   -&gt; w3cschool_id <span class="type">INT</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span> AUTO_INCREMENT,</span><br><span class="line">   -&gt; w3cschool_title <span class="type">VARCHAR</span>(<span class="number">100</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">   -&gt; w3cschool_author <span class="type">VARCHAR</span>(<span class="number">40</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">   -&gt; submission_date <span class="type">DATE</span>,</span><br><span class="line">   -&gt; <span class="keyword">PRIMARY KEY</span> ( w3cschool_id )</span><br><span class="line">   -&gt; );</span><br></pre></td></tr></table></figure>
 
+</li>
+</ul>
+<h3 id="数据类型及说明"><a href="#数据类型及说明" class="headerlink" title="数据类型及说明"></a>数据类型及说明</h3><h3 id="常用建表字段"><a href="#常用建表字段" class="headerlink" title="常用建表字段"></a>常用建表字段</h3><p>自增长有0占位的userID：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`userID` <span class="keyword">int</span>(<span class="number">6</span>) <span class="keyword">unsigned</span> zerofill NOT <span class="literal">NULL</span> AUTO_INCREMENT,</span><br></pre></td></tr></table></figure>
+<p>提交/修改时间: </p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`submission_date` timestamp <span class="keyword">NOT</span> <span class="literal">NULL</span><span class="built_in"> DEFAULT </span>CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,</span><br></pre></td></tr></table></figure>
+
+<p>首次创建时间: </p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`create_time` timestamp <span class="keyword">NOT</span> <span class="literal">NULL</span><span class="built_in"> DEFAULT </span>CURRENT_TIMESTAMP,</span><br></pre></td></tr></table></figure>
 
 
 <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="https://www.w3cschool.cn/mysql/mysql-create-database.html" target="_blank" rel="noopener">W3C MYSQL教程</a></p>
@@ -509,8 +536,24 @@
 <li>前往Bmob官网<a href="https://bmob.github.io/hydrogen-js-sdk/#/?id=sdk%e4%bd%bf%e7%94%a8%e6%96%87%e6%a1%a3" target="_blank" rel="noopener">查看文档</a>并下载对应SDK<a href="https://github.com/bmob/hydrogen-js-sdk/" target="_blank" rel="noopener">GitHub源码地址</a></li>
 <li>在Bmob的控制台云数据库新建项目、新建表、设计数据结构并导入数据</li>
 </ol>
-<h2 id="在项目中接入Bmob云数据库"><a href="#在项目中接入Bmob云数据库" class="headerlink" title="在项目中接入Bmob云数据库"></a>在项目中接入Bmob云数据库</h2><p>将sdk中的<code>dist/Bmob-2.2.1.min.js</code>导入项目的js文件夹下<br>在index.html中引入    <code>&lt;script src=&quot;js/dist/Bmob-2.2.1.min.js&quot;&gt;&lt;/script&gt;</code><br>新建一个js文件<code>main.js</code></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Bmob.initialize(<span class="string">"你的Secret Key"</span>, <span class="string">"你的API 安全码"</span>);</span><br><span class="line"><span class="comment">//获取_User列表内所有数据，因为_User是系统内置用户表，出于隐私安全考虑，是获取不到密码的</span></span><br><span class="line"><span class="comment">// var query = Bmob.Query("_User");</span></span><br><span class="line"><span class="comment">// query.find().then(res =&gt; &#123;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 	console.log(res)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// &#125;);</span></span><br><span class="line">	<span class="keyword">var</span> text = <span class="string">""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> query = Bmob.Query(<span class="string">'TestData'</span>);</span><br><span class="line"></span><br><span class="line">query.find().then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">console</span>.log(res.length)</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; res.length; i++) &#123; </span><br><span class="line">	    text += res[i].name + <span class="string">"&lt;br&gt;"</span>;</span><br><span class="line">		<span class="built_in">document</span>.getElementById(<span class="string">"name"</span>).innerHTML = text;</span><br><span class="line"></span><br><span class="line">	 &#125;</span><br><span class="line">	</span><br><span class="line"></span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// query.get('khxyHHHZ').then(res =&gt; &#123;</span></span><br><span class="line"><span class="comment">// 	console.log(res.name)</span></span><br><span class="line"><span class="comment">// 	for (i in res)&#123;</span></span><br><span class="line"><span class="comment">// 		text += res[i]</span></span><br><span class="line"><span class="comment">// 		console.log(text)</span></span><br><span class="line">		</span><br><span class="line"><span class="comment">// 	&#125;</span></span><br><span class="line"><span class="comment">// &#125;).catch(err =&gt; &#123;</span></span><br><span class="line"><span class="comment">//   console.log(err)</span></span><br><span class="line"><span class="comment">// &#125;)</span></span><br></pre></td></tr></table></figure>
+<h2 id="在项目中接入Bmob云数据库"><a href="#在项目中接入Bmob云数据库" class="headerlink" title="在项目中接入Bmob云数据库"></a>在项目中接入Bmob云数据库</h2><ol>
+<li>引入bmob.js<br>将sdk中的<code>dist/Bmob-2.2.1.min.js</code>导入项目的js文件夹下<br>在index.html中引入    <code>&lt;script src=&quot;js/dist/Bmob-2.2.1.min.js&quot;&gt;&lt;/script&gt;</code><br>新建一个js文件<code>main.js</code></li>
+<li>连接对应的bmob数据库<br><code>Bmob.initialize(&quot;你的Secret Key&quot;, &quot;你的API 安全码&quot;);</code></li>
+<li>系统用户表_User<br>获取_User列表内所有数据，因为_User是系统内置用户表，出于隐私安全考虑，密码不可见，且无法用明文方式进行参数传递。</li>
+</ol>
+<figure class="highlight plain"><figcaption><span>query </span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">query.find().then(res =&gt; &#123;</span><br><span class="line"> 	console.log(res)</span><br><span class="line"></span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure>
+<p>判断登陆+本地缓存的方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Bmob.User.login(&apos;123&apos;, &apos;123456&apos;).then(res =&gt; &#123;</span><br><span class="line"></span><br><span class="line">	//若登陆成功更新用户缓存</span><br><span class="line">	Bmob.User.updateStorage(res.objectId).then(res =&gt; &#123;</span><br><span class="line">		//更新缓存成功，跳转页面</span><br><span class="line">		//跳转到第二个页面-不传参数，href请使用相对路径</span><br><span class="line">		window.location.href = &quot;secondPage.html&quot;;</span><br><span class="line">	&#125;).catch(err =&gt; &#123;</span><br><span class="line">		console.log(err)</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;).catch(err =&gt; &#123;</span><br><span class="line">	console.log(err)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>获取登陆的用户信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">let current = Bmob.User.current()</span><br><span class="line">// var data = &#123;&#125;;</span><br><span class="line">var arr = Object.keys(current);</span><br><span class="line">console.log(arr.length == 0) //true 为空， false 不为空</span><br><span class="line">if (arr.length == 0) &#123;</span><br><span class="line">	//如果为空,返回登陆页面,防止未登陆用户造成系统崩溃</span><br><span class="line">	window.location.href = &quot;index.html&quot;</span><br><span class="line">&#125; else&#123;</span><br><span class="line">	//如果不为空,则将current内的值填入页面内</span><br><span class="line">	console.log(current)</span><br><span class="line">	document.getElementById(&quot;username&quot;).innerHTML = current.username;</span><br><span class="line">	document.getElementById(&quot;roomNumber&quot;).innerHTML = current.roomNumber + &apos;房间&apos;;</span><br><span class="line">	var gender = &apos;&apos;</span><br><span class="line">	if (current.sex == 0) &#123;</span><br><span class="line">		gender = &apos;男&apos;</span><br><span class="line">	&#125; else&#123;</span><br><span class="line">		gender = &apos;女&apos;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	document.getElementById(&quot;gender&quot;).innerHTML = gender;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>获取自创建表TestData内所有数据，并遍历显示在HTML内</li>
+</ol>
+<figure class="highlight plain"><figcaption><span>query </span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">query.find().then(res =&gt; &#123;</span><br><span class="line">	console.log(res.length)</span><br><span class="line">	for (i = 0; i &lt; res.length; i++) &#123; </span><br><span class="line">	    text += res[i].name + &quot;&lt;br&gt;&quot;;</span><br><span class="line">		document.getElementById(&quot;name&quot;).innerHTML = text;</span><br><span class="line">	 &#125;</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>按objectId获取对应数据（若为_User此方法不可用，但可以使用内置的Bmob<br>.User.current()方法获取登陆后缓存的用户数据）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">	console.log(res.name)</span><br><span class="line">	</span><br><span class="line">&#125;).catch(err =&gt; &#123;</span><br><span class="line">  console.log(err)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
 
           
         
@@ -727,7 +770,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/11/28/Vue%E8%87%AA%E5%AD%A6%E5%88%9D%E6%8E%A2/" itemprop="url">Vue初探(一)</a></h1>
+                <a class="post-title-link" href="/2019/11/28/Vue%E8%87%AA%E5%AD%A6%E5%88%9D%E6%8E%A2/" itemprop="url">Vue初探(一)安装及项目创建</a></h1>
         
 
         <div class="post-meta">
@@ -843,7 +886,10 @@
 <li>vue ui  启动脚手架图形界面（3.0以上版本）</li>
 </ul>
 <h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><ul>
-<li>npm install 安装依赖</li>
+<li>npm install 安装依赖<ul>
+<li>npm install mysql //连接mysql数据库的依赖</li>
+</ul>
+</li>
 <li>npm run dev 或 npm run serve 启动项目</li>
 </ul>
 <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="https://www.jianshu.com/p/167aaf13346c" target="_blank" rel="noopener">Mac安装Vue环境——2019-05-11</a><br><a href="https://blog.csdn.net/gcDdblue/article/details/100171824" target="_blank" rel="noopener">正确姿势开发vue后台管理系统</a><br><a href="https://www.cnblogs.com/loveyaxin/p/10107550.html" target="_blank" rel="noopener">vue-cli 3.x安装配置步骤详细说明</a><br><a href="https://www.cnblogs.com/doit8791/p/5259436.html" target="_blank" rel="noopener">CSS预处理器Sass(Scss)、Less、Stylus</a><br><a href="https://blog.csdn.net/xueboren001/article/details/53389221" target="_blank" rel="noopener">ESLint深入使用</a><br><a href="https://blog.csdn.net/weixin_34221276/article/details/91423683" target="_blank" rel="noopener">一次学会使用 mocha &amp; jest 编写单元测试</a></p>
