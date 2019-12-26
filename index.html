@@ -381,7 +381,7 @@
 </li>
 <li>第十二讲 电影评论情感分析：RNN循环网络原理及应用<ol>
 <li>自然语言的分析</li>
-<li>如何将自然语言处理为计算机可处理的数据-词嵌入？</li>
+<li>如何将自然语言处理为计算机可处理的数据-词嵌入</li>
 <li>模型优化：同义词、近义词、反义词……</li>
 </ol>
 </li>
@@ -389,18 +389,18 @@
 <li>第十四讲 鸢尾花品种——网页落地</li>
 <li>第十五讲 花卉识别——移动应用落地</li>
 <li>第十六讲 课程回顾与大作业<ol>
-<li>Final Project</li>
-<li>Talk is cheap, show me the code</li>
+<li>Final Project以PPT+源代码+多样性展现形式</li>
+<li>有展示答辩</li>
 </ol>
 </li>
 </ol>
 <h2 id="线下课程实施经验"><a href="#线下课程实施经验" class="headerlink" title="线下课程实施经验"></a>线下课程实施经验</h2><ul>
 <li>偏理工科学生兴趣</li>
 <li>1、2年级学生修读积极</li>
+<li>Talk is cheap, show me the code</li>
 </ul>
 <h2 id="网课经验"><a href="#网课经验" class="headerlink" title="网课经验"></a>网课经验</h2><ul>
-<li>网易云课堂</li>
-<li>MOOC</li>
+<li>网易云课堂、MOOC</li>
 <li>人出镜减少工作量</li>
 <li>设备：摄像头、背景板、补光、电脑、美颜相机</li>
 <li>适时缩放屏幕，突出焦点，以学习体验为本</li>
@@ -413,6 +413,16 @@
 <h2 id="误区"><a href="#误区" class="headerlink" title="误区"></a>误区</h2><ul>
 <li>教学中设备不要求高</li>
 <li>先知识后能力——先能力后知识</li>
+<li>需要补充一些相关知识：Python、线性代数、应用开发等</li>
+</ul>
+<h2 id="讲课要点"><a href="#讲课要点" class="headerlink" title="讲课要点"></a>讲课要点</h2><ul>
+<li>核心步骤<ul>
+<li>训练数据的生成和整理</li>
+<li>训练模型的设计和构建</li>
+<li>训练模型</li>
+<li>优化模型</li>
+</ul>
+</li>
 </ul>
 
           
@@ -555,7 +565,32 @@
       
         
           
-            <h2 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h2><p>查看本机Python版本<code>python -V</code>，我的默认版本是2.7，去<a href="https://www.python.org/downloads/mac-osx/" target="_blank" rel="noopener">Python官网</a>下载一个3.7的版本进行安装。安装完成后，修改默认启动版本为3.7版本，打开<code>open ~/.bash_profile</code>，添加<code>alias python=&quot;/usr/local/bin/python3.7&quot;</code>，不要忘记<code>source ~/.bash_profile</code>重新加载一下。再次<code>python -V</code>发现Python成功变成3.7版本。<br>前往<a href="https://www.anaconda.com/" target="_blank" rel="noopener">Anaconda官网</a>下载对应的安装包，进行安装。</p>
+            <h2 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h2><ul>
+<li><p>查看本机Python版本<code>python -V</code>，我的默认版本是2.7，去<a href="https://www.python.org/downloads/mac-osx/" target="_blank" rel="noopener">Python官网</a>下载一个3.7的版本进行安装。</p>
+</li>
+<li><p>安装完成后，修改默认启动版本为3.7版本，打开<code>open ~/.bash_profile</code>，添加<code>alias python=&quot;/usr/local/bin/python3.7&quot;</code>，不要忘记<code>source ~/.bash_profile</code>重新加载一下。再次<code>python -V</code>发现Python成功变成3.7版本。</p>
+</li>
+<li><p>前往<a href="https://www.anaconda.com/" target="_blank" rel="noopener">Anaconda官网</a>下载对应的安装包，进行安装。</p>
+</li>
+<li><p>安装Tensorflow，先查看是否有<code>conda --version</code>，有可能报错<code>conda command not found</code></p>
+<ul>
+<li><p>先检查anaconda中的bin文件夹内是否有（有）</p>
+</li>
+<li><p>在<code>vi ~/.zshrc</code>中添加`export PATH=/Users/jiachenfu/anaconda3/bin:$PATH</p>
+</li>
+<li><p>然后<code>source ~/.zshrc</code>，检查一下<code>conda --version</code>成功</p>
+</li>
+<li><p>更改下载源为清华镜像<code>conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</code>，然后<code>conda config --set show_channel_urls yes</code></p>
+</li>
+<li><p>最后安装Tensorflow<code>conda install tensorflow</code></p>
+</li>
+<li><p>打开Anaconda中的jupyter,新建一个Python3文件,运行</p>
+<pre><code>import tensorflow as tf 
+tf.__version__</code></pre><p>  成功输出<code>1.1.0</code></p>
+</li>
+</ul>
+</li>
+</ul>
 <h2 id="Anaconda使用记录"><a href="#Anaconda使用记录" class="headerlink" title="Anaconda使用记录"></a>Anaconda使用记录</h2>
           
         
@@ -1356,7 +1391,14 @@
       
         
           
-            <h2 id="选择服务器系统"><a href="#选择服务器系统" class="headerlink" title="选择服务器系统"></a>选择服务器系统</h2><h2 id="安装数据库"><a href="#安装数据库" class="headerlink" title="安装数据库"></a>安装数据库</h2><h2 id="配置相关环境"><a href="#配置相关环境" class="headerlink" title="配置相关环境"></a>配置相关环境</h2>
+            <h2 id="选择服务器系统"><a href="#选择服务器系统" class="headerlink" title="选择服务器系统"></a>选择服务器系统</h2><h2 id="安装数据库"><a href="#安装数据库" class="headerlink" title="安装数据库"></a>安装数据库</h2><h2 id="配置相关环境"><a href="#配置相关环境" class="headerlink" title="配置相关环境"></a>配置相关环境</h2><h3 id="ssh远程连接–-gt-sftp"><a href="#ssh远程连接–-gt-sftp" class="headerlink" title="ssh远程连接–&gt;sftp"></a>ssh远程连接–&gt;sftp</h3><ul>
+<li>配置实例安全组，开放22端口<br>ssh 如果连接不成功，提示<code>ssh_exchange_identification: read: Connection reset by peer</code></li>
+</ul>
+<h4 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h4><ol>
+<li>前往本地文件夹<code>/Users/jiachenfu/.ssh/</code>删除<code>known_hosts</code>或改为<code>known_hosts.bak</code>，尝试<code>ssh root@ip</code>是否解决</li>
+<li>尝试<code>ping ip</code>，如果成功，前往阿里云网页进行远程登录，修改<code>vi /etc/hosts.allow</code>，在末尾添加<code>sshd: ALL    ##允许所有ip主机均能连接本机</code>，然后重启<code>systemctl restart sshd.service</code>，尝试<code>ssh root@ip</code>是否解决</li>
+</ol>
+
           
         
       

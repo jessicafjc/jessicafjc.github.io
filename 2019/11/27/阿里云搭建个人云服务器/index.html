@@ -79,15 +79,15 @@
 
 
 
-<meta name="description" content="选择服务器系统安装数据库配置相关环境">
+<meta name="description" content="选择服务器系统安装数据库配置相关环境ssh远程连接–&amp;gt;sftp 配置实例安全组，开放22端口ssh 如果连接不成功，提示ssh_exchange_identification: read: Connection reset by peer  解决办法 前往本地文件夹&#x2F;Users&#x2F;jiachenfu&#x2F;.ssh&#x2F;删除known_hosts或改为known_hosts.bak，尝试ssh root">
 <meta name="keywords" content="实践">
 <meta property="og:type" content="article">
 <meta property="og:title" content="阿里云搭建个人云服务器">
 <meta property="og:url" content="http:&#x2F;&#x2F;jessicafu.cn&#x2F;2019&#x2F;11&#x2F;27&#x2F;%E9%98%BF%E9%87%8C%E4%BA%91%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8&#x2F;index.html">
 <meta property="og:site_name" content="FjC的个人博客">
-<meta property="og:description" content="选择服务器系统安装数据库配置相关环境">
+<meta property="og:description" content="选择服务器系统安装数据库配置相关环境ssh远程连接–&amp;gt;sftp 配置实例安全组，开放22端口ssh 如果连接不成功，提示ssh_exchange_identification: read: Connection reset by peer  解决办法 前往本地文件夹&#x2F;Users&#x2F;jiachenfu&#x2F;.ssh&#x2F;删除known_hosts或改为known_hosts.bak，尝试ssh root">
 <meta property="og:locale" content="cn">
-<meta property="og:updated_time" content="2019-11-28T14:08:27.552Z">
+<meta property="og:updated_time" content="2019-12-26T08:28:16.818Z">
 <meta name="twitter:card" content="summary">
 
 
@@ -328,7 +328,14 @@
       
 
       
-        <h2 id="选择服务器系统"><a href="#选择服务器系统" class="headerlink" title="选择服务器系统"></a>选择服务器系统</h2><h2 id="安装数据库"><a href="#安装数据库" class="headerlink" title="安装数据库"></a>安装数据库</h2><h2 id="配置相关环境"><a href="#配置相关环境" class="headerlink" title="配置相关环境"></a>配置相关环境</h2>
+        <h2 id="选择服务器系统"><a href="#选择服务器系统" class="headerlink" title="选择服务器系统"></a>选择服务器系统</h2><h2 id="安装数据库"><a href="#安装数据库" class="headerlink" title="安装数据库"></a>安装数据库</h2><h2 id="配置相关环境"><a href="#配置相关环境" class="headerlink" title="配置相关环境"></a>配置相关环境</h2><h3 id="ssh远程连接–-gt-sftp"><a href="#ssh远程连接–-gt-sftp" class="headerlink" title="ssh远程连接–&gt;sftp"></a>ssh远程连接–&gt;sftp</h3><ul>
+<li>配置实例安全组，开放22端口<br>ssh 如果连接不成功，提示<code>ssh_exchange_identification: read: Connection reset by peer</code></li>
+</ul>
+<h4 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h4><ol>
+<li>前往本地文件夹<code>/Users/jiachenfu/.ssh/</code>删除<code>known_hosts</code>或改为<code>known_hosts.bak</code>，尝试<code>ssh root@ip</code>是否解决</li>
+<li>尝试<code>ping ip</code>，如果成功，前往阿里云网页进行远程登录，修改<code>vi /etc/hosts.allow</code>，在末尾添加<code>sshd: ALL    ##允许所有ip主机均能连接本机</code>，然后重启<code>systemctl restart sshd.service</code>，尝试<code>ssh root@ip</code>是否解决</li>
+</ol>
+
       
     </div>
     
@@ -522,7 +529,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#选择服务器系统"><span class="nav-number">1.</span> <span class="nav-text">选择服务器系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装数据库"><span class="nav-number">2.</span> <span class="nav-text">安装数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置相关环境"><span class="nav-number">3.</span> <span class="nav-text">配置相关环境</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#选择服务器系统"><span class="nav-number">1.</span> <span class="nav-text">选择服务器系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装数据库"><span class="nav-number">2.</span> <span class="nav-text">安装数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置相关环境"><span class="nav-number">3.</span> <span class="nav-text">配置相关环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ssh远程连接–-gt-sftp"><span class="nav-number">3.1.</span> <span class="nav-text">ssh远程连接–&gt;sftp</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#解决办法"><span class="nav-number">3.1.1.</span> <span class="nav-text">解决办法</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
