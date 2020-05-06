@@ -265,7 +265,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jiachen Fu">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://aktools.graueneko.xyz/assets/icons/icon-192x192.png">
+      <meta itemprop="image" content="https://p.qpic.cn/comic/duc2TvpEgSTWt5euo7ug7pCuphrXUvoTiavtItXPnNA5icn4fR1MVY11Sr3MYcfNns/1280">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -477,7 +477,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jiachen Fu">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://aktools.graueneko.xyz/assets/icons/icon-192x192.png">
+      <meta itemprop="image" content="https://p.qpic.cn/comic/duc2TvpEgSTWt5euo7ug7pCuphrXUvoTiavtItXPnNA5icn4fR1MVY11Sr3MYcfNns/1280">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -644,7 +644,7 @@ tf.__version__</code></pre><p>  成功输出<code>1.1.0</code></p>
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jiachen Fu">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://aktools.graueneko.xyz/assets/icons/icon-192x192.png">
+      <meta itemprop="image" content="https://p.qpic.cn/comic/duc2TvpEgSTWt5euo7ug7pCuphrXUvoTiavtItXPnNA5icn4fR1MVY11Sr3MYcfNns/1280">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -821,7 +821,7 @@ tf.__version__</code></pre><p>  成功输出<code>1.1.0</code></p>
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jiachen Fu">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://aktools.graueneko.xyz/assets/icons/icon-192x192.png">
+      <meta itemprop="image" content="https://p.qpic.cn/comic/duc2TvpEgSTWt5euo7ug7pCuphrXUvoTiavtItXPnNA5icn4fR1MVY11Sr3MYcfNns/1280">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -986,7 +986,7 @@ tf.__version__</code></pre><p>  成功输出<code>1.1.0</code></p>
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jiachen Fu">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://aktools.graueneko.xyz/assets/icons/icon-192x192.png">
+      <meta itemprop="image" content="https://p.qpic.cn/comic/duc2TvpEgSTWt5euo7ug7pCuphrXUvoTiavtItXPnNA5icn4fR1MVY11Sr3MYcfNns/1280">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1135,7 +1135,7 @@ tf.__version__</code></pre><p>  成功输出<code>1.1.0</code></p>
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jiachen Fu">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://aktools.graueneko.xyz/assets/icons/icon-192x192.png">
+      <meta itemprop="image" content="https://p.qpic.cn/comic/duc2TvpEgSTWt5euo7ug7pCuphrXUvoTiavtItXPnNA5icn4fR1MVY11Sr3MYcfNns/1280">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1325,7 +1325,7 @@ tf.__version__</code></pre><p>  成功输出<code>1.1.0</code></p>
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jiachen Fu">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://aktools.graueneko.xyz/assets/icons/icon-192x192.png">
+      <meta itemprop="image" content="https://p.qpic.cn/comic/duc2TvpEgSTWt5euo7ug7pCuphrXUvoTiavtItXPnNA5icn4fR1MVY11Sr3MYcfNns/1280">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1396,7 +1396,9 @@ tf.__version__</code></pre><p>  成功输出<code>1.1.0</code></p>
 </ul>
 <h4 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h4><ol>
 <li>前往本地文件夹<code>/Users/jiachenfu/.ssh/</code>删除<code>known_hosts</code>或改为<code>known_hosts.bak</code>，尝试<code>ssh root@ip</code>是否解决</li>
+<li>切换一个网络吧，关闭代理，有的校园网络很坑会连不上</li>
 <li>尝试<code>ping ip</code>，如果成功，前往阿里云网页进行远程登录，修改<code>vi /etc/hosts.allow</code>，在末尾添加<code>sshd: ALL    ##允许所有ip主机均能连接本机</code>，然后重启<code>systemctl restart sshd.service</code>，尝试<code>ssh root@ip</code>是否解决</li>
+<li>查看阿里云实例密钥对是否绑定</li>
 </ol>
 
           
@@ -1451,7 +1453,7 @@ tf.__version__</code></pre><p>  成功输出<code>1.1.0</code></p>
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jiachen Fu">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://aktools.graueneko.xyz/assets/icons/icon-192x192.png">
+      <meta itemprop="image" content="https://p.qpic.cn/comic/duc2TvpEgSTWt5euo7ug7pCuphrXUvoTiavtItXPnNA5icn4fR1MVY11Sr3MYcfNns/1280">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1619,7 +1621,7 @@ tf.__version__</code></pre><p>  成功输出<code>1.1.0</code></p>
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jiachen Fu">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://aktools.graueneko.xyz/assets/icons/icon-192x192.png">
+      <meta itemprop="image" content="https://p.qpic.cn/comic/duc2TvpEgSTWt5euo7ug7pCuphrXUvoTiavtItXPnNA5icn4fR1MVY11Sr3MYcfNns/1280">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1818,7 +1820,7 @@ tf.__version__</code></pre><p>  成功输出<code>1.1.0</code></p>
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jiachen Fu">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://aktools.graueneko.xyz/assets/icons/icon-192x192.png">
+      <meta itemprop="image" content="https://p.qpic.cn/comic/duc2TvpEgSTWt5euo7ug7pCuphrXUvoTiavtItXPnNA5icn4fR1MVY11Sr3MYcfNns/1280">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1968,7 +1970,7 @@ tf.__version__</code></pre><p>  成功输出<code>1.1.0</code></p>
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
               <img class="site-author-image" itemprop="image"
-                src="https://aktools.graueneko.xyz/assets/icons/icon-192x192.png"
+                src="https://p.qpic.cn/comic/duc2TvpEgSTWt5euo7ug7pCuphrXUvoTiavtItXPnNA5icn4fR1MVY11Sr3MYcfNns/1280"
                 alt="Jiachen Fu" />
             
               <p class="site-author-name" itemprop="name">Jiachen Fu</p>
@@ -2064,7 +2066,7 @@ tf.__version__</code></pre><p>  成功输出<code>1.1.0</code></p>
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; 2019 &mdash; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
