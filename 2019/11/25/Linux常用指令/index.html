@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"jessicafu.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="常用指令 查看当前地址pwd 查看当前位置内所有文件ls 查看当前位置内所有文件及详细信息ls -s 前往某地址cd 前往的地址目录 回到上一级目录 cd ..回到上上级cd ..&#x2F;.. 新建文件夹 mkdir 文件夹名 断开连接ctl + c  vim编辑器vim几种模式 正常模式：可以使用快捷键命令，或按:输入命令行。 插入模式：可以输入文本，在正常模式下，按i、a、o等都可以进入插入模式。">
+  <meta name="description" content="常用指令 查看当前地址pwd 查看当前位置内所有文件ls 查看当前位置内所有文件及详细信息ls -s 前往某地址cd 前往的地址目录 回到上一级目录 cd ..回到上上级cd ..&#x2F;.. 新建文件夹 mkdir 文件夹名 断开连接ctl + c 解压到当前位置：tar -zxvf 压缩包名称  删除文件夹及旗下所有文件rm -rf 文件夹路径 删除文件rm -f 文件路径+文件名.扩展名  vim">
 <meta name="keywords" content="Liunx">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux&#x2F;Mac OS常用指令">
 <meta property="og:url" content="http:&#x2F;&#x2F;jessicafu.cn&#x2F;2019&#x2F;11&#x2F;25&#x2F;Linux%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4&#x2F;index.html">
 <meta property="og:site_name" content="FjC的个人博客">
-<meta property="og:description" content="常用指令 查看当前地址pwd 查看当前位置内所有文件ls 查看当前位置内所有文件及详细信息ls -s 前往某地址cd 前往的地址目录 回到上一级目录 cd ..回到上上级cd ..&#x2F;.. 新建文件夹 mkdir 文件夹名 断开连接ctl + c  vim编辑器vim几种模式 正常模式：可以使用快捷键命令，或按:输入命令行。 插入模式：可以输入文本，在正常模式下，按i、a、o等都可以进入插入模式。">
+<meta property="og:description" content="常用指令 查看当前地址pwd 查看当前位置内所有文件ls 查看当前位置内所有文件及详细信息ls -s 前往某地址cd 前往的地址目录 回到上一级目录 cd ..回到上上级cd ..&#x2F;.. 新建文件夹 mkdir 文件夹名 断开连接ctl + c 解压到当前位置：tar -zxvf 压缩包名称  删除文件夹及旗下所有文件rm -rf 文件夹路径 删除文件rm -f 文件路径+文件名.扩展名  vim">
 <meta property="og:locale" content="cn">
-<meta property="og:updated_time" content="2020-05-21T08:01:17.301Z">
+<meta property="og:updated_time" content="2020-05-22T05:31:27.144Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://jessicafu.cn/2019/11/25/Linux%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/">
@@ -193,7 +193,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-21 16:01:17" itemprop="dateModified" datetime="2020-05-21T16:01:17+08:00">2020-05-21</time>
+                <time title="Modified: 2020-05-22 13:31:27" itemprop="dateModified" datetime="2020-05-22T13:31:27+08:00">2020-05-22</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -224,6 +224,9 @@
 <li>回到上一级目录 <code>cd ..</code>回到上上级<code>cd ../..</code></li>
 <li>新建文件夹 <code>mkdir 文件夹名</code></li>
 <li>断开连接<code>ctl + c</code></li>
+<li>解压到当前位置：tar -zxvf 压缩包名称 </li>
+<li>删除文件夹及旗下所有文件<code>rm -rf 文件夹路径</code></li>
+<li>删除文件<code>rm -f 文件路径+文件名.扩展名</code></li>
 </ul>
 <h2 id="vim编辑器"><a href="#vim编辑器" class="headerlink" title="vim编辑器"></a>vim编辑器</h2><h3 id="vim几种模式"><a href="#vim几种模式" class="headerlink" title="vim几种模式"></a>vim几种模式</h3><ul>
 <li>正常模式：可以使用快捷键命令，或按<code>:</code>输入命令行。</li>
@@ -231,9 +234,9 @@
 <li>可视模式：正常模式下按v可以进入可视模式， 在可视模式下，移动光标可以选择文本。按V进入可视行模式， 总是整行整行的选中。<code>ctrl+v</code>进入可视块模式。</li>
 <li>替换模式：正常模式下，按R进入。</li>
 </ul>
-<h3 id="vim常用指令"><a href="#vim常用指令" class="headerlink" title="vim常用指令"></a>vim常用指令</h3><ul>
-<li>行号显示</li>
-<li>关键词查找</li>
+<h3 id="vim常用指令"><a href="#vim常用指令" class="headerlink" title="vim常用指令"></a>vim常用指令</h3><p>*行号显示</p>
+<ul>
+<li>关键词查找：<code>/</code>+<code>关键词</code></li>
 <li>修改<code>i</code></li>
 <li>保存退出<code>:wq</code></li>
 <li>在后面的文本中查找<code>/</code></li>
