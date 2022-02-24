@@ -60,33 +60,59 @@
       </tags>
   </entry>
   <entry>
-    <title>HTML5+JS+CSS与Bmob云后台实践</title>
-    <url>/2019/12/02/HTML5+JS+CSS%E4%B8%8EBmob%E4%BA%91%E5%90%8E%E5%8F%B0%E5%AE%9E%E8%B7%B5/</url>
-    <content><![CDATA[<h1 id="前置环境"><a href="#前置环境" class="headerlink" title="前置环境"></a>前置环境</h1><ol>
-<li>代码编译器我选择Hbulider X <a href="https://www.dcloud.io/hbuilderx.html">官网下载</a></li>
-<li>在Hbuilder新建一个空白项目test_demo，包含index.html、css文件夹、js文件夹、img文件夹</li>
-<li>前往Bmob<a href="https://bmob.github.io/hydrogen-js-sdk/#/?id=sdk%25e4%25bd%25bf%25e7%2594%25a8%25e6%2596%2587%25e6%25a1%25a3">官网查看文档</a>并下载对应SDKGitHub<a href="https://github.com/bmob/hydrogen-js-sdk/">源码地址</a></li>
-<li>在Bmob的控制台云数据库新建项目、新建表、设计数据结构并导入数据<h1 id="在项目中接入Bmob云数据库"><a href="#在项目中接入Bmob云数据库" class="headerlink" title="在项目中接入Bmob云数据库"></a>在项目中接入Bmob云数据库</h1></li>
-<li>引入bmob.js<br>将sdk中的<code>dist/Bmob-2.2.1.min.js</code>导入项目的js文件夹下,在index.html中引入 <code>&lt;script src=&quot;js/dist/Bmob-2.2.1.min.js&quot;&gt;&lt;/script&gt;</code> 新建一个js文件<code>main.js</code></li>
-<li>连接对应的bmob数据库<code>Bmob.initialize(&quot;你的Secret Key&quot;, &quot;你的API 安全码&quot;);</code></li>
-<li>系统用户表_User<br>获取_User列表内所有数据，因为_User是系统内置用户表，出于隐私安全考虑，密码不可见，且无法用明文方式进行参数传递。<figure class="highlight arcade"><table><tr><td class="code"><pre><span class="line">query.<span class="built_in">find</span>().then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line"> 	<span class="built_in">console</span>.<span class="built_in">log</span>(res)</span><br><span class="line"></span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure>
-判断登陆+本地缓存的方法</li>
-</ol>
-<figure class="highlight arcade"><table><tr><td class="code"><pre><span class="line">Bmob.User.login(<span class="string">&#x27;123&#x27;</span>, <span class="string">&#x27;123456&#x27;</span>).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//若登陆成功更新用户缓存</span></span><br><span class="line">	Bmob.User.updateStorage(res.objectId).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">		<span class="comment">//更新缓存成功，跳转页面</span></span><br><span class="line">		<span class="comment">//跳转到第二个页面-不传参数，href请使用相对路径</span></span><br><span class="line">		window.location.href = <span class="string">&quot;secondPage.html&quot;</span>;</span><br><span class="line">	&#125;).catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">		<span class="built_in">console</span>.<span class="built_in">log</span>(err)</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;).catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">	<span class="built_in">console</span>.<span class="built_in">log</span>(err)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>获取登陆的用户信息</p>
-<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">let <span class="keyword">current</span> = Bmob.<span class="keyword">User</span>.<span class="keyword">current</span>()</span><br><span class="line">// var data = &#123;&#125;;</span><br><span class="line">var arr = <span class="keyword">Object</span>.keys(<span class="keyword">current</span>);</span><br><span class="line">console.log(arr.length == <span class="number">0</span>) //<span class="keyword">true</span> 为空， <span class="keyword">false</span> 不为空</span><br><span class="line"><span class="keyword">if</span> (arr.length == <span class="number">0</span>) &#123;</span><br><span class="line">	//如果为空,返回登陆页面,防止未登陆用户造成系统崩溃</span><br><span class="line">	<span class="keyword">window</span>.<span class="keyword">location</span>.href = &quot;index.html&quot;</span><br><span class="line">&#125; <span class="keyword">else</span>&#123;</span><br><span class="line">	//如果不为空,则将<span class="keyword">current</span>内的值填入页面内</span><br><span class="line">	console.log(<span class="keyword">current</span>)</span><br><span class="line">	document.getElementById(&quot;username&quot;).innerHTML = <span class="keyword">current</span>.username;</span><br><span class="line">	document.getElementById(&quot;roomNumber&quot;).innerHTML = <span class="keyword">current</span>.roomNumber + <span class="string">&#x27;房间&#x27;</span>;</span><br><span class="line">	var gender = <span class="string">&#x27;&#x27;</span></span><br><span class="line">	<span class="keyword">if</span> (<span class="keyword">current</span>.sex == <span class="number">0</span>) &#123;</span><br><span class="line">		gender = <span class="string">&#x27;男&#x27;</span></span><br><span class="line">	&#125; <span class="keyword">else</span>&#123;</span><br><span class="line">		gender = <span class="string">&#x27;女&#x27;</span></span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	document.getElementById(&quot;gender&quot;).innerHTML = gender;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>获取自创建表TestData内所有数据，并遍历显示在HTML内</p>
-<figure class="highlight arcade"><table><tr><td class="code"><pre><span class="line">query.<span class="built_in">find</span>().then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">	<span class="built_in">console</span>.<span class="built_in">log</span>(res.<span class="built_in">length</span>)</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; res.<span class="built_in">length</span>; i++) &#123; </span><br><span class="line">	    <span class="built_in">text</span> += res[i].name + <span class="string">&quot;&lt;br&gt;&quot;</span>;</span><br><span class="line">		document.getElementById(<span class="string">&quot;name&quot;</span>).innerHTML = <span class="built_in">text</span>;</span><br><span class="line">	 &#125;</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>按objectId获取对应数据（若为_User此方法不可用，但可以使用内置的Bmob<br>.User.current()方法获取登陆后缓存的用户数据）</p>
-<figure class="highlight arcade"><table><tr><td class="code"><pre><span class="line">	<span class="built_in">console</span>.<span class="built_in">log</span>(res.name)</span><br><span class="line">	</span><br><span class="line">&#125;).catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.<span class="built_in">log</span>(err)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    <title>Liunx常用指令</title>
+    <url>/2019/11/25/liunx%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/</url>
+    <content><![CDATA[<h1 id="常用指令"><a href="#常用指令" class="headerlink" title="常用指令"></a>常用指令</h1><ul>
+<li>查看当前地址<code>pwd</code></li>
+<li>查看当前位置内所有文件<code>ls</code></li>
+<li>查看当前位置内所有文件及详细信息<code>ls -s</code></li>
+<li>前往某地址<code>cd 前往的地址目录</code></li>
+<li>回到上一级目录 <code>cd ..</code>回到上上级<code>cd ../..</code></li>
+<li>新建文件夹 <code>mkdir</code> 文件夹名</li>
+<li>断开连接<code>ctl + c</code></li>
+<li>解压到当前位置：<code>tar -zxvf 压缩包名称</code></li>
+<li>删除文件夹及旗下所有文件<code>rm -rf 文件夹路径</code></li>
+<li>删除文件<code>rm -f 文件路径+文件名.扩展名</code></li>
+</ul>
+<h1 id="vim编辑器"><a href="#vim编辑器" class="headerlink" title="vim编辑器"></a>vim编辑器</h1><h2 id="vim几种模式"><a href="#vim几种模式" class="headerlink" title="vim几种模式"></a>vim几种模式</h2><ul>
+<li>正常模式：可以使用快捷键命令，或按<code>:</code>输入命令行。</li>
+<li>插入模式：可以输入文本，在正常模式下，按<code>i</code>、<code>a</code>、<code>o</code>等都可以进入插入模式。</li>
+<li>可视模式：正常模式下按<code>v</code>可以进入可视模式， 在可视模式下，移动光标可以选择文``本。按<code>v</code>进入可视行模式， 总是整行整行的选中。<code>ctrl+v</code>进入可视块模式。</li>
+<li>替换模式：正常模式下，按<code>r</code>进入。</li>
+</ul>
+<h1 id="vim常用指令"><a href="#vim常用指令" class="headerlink" title="vim常用指令"></a>vim常用指令</h1><ul>
+<li>行号显示<code>:set nu</code></li>
+<li>关键词查找<code>:/+关键词</code></li>
+<li>修改<code>i</code></li>
+<li>保存退出<code>:wq</code></li>
+<li>在后面的文本中查找<code>/</code></li>
+<li><code>?something</code>: 在前面的文本中查找something。</li>
+<li><code>/pattern/+number</code>: 将光标停在包含pattern的行后面第number行上。</li>
+<li><code>/pattern/-number</code>: 将光标停在包含pattern的行前面第number行上。</li>
+<li><code>n</code>: 向后查找下一个。</li>
+<li><code>N</code>: 向前查找下一个。</li>
+</ul>
+]]></content>
       <categories>
         <category>散装知识</category>
       </categories>
       <tags>
-        <tag>实践</tag>
-        <tag>Bmob</tag>
-        <tag>后端</tag>
+        <tag>Liunx</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Swift5.0 UI代码Tips</title>
+    <url>/2019/12/02/swift5.0-UI%E4%BB%A3%E7%A0%81Tips/</url>
+    <content><![CDATA[<blockquote>
+<p>记录开发过程中用到的纯代码写UI及一些经验心得<br>记录一些自己写的UI库封装<br>记录一些用过的第三方UI类库</p>
+</blockquote>
+<h1 id="文字类"><a href="#文字类" class="headerlink" title="文字类"></a>文字类</h1><h2 id="label圆角"><a href="#label圆角" class="headerlink" title="label圆角"></a>label圆角</h2><figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="attr">label.layer.cornerRadius</span> = <span class="number">5</span><span class="comment">;</span></span><br><span class="line"><span class="attr">label.clipsToBounds</span> = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<h1 id="按钮类"><a href="#按钮类" class="headerlink" title="按钮类"></a>按钮类</h1><h1 id="图片类"><a href="#图片类" class="headerlink" title="图片类"></a>图片类</h1>]]></content>
+      <categories>
+        <category>散装知识</category>
+      </categories>
+      <tags>
+        <tag>Swift</tag>
       </tags>
   </entry>
   <entry>
@@ -167,59 +193,33 @@
       </tags>
   </entry>
   <entry>
-    <title>Liunx常用指令</title>
-    <url>/2019/11/25/liunx%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/</url>
-    <content><![CDATA[<h1 id="常用指令"><a href="#常用指令" class="headerlink" title="常用指令"></a>常用指令</h1><ul>
-<li>查看当前地址<code>pwd</code></li>
-<li>查看当前位置内所有文件<code>ls</code></li>
-<li>查看当前位置内所有文件及详细信息<code>ls -s</code></li>
-<li>前往某地址<code>cd 前往的地址目录</code></li>
-<li>回到上一级目录 <code>cd ..</code>回到上上级<code>cd ../..</code></li>
-<li>新建文件夹 <code>mkdir</code> 文件夹名</li>
-<li>断开连接<code>ctl + c</code></li>
-<li>解压到当前位置：<code>tar -zxvf 压缩包名称</code></li>
-<li>删除文件夹及旗下所有文件<code>rm -rf 文件夹路径</code></li>
-<li>删除文件<code>rm -f 文件路径+文件名.扩展名</code></li>
-</ul>
-<h1 id="vim编辑器"><a href="#vim编辑器" class="headerlink" title="vim编辑器"></a>vim编辑器</h1><h2 id="vim几种模式"><a href="#vim几种模式" class="headerlink" title="vim几种模式"></a>vim几种模式</h2><ul>
-<li>正常模式：可以使用快捷键命令，或按<code>:</code>输入命令行。</li>
-<li>插入模式：可以输入文本，在正常模式下，按<code>i</code>、<code>a</code>、<code>o</code>等都可以进入插入模式。</li>
-<li>可视模式：正常模式下按<code>v</code>可以进入可视模式， 在可视模式下，移动光标可以选择文``本。按<code>v</code>进入可视行模式， 总是整行整行的选中。<code>ctrl+v</code>进入可视块模式。</li>
-<li>替换模式：正常模式下，按<code>r</code>进入。</li>
-</ul>
-<h1 id="vim常用指令"><a href="#vim常用指令" class="headerlink" title="vim常用指令"></a>vim常用指令</h1><ul>
-<li>行号显示<code>:set nu</code></li>
-<li>关键词查找<code>:/+关键词</code></li>
-<li>修改<code>i</code></li>
-<li>保存退出<code>:wq</code></li>
-<li>在后面的文本中查找<code>/</code></li>
-<li><code>?something</code>: 在前面的文本中查找something。</li>
-<li><code>/pattern/+number</code>: 将光标停在包含pattern的行后面第number行上。</li>
-<li><code>/pattern/-number</code>: 将光标停在包含pattern的行前面第number行上。</li>
-<li><code>n</code>: 向后查找下一个。</li>
-<li><code>N</code>: 向前查找下一个。</li>
-</ul>
-]]></content>
+    <title>HTML5+JS+CSS与Bmob云后台实践</title>
+    <url>/2019/12/02/HTML5+JS+CSS%E4%B8%8EBmob%E4%BA%91%E5%90%8E%E5%8F%B0%E5%AE%9E%E8%B7%B5/</url>
+    <content><![CDATA[<h1 id="前置环境"><a href="#前置环境" class="headerlink" title="前置环境"></a>前置环境</h1><ol>
+<li>代码编译器我选择Hbulider X <a href="https://www.dcloud.io/hbuilderx.html">官网下载</a></li>
+<li>在Hbuilder新建一个空白项目test_demo，包含index.html、css文件夹、js文件夹、img文件夹</li>
+<li>前往Bmob<a href="https://bmob.github.io/hydrogen-js-sdk/#/?id=sdk%25e4%25bd%25bf%25e7%2594%25a8%25e6%2596%2587%25e6%25a1%25a3">官网查看文档</a>并下载对应SDKGitHub<a href="https://github.com/bmob/hydrogen-js-sdk/">源码地址</a></li>
+<li>在Bmob的控制台云数据库新建项目、新建表、设计数据结构并导入数据<h1 id="在项目中接入Bmob云数据库"><a href="#在项目中接入Bmob云数据库" class="headerlink" title="在项目中接入Bmob云数据库"></a>在项目中接入Bmob云数据库</h1></li>
+<li>引入bmob.js<br>将sdk中的<code>dist/Bmob-2.2.1.min.js</code>导入项目的js文件夹下,在index.html中引入 <code>&lt;script src=&quot;js/dist/Bmob-2.2.1.min.js&quot;&gt;&lt;/script&gt;</code> 新建一个js文件<code>main.js</code></li>
+<li>连接对应的bmob数据库<code>Bmob.initialize(&quot;你的Secret Key&quot;, &quot;你的API 安全码&quot;);</code></li>
+<li>系统用户表_User<br>获取_User列表内所有数据，因为_User是系统内置用户表，出于隐私安全考虑，密码不可见，且无法用明文方式进行参数传递。<figure class="highlight arcade"><table><tr><td class="code"><pre><span class="line">query.<span class="built_in">find</span>().then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line"> 	<span class="built_in">console</span>.<span class="built_in">log</span>(res)</span><br><span class="line"></span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure>
+判断登陆+本地缓存的方法</li>
+</ol>
+<figure class="highlight arcade"><table><tr><td class="code"><pre><span class="line">Bmob.User.login(<span class="string">&#x27;123&#x27;</span>, <span class="string">&#x27;123456&#x27;</span>).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//若登陆成功更新用户缓存</span></span><br><span class="line">	Bmob.User.updateStorage(res.objectId).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">		<span class="comment">//更新缓存成功，跳转页面</span></span><br><span class="line">		<span class="comment">//跳转到第二个页面-不传参数，href请使用相对路径</span></span><br><span class="line">		window.location.href = <span class="string">&quot;secondPage.html&quot;</span>;</span><br><span class="line">	&#125;).catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">		<span class="built_in">console</span>.<span class="built_in">log</span>(err)</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;).catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">	<span class="built_in">console</span>.<span class="built_in">log</span>(err)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>获取登陆的用户信息</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">let <span class="keyword">current</span> = Bmob.<span class="keyword">User</span>.<span class="keyword">current</span>()</span><br><span class="line">// var data = &#123;&#125;;</span><br><span class="line">var arr = <span class="keyword">Object</span>.keys(<span class="keyword">current</span>);</span><br><span class="line">console.log(arr.length == <span class="number">0</span>) //<span class="keyword">true</span> 为空， <span class="keyword">false</span> 不为空</span><br><span class="line"><span class="keyword">if</span> (arr.length == <span class="number">0</span>) &#123;</span><br><span class="line">	//如果为空,返回登陆页面,防止未登陆用户造成系统崩溃</span><br><span class="line">	<span class="keyword">window</span>.<span class="keyword">location</span>.href = &quot;index.html&quot;</span><br><span class="line">&#125; <span class="keyword">else</span>&#123;</span><br><span class="line">	//如果不为空,则将<span class="keyword">current</span>内的值填入页面内</span><br><span class="line">	console.log(<span class="keyword">current</span>)</span><br><span class="line">	document.getElementById(&quot;username&quot;).innerHTML = <span class="keyword">current</span>.username;</span><br><span class="line">	document.getElementById(&quot;roomNumber&quot;).innerHTML = <span class="keyword">current</span>.roomNumber + <span class="string">&#x27;房间&#x27;</span>;</span><br><span class="line">	var gender = <span class="string">&#x27;&#x27;</span></span><br><span class="line">	<span class="keyword">if</span> (<span class="keyword">current</span>.sex == <span class="number">0</span>) &#123;</span><br><span class="line">		gender = <span class="string">&#x27;男&#x27;</span></span><br><span class="line">	&#125; <span class="keyword">else</span>&#123;</span><br><span class="line">		gender = <span class="string">&#x27;女&#x27;</span></span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	document.getElementById(&quot;gender&quot;).innerHTML = gender;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>获取自创建表TestData内所有数据，并遍历显示在HTML内</p>
+<figure class="highlight arcade"><table><tr><td class="code"><pre><span class="line">query.<span class="built_in">find</span>().then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">	<span class="built_in">console</span>.<span class="built_in">log</span>(res.<span class="built_in">length</span>)</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; res.<span class="built_in">length</span>; i++) &#123; </span><br><span class="line">	    <span class="built_in">text</span> += res[i].name + <span class="string">&quot;&lt;br&gt;&quot;</span>;</span><br><span class="line">		document.getElementById(<span class="string">&quot;name&quot;</span>).innerHTML = <span class="built_in">text</span>;</span><br><span class="line">	 &#125;</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>按objectId获取对应数据（若为_User此方法不可用，但可以使用内置的Bmob<br>.User.current()方法获取登陆后缓存的用户数据）</p>
+<figure class="highlight arcade"><table><tr><td class="code"><pre><span class="line">	<span class="built_in">console</span>.<span class="built_in">log</span>(res.name)</span><br><span class="line">	</span><br><span class="line">&#125;).catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.<span class="built_in">log</span>(err)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>散装知识</category>
       </categories>
       <tags>
-        <tag>Liunx</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Swift5.0 UI代码Tips</title>
-    <url>/2019/12/02/swift5.0-UI%E4%BB%A3%E7%A0%81Tips/</url>
-    <content><![CDATA[<blockquote>
-<p>记录开发过程中用到的纯代码写UI及一些经验心得<br>记录一些自己写的UI库封装<br>记录一些用过的第三方UI类库</p>
-</blockquote>
-<h1 id="文字类"><a href="#文字类" class="headerlink" title="文字类"></a>文字类</h1><h2 id="label圆角"><a href="#label圆角" class="headerlink" title="label圆角"></a>label圆角</h2><figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="attr">label.layer.cornerRadius</span> = <span class="number">5</span><span class="comment">;</span></span><br><span class="line"><span class="attr">label.clipsToBounds</span> = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-<h1 id="按钮类"><a href="#按钮类" class="headerlink" title="按钮类"></a>按钮类</h1><h1 id="图片类"><a href="#图片类" class="headerlink" title="图片类"></a>图片类</h1>]]></content>
-      <categories>
-        <category>散装知识</category>
-      </categories>
-      <tags>
-        <tag>Swift</tag>
+        <tag>实践</tag>
+        <tag>Bmob</tag>
+        <tag>后端</tag>
       </tags>
   </entry>
   <entry>
