@@ -126,12 +126,12 @@
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">5</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">14</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">15</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -207,10 +207,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2022-02-25 16:58:13 / 修改时间：23:18:32" itemprop="dateCreated datePublished" datetime="2022-02-25T16:58:13+08:00">2022-02-25</time>
+              <time title="创建时间：2022-02-25 16:58:13" itemprop="dateCreated datePublished" datetime="2022-02-25T16:58:13+08:00">2022-02-25</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-02-28 11:01:00" itemprop="dateModified" datetime="2022-02-28T11:01:00+08:00">2022-02-28</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -249,9 +255,6 @@
 <li>启动服务<code>npm start</code>，浏览器输入：localhost:3000,如果页面中展示了如”Hello Koa 2”的内容，说明项目搭建成功。</li>
 </ol>
 </li>
-</ol>
-<h1 id="koa2-连接-Redis"><a href="#koa2-连接-Redis" class="headerlink" title="koa2 连接 Redis"></a>koa2 连接 Redis</h1><ol>
-<li>koa2连接Redis需要安装两个中间件koa-generic-session（用于操作session）和koa-redis（用于连接Redis），我们到koa2项目目录下<code>npm i koa-generic-session koa-redis</code></li>
 </ol>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://github.com/koajs/koa">Github koa</a><br><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/4c51e5a1fcb7">koa2 配置 redis</a><br><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/3e35db2c8d6c">koa2从搭建项目到实现API</a></p>
 
@@ -361,7 +364,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/24/%E5%88%9D%E6%8E%A2%E9%98%BF%E9%87%8C%E4%BA%91ECS-%E4%BA%91Redis/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/24/Redis%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -375,7 +378,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/02/24/%E5%88%9D%E6%8E%A2%E9%98%BF%E9%87%8C%E4%BA%91ECS-%E4%BA%91Redis/" class="post-title-link" itemprop="url">初探阿里云ECS+云Redis</a>
+            <a href="/2022/02/24/Redis%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/" class="post-title-link" itemprop="url">Redis数据库基础</a>
         </h2>
 
         <div class="post-meta">
@@ -392,7 +395,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-02-26 23:20:39" itemprop="dateModified" datetime="2022-02-26T23:20:39+08:00">2022-02-26</time>
+                <time title="修改时间：2022-02-28 11:00:22" itemprop="dateModified" datetime="2022-02-28T11:00:22+08:00">2022-02-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -415,10 +418,196 @@
     <div class="post-body" itemprop="articleBody">
 
       
+          <h1 id="Redis-数据基础"><a href="#Redis-数据基础" class="headerlink" title="Redis 数据基础"></a>Redis 数据基础</h1><h2 id="Redis-通用指令"><a href="#Redis-通用指令" class="headerlink" title="Redis 通用指令"></a>Redis 通用指令</h2><h3 id="1-key通用操作"><a href="#1-key通用操作" class="headerlink" title="1. key通用操作"></a>1. key通用操作</h3><ul>
+<li><p>删除指定key<br><code>del key</code></p>
+</li>
+<li><p>获取key是否存在<br><code>exists key</code></p>
+</li>
+<li><p>获取key的类型<br><code>type key</code></p>
+</li>
+<li><p>时效性控制</p>
+<ul>
+<li>为指定key设置有效期<br>  <code>expire key seconds</code><br>  <code>pexpire key milliseconds</code><br>  <code>expireat key timestamp</code><br>  <code>pexpireat key milliseconds-timestamp</code></li>
+<li>获取key的剩余有效期<br>  <code>ttl key</code> 返回-2表示数据已过期，key为nil；返回-1表示key存在且未设置有效期<br>  <code>pttl key</code></li>
+<li>切换key从时效性转换为永久性<br>  <code>persist key</code></li>
+</ul>
+</li>
+<li><p>查询模型</p>
+<ul>
+<li>查询key<br>  <img src="/2022/02/24/Redis%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/16454333387131.jpg"></li>
+</ul>
+</li>
+</ul>
+<h3 id="2-数据库通用指令"><a href="#2-数据库通用指令" class="headerlink" title="2. 数据库通用指令"></a>2. 数据库通用指令</h3><p><strong>待完善</strong></p>
+<h2 id="String"><a href="#String" class="headerlink" title="String"></a>String</h2><h3 id="1-递增递减"><a href="#1-递增递减" class="headerlink" title="1. 递增递减"></a>1. 递增递减</h3><h3 id="2-数据实效性"><a href="#2-数据实效性" class="headerlink" title="2. 数据实效性"></a>2. 数据实效性</h3><h3 id="3-结构型和非结构型"><a href="#3-结构型和非结构型" class="headerlink" title="3. 结构型和非结构型"></a>3. 结构型和非结构型</h3><h3 id="4-结构型和非结构型高热度访问加速"><a href="#4-结构型和非结构型高热度访问加速" class="headerlink" title="4. 结构型和非结构型高热度访问加速"></a>4. 结构型和非结构型高热度访问加速</h3><h3 id="5-key命名规范："><a href="#5-key命名规范：" class="headerlink" title="5. key命名规范："></a>5. key命名规范：</h3><p><strong>表名：主键名：主键值：字段名</strong><br>单一存储格式<br><code>set user:id:3124231:fans 123123123</code><br><code>set user:id:1344345:blogs 789</code></p>
+<p>JSON格式<br><code>set user:id:00789 &#123;id:00789,blog:789,fans:12343234&#125;</code></p>
+<blockquote>
+<p>两者皆有优劣，单一存储修改时仅修改单一数据，JSON格式要修改都修改</p>
+</blockquote>
+<h2 id="hash"><a href="#hash" class="headerlink" title="hash"></a>hash</h2><h3 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h3><p>一个存储空间保存多个键值对数据<br>hash类型：底层使用哈希表结构实现数据存储<br>hash类型下的value只能存储字符串，不存在嵌套，若数据未获取到，则对应值为nil<br><img src="/2022/02/24/Redis%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/16454081278901.jpg"></p>
+<ul>
+<li>添加修改<br><code>hset user name zhangsan</code><br><code>hmset user name zhangsan weight 80</code></li>
+<li>获取数据<br><code>hgetall user</code><br><code>hget user name</code><br><code>hmget user name weight</code></li>
+<li>删除数据<br><code>hdelall user</code><br><code>hdel user name</code></li>
+<li>field 数量查询<br><code>hlen user</code></li>
+<li>判断是否存在指定字段<br><code>hexits user height</code></li>
+<li>获取所有字段名或字段值<br><code>hkeys key</code>（不可能重复）<br><code>hvals key</code>（可能有重复）</li>
+<li>设置指定字段的数值数据递增（可指定范围）<br><code>hincrby user age 1</code><br><code>hincrbyfloat user hight 0.5</code><h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h3></li>
+</ul>
+<ol>
+<li>电商购物车<br><code>hsetnx key field value</code><br>判断是否有该field，有则返回0修改失败，没有则添加value返回1修改成功</li>
+<li>商家抢购限购、限量发放、激活码<br><code>hincrby stop001 item001 -1</code><h3 id="string存储对象（JSON）与hash存储对象的区别"><a href="#string存储对象（JSON）与hash存储对象的区别" class="headerlink" title="string存储对象（JSON）与hash存储对象的区别"></a>string存储对象（JSON）与hash存储对象的区别</h3>JSON：整体性，强调读，一次性获取所有<br>hash：单一性，强调改，可单独分割一个个field进行独立操作</li>
+</ol>
+<h2 id="list"><a href="#list" class="headerlink" title="list"></a>list</h2><p>一个存储空间保存多个数据，强调顺序，底层使用双向链表存储结构实现<br>保存的数据都是string，总容量有限，2^32-1</p>
+<h3 id="基础知识-1"><a href="#基础知识-1" class="headerlink" title="基础知识"></a>基础知识</h3><ul>
+<li><p>添加修改数据，返回value的数量<br><code>lpush key value1 value2</code><br><code>rpush key value1 value2</code></p>
+</li>
+<li><p>获取数据，左进右查则为顺<br><code>lrange key star stop</code> 若想查所有，star为 0 stop为 -1<br><code>lindex key index</code>index为索引<br><code>llen key</code> 返回value的数量</p>
+</li>
+<li><p>获取并移除数据<br><code>lpop key</code><br><code>rpop key</code></p>
+</li>
+<li><p>规定时间内获取并移除数据<br><code>blpop key1 key2... [timeout]</code> timeout以秒为单位<br><code>brpop key1 key2... [timeout]</code></p>
+<h3 id="使用场景-1"><a href="#使用场景-1" class="headerlink" title="使用场景"></a>使用场景</h3></li>
+</ul>
+<ol>
+<li>朋友圈点赞顺序显示好友信息<br><code>lrem key count value</code> 移除指定数据，count为移除个数，value为移除的值</li>
+<li>list 进行分页操作，第一页来自list，第二页及更多通过数据库加载</li>
+<li>自媒体账号个人用户关注列表按顺序展示，粉丝列表将最新关注放前面</li>
+<li>新闻等数据最近发生放前面，最新消息展示</li>
+</ol>
+<h2 id="set-类型"><a href="#set-类型" class="headerlink" title="set 类型"></a>set 类型</h2><p>存储大量数据，便于查询，可进行同类型数据快速去重<br>set类型：与hash存储结构完全相同，仅存储键，不存储值（nil），且<strong>不允许重复</strong><br><img src="/2022/02/24/Redis%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/16454249123420.jpg"></p>
+<h3 id="基础知识-2"><a href="#基础知识-2" class="headerlink" title="基础知识"></a>基础知识</h3><ul>
+<li>添加<br><code>sadd key membel1 membel2...</code></li>
+<li>获取全部<br><code>smembers key</code></li>
+<li>删除数据<br><code>srem key menber1 member2...</code></li>
+<li>获取集合数据总量<br><code>scard key</code></li>
+<li>判断是否包含指定数据<br><code>sismember key member</code></li>
+</ul>
+<h3 id="使用场景-2"><a href="#使用场景-2" class="headerlink" title="使用场景"></a>使用场景</h3><ol>
+<li>随机推荐可能感兴趣的内容，不重复</li>
+</ol>
+<ul>
+<li>随机获取指定数量的数据<br><code>srandmember key [count]</code></li>
+<li>随机获取集合中的某个数据并将该数据移除集合<br><code>spop key</code></li>
+</ul>
+<ol start="2">
+<li>共同关注、共同好友</li>
+</ol>
+<ul>
+<li>集合的交、并、差集<br><code>sinter key1 key2 ...</code><br><code>sunion key1 key2</code><br><code>sdiff key1 key2</code></li>
+<li>集合的交、并、差集并存储到指定集合<br><code>sinterstore [key3] key1 key2 ...</code><br><code>sunionstore [key3] key1 key2</code><br><code>sdiffstore [key3] key1 key2</code></li>
+<li>将指定数据从原始集合中移动到目标集合中<br><code>smove [原始集合key1] [目标集合kye2] [要移动的数据]</code></li>
+</ul>
+<ol start="3">
+<li>统计网站访问量PV\独立访客UV\独立IP</li>
+</ol>
+<ul>
+<li>pv用string类</li>
+<li>uv建立set类型，记录不同cookie数量</li>
+<li>ip建立set模型，记录不同ip数量</li>
+</ul>
+<ol start="4">
+<li>黑白名单</li>
+</ol>
+<h2 id="sorted-set"><a href="#sorted-set" class="headerlink" title="sorted_set"></a>sorted_set</h2><p>可以保持可排序的数据<br>score是有限度的，64位<br>score的数据是双精度double值，基于双精度浮点数特征，可能丢失精度需注意<br>sorted_set底层存储还是基于set结构，数据不能重复，若添加相同的数据，score将被覆盖，保留最后一次结果</p>
+<h3 id="基础知识-3"><a href="#基础知识-3" class="headerlink" title="基础知识"></a>基础知识</h3><ul>
+<li>添加数据<br><code>zadd key [score1] [member1] ....</code></li>
+<li>获取数据<br><code>zrange key star stop withscores</code>withscores可以不加，全部遍历可用 0 -1<br><code>zrevrange key star stop</code> score由大到小</li>
+<li>删除数据<br><code>zrem key member1 member2 ...</code> 注意不是根据score删除</li>
+<li>按条件获取数据<br><code>zrangebyscore key min max withscores limit</code> withscores&#x2F;limit可以不加<br><code>zrerangebyscore key max min withscores limit 0 3</code> limit限制几个，可用于分页 </li>
+<li>条件删除数据<br><code>zremrangebyrank key start stop</code><br><code>zremrangebyscore key min max</code></li>
+<li>获取集合数据总量<br><code>zcard key</code><br><code>zcount key min max</code></li>
+<li>集合交、并操作<br><code>zinterstore [存储集合key3] [进行处理的集合数量] key1 key2 ... </code><br><code>zunionstore [存储集合key3] [进行处理的集合数量] key1 key2 ... </code><h3 id="使用场景-3"><a href="#使用场景-3" class="headerlink" title="使用场景"></a>使用场景</h3></li>
+</ul>
+<ol>
+<li>top10排行榜</li>
+</ol>
+<ul>
+<li>获取数据对应索引(排名)<br><code>zrank key member</code><br><code>zrevrank key member</code></li>
+<li>score 值获取与修改<br><code>zscore key member</code><br><code>zincrby key increment member</code></li>
+</ul>
+<ol start="2">
+<li>基础服务+增值类服务，需要实效性，如体验式vip，试用期</li>
+<li>定期开始投票、讨论、限时进行逾期作废，可用于定时任务执行顺序管理或任务过期管理，建议分段处理</li>
+<li>任务权重设置，采用score记录权重</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/22/%E4%BA%91ECS+%E4%BA%91Redis/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Jiachen Fu">
+      <meta itemprop="description" content="一饮一啄莫非前定<br>兰因絮果必有来因">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FjC的个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/02/22/%E4%BA%91ECS+%E4%BA%91Redis/" class="post-title-link" itemprop="url">云ECS+云Redis</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-02-22 16:58:13" itemprop="dateCreated datePublished" datetime="2022-02-22T16:58:13+08:00">2022-02-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-02-28 11:01:11" itemprop="dateModified" datetime="2022-02-28T11:01:11+08:00">2022-02-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">后端开发</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
           Here's something encrypted, password is required to continue reading.
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2022/02/24/%E5%88%9D%E6%8E%A2%E9%98%BF%E9%87%8C%E4%BA%91ECS-%E4%BA%91Redis/#more" rel="contents">
+              <a class="btn" href="/2022/02/22/%E4%BA%91ECS+%E4%BA%91Redis/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1656,14 +1845,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">

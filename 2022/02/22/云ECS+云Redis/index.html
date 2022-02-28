@@ -20,20 +20,22 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="记录开发过程中用到的纯代码写UI及一些经验心得记录一些自己写的UI库封装记录一些用过的第三方UI类库  文字类label圆角12label.layer.cornerRadius &#x3D; 5;label.clipsToBounds &#x3D; true 按钮类图片类">
+  <meta name="description" content="Here&#39;s something encrypted, password is required to continue reading.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Swift5.0 UI代码Tips">
-<meta property="og:url" content="http://example.com/2019/12/02/swift5.0-UI%E4%BB%A3%E7%A0%81Tips/index.html">
+<meta property="og:title" content="云ECS+云Redis">
+<meta property="og:url" content="http://example.com/2022/02/22/%E4%BA%91ECS+%E4%BA%91Redis/index.html">
 <meta property="og:site_name" content="FjC的个人博客">
-<meta property="og:description" content="记录开发过程中用到的纯代码写UI及一些经验心得记录一些自己写的UI库封装记录一些用过的第三方UI类库  文字类label圆角12label.layer.cornerRadius &#x3D; 5;label.clipsToBounds &#x3D; true 按钮类图片类">
+<meta property="og:description" content="Here&#39;s something encrypted, password is required to continue reading.">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2019-12-02T07:03:38.000Z">
-<meta property="article:modified_time" content="2022-02-23T14:14:34.499Z">
+<meta property="article:published_time" content="2022-02-22T08:58:13.000Z">
+<meta property="article:modified_time" content="2022-02-28T03:01:11.828Z">
 <meta property="article:author" content="Jiachen Fu">
-<meta property="article:tag" content="Swift">
+<meta property="article:tag" content="Redis">
+<meta property="article:tag" content="阿里云">
+<meta property="article:tag" content="ECS">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2019/12/02/swift5.0-UI%E4%BB%A3%E7%A0%81Tips/">
+<link rel="canonical" href="http://example.com/2022/02/22/%E4%BA%91ECS+%E4%BA%91Redis/">
 
 
 <script id="page-configurations">
@@ -46,7 +48,7 @@
   };
 </script>
 
-  <title>Swift5.0 UI代码Tips | FjC的个人博客</title>
+  <title>云ECS+云Redis | FjC的个人博客</title>
   
 
 
@@ -187,7 +189,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2019/12/02/swift5.0-UI%E4%BB%A3%E7%A0%81Tips/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/22/%E4%BA%91ECS+%E4%BA%91Redis/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -200,7 +202,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Swift5.0 UI代码Tips
+          云ECS+云Redis
         </h1>
 
         <div class="post-meta">
@@ -210,14 +212,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-12-02 15:03:38" itemprop="dateCreated datePublished" datetime="2019-12-02T15:03:38+08:00">2019-12-02</time>
+              <time title="创建时间：2022-02-22 16:58:13" itemprop="dateCreated datePublished" datetime="2022-02-22T16:58:13+08:00">2022-02-22</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-02-23 22:14:34" itemprop="dateModified" datetime="2022-02-23T22:14:34+08:00">2022-02-23</time>
+                <time title="修改时间：2022-02-28 11:01:11" itemprop="dateModified" datetime="2022-02-28T11:01:11+08:00">2022-02-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -225,7 +227,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%A3%E8%A3%85%E7%9F%A5%E8%AF%86/" itemprop="url" rel="index"><span itemprop="name">散装知识</span></a>
+                  <a href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">后端开发</span></a>
                 </span>
             </span>
 
@@ -240,11 +242,18 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <blockquote>
-<p>记录开发过程中用到的纯代码写UI及一些经验心得<br>记录一些自己写的UI库封装<br>记录一些用过的第三方UI类库</p>
-</blockquote>
-<h1 id="文字类"><a href="#文字类" class="headerlink" title="文字类"></a>文字类</h1><h2 id="label圆角"><a href="#label圆角" class="headerlink" title="label圆角"></a>label圆角</h2><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">label.layer.cornerRadius</span> = <span class="number">5</span><span class="comment">;</span></span><br><span class="line"><span class="attr">label.clipsToBounds</span> = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-<h1 id="按钮类"><a href="#按钮类" class="headerlink" title="按钮类"></a>按钮类</h1><h1 id="图片类"><a href="#图片类" class="headerlink" title="图片类"></a>图片类</h1>
+        <div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="e69ab73e4709bd582344509c555d9bc5a10e4ecd7d0d3d2261392c112657c6c7">41b535b75251d982879fbe3234d52c0ee413592f63f5eace8b27e21e00ee9100094fa89977579ad9c255da5d19b0a3c8f27066aca39240348ed16930800c1b491fd47aa1e8124a679a4da059e2560190e0b3b7d45f41fa3fb76cd5e85a552814fdcf2dbd1d421e3f23c1f8de9aba863420e6fd2c61355dc66f16b271d941ed38104a709540b1b2356a99ba8081dcabc30aefbde8559dd5099a449051e9b22503b816e2cd0799277460ca8890ff769dce85207d34ab9b9c8f4b6765a5ca78df9796994d0cdd30a366111926309e5f862a5b51cb868e5e473c4ee97b485d507a94787ae44cd4c252f8a7b0e3f6a91fe1315fc6431c1a09d6fd99be4c8a49dd69dcb645f2c440575be35630c4ad4892fe8510876491155bce259948cc51c236e69e969513c45692b8151222b8a14e150dcf8837e6eae07dc05fc0521d9dcd11483ffd376f3afdd692f8e08e014d6a7d759b595b69a68a6574590f40741e25f21f2595665af71a32c0e98677f04c83e8a484c369443fedbcdcea5de9368b14c34e51527f62664eac1fd3fd389681cf72a2870cbed6162ac2c64fd7635e9d5f7d061e6e832dc3a1ccfb27bf250962fe1ef722df5f8d974358155004f4c939ba21f20bb4098ecd2f306f0824f5a70f5b48b3e593824b6dafb87cf08eef9f73ba9739e8888746b75216299f31b9ae86576934f282ffb1dcc014d4b9de8dfa112b1ca89a29a7e99baa8f45523b67dbbf7cba6f842d149b671a12dcf59be6f607d46233364c6d24f8025c108107574dac5ad7e11a1a56a767af4482ebc4403cd4b1e69d70583b67ccdfd6bd69acf893ffa5c168bb6938a7671d45642732a49c1d4471f42f3cb8a97d4767ece9b8acedc8685d7ee6dd94f803d0dfbbbdaec99bfab7a3967566ce1de77a4b3f37026bfcf2ee156f1f07504a783e7461ee266940db3b0e583d1d4c586eb832fa59048636a688ae78604d03e990667dd42b9d4c5bad1e268944cd36bb50824fbf68af8726bf72b5badd6d34b917b1c2c2108c59fc72a475a6e1cf1e6d11315c2b1ab5e7dbd0bd22624fa1563515251db4e385ba3508f7cc1d79f1a256a5df5b084a0ea59e568e4d15dcac255b20cbb2c2a2f0e198f172fc168fd247efeb737613758835f3e051c07765e44576ab75dca21c596e20abc8d1c746e0459a70122fcef5b12aa21fc1b867ff752f1bf71a60cd630658a3788534b552390ba0e19e6ec319f568bd8f2984ba1b1373822dba312ee756b8dd35865c10ac956d3a03bd64a7126c5413f603f66f9265eb7896b23f6e7fb56d6c797503f000694e42c156fd236684f5af68325915fa0e737a6771d787e2a94f550107af436a39eba76059ca1591c442372e2913923b102ac98b73c45b26472adee692c5fa52c961f9ee4e919118a6bd9608a49ebd2c751a351b4c02447e1250961021b7b082609da2c0a739f9d0819f11dff9ca85f3d3f3f7089df8b65b138d1d61acccfcd430e807da785d77c697036d6cf1df7338bdd00d5b955c3811e5b84bf27eb9a5a466692a55c28c9ca0185dde484ceaa777463bfcf1b27992430d8019430440e9b57091ee14fcc12d71a9577065dfb7ed3c0cae806f7cf442672944954ac49f044aa33c14d006129ad57886f4e45d440b2c2516004df1c2f963666b5815b5654057190d77d1d1ceebf026289c8f2dd92823476eb530dc8d8a4a69d09da6f27e3a8c3db916cc7fa6380e09cc1edf817655b7269ad806117e017257ed628361417998d2192227dace49a4a2e19faa89e355207c116cc81c671811fb8401e292de5a464aaf9434890d74e2d4144b9f35d7d6e14a90fa68cd80df856d18fb597dea12374269710195304c97c5b5e1602c6cbdb41560160ad2b5b8b080ea96eec418c44f47009b915c3817f5e2b64e7931343ee671bd36624e001f6427d07062f176bb73d48c83cea0ff29996f49d9305a3620e13733bded31841fcb9a5295f6375237154b7a810613b4c530d5285e9342f7905da114ffeaa65cc430756a79bb7c15653c7095f50ba0ca92ea87d6e7f75ab733d9c368d785334882793406e656e2e318dfc7e6be1ad7bdcda0cdc90e6a24357578b80dfa64057787b54c84b6dce94680f5817d906dacf3600beb1fdaf49be3b2f6ee770603aa502191142f5e6ee61344f486b528c00e9c387157d48632ba67fe8b7917f6d109078e0320510942545aa357</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">Hey, password is required here.</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">
     </div>
 
     
@@ -253,7 +262,9 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Swift/" rel="tag"># Swift</a>
+              <a href="/tags/Redis/" rel="tag"># Redis</a>
+              <a href="/tags/%E9%98%BF%E9%87%8C%E4%BA%91/" rel="tag"># 阿里云</a>
+              <a href="/tags/ECS/" rel="tag"># ECS</a>
           </div>
 
         
@@ -262,12 +273,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2019/11/28/vue%E5%AE%89%E8%A3%85%E5%8F%8A%E5%88%9B%E5%BB%BA%E6%96%B0%E9%A1%B9%E7%9B%AE/" rel="prev" title="vue安装及创建新项目">
-      <i class="fa fa-chevron-left"></i> vue安装及创建新项目
+    <a href="/2020/05/22/Express+Mysql%E6%90%AD%E5%BB%BA%E6%8E%A5%E5%8F%A3%E5%B9%B3%E5%8F%B0/" rel="prev" title="Express+Mysql搭建接口平台">
+      <i class="fa fa-chevron-left"></i> Express+Mysql搭建接口平台
     </a></div>
       <div class="post-nav-item">
-    <a href="/2019/12/02/HTML5+JS+CSS%E4%B8%8EBmob%E4%BA%91%E5%90%8E%E5%8F%B0%E5%AE%9E%E8%B7%B5/" rel="next" title="HTML5+JS+CSS与Bmob云后台实践">
-      HTML5+JS+CSS与Bmob云后台实践 <i class="fa fa-chevron-right"></i>
+    <a href="/2022/02/24/Redis%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/" rel="next" title="Redis数据库基础">
+      Redis数据库基础 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -327,7 +338,6 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%87%E5%AD%97%E7%B1%BB"><span class="nav-text">文字类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#label%E5%9C%86%E8%A7%92"><span class="nav-text">label圆角</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8C%89%E9%92%AE%E7%B1%BB"><span class="nav-text">按钮类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%BE%E7%89%87%E7%B1%BB"><span class="nav-text">图片类</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Redis 数据基础Redis 通用指令1. key通用操作 删除指定keydel key  获取key是否存在exists key  获取key的类型type key  时效性控制  为指定key设置有效期  expire key seconds  pexpire key milliseconds  expireat key timestamp  pexpireat key millisecon">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis数据库基础">
+<meta property="og:url" content="http://example.com/2022/02/24/Redis%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="FjC的个人博客">
+<meta property="og:description" content="Redis 数据基础Redis 通用指令1. key通用操作 删除指定keydel key  获取key是否存在exists key  获取key的类型type key  时效性控制  为指定key设置有效期  expire key seconds  pexpire key milliseconds  expireat key timestamp  pexpireat key millisecon">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2022/02/24/Redis%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/16454333387131.jpg">
+<meta property="og:image" content="http://example.com/2022/02/24/Redis%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/16454081278901.jpg">
+<meta property="og:image" content="http://example.com/2022/02/24/Redis%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/16454249123420.jpg">
+<meta property="article:published_time" content="2022-02-24T13:28:38.000Z">
+<meta property="article:modified_time" content="2022-02-28T03:00:22.315Z">
+<meta property="article:author" content="Jiachen Fu">
+<meta property="article:tag" content="Redis">
+<meta property="article:tag" content="阿里云">
+<meta property="article:tag" content="ECS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2022/02/24/Redis%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/16454333387131.jpg">
+
+<link rel="canonical" href="http://example.com/2022/02/24/Redis%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Redis数据库基础 | FjC的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+	<a target="_blank" rel="noopener" href="https://github.com/jessicafjc" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">FjC的个人博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">发散、记录、实践、反思</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">18</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">5</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">15</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/24/Redis%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Jiachen Fu">
+      <meta itemprop="description" content="一饮一啄莫非前定<br>兰因絮果必有来因">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FjC的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Redis数据库基础
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-02-24 21:28:38" itemprop="dateCreated datePublished" datetime="2022-02-24T21:28:38+08:00">2022-02-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-02-28 11:00:22" itemprop="dateModified" datetime="2022-02-28T11:00:22+08:00">2022-02-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%A3%E8%A3%85%E7%9F%A5%E8%AF%86/" itemprop="url" rel="index"><span itemprop="name">散装知识</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Redis-数据基础"><a href="#Redis-数据基础" class="headerlink" title="Redis 数据基础"></a>Redis 数据基础</h1><h2 id="Redis-通用指令"><a href="#Redis-通用指令" class="headerlink" title="Redis 通用指令"></a>Redis 通用指令</h2><h3 id="1-key通用操作"><a href="#1-key通用操作" class="headerlink" title="1. key通用操作"></a>1. key通用操作</h3><ul>
+<li><p>删除指定key<br><code>del key</code></p>
+</li>
+<li><p>获取key是否存在<br><code>exists key</code></p>
+</li>
+<li><p>获取key的类型<br><code>type key</code></p>
+</li>
+<li><p>时效性控制</p>
+<ul>
+<li>为指定key设置有效期<br>  <code>expire key seconds</code><br>  <code>pexpire key milliseconds</code><br>  <code>expireat key timestamp</code><br>  <code>pexpireat key milliseconds-timestamp</code></li>
+<li>获取key的剩余有效期<br>  <code>ttl key</code> 返回-2表示数据已过期，key为nil；返回-1表示key存在且未设置有效期<br>  <code>pttl key</code></li>
+<li>切换key从时效性转换为永久性<br>  <code>persist key</code></li>
+</ul>
+</li>
+<li><p>查询模型</p>
+<ul>
+<li>查询key<br>  <img src="/2022/02/24/Redis%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/16454333387131.jpg"></li>
+</ul>
+</li>
+</ul>
+<h3 id="2-数据库通用指令"><a href="#2-数据库通用指令" class="headerlink" title="2. 数据库通用指令"></a>2. 数据库通用指令</h3><p><strong>待完善</strong></p>
+<h2 id="String"><a href="#String" class="headerlink" title="String"></a>String</h2><h3 id="1-递增递减"><a href="#1-递增递减" class="headerlink" title="1. 递增递减"></a>1. 递增递减</h3><h3 id="2-数据实效性"><a href="#2-数据实效性" class="headerlink" title="2. 数据实效性"></a>2. 数据实效性</h3><h3 id="3-结构型和非结构型"><a href="#3-结构型和非结构型" class="headerlink" title="3. 结构型和非结构型"></a>3. 结构型和非结构型</h3><h3 id="4-结构型和非结构型高热度访问加速"><a href="#4-结构型和非结构型高热度访问加速" class="headerlink" title="4. 结构型和非结构型高热度访问加速"></a>4. 结构型和非结构型高热度访问加速</h3><h3 id="5-key命名规范："><a href="#5-key命名规范：" class="headerlink" title="5. key命名规范："></a>5. key命名规范：</h3><p><strong>表名：主键名：主键值：字段名</strong><br>单一存储格式<br><code>set user:id:3124231:fans 123123123</code><br><code>set user:id:1344345:blogs 789</code></p>
+<p>JSON格式<br><code>set user:id:00789 &#123;id:00789,blog:789,fans:12343234&#125;</code></p>
+<blockquote>
+<p>两者皆有优劣，单一存储修改时仅修改单一数据，JSON格式要修改都修改</p>
+</blockquote>
+<h2 id="hash"><a href="#hash" class="headerlink" title="hash"></a>hash</h2><h3 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h3><p>一个存储空间保存多个键值对数据<br>hash类型：底层使用哈希表结构实现数据存储<br>hash类型下的value只能存储字符串，不存在嵌套，若数据未获取到，则对应值为nil<br><img src="/2022/02/24/Redis%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/16454081278901.jpg"></p>
+<ul>
+<li>添加修改<br><code>hset user name zhangsan</code><br><code>hmset user name zhangsan weight 80</code></li>
+<li>获取数据<br><code>hgetall user</code><br><code>hget user name</code><br><code>hmget user name weight</code></li>
+<li>删除数据<br><code>hdelall user</code><br><code>hdel user name</code></li>
+<li>field 数量查询<br><code>hlen user</code></li>
+<li>判断是否存在指定字段<br><code>hexits user height</code></li>
+<li>获取所有字段名或字段值<br><code>hkeys key</code>（不可能重复）<br><code>hvals key</code>（可能有重复）</li>
+<li>设置指定字段的数值数据递增（可指定范围）<br><code>hincrby user age 1</code><br><code>hincrbyfloat user hight 0.5</code><h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h3></li>
+</ul>
+<ol>
+<li>电商购物车<br><code>hsetnx key field value</code><br>判断是否有该field，有则返回0修改失败，没有则添加value返回1修改成功</li>
+<li>商家抢购限购、限量发放、激活码<br><code>hincrby stop001 item001 -1</code><h3 id="string存储对象（JSON）与hash存储对象的区别"><a href="#string存储对象（JSON）与hash存储对象的区别" class="headerlink" title="string存储对象（JSON）与hash存储对象的区别"></a>string存储对象（JSON）与hash存储对象的区别</h3>JSON：整体性，强调读，一次性获取所有<br>hash：单一性，强调改，可单独分割一个个field进行独立操作</li>
+</ol>
+<h2 id="list"><a href="#list" class="headerlink" title="list"></a>list</h2><p>一个存储空间保存多个数据，强调顺序，底层使用双向链表存储结构实现<br>保存的数据都是string，总容量有限，2^32-1</p>
+<h3 id="基础知识-1"><a href="#基础知识-1" class="headerlink" title="基础知识"></a>基础知识</h3><ul>
+<li><p>添加修改数据，返回value的数量<br><code>lpush key value1 value2</code><br><code>rpush key value1 value2</code></p>
+</li>
+<li><p>获取数据，左进右查则为顺<br><code>lrange key star stop</code> 若想查所有，star为 0 stop为 -1<br><code>lindex key index</code>index为索引<br><code>llen key</code> 返回value的数量</p>
+</li>
+<li><p>获取并移除数据<br><code>lpop key</code><br><code>rpop key</code></p>
+</li>
+<li><p>规定时间内获取并移除数据<br><code>blpop key1 key2... [timeout]</code> timeout以秒为单位<br><code>brpop key1 key2... [timeout]</code></p>
+<h3 id="使用场景-1"><a href="#使用场景-1" class="headerlink" title="使用场景"></a>使用场景</h3></li>
+</ul>
+<ol>
+<li>朋友圈点赞顺序显示好友信息<br><code>lrem key count value</code> 移除指定数据，count为移除个数，value为移除的值</li>
+<li>list 进行分页操作，第一页来自list，第二页及更多通过数据库加载</li>
+<li>自媒体账号个人用户关注列表按顺序展示，粉丝列表将最新关注放前面</li>
+<li>新闻等数据最近发生放前面，最新消息展示</li>
+</ol>
+<h2 id="set-类型"><a href="#set-类型" class="headerlink" title="set 类型"></a>set 类型</h2><p>存储大量数据，便于查询，可进行同类型数据快速去重<br>set类型：与hash存储结构完全相同，仅存储键，不存储值（nil），且<strong>不允许重复</strong><br><img src="/2022/02/24/Redis%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/16454249123420.jpg"></p>
+<h3 id="基础知识-2"><a href="#基础知识-2" class="headerlink" title="基础知识"></a>基础知识</h3><ul>
+<li>添加<br><code>sadd key membel1 membel2...</code></li>
+<li>获取全部<br><code>smembers key</code></li>
+<li>删除数据<br><code>srem key menber1 member2...</code></li>
+<li>获取集合数据总量<br><code>scard key</code></li>
+<li>判断是否包含指定数据<br><code>sismember key member</code></li>
+</ul>
+<h3 id="使用场景-2"><a href="#使用场景-2" class="headerlink" title="使用场景"></a>使用场景</h3><ol>
+<li>随机推荐可能感兴趣的内容，不重复</li>
+</ol>
+<ul>
+<li>随机获取指定数量的数据<br><code>srandmember key [count]</code></li>
+<li>随机获取集合中的某个数据并将该数据移除集合<br><code>spop key</code></li>
+</ul>
+<ol start="2">
+<li>共同关注、共同好友</li>
+</ol>
+<ul>
+<li>集合的交、并、差集<br><code>sinter key1 key2 ...</code><br><code>sunion key1 key2</code><br><code>sdiff key1 key2</code></li>
+<li>集合的交、并、差集并存储到指定集合<br><code>sinterstore [key3] key1 key2 ...</code><br><code>sunionstore [key3] key1 key2</code><br><code>sdiffstore [key3] key1 key2</code></li>
+<li>将指定数据从原始集合中移动到目标集合中<br><code>smove [原始集合key1] [目标集合kye2] [要移动的数据]</code></li>
+</ul>
+<ol start="3">
+<li>统计网站访问量PV\独立访客UV\独立IP</li>
+</ol>
+<ul>
+<li>pv用string类</li>
+<li>uv建立set类型，记录不同cookie数量</li>
+<li>ip建立set模型，记录不同ip数量</li>
+</ul>
+<ol start="4">
+<li>黑白名单</li>
+</ol>
+<h2 id="sorted-set"><a href="#sorted-set" class="headerlink" title="sorted_set"></a>sorted_set</h2><p>可以保持可排序的数据<br>score是有限度的，64位<br>score的数据是双精度double值，基于双精度浮点数特征，可能丢失精度需注意<br>sorted_set底层存储还是基于set结构，数据不能重复，若添加相同的数据，score将被覆盖，保留最后一次结果</p>
+<h3 id="基础知识-3"><a href="#基础知识-3" class="headerlink" title="基础知识"></a>基础知识</h3><ul>
+<li>添加数据<br><code>zadd key [score1] [member1] ....</code></li>
+<li>获取数据<br><code>zrange key star stop withscores</code>withscores可以不加，全部遍历可用 0 -1<br><code>zrevrange key star stop</code> score由大到小</li>
+<li>删除数据<br><code>zrem key member1 member2 ...</code> 注意不是根据score删除</li>
+<li>按条件获取数据<br><code>zrangebyscore key min max withscores limit</code> withscores&#x2F;limit可以不加<br><code>zrerangebyscore key max min withscores limit 0 3</code> limit限制几个，可用于分页 </li>
+<li>条件删除数据<br><code>zremrangebyrank key start stop</code><br><code>zremrangebyscore key min max</code></li>
+<li>获取集合数据总量<br><code>zcard key</code><br><code>zcount key min max</code></li>
+<li>集合交、并操作<br><code>zinterstore [存储集合key3] [进行处理的集合数量] key1 key2 ... </code><br><code>zunionstore [存储集合key3] [进行处理的集合数量] key1 key2 ... </code><h3 id="使用场景-3"><a href="#使用场景-3" class="headerlink" title="使用场景"></a>使用场景</h3></li>
+</ul>
+<ol>
+<li>top10排行榜</li>
+</ol>
+<ul>
+<li>获取数据对应索引(排名)<br><code>zrank key member</code><br><code>zrevrank key member</code></li>
+<li>score 值获取与修改<br><code>zscore key member</code><br><code>zincrby key increment member</code></li>
+</ul>
+<ol start="2">
+<li>基础服务+增值类服务，需要实效性，如体验式vip，试用期</li>
+<li>定期开始投票、讨论、限时进行逾期作废，可用于定时任务执行顺序管理或任务过期管理，建议分段处理</li>
+<li>任务权重设置，采用score记录权重</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Redis/" rel="tag"># Redis</a>
+              <a href="/tags/%E9%98%BF%E9%87%8C%E4%BA%91/" rel="tag"># 阿里云</a>
+              <a href="/tags/ECS/" rel="tag"># ECS</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/02/22/%E4%BA%91ECS+%E4%BA%91Redis/" rel="prev" title="云ECS+云Redis">
+      <i class="fa fa-chevron-left"></i> 云ECS+云Redis
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/02/24/hexo%E5%8D%9A%E5%AE%A2%E5%AE%9E%E7%94%A8%E5%8A%9F%E8%83%BD%E5%8F%8A%E6%8F%92%E4%BB%B6/" rel="next" title="hexo博客实用功能及插件">
+      hexo博客实用功能及插件 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis-%E6%95%B0%E6%8D%AE%E5%9F%BA%E7%A1%80"><span class="nav-text">Redis 数据基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis-%E9%80%9A%E7%94%A8%E6%8C%87%E4%BB%A4"><span class="nav-text">Redis 通用指令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-key%E9%80%9A%E7%94%A8%E6%93%8D%E4%BD%9C"><span class="nav-text">1. key通用操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%95%B0%E6%8D%AE%E5%BA%93%E9%80%9A%E7%94%A8%E6%8C%87%E4%BB%A4"><span class="nav-text">2. 数据库通用指令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#String"><span class="nav-text">String</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E9%80%92%E5%A2%9E%E9%80%92%E5%87%8F"><span class="nav-text">1. 递增递减</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%95%B0%E6%8D%AE%E5%AE%9E%E6%95%88%E6%80%A7"><span class="nav-text">2. 数据实效性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E7%BB%93%E6%9E%84%E5%9E%8B%E5%92%8C%E9%9D%9E%E7%BB%93%E6%9E%84%E5%9E%8B"><span class="nav-text">3. 结构型和非结构型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E7%BB%93%E6%9E%84%E5%9E%8B%E5%92%8C%E9%9D%9E%E7%BB%93%E6%9E%84%E5%9E%8B%E9%AB%98%E7%83%AD%E5%BA%A6%E8%AE%BF%E9%97%AE%E5%8A%A0%E9%80%9F"><span class="nav-text">4. 结构型和非结构型高热度访问加速</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-key%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83%EF%BC%9A"><span class="nav-text">5. key命名规范：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hash"><span class="nav-text">hash</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="nav-text">基础知识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-text">使用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#string%E5%AD%98%E5%82%A8%E5%AF%B9%E8%B1%A1%EF%BC%88JSON%EF%BC%89%E4%B8%8Ehash%E5%AD%98%E5%82%A8%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-text">string存储对象（JSON）与hash存储对象的区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#list"><span class="nav-text">list</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86-1"><span class="nav-text">基础知识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF-1"><span class="nav-text">使用场景</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#set-%E7%B1%BB%E5%9E%8B"><span class="nav-text">set 类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86-2"><span class="nav-text">基础知识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF-2"><span class="nav-text">使用场景</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sorted-set"><span class="nav-text">sorted_set</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86-3"><span class="nav-text">基础知识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF-3"><span class="nav-text">使用场景</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jiachen Fu"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Jiachen Fu</p>
+  <div class="site-description" itemprop="description">一饮一啄莫非前定<br>兰因絮果必有来因</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/jessicafjc" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;jessicafjc" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:jiabao510834504@126.com" title="E-Mail → mailto:jiabao510834504@126.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jiachen Fu</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
