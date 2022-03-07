@@ -508,7 +508,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-03-07 23:16:40" itemprop="dateModified" datetime="2022-03-07T23:16:40+08:00">2022-03-07</time>
+                <time title="修改时间：2022-03-07 23:36:58" itemprop="dateModified" datetime="2022-03-07T23:36:58+08:00">2022-03-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -558,6 +558,42 @@
 <li>然后重新编译，打包上传就可以了 <code>hexo d -g</code></li>
 <li>测试，去到百度统计，找到代码安装检查，就可以测试是否添加上去了<h2 id="LeanCloud阅读次数统计"><a href="#LeanCloud阅读次数统计" class="headerlink" title="LeanCloud阅读次数统计"></a>LeanCloud阅读次数统计</h2></li>
 </ol>
+<ul>
+<li><p>首先，前往Leancloud<a target="_blank" rel="noopener" href="https://console.leancloud.app/apps">官网</a>进行注册，并登陆。</p>
+</li>
+<li><p>点击创建应用,输入应用的名称(随便起都行), 选择开发版, 点击创建</p>
+</li>
+<li><p>创建成功后点击右上角的设置小齿轮,点击存储-创建 Class</p>
+</li>
+<li><p>Class名称设置为<code>Counter</code>(必须为<strong>Counter</strong>)-选择无限制-点击创建</p>
+</li>
+<li><p>创建后点击设置-点击应用Key-获取App ID和App Key</p>
+</li>
+<li><p>将获取到的App ID和App Key设置到Next主题配置文件 <strong>_config.yml</strong>,配置文件已存在这个配置, 只要把id和key加上去就好了</p>
+</li>
+<li><p>点击安全中心, 填写自己博客对应的域名（注意协议、域名和端口号需严格一致）</p>
+</li>
+<li><p>点击云引擎-点击部署-点击在线编辑</p>
+</li>
+<li><p>点击创建函数-选择 <code>Hook</code> , AV.Cloud.选择 <code>beforeSave</code> ,类选择Counter-添加代码</p>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> query = <span class="keyword">new</span> <span class="variable constant_">AV</span>.<span class="title class_">Query</span>(<span class="string">&quot;Counter&quot;</span>);</span><br><span class="line"><span class="keyword">if</span> (request.<span class="property">object</span>.<span class="property">updatedKeys</span>.<span class="title function_">indexOf</span>(<span class="string">&#x27;time&#x27;</span>) !== -<span class="number">1</span>) &#123;</span><br><span class="line">     <span class="keyword">return</span> query.<span class="title function_">get</span>(request.<span class="property">object</span>.<span class="property">id</span>).<span class="title function_">then</span>(<span class="keyword">function</span> (<span class="params">obj</span>) &#123;</span><br><span class="line">     <span class="keyword">if</span> (obj.<span class="title function_">get</span>(<span class="string">&quot;time&quot;</span>) + <span class="number">1</span> !== request.<span class="property">object</span>.<span class="title function_">get</span>(<span class="string">&quot;time&quot;</span>)) &#123;</span><br><span class="line">     <span class="keyword">throw</span> <span class="keyword">new</span> <span class="variable constant_">AV</span>.<span class="property">Cloud</span>.<span class="title class_">Error</span>(<span class="string">&#x27;Invalid update!&#x27;</span>);</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>点击保存，点击部署</p>
+</li>
+<li><p>打开Next主题配置文件 <strong>_config.yml</strong>, 将leancloud_visitors下的security设置为true（如没有则新增）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">leancloud_visitors</span>:</span><br><span class="line">     <span class="attr">enable</span>: <span class="literal">true</span></span><br><span class="line">     <span class="attr">app_id</span>: &lt;&lt;your app id&gt;&gt; # 同前文的id</span><br><span class="line">     <span class="attr">app_key</span>: &lt;&lt;your app key&gt;&gt; # 同前文的key</span><br><span class="line">     # <span class="title class_">Dependencies</span>: <span class="attr">https</span>:<span class="comment">//github.com/theme-next/hexo-leancloud-counter-security</span></span><br><span class="line">     <span class="attr">security</span>: <span class="literal">true</span></span><br><span class="line">     # 由于<span class="title class_">Leancloud</span>免费版的云引擎存在请求线程数和运行时间限制以及休眠机制，</span><br><span class="line">     # 很多时候访客数量加载会很慢。</span><br><span class="line">     # 如果设置betterPerformance为<span class="literal">true</span>，</span><br><span class="line">     # 则网页则会在提交请求之前直接显示访客人数为查询到的人数+<span class="number">1</span>，以增加用户体验。</span><br><span class="line">     <span class="attr">betterPerformance</span>: <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>打开命令行cmd并进入站点文件夹，<code>npm install hexo-leancloud-counter-security --save</code></p>
+</li>
+<li><p>设置<code>hexo lc-counter register &lt;&lt;username&gt;&gt; &lt;&lt;password&gt;&gt;</code>，将&lt;&lt; username &gt;&gt;和&lt;&lt; password &gt;&gt;替换为你自己的用户名和密码（不必与leancloud的账号）相同。</p>
+</li>
+<li><p>打开站点配置文件 <strong>_config.yml</strong>，将&lt;&lt; username &gt;&gt;和&lt;&lt; password &gt;&gt;替换为你刚刚设置的用户名和密码</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">leancloud_counter_security</span>:</span><br><span class="line">    <span class="attr">enable_sync</span>: <span class="literal">true</span></span><br><span class="line">    <span class="attr">app_id</span>: &lt;&lt;your app id&gt;&gt;   # 同前文的id</span><br><span class="line">    <span class="attr">app_key</span>: &lt;&lt;your app key&gt;&gt; # 同前文的key</span><br><span class="line">    <span class="attr">username</span>: </span><br><span class="line">    <span class="attr">password</span>:</span><br></pre></td></tr></table></figure>
+<ul>
+<li>返回Leancloud控制台的应用内, 检查_User表中是否出现一条记录</li>
+<li>进入Counter表, 打开权限设置，修改<code>add</code>和<code>create</code>为指定用户，修改<code>delete</code>为指定空用户</li>
+</ul>
 <h3 id="参考文章-1"><a href="#参考文章-1" class="headerlink" title="参考文章"></a>参考文章</h3><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/e0a719bac963">Hexo Next leancloud文章阅读次数配置</a><br><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/3a6342e16e57">hexo 添加live2d看板动画</a></p>
 
       
