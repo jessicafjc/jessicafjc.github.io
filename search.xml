@@ -92,44 +92,80 @@
       </tags>
   </entry>
   <entry>
-    <title>Liunx常用指令</title>
-    <url>/2019/11/25/liunx%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/</url>
-    <content><![CDATA[<h1 id="常用指令"><a href="#常用指令" class="headerlink" title="常用指令"></a>常用指令</h1><ul>
-<li>查看当前地址<code>pwd</code></li>
-<li>查看当前位置内所有文件<code>ls</code></li>
-<li>查看当前位置内所有文件及详细信息<code>ls -s</code></li>
-<li>前往某地址<code>cd 前往的地址目录</code></li>
-<li>回到上一级目录 <code>cd ..</code>回到上上级<code>cd ../..</code></li>
-<li>新建文件夹 <code>mkdir</code> 文件夹名</li>
-<li>断开连接<code>ctl + c</code></li>
-<li>解压到当前位置：<code>tar -zxvf 压缩包名称</code></li>
-<li>删除文件夹及旗下所有文件<code>rm -rf 文件夹路径</code></li>
-<li>删除文件<code>rm -f 文件路径+文件名.扩展名</code></li>
+    <title>Tensorflow课程建设与教学研讨-南京邮电大学</title>
+    <url>/2019/12/15/Tensorflow%E8%AF%BE%E7%A8%8B%E5%BB%BA%E8%AE%BE%E4%B8%8E%E6%95%99%E5%AD%A6%E7%A0%94%E8%AE%A8-%E5%8D%97%E4%BA%AC%E9%82%AE%E7%94%B5%E5%A4%A7%E5%AD%A6/</url>
+    <content><![CDATA[<h1 id="课程构架"><a href="#课程构架" class="headerlink" title="课程构架"></a>课程构架</h1><ol>
+<li>第一讲 人工智能导论</li>
+<li>第二讲 环境搭建</li>
+<li>第三讲 TensorFlow编程基础</li>
+<li>第四讲 线性回归问题——函数回归单一神经元</li>
+<li>第五讲 房价预测问题：多元线性回归及TensorFlow编程进阶<ol>
+<li>多因素影响如何处理</li>
+<li>矩阵向量计算</li>
+</ol>
+</li>
+<li>第六讲 MNIST手写数字识别：分类应用入门<ol>
+<li>与线性回归相比，多了一个激活函数</li>
+</ol>
+</li>
+<li>第七讲 MNIST手写数字识别进阶：多层神经网络与应用</li>
+<li>第八讲 图像识别问题：卷积神经网络与应用<ol>
+<li>CIFAR10（数字“10”代表十分类）</li>
+</ol>
+</li>
+<li>第九讲 Deep Dream：理解深度神经网络结构及应用</li>
+<li>第十讲 猫狗大战：迁移学习及应用</li>
+<li>第十一讲 泰坦尼克号上的旅客生存概率预测：TensorFlow的高级框架Keras<ol>
+<li>使用高级框架</li>
+<li>数据处理</li>
+</ol>
+</li>
+<li>第十二讲 电影评论情感分析：RNN循环网络原理及应用<ol>
+<li>自然语言的分析</li>
+<li>如何将自然语言处理为计算机可处理的数据-词嵌入</li>
+<li>模型优化：同义词、近义词、反义词……</li>
+</ol>
+</li>
+<li>第十三讲 FashionMNIST图像生成：生成对抗网原理及应用</li>
+<li>第十四讲 鸢尾花品种——网页落地</li>
+<li>第十五讲 花卉识别——移动应用落地</li>
+<li>第十六讲 课程回顾与大作业<ol>
+<li>Final Project以PPT+源代码+多样性展现形式</li>
+<li>有展示答辩<h1 id="线下课程实施经验"><a href="#线下课程实施经验" class="headerlink" title="线下课程实施经验"></a>线下课程实施经验</h1></li>
+</ol>
+</li>
+</ol>
+<ul>
+<li>偏理工科学生兴趣</li>
+<li>1、2年级学生修读积极</li>
+<li>Talk is cheap, show me the code<h1 id="网课经验"><a href="#网课经验" class="headerlink" title="网课经验"></a>网课经验</h1></li>
+<li>网易云课堂、MOOC</li>
+<li>人出镜减少工作量</li>
+<li>设备：摄像头、背景板、补光、电脑、美颜相机</li>
+<li>适时缩放屏幕，突出焦点，以学习体验为本</li>
+<li>增加激光笔强调鼠标所在位置</li>
+<li>重点内容加字幕提醒</li>
+<li>音量比音质更重要</li>
+<li>提前进入状态</li>
+<li>不一定写出每一句的脚本，做好准备灵活发挥更重要<h1 id="误区"><a href="#误区" class="headerlink" title="误区"></a>误区</h1></li>
+<li>教学中设备不要求高</li>
+<li>先知识后能力——先能力后知识</li>
+<li>需要补充一些相关知识：Python、线性代数、应用开发等<h1 id="讲课要点"><a href="#讲课要点" class="headerlink" title="讲课要点"></a>讲课要点</h1></li>
+<li>核心步骤<ul>
+<li>训练数据的生成和整理</li>
+<li>训练模型的设计和构建</li>
+<li>训练模型</li>
+<li>优化模型</li>
 </ul>
-<h1 id="vim编辑器"><a href="#vim编辑器" class="headerlink" title="vim编辑器"></a>vim编辑器</h1><h2 id="vim几种模式"><a href="#vim几种模式" class="headerlink" title="vim几种模式"></a>vim几种模式</h2><ul>
-<li>正常模式：可以使用快捷键命令，或按<code>:</code>输入命令行。</li>
-<li>插入模式：可以输入文本，在正常模式下，按<code>i</code>、<code>a</code>、<code>o</code>等都可以进入插入模式。</li>
-<li>可视模式：正常模式下按<code>v</code>可以进入可视模式， 在可视模式下，移动光标可以选择文&#96;&#96;本。按<code>v</code>进入可视行模式， 总是整行整行的选中。<code>ctrl+v</code>进入可视块模式。</li>
-<li>替换模式：正常模式下，按<code>r</code>进入。</li>
-</ul>
-<h1 id="vim常用指令"><a href="#vim常用指令" class="headerlink" title="vim常用指令"></a>vim常用指令</h1><ul>
-<li>行号显示<code>:set nu</code></li>
-<li>关键词查找<code>:/+关键词</code></li>
-<li>修改<code>i</code></li>
-<li>保存退出<code>:wq</code></li>
-<li>在后面的文本中查找<code>/</code></li>
-<li><code>?something</code>: 在前面的文本中查找something。</li>
-<li><code>/pattern/+number</code>: 将光标停在包含pattern的行后面第number行上。</li>
-<li><code>/pattern/-number</code>: 将光标停在包含pattern的行前面第number行上。</li>
-<li><code>n</code>: 向后查找下一个。</li>
-<li><code>N</code>: 向前查找下一个。</li>
+</li>
 </ul>
 ]]></content>
       <categories>
-        <category>散装知识</category>
+        <category>教学研讨</category>
       </categories>
       <tags>
-        <tag>Liunx</tag>
+        <tag>Tensorflow</tag>
+        <tag>AI</tag>
       </tags>
   </entry>
   <entry>
@@ -323,80 +359,122 @@
       </tags>
   </entry>
   <entry>
-    <title>Tensorflow课程建设与教学研讨-南京邮电大学</title>
-    <url>/2019/12/15/Tensorflow%E8%AF%BE%E7%A8%8B%E5%BB%BA%E8%AE%BE%E4%B8%8E%E6%95%99%E5%AD%A6%E7%A0%94%E8%AE%A8-%E5%8D%97%E4%BA%AC%E9%82%AE%E7%94%B5%E5%A4%A7%E5%AD%A6/</url>
-    <content><![CDATA[<h1 id="课程构架"><a href="#课程构架" class="headerlink" title="课程构架"></a>课程构架</h1><ol>
-<li>第一讲 人工智能导论</li>
-<li>第二讲 环境搭建</li>
-<li>第三讲 TensorFlow编程基础</li>
-<li>第四讲 线性回归问题——函数回归单一神经元</li>
-<li>第五讲 房价预测问题：多元线性回归及TensorFlow编程进阶<ol>
-<li>多因素影响如何处理</li>
-<li>矩阵向量计算</li>
-</ol>
-</li>
-<li>第六讲 MNIST手写数字识别：分类应用入门<ol>
-<li>与线性回归相比，多了一个激活函数</li>
-</ol>
-</li>
-<li>第七讲 MNIST手写数字识别进阶：多层神经网络与应用</li>
-<li>第八讲 图像识别问题：卷积神经网络与应用<ol>
-<li>CIFAR10（数字“10”代表十分类）</li>
-</ol>
-</li>
-<li>第九讲 Deep Dream：理解深度神经网络结构及应用</li>
-<li>第十讲 猫狗大战：迁移学习及应用</li>
-<li>第十一讲 泰坦尼克号上的旅客生存概率预测：TensorFlow的高级框架Keras<ol>
-<li>使用高级框架</li>
-<li>数据处理</li>
-</ol>
-</li>
-<li>第十二讲 电影评论情感分析：RNN循环网络原理及应用<ol>
-<li>自然语言的分析</li>
-<li>如何将自然语言处理为计算机可处理的数据-词嵌入</li>
-<li>模型优化：同义词、近义词、反义词……</li>
-</ol>
-</li>
-<li>第十三讲 FashionMNIST图像生成：生成对抗网原理及应用</li>
-<li>第十四讲 鸢尾花品种——网页落地</li>
-<li>第十五讲 花卉识别——移动应用落地</li>
-<li>第十六讲 课程回顾与大作业<ol>
-<li>Final Project以PPT+源代码+多样性展现形式</li>
-<li>有展示答辩<h1 id="线下课程实施经验"><a href="#线下课程实施经验" class="headerlink" title="线下课程实施经验"></a>线下课程实施经验</h1></li>
-</ol>
-</li>
-</ol>
-<ul>
-<li>偏理工科学生兴趣</li>
-<li>1、2年级学生修读积极</li>
-<li>Talk is cheap, show me the code<h1 id="网课经验"><a href="#网课经验" class="headerlink" title="网课经验"></a>网课经验</h1></li>
-<li>网易云课堂、MOOC</li>
-<li>人出镜减少工作量</li>
-<li>设备：摄像头、背景板、补光、电脑、美颜相机</li>
-<li>适时缩放屏幕，突出焦点，以学习体验为本</li>
-<li>增加激光笔强调鼠标所在位置</li>
-<li>重点内容加字幕提醒</li>
-<li>音量比音质更重要</li>
-<li>提前进入状态</li>
-<li>不一定写出每一句的脚本，做好准备灵活发挥更重要<h1 id="误区"><a href="#误区" class="headerlink" title="误区"></a>误区</h1></li>
-<li>教学中设备不要求高</li>
-<li>先知识后能力——先能力后知识</li>
-<li>需要补充一些相关知识：Python、线性代数、应用开发等<h1 id="讲课要点"><a href="#讲课要点" class="headerlink" title="讲课要点"></a>讲课要点</h1></li>
-<li>核心步骤<ul>
-<li>训练数据的生成和整理</li>
-<li>训练模型的设计和构建</li>
-<li>训练模型</li>
-<li>优化模型</li>
+    <title>Liunx常用指令</title>
+    <url>/2019/11/25/liunx%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/</url>
+    <content><![CDATA[<h1 id="常用指令"><a href="#常用指令" class="headerlink" title="常用指令"></a>常用指令</h1><ul>
+<li>查看当前地址<code>pwd</code></li>
+<li>查看当前位置内所有文件<code>ls</code></li>
+<li>查看当前位置内所有文件及详细信息<code>ls -s</code></li>
+<li>前往某地址<code>cd 前往的地址目录</code></li>
+<li>回到上一级目录 <code>cd ..</code>回到上上级<code>cd ../..</code></li>
+<li>新建文件夹 <code>mkdir</code> 文件夹名</li>
+<li>断开连接<code>ctl + c</code></li>
+<li>解压到当前位置：<code>tar -zxvf 压缩包名称</code></li>
+<li>删除文件夹及旗下所有文件<code>rm -rf 文件夹路径</code></li>
+<li>删除文件<code>rm -f 文件路径+文件名.扩展名</code></li>
 </ul>
-</li>
+<h1 id="vim编辑器"><a href="#vim编辑器" class="headerlink" title="vim编辑器"></a>vim编辑器</h1><h2 id="vim几种模式"><a href="#vim几种模式" class="headerlink" title="vim几种模式"></a>vim几种模式</h2><ul>
+<li>正常模式：可以使用快捷键命令，或按<code>:</code>输入命令行。</li>
+<li>插入模式：可以输入文本，在正常模式下，按<code>i</code>、<code>a</code>、<code>o</code>等都可以进入插入模式。</li>
+<li>可视模式：正常模式下按<code>v</code>可以进入可视模式， 在可视模式下，移动光标可以选择文&#96;&#96;本。按<code>v</code>进入可视行模式， 总是整行整行的选中。<code>ctrl+v</code>进入可视块模式。</li>
+<li>替换模式：正常模式下，按<code>r</code>进入。</li>
+</ul>
+<h1 id="vim常用指令"><a href="#vim常用指令" class="headerlink" title="vim常用指令"></a>vim常用指令</h1><ul>
+<li>行号显示<code>:set nu</code></li>
+<li>关键词查找<code>:/+关键词</code></li>
+<li>修改<code>i</code></li>
+<li>保存退出<code>:wq</code></li>
+<li>在后面的文本中查找<code>/</code></li>
+<li><code>?something</code>: 在前面的文本中查找something。</li>
+<li><code>/pattern/+number</code>: 将光标停在包含pattern的行后面第number行上。</li>
+<li><code>/pattern/-number</code>: 将光标停在包含pattern的行前面第number行上。</li>
+<li><code>n</code>: 向后查找下一个。</li>
+<li><code>N</code>: 向前查找下一个。</li>
 </ul>
 ]]></content>
       <categories>
-        <category>教学研讨</category>
+        <category>散装知识</category>
       </categories>
       <tags>
-        <tag>Tensorflow</tag>
-        <tag>AI</tag>
+        <tag>Liunx</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>hexo博客实用功能及插件</title>
+    <url>/2022/02/24/hexo%E5%8D%9A%E5%AE%A2%E5%AE%9E%E7%94%A8%E5%8A%9F%E8%83%BD%E5%8F%8A%E6%8F%92%E4%BB%B6/</url>
+    <content><![CDATA[<h1 id="文章加密"><a href="#文章加密" class="headerlink" title="文章加密"></a>文章加密</h1><p>安装<code>npm install --save hexo-blog-encrypt</code><br>将 “password” 字段添加到文章头</p>
+<blockquote>
+<p>纯数字不好使</p>
+</blockquote>
+<h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><p><a href="https://blog.csdn.net/weixin_58068682/article/details/116614622">Hexo博客技巧：对文章进行加密</a></p>
+<h1 id="插入图片"><a href="#插入图片" class="headerlink" title="插入图片"></a>插入图片</h1><p>安装<code>npm install https://github.com/CodeFalling/hexo-asset-image –save</code></p>
+<blockquote>
+<p>注意这一步一定要使用上面的安装方法，使用官网的代码则会出现保存文件为.com的现象</p>
+</blockquote>
+<h1 id="hexo-添加live2d看板动画"><a href="#hexo-添加live2d看板动画" class="headerlink" title="hexo 添加live2d看板动画"></a>hexo 添加live2d看板动画</h1><ol>
+<li>安装<code>npm install --save hexo-helper-live2d</code></li>
+<li><a href="https://github.com/xiazeyu/live2d-widget-models.git">下载</a>各种动画model</li>
+<li>配置博客站点配置文件，**_config.yml** <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">live2d:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">pluginModelPath:</span> <span class="string">assets/</span></span><br><span class="line">  <span class="attr">model:</span></span><br><span class="line">    <span class="attr">use:</span> <span class="string">live2d-widget-model-epsilon2_1</span>  <span class="comment">#模板目录，在node_modules里</span></span><br><span class="line">  <span class="attr">display:</span></span><br><span class="line">    <span class="attr">position:</span> <span class="string">right</span></span><br><span class="line">    <span class="attr">width:</span> <span class="number">150</span> </span><br><span class="line">    <span class="attr">height:</span> <span class="number">300</span></span><br><span class="line">  <span class="attr">mobile:</span></span><br><span class="line">    <span class="attr">show:</span> <span class="literal">false</span>  <span class="comment">#是否在手机进行显示</span></span><br></pre></td></tr></table></figure>
+<h3 id="参考文章-1"><a href="#参考文章-1" class="headerlink" title="参考文章"></a>参考文章</h3><a href="https://www.jianshu.com/p/3a6342e16e57">hexo 添加live2d看板动画</a></li>
+</ol>
+<h1 id="首页不显示全文，显示阅读更多"><a href="#首页不显示全文，显示阅读更多" class="headerlink" title="首页不显示全文，显示阅读更多"></a>首页不显示全文，显示阅读更多</h1><ol>
+<li>打开博客主题配置文件 <strong>themes&#x2F;next&#x2F;_config.yml</strong>，修改<code>excerpt_description: </code>为<code>true</code>，好像现在版本的next主题默认是true</li>
+<li>两种方式<ol>
+<li>在需要截断的地方输入 <code>&lt;!--more--&gt;</code></li>
+<li>在md开头写摘要 <code>description: 这是显示在首页的概述，正文内容均会被隐藏。</code></li>
+</ol>
+</li>
+<li>重启部署即可 <code>hexo clean</code> <code>hexo d -g</code></li>
+</ol>
+<h1 id="添加统计数据"><a href="#添加统计数据" class="headerlink" title="添加统计数据"></a>添加统计数据</h1><h2 id="百度统计"><a href="#百度统计" class="headerlink" title="百度统计"></a>百度统计</h2><ol>
+<li>登录百度统计<a href="https://tongji.baidu.com/">https://tongji.baidu.com</a> 新增网站，添加完毕后到代码获取拿到统计脚本,找到<code>https://hm.baidu.com/hm.js?</code>后面的key值</li>
+<li>拿到key后，去到Hexo根目录下的<code>themes\next\</code>，打开 <strong>_config.yml</strong> 文件，找到baidu_analytics，在后面加上key值</li>
+<li>然后重新编译，打包上传就可以了 <code>hexo d -g</code></li>
+<li>测试，去到百度统计，找到代码安装检查，就可以测试是否添加上去了<h2 id="LeanCloud阅读次数统计"><a href="#LeanCloud阅读次数统计" class="headerlink" title="LeanCloud阅读次数统计"></a>LeanCloud阅读次数统计</h2></li>
+</ol>
+<ul>
+<li><p>首先，前往Leancloud<a href="https://console.leancloud.app/apps">官网</a>进行注册，并登陆。</p>
+</li>
+<li><p>点击创建应用,输入应用的名称(随便起都行), 选择开发版, 点击创建</p>
+</li>
+<li><p>创建成功后点击右上角的设置小齿轮,点击存储-创建 Class</p>
+</li>
+<li><p>Class名称设置为<code>Counter</code>(必须为<strong>Counter</strong>)-选择无限制-点击创建</p>
+</li>
+<li><p>创建后点击设置-点击应用Key-获取App ID和App Key</p>
+</li>
+<li><p>将获取到的App ID和App Key设置到Next主题配置文件 <strong>_config.yml</strong>,配置文件已存在这个配置, 只要把id和key加上去就好了</p>
+</li>
+<li><p>点击安全中心, 填写自己博客对应的域名（注意协议、域名和端口号需严格一致）</p>
+</li>
+<li><p>点击云引擎-点击部署-点击在线编辑</p>
+</li>
+<li><p>点击创建函数-选择 <code>Hook</code> , AV.Cloud.选择 <code>beforeSave</code> ,类选择Counter-添加代码</p>
+  <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> query = <span class="keyword">new</span> <span class="variable constant_">AV</span>.<span class="title class_">Query</span>(<span class="string">&quot;Counter&quot;</span>);</span><br><span class="line"><span class="keyword">if</span> (request.<span class="property">object</span>.<span class="property">updatedKeys</span>.<span class="title function_">indexOf</span>(<span class="string">&#x27;time&#x27;</span>) !== -<span class="number">1</span>) &#123;</span><br><span class="line">     <span class="keyword">return</span> query.<span class="title function_">get</span>(request.<span class="property">object</span>.<span class="property">id</span>).<span class="title function_">then</span>(<span class="keyword">function</span> (<span class="params">obj</span>) &#123;</span><br><span class="line">     <span class="keyword">if</span> (obj.<span class="title function_">get</span>(<span class="string">&quot;time&quot;</span>) + <span class="number">1</span> !== request.<span class="property">object</span>.<span class="title function_">get</span>(<span class="string">&quot;time&quot;</span>)) &#123;</span><br><span class="line">     <span class="keyword">throw</span> <span class="keyword">new</span> <span class="variable constant_">AV</span>.<span class="property">Cloud</span>.<span class="title class_">Error</span>(<span class="string">&#x27;Invalid update!&#x27;</span>);</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>点击保存，点击部署</p>
+</li>
+<li><p>打开Next主题配置文件 <strong>_config.yml</strong>, 将leancloud_visitors下的security设置为true（如没有则新增）</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="attr">leancloud_visitors</span>:</span><br><span class="line">     <span class="attr">enable</span>: <span class="literal">true</span></span><br><span class="line">     <span class="attr">app_id</span>: &lt;&lt;your app id&gt;&gt; # 同前文的id</span><br><span class="line">     <span class="attr">app_key</span>: &lt;&lt;your app key&gt;&gt; # 同前文的key</span><br><span class="line">     # <span class="title class_">Dependencies</span>: <span class="attr">https</span>:<span class="comment">//github.com/theme-next/hexo-leancloud-counter-security</span></span><br><span class="line">     <span class="attr">security</span>: <span class="literal">true</span></span><br><span class="line">     # 由于<span class="title class_">Leancloud</span>免费版的云引擎存在请求线程数和运行时间限制以及休眠机制，</span><br><span class="line">     # 很多时候访客数量加载会很慢。</span><br><span class="line">     # 如果设置betterPerformance为<span class="literal">true</span>，</span><br><span class="line">     # 则网页则会在提交请求之前直接显示访客人数为查询到的人数+<span class="number">1</span>，以增加用户体验。</span><br><span class="line">     <span class="attr">betterPerformance</span>: <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>打开命令行cmd并进入站点文件夹，<code>npm install hexo-leancloud-counter-security --save</code></p>
+</li>
+<li><p>设置<code>hexo lc-counter register &lt;&lt;username&gt;&gt; &lt;&lt;password&gt;&gt;</code>，将&lt;&lt; username &gt;&gt;和&lt;&lt; password &gt;&gt;替换为你自己的用户名和密码（不必与leancloud的账号）相同。</p>
+</li>
+<li><p>打开站点配置文件 <strong>_config.yml</strong>，将&lt;&lt; username &gt;&gt;和&lt;&lt; password &gt;&gt;替换为你刚刚设置的用户名和密码</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="attr">leancloud_counter_security</span>:</span><br><span class="line">    <span class="attr">enable_sync</span>: <span class="literal">true</span></span><br><span class="line">    <span class="attr">app_id</span>: &lt;&lt;your app id&gt;&gt;   # 同前文的id</span><br><span class="line">    <span class="attr">app_key</span>: &lt;&lt;your app key&gt;&gt; # 同前文的key</span><br><span class="line">    <span class="attr">username</span>: </span><br><span class="line">    <span class="attr">password</span>:</span><br></pre></td></tr></table></figure>
+<ul>
+<li>返回Leancloud控制台的应用内, 检查_User表中是否出现一条记录</li>
+<li>进入Counter表, 打开权限设置，修改<code>add</code>和<code>create</code>为指定用户，修改<code>delete</code>为指定空用户</li>
+</ul>
+<h3 id="参考文章-2"><a href="#参考文章-2" class="headerlink" title="参考文章"></a>参考文章</h3><p><a href="https://www.jianshu.com/p/e0a719bac963">Hexo Next leancloud文章阅读次数配置</a><br><a href="https://www.jianshu.com/p/3a6342e16e57">hexo 添加live2d看板动画</a></p>
+]]></content>
+      <categories>
+        <category>博客</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
       </tags>
   </entry>
   <entry>
@@ -485,84 +563,6 @@
         <tag>Redis</tag>
         <tag>阿里云</tag>
         <tag>ECS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>hexo博客实用功能及插件</title>
-    <url>/2022/02/24/hexo%E5%8D%9A%E5%AE%A2%E5%AE%9E%E7%94%A8%E5%8A%9F%E8%83%BD%E5%8F%8A%E6%8F%92%E4%BB%B6/</url>
-    <content><![CDATA[<h1 id="文章加密"><a href="#文章加密" class="headerlink" title="文章加密"></a>文章加密</h1><p>安装<code>npm install --save hexo-blog-encrypt</code><br>将 “password” 字段添加到文章头</p>
-<blockquote>
-<p>纯数字不好使</p>
-</blockquote>
-<h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><p><a href="https://blog.csdn.net/weixin_58068682/article/details/116614622">Hexo博客技巧：对文章进行加密</a></p>
-<h1 id="插入图片"><a href="#插入图片" class="headerlink" title="插入图片"></a>插入图片</h1><p>安装<code>npm install https://github.com/CodeFalling/hexo-asset-image –save</code></p>
-<blockquote>
-<p>注意这一步一定要使用上面的安装方法，使用官网的代码则会出现保存文件为.com的现象</p>
-</blockquote>
-<h1 id="hexo-添加live2d看板动画"><a href="#hexo-添加live2d看板动画" class="headerlink" title="hexo 添加live2d看板动画"></a>hexo 添加live2d看板动画</h1><ol>
-<li>安装<code>npm install --save hexo-helper-live2d</code></li>
-<li><a href="https://github.com/xiazeyu/live2d-widget-models.git">下载</a>各种动画model</li>
-<li>配置博客站点配置文件，**_config.yml** <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">live2d:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">pluginModelPath:</span> <span class="string">assets/</span></span><br><span class="line">  <span class="attr">model:</span></span><br><span class="line">    <span class="attr">use:</span> <span class="string">live2d-widget-model-epsilon2_1</span>  <span class="comment">#模板目录，在node_modules里</span></span><br><span class="line">  <span class="attr">display:</span></span><br><span class="line">    <span class="attr">position:</span> <span class="string">right</span></span><br><span class="line">    <span class="attr">width:</span> <span class="number">150</span> </span><br><span class="line">    <span class="attr">height:</span> <span class="number">300</span></span><br><span class="line">  <span class="attr">mobile:</span></span><br><span class="line">    <span class="attr">show:</span> <span class="literal">false</span>  <span class="comment">#是否在手机进行显示</span></span><br></pre></td></tr></table></figure>
-<h3 id="参考文章-1"><a href="#参考文章-1" class="headerlink" title="参考文章"></a>参考文章</h3><a href="https://www.jianshu.com/p/3a6342e16e57">hexo 添加live2d看板动画</a></li>
-</ol>
-<h1 id="首页不显示全文，显示阅读更多"><a href="#首页不显示全文，显示阅读更多" class="headerlink" title="首页不显示全文，显示阅读更多"></a>首页不显示全文，显示阅读更多</h1><ol>
-<li>打开博客主题配置文件 <strong>themes&#x2F;next&#x2F;_config.yml</strong>，修改<code>excerpt_description: </code>为<code>true</code>，好像现在版本的next主题默认是true</li>
-<li>两种方式<ol>
-<li>在需要截断的地方输入 <code>&lt;!--more--&gt;</code></li>
-<li>在md开头写摘要 <code>description: 这是显示在首页的概述，正文内容均会被隐藏。</code></li>
-</ol>
-</li>
-<li>重启部署即可 <code>hexo clean</code> <code>hexo d -g</code></li>
-</ol>
-<h1 id="添加统计数据"><a href="#添加统计数据" class="headerlink" title="添加统计数据"></a>添加统计数据</h1><h2 id="百度统计"><a href="#百度统计" class="headerlink" title="百度统计"></a>百度统计</h2><ol>
-<li>登录百度统计<a href="https://tongji.baidu.com/">https://tongji.baidu.com</a> 新增网站，添加完毕后到代码获取拿到统计脚本,找到<code>https://hm.baidu.com/hm.js?</code>后面的key值</li>
-<li>拿到key后，去到Hexo根目录下的<code>themes\next\</code>，打开 <strong>_config.yml</strong> 文件，找到baidu_analytics，在后面加上key值</li>
-<li>然后重新编译，打包上传就可以了 <code>hexo d -g</code></li>
-<li>测试，去到百度统计，找到代码安装检查，就可以测试是否添加上去了<h2 id="LeanCloud阅读次数统计"><a href="#LeanCloud阅读次数统计" class="headerlink" title="LeanCloud阅读次数统计"></a>LeanCloud阅读次数统计</h2></li>
-</ol>
-<ul>
-<li><p>首先，前往Leancloud<a href="https://console.leancloud.app/apps">官网</a>进行注册，并登陆。</p>
-</li>
-<li><p>点击创建应用,输入应用的名称(随便起都行), 选择开发版, 点击创建</p>
-</li>
-<li><p>创建成功后点击右上角的设置小齿轮,点击存储-创建 Class</p>
-</li>
-<li><p>Class名称设置为<code>Counter</code>(必须为<strong>Counter</strong>)-选择无限制-点击创建</p>
-</li>
-<li><p>创建后点击设置-点击应用Key-获取App ID和App Key</p>
-</li>
-<li><p>将获取到的App ID和App Key设置到Next主题配置文件 <strong>_config.yml</strong>,配置文件已存在这个配置, 只要把id和key加上去就好了</p>
-</li>
-<li><p>点击安全中心, 填写自己博客对应的域名（注意协议、域名和端口号需严格一致）</p>
-</li>
-<li><p>点击云引擎-点击部署-点击在线编辑</p>
-</li>
-<li><p>点击创建函数-选择 <code>Hook</code> , AV.Cloud.选择 <code>beforeSave</code> ,类选择Counter-添加代码</p>
-  <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> query = <span class="keyword">new</span> <span class="variable constant_">AV</span>.<span class="title class_">Query</span>(<span class="string">&quot;Counter&quot;</span>);</span><br><span class="line"><span class="keyword">if</span> (request.<span class="property">object</span>.<span class="property">updatedKeys</span>.<span class="title function_">indexOf</span>(<span class="string">&#x27;time&#x27;</span>) !== -<span class="number">1</span>) &#123;</span><br><span class="line">     <span class="keyword">return</span> query.<span class="title function_">get</span>(request.<span class="property">object</span>.<span class="property">id</span>).<span class="title function_">then</span>(<span class="keyword">function</span> (<span class="params">obj</span>) &#123;</span><br><span class="line">     <span class="keyword">if</span> (obj.<span class="title function_">get</span>(<span class="string">&quot;time&quot;</span>) + <span class="number">1</span> !== request.<span class="property">object</span>.<span class="title function_">get</span>(<span class="string">&quot;time&quot;</span>)) &#123;</span><br><span class="line">     <span class="keyword">throw</span> <span class="keyword">new</span> <span class="variable constant_">AV</span>.<span class="property">Cloud</span>.<span class="title class_">Error</span>(<span class="string">&#x27;Invalid update!&#x27;</span>);</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>点击保存，点击部署</p>
-</li>
-<li><p>打开Next主题配置文件 <strong>_config.yml</strong>, 将leancloud_visitors下的security设置为true（如没有则新增）</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="attr">leancloud_visitors</span>:</span><br><span class="line">     <span class="attr">enable</span>: <span class="literal">true</span></span><br><span class="line">     <span class="attr">app_id</span>: &lt;&lt;your app id&gt;&gt; # 同前文的id</span><br><span class="line">     <span class="attr">app_key</span>: &lt;&lt;your app key&gt;&gt; # 同前文的key</span><br><span class="line">     # <span class="title class_">Dependencies</span>: <span class="attr">https</span>:<span class="comment">//github.com/theme-next/hexo-leancloud-counter-security</span></span><br><span class="line">     <span class="attr">security</span>: <span class="literal">true</span></span><br><span class="line">     # 由于<span class="title class_">Leancloud</span>免费版的云引擎存在请求线程数和运行时间限制以及休眠机制，</span><br><span class="line">     # 很多时候访客数量加载会很慢。</span><br><span class="line">     # 如果设置betterPerformance为<span class="literal">true</span>，</span><br><span class="line">     # 则网页则会在提交请求之前直接显示访客人数为查询到的人数+<span class="number">1</span>，以增加用户体验。</span><br><span class="line">     <span class="attr">betterPerformance</span>: <span class="literal">false</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>打开命令行cmd并进入站点文件夹，<code>npm install hexo-leancloud-counter-security --save</code></p>
-</li>
-<li><p>设置<code>hexo lc-counter register &lt;&lt;username&gt;&gt; &lt;&lt;password&gt;&gt;</code>，将&lt;&lt; username &gt;&gt;和&lt;&lt; password &gt;&gt;替换为你自己的用户名和密码（不必与leancloud的账号）相同。</p>
-</li>
-<li><p>打开站点配置文件 <strong>_config.yml</strong>，将&lt;&lt; username &gt;&gt;和&lt;&lt; password &gt;&gt;替换为你刚刚设置的用户名和密码</p>
-</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="attr">leancloud_counter_security</span>:</span><br><span class="line">    <span class="attr">enable_sync</span>: <span class="literal">true</span></span><br><span class="line">    <span class="attr">app_id</span>: &lt;&lt;your app id&gt;&gt;   # 同前文的id</span><br><span class="line">    <span class="attr">app_key</span>: &lt;&lt;your app key&gt;&gt; # 同前文的key</span><br><span class="line">    <span class="attr">username</span>: </span><br><span class="line">    <span class="attr">password</span>:</span><br></pre></td></tr></table></figure>
-<ul>
-<li>返回Leancloud控制台的应用内, 检查_User表中是否出现一条记录</li>
-<li>进入Counter表, 打开权限设置，修改<code>add</code>和<code>create</code>为指定用户，修改<code>delete</code>为指定空用户</li>
-</ul>
-<h3 id="参考文章-2"><a href="#参考文章-2" class="headerlink" title="参考文章"></a>参考文章</h3><p><a href="https://www.jianshu.com/p/e0a719bac963">Hexo Next leancloud文章阅读次数配置</a><br><a href="https://www.jianshu.com/p/3a6342e16e57">hexo 添加live2d看板动画</a></p>
-]]></content>
-      <categories>
-        <category>博客</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
       </tags>
   </entry>
   <entry>
