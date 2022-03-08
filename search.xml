@@ -1,36 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>HTML5+JS+CSS与Bmob云后台实践</title>
-    <url>/2019/12/02/HTML5+JS+CSS%E4%B8%8EBmob%E4%BA%91%E5%90%8E%E5%8F%B0%E5%AE%9E%E8%B7%B5/</url>
-    <content><![CDATA[<h1 id="前置环境"><a href="#前置环境" class="headerlink" title="前置环境"></a>前置环境</h1><ol>
-<li>代码编译器我选择Hbulider X <a href="https://www.dcloud.io/hbuilderx.html">官网下载</a></li>
-<li>在Hbuilder新建一个空白项目test_demo，包含index.html、css文件夹、js文件夹、img文件夹</li>
-<li>前往Bmob<a href="https://bmob.github.io/hydrogen-js-sdk/#/?id=sdk%25e4%25bd%25bf%25e7%2594%25a8%25e6%2596%2587%25e6%25a1%25a3">官网查看文档</a>并下载对应SDKGitHub<a href="https://github.com/bmob/hydrogen-js-sdk/">源码地址</a></li>
-<li>在Bmob的控制台云数据库新建项目、新建表、设计数据结构并导入数据<h1 id="在项目中接入Bmob云数据库"><a href="#在项目中接入Bmob云数据库" class="headerlink" title="在项目中接入Bmob云数据库"></a>在项目中接入Bmob云数据库</h1></li>
-<li>引入bmob.js<br>将sdk中的<code>dist/Bmob-2.2.1.min.js</code>导入项目的js文件夹下,在index.html中引入 <code>&lt;script src=&quot;js/dist/Bmob-2.2.1.min.js&quot;&gt;&lt;/script&gt;</code> 新建一个js文件<code>main.js</code></li>
-<li>连接对应的bmob数据库<code>Bmob.initialize(&quot;你的Secret Key&quot;, &quot;你的API 安全码&quot;);</code></li>
-<li>系统用户表_User<br>获取_User列表内所有数据，因为_User是系统内置用户表，出于隐私安全考虑，密码不可见，且无法用明文方式进行参数传递。<figure class="highlight arcade"><table><tr><td class="code"><pre><span class="line">query.<span class="built_in">find</span>().then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line"> 	<span class="built_in">console</span>.<span class="built_in">log</span>(res)</span><br><span class="line"></span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure>
-判断登陆+本地缓存的方法</li>
-</ol>
-<figure class="highlight arcade"><table><tr><td class="code"><pre><span class="line">Bmob.User.login(<span class="string">&#x27;123&#x27;</span>, <span class="string">&#x27;123456&#x27;</span>).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//若登陆成功更新用户缓存</span></span><br><span class="line">	Bmob.User.updateStorage(res.objectId).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">		<span class="comment">//更新缓存成功，跳转页面</span></span><br><span class="line">		<span class="comment">//跳转到第二个页面-不传参数，href请使用相对路径</span></span><br><span class="line">		window.location.href = <span class="string">&quot;secondPage.html&quot;</span>;</span><br><span class="line">	&#125;).catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">		<span class="built_in">console</span>.<span class="built_in">log</span>(err)</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;).catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">	<span class="built_in">console</span>.<span class="built_in">log</span>(err)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>获取登陆的用户信息</p>
-<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">let <span class="keyword">current</span> = Bmob.<span class="keyword">User</span>.<span class="keyword">current</span>()</span><br><span class="line">// var data = &#123;&#125;;</span><br><span class="line">var arr = <span class="keyword">Object</span>.keys(<span class="keyword">current</span>);</span><br><span class="line">console.log(arr.length == <span class="number">0</span>) //<span class="keyword">true</span> 为空， <span class="keyword">false</span> 不为空</span><br><span class="line"><span class="keyword">if</span> (arr.length == <span class="number">0</span>) &#123;</span><br><span class="line">	//如果为空,返回登陆页面,防止未登陆用户造成系统崩溃</span><br><span class="line">	<span class="keyword">window</span>.<span class="keyword">location</span>.href = &quot;index.html&quot;</span><br><span class="line">&#125; <span class="keyword">else</span>&#123;</span><br><span class="line">	//如果不为空,则将<span class="keyword">current</span>内的值填入页面内</span><br><span class="line">	console.log(<span class="keyword">current</span>)</span><br><span class="line">	document.getElementById(&quot;username&quot;).innerHTML = <span class="keyword">current</span>.username;</span><br><span class="line">	document.getElementById(&quot;roomNumber&quot;).innerHTML = <span class="keyword">current</span>.roomNumber + <span class="string">&#x27;房间&#x27;</span>;</span><br><span class="line">	var gender = <span class="string">&#x27;&#x27;</span></span><br><span class="line">	<span class="keyword">if</span> (<span class="keyword">current</span>.sex == <span class="number">0</span>) &#123;</span><br><span class="line">		gender = <span class="string">&#x27;男&#x27;</span></span><br><span class="line">	&#125; <span class="keyword">else</span>&#123;</span><br><span class="line">		gender = <span class="string">&#x27;女&#x27;</span></span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	document.getElementById(&quot;gender&quot;).innerHTML = gender;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>获取自创建表TestData内所有数据，并遍历显示在HTML内</p>
-<figure class="highlight arcade"><table><tr><td class="code"><pre><span class="line">query.<span class="built_in">find</span>().then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">	<span class="built_in">console</span>.<span class="built_in">log</span>(res.<span class="built_in">length</span>)</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; res.<span class="built_in">length</span>; i++) &#123; </span><br><span class="line">	    <span class="built_in">text</span> += res[i].name + <span class="string">&quot;&lt;br&gt;&quot;</span>;</span><br><span class="line">		document.getElementById(<span class="string">&quot;name&quot;</span>).innerHTML = <span class="built_in">text</span>;</span><br><span class="line">	 &#125;</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>按objectId获取对应数据（若为_User此方法不可用，但可以使用内置的Bmob<br>.User.current()方法获取登陆后缓存的用户数据）</p>
-<figure class="highlight arcade"><table><tr><td class="code"><pre><span class="line">	<span class="built_in">console</span>.<span class="built_in">log</span>(res.name)</span><br><span class="line">	</span><br><span class="line">&#125;).catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.<span class="built_in">log</span>(err)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>散装知识</category>
-      </categories>
-      <tags>
-        <tag>Bmob</tag>
-        <tag>后端</tag>
-        <tag>实践</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Express+Mysql搭建接口平台</title>
     <url>/2020/05/22/Express+Mysql%E6%90%AD%E5%BB%BA%E6%8E%A5%E5%8F%A3%E5%B9%B3%E5%8F%B0/</url>
     <content><![CDATA[<h1 id="安装Express"><a href="#安装Express" class="headerlink" title="安装Express"></a>安装Express</h1><p>前提已经完成node和mysql的搭建和配置</p>
@@ -85,10 +55,40 @@
         <category>散装知识</category>
       </categories>
       <tags>
-        <tag>实践</tag>
         <tag>Node</tag>
+        <tag>实践</tag>
         <tag>MYSQL</tag>
         <tag>Express</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>HTML5+JS+CSS与Bmob云后台实践</title>
+    <url>/2019/12/02/HTML5+JS+CSS%E4%B8%8EBmob%E4%BA%91%E5%90%8E%E5%8F%B0%E5%AE%9E%E8%B7%B5/</url>
+    <content><![CDATA[<h1 id="前置环境"><a href="#前置环境" class="headerlink" title="前置环境"></a>前置环境</h1><ol>
+<li>代码编译器我选择Hbulider X <a href="https://www.dcloud.io/hbuilderx.html">官网下载</a></li>
+<li>在Hbuilder新建一个空白项目test_demo，包含index.html、css文件夹、js文件夹、img文件夹</li>
+<li>前往Bmob<a href="https://bmob.github.io/hydrogen-js-sdk/#/?id=sdk%25e4%25bd%25bf%25e7%2594%25a8%25e6%2596%2587%25e6%25a1%25a3">官网查看文档</a>并下载对应SDKGitHub<a href="https://github.com/bmob/hydrogen-js-sdk/">源码地址</a></li>
+<li>在Bmob的控制台云数据库新建项目、新建表、设计数据结构并导入数据<h1 id="在项目中接入Bmob云数据库"><a href="#在项目中接入Bmob云数据库" class="headerlink" title="在项目中接入Bmob云数据库"></a>在项目中接入Bmob云数据库</h1></li>
+<li>引入bmob.js<br>将sdk中的<code>dist/Bmob-2.2.1.min.js</code>导入项目的js文件夹下,在index.html中引入 <code>&lt;script src=&quot;js/dist/Bmob-2.2.1.min.js&quot;&gt;&lt;/script&gt;</code> 新建一个js文件<code>main.js</code></li>
+<li>连接对应的bmob数据库<code>Bmob.initialize(&quot;你的Secret Key&quot;, &quot;你的API 安全码&quot;);</code></li>
+<li>系统用户表_User<br>获取_User列表内所有数据，因为_User是系统内置用户表，出于隐私安全考虑，密码不可见，且无法用明文方式进行参数传递。<figure class="highlight arcade"><table><tr><td class="code"><pre><span class="line">query.<span class="built_in">find</span>().then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line"> 	<span class="built_in">console</span>.<span class="built_in">log</span>(res)</span><br><span class="line"></span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure>
+判断登陆+本地缓存的方法</li>
+</ol>
+<figure class="highlight arcade"><table><tr><td class="code"><pre><span class="line">Bmob.User.login(<span class="string">&#x27;123&#x27;</span>, <span class="string">&#x27;123456&#x27;</span>).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//若登陆成功更新用户缓存</span></span><br><span class="line">	Bmob.User.updateStorage(res.objectId).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">		<span class="comment">//更新缓存成功，跳转页面</span></span><br><span class="line">		<span class="comment">//跳转到第二个页面-不传参数，href请使用相对路径</span></span><br><span class="line">		window.location.href = <span class="string">&quot;secondPage.html&quot;</span>;</span><br><span class="line">	&#125;).catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">		<span class="built_in">console</span>.<span class="built_in">log</span>(err)</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;).catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">	<span class="built_in">console</span>.<span class="built_in">log</span>(err)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>获取登陆的用户信息</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">let <span class="keyword">current</span> = Bmob.<span class="keyword">User</span>.<span class="keyword">current</span>()</span><br><span class="line">// var data = &#123;&#125;;</span><br><span class="line">var arr = <span class="keyword">Object</span>.keys(<span class="keyword">current</span>);</span><br><span class="line">console.log(arr.length == <span class="number">0</span>) //<span class="keyword">true</span> 为空， <span class="keyword">false</span> 不为空</span><br><span class="line"><span class="keyword">if</span> (arr.length == <span class="number">0</span>) &#123;</span><br><span class="line">	//如果为空,返回登陆页面,防止未登陆用户造成系统崩溃</span><br><span class="line">	<span class="keyword">window</span>.<span class="keyword">location</span>.href = &quot;index.html&quot;</span><br><span class="line">&#125; <span class="keyword">else</span>&#123;</span><br><span class="line">	//如果不为空,则将<span class="keyword">current</span>内的值填入页面内</span><br><span class="line">	console.log(<span class="keyword">current</span>)</span><br><span class="line">	document.getElementById(&quot;username&quot;).innerHTML = <span class="keyword">current</span>.username;</span><br><span class="line">	document.getElementById(&quot;roomNumber&quot;).innerHTML = <span class="keyword">current</span>.roomNumber + <span class="string">&#x27;房间&#x27;</span>;</span><br><span class="line">	var gender = <span class="string">&#x27;&#x27;</span></span><br><span class="line">	<span class="keyword">if</span> (<span class="keyword">current</span>.sex == <span class="number">0</span>) &#123;</span><br><span class="line">		gender = <span class="string">&#x27;男&#x27;</span></span><br><span class="line">	&#125; <span class="keyword">else</span>&#123;</span><br><span class="line">		gender = <span class="string">&#x27;女&#x27;</span></span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	document.getElementById(&quot;gender&quot;).innerHTML = gender;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>获取自创建表TestData内所有数据，并遍历显示在HTML内</p>
+<figure class="highlight arcade"><table><tr><td class="code"><pre><span class="line">query.<span class="built_in">find</span>().then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">	<span class="built_in">console</span>.<span class="built_in">log</span>(res.<span class="built_in">length</span>)</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; res.<span class="built_in">length</span>; i++) &#123; </span><br><span class="line">	    <span class="built_in">text</span> += res[i].name + <span class="string">&quot;&lt;br&gt;&quot;</span>;</span><br><span class="line">		document.getElementById(<span class="string">&quot;name&quot;</span>).innerHTML = <span class="built_in">text</span>;</span><br><span class="line">	 &#125;</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>按objectId获取对应数据（若为_User此方法不可用，但可以使用内置的Bmob<br>.User.current()方法获取登陆后缓存的用户数据）</p>
+<figure class="highlight arcade"><table><tr><td class="code"><pre><span class="line">	<span class="built_in">console</span>.<span class="built_in">log</span>(res.name)</span><br><span class="line">	</span><br><span class="line">&#125;).catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.<span class="built_in">log</span>(err)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>散装知识</category>
+      </categories>
+      <tags>
+        <tag>实践</tag>
+        <tag>Bmob</tag>
+        <tag>后端</tag>
       </tags>
   </entry>
   <entry>
@@ -400,9 +400,77 @@
       </tags>
   </entry>
   <entry>
+    <title>Swift5.0 UI代码Tips</title>
+    <url>/2019/12/02/swift5.0-UI%E4%BB%A3%E7%A0%81Tips/</url>
+    <content><![CDATA[<blockquote>
+<p>记录开发过程中用到的纯代码写UI及一些经验心得<br>记录一些自己写的UI库封装<br>记录一些用过的第三方UI类库</p>
+</blockquote>
+<h1 id="文字类"><a href="#文字类" class="headerlink" title="文字类"></a>文字类</h1><h2 id="label圆角"><a href="#label圆角" class="headerlink" title="label圆角"></a>label圆角</h2><figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="attr">label.layer.cornerRadius</span> = <span class="number">5</span><span class="comment">;</span></span><br><span class="line"><span class="attr">label.clipsToBounds</span> = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<h1 id="按钮类"><a href="#按钮类" class="headerlink" title="按钮类"></a>按钮类</h1><h1 id="图片类"><a href="#图片类" class="headerlink" title="图片类"></a>图片类</h1>]]></content>
+      <categories>
+        <category>散装知识</category>
+      </categories>
+      <tags>
+        <tag>Swift</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>vue安装及创建新项目</title>
+    <url>/2019/11/28/vue%E5%AE%89%E8%A3%85%E5%8F%8A%E5%88%9B%E5%BB%BA%E6%96%B0%E9%A1%B9%E7%9B%AE/</url>
+    <content><![CDATA[<h1 id="Vue了解"><a href="#Vue了解" class="headerlink" title="Vue了解"></a>Vue了解</h1><p>渐进式JavaScript 框架</p>
+<h1 id="Vue开发环境配置"><a href="#Vue开发环境配置" class="headerlink" title="Vue开发环境配置"></a>Vue开发环境配置</h1><ol>
+<li><p>Vue依托nodejs，vue只是node万千包中的一个，所以首先要安装nodejs</p>
+</li>
+<li><p>查看是否安装node，可以使用<code>node -v</code>版本号查看，若未安装<a href="https://nodejs.org/en/download/">下载地址</a></p>
+</li>
+<li><p>查看是否安装vue <code>vue -V</code>注意大写</p>
+</li>
+<li><p>安装Vue <code>npm install -g @vue/cli</code></p>
+<ul>
+<li>前面加sudo 是获取系统的权限，之后需要输入密码，不加sudo可能因为权限的问题安装失败</li>
+<li>如果安装vue出现一些警告和错误，清除一下缓存就行 <code>npm cache clean --force</code></li>
+</ul>
+</li>
+<li><p>3.0以上版本集成了图形界面，所以卸载2.9.6等旧版本的命令：<code>sudo npm uninstall vue-cli -g</code></p>
+</li>
+</ol>
+<h1 id="创建并配置Vue项目"><a href="#创建并配置Vue项目" class="headerlink" title="创建并配置Vue项目"></a>创建并配置Vue项目</h1><p>创建或前往本地文件夹，这里以新创建文件夹 VueProject为例<code>mkdir VueProject</code></p>
+<p>创建项目<code>vue create 项目名</code>，项目名必须小写</p>
+<blockquote>
+<p>3.0以上版本可以直接图形化方式创建项目<code>vue ui</code></p>
+</blockquote>
+<h1 id="启动项目"><a href="#启动项目" class="headerlink" title="启动项目"></a>启动项目</h1><ol>
+<li>前往项目文件夹<code>cd 项目文件夹</code></li>
+<li>启动项目<code>npm run serve</code><h2 id="vue的命令"><a href="#vue的命令" class="headerlink" title="vue的命令"></a>vue的命令</h2></li>
+</ol>
+<ul>
+<li>init 从模板生成新项目</li>
+<li>list 列出可用的官方模板</li>
+<li>build 创建新项目的原型</li>
+<li>create 创建（警告：仅用于v3以上版本）</li>
+<li>vue ui 启动脚手架图形界面（3.0以上版本）<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2></li>
+<li>npm install 安装依赖<ul>
+<li><code>npm install mysql</code> &#x2F;&#x2F;连接mysql数据库的依赖</li>
+</ul>
+</li>
+<li><code>npm run dev</code> 或 <code>npm run serve </code>启动项目<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><a href="https://www.jianshu.com/p/167aaf13346c">Mac安装Vue环境——2019-05-11</a><br><a href="https://blog.csdn.net/gcDdblue/article/details/100171824">正确姿势开发vue后台管理系统</a><br><a href="https://www.cnblogs.com/loveyaxin/p/10107550.html">vue-cli 3.x安装配置步骤详细说明</a><br><a href="https://www.cnblogs.com/doit8791/p/5259436.html">CSS预处理器Sass(Scss)、Less、Stylus</a><br><a href="https://blog.csdn.net/xueboren001/article/details/53389221">ESLint深入使用</a><br><a href="https://blog.csdn.net/weixin_34221276/article/details/91423683">一次学会使用 mocha &amp; jest 编写单元测试</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>散装知识</category>
+      </categories>
+      <tags>
+        <tag>Vue</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>hexo博客实用功能及插件</title>
     <url>/2022/02/24/hexo%E5%8D%9A%E5%AE%A2%E5%AE%9E%E7%94%A8%E5%8A%9F%E8%83%BD%E5%8F%8A%E6%8F%92%E4%BB%B6/</url>
-    <content><![CDATA[<h2 id="文章加密"><a href="#文章加密" class="headerlink" title="文章加密"></a>文章加密</h2><p>安装<code>npm install --save hexo-blog-encrypt</code><br>将 “password” 字段添加到文章头</p>
+    <content><![CDATA[<h2 id="设置文章目录"><a href="#设置文章目录" class="headerlink" title="设置文章目录"></a>设置文章目录</h2><ol>
+<li>打开博客主题配置文件 <strong>themes&#x2F;next&#x2F;_config.yml</strong>，修改 <figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">toc:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># Automatically add list number to toc.</span></span><br><span class="line">  <span class="attr">number:</span> <span class="literal">false</span></span><br><span class="line">  <span class="comment"># If true, all words will placed on next lines if header width longer then sidebar width.</span></span><br><span class="line">  <span class="attr">wrap:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># If true, all level of TOC in a post will be displayed, rather than the activated part of it.</span></span><br><span class="line">  <span class="attr">expand_all:</span> <span class="literal">false</span></span><br><span class="line">  <span class="comment"># Maximum heading depth of generated toc.</span></span><br><span class="line">  <span class="attr">max_depth:</span> <span class="number">9</span></span><br></pre></td></tr></table></figure>
+<h2 id="文章加密"><a href="#文章加密" class="headerlink" title="文章加密"></a>文章加密</h2></li>
+</ol>
+<p>安装<code>npm install --save hexo-blog-encrypt</code><br>将 “password” 字段添加到文章头</p>
 <blockquote>
 <p>纯数字不好使</p>
 </blockquote>
@@ -481,64 +549,27 @@
       </tags>
   </entry>
   <entry>
-    <title>Swift5.0 UI代码Tips</title>
-    <url>/2019/12/02/swift5.0-UI%E4%BB%A3%E7%A0%81Tips/</url>
-    <content><![CDATA[<blockquote>
-<p>记录开发过程中用到的纯代码写UI及一些经验心得<br>记录一些自己写的UI库封装<br>记录一些用过的第三方UI类库</p>
-</blockquote>
-<h1 id="文字类"><a href="#文字类" class="headerlink" title="文字类"></a>文字类</h1><h2 id="label圆角"><a href="#label圆角" class="headerlink" title="label圆角"></a>label圆角</h2><figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="attr">label.layer.cornerRadius</span> = <span class="number">5</span><span class="comment">;</span></span><br><span class="line"><span class="attr">label.clipsToBounds</span> = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-<h1 id="按钮类"><a href="#按钮类" class="headerlink" title="按钮类"></a>按钮类</h1><h1 id="图片类"><a href="#图片类" class="headerlink" title="图片类"></a>图片类</h1>]]></content>
+    <title>云ECS+云Redis</title>
+    <url>/2022/02/28/%E4%BA%91ECS+%E4%BA%91Redis/</url>
+    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="67fb0033cb55a46b5fa764364a9a2091f29100bff835b8f77dffd7cf7f05d53b">41b535b75251d982879fbe3234d52c0e7edf87b96aeb0858f7affaeadbed6f66493141bdd7c5389c3da95aa715abc85426e7ef7ccae2694a1bb2d397dfa4b8039990fe5b030ba5896e7375bc79568c57fb079e253343d76251d65ec1cdac1c268c34eef98a51074b5ea9bebcaa8d560f2e6d5d5c20cae534d81c2bdf63e6dc7063b99b8f23cc86e4a6f8d09812cf61c92028bc18c834934d99076299a39f0a195235cb50a844bea179133aa5ec928d3b3f2359d160657a6039a0314458865ae15e33386da775783d8bb5eea9874c8e12d075f185fded95d8828aaba55f3eb6f987908d3cc06bbbf2a94d788a11e6b14e0185a9a567d22271b733fb238afd21cf0300b581487ae32728b70130acbd232dbc537cd9cd6cb76cf3f7b6d93fe9a3b0a4d0dce7fe14f00844f506e2d5e8cf9930298a989e4ba023311fbe0281730c24422b0dccdb3ded3f8dede4fbbd4bb933655b4ca94dda45528cae6ab244d3e28a4c7eb0ebbebf58760766a0ac8b2e0397785aea3304e0f72ab8235fd9fb640598800982de27c6731295b6254028c6f3302ea1eb6fb79393f5e542621b2d23644349fe73c9f6df5f5c3a231efb2d19aa28d3a942e4bcb79441d3353300685c9ef8f367a3c3fffa760f8e97e1bef537f3e5488470a9b76cc8206374dedaf3223385e89f019f1e1c42baa9679d10fdb067607bf98f985ec1109cdeff8671522501738e3b8ac043c3f95c72cf6070dc14d8da5c2b96d5b779356a63f29f3c1ccfae3c0837f2d8d56a3918d58ee7bb1ffff4f148e79cfe031f4a398056be31a1fa06f2964b854e6ef59408886d04feb79c2120cf0d5b761d1ca4c74606d7fc7941f8e97b4518222468700824b2cc92b69a1da36db7bf339475e0bd7f595f1665376d4ef955af4d701a7d47ce0efecddc5786d0d5001d36298fe06c4ee0f47e60bbcde8e74173d1ce4f50d9e4762f6879c39fbc7dfc5612e943b5c714d5529a672c123dcd1bddd71c509249da2908e1242139619ee8b0a463b18630d55affcb09aca5393d001a859f1f381cf5181b13bcd8e04936ab486fab3571cb133fa2dae64830be62621e2501e2a9725ee5fc1fa3c0f157a94679b8288e90a19608f8e7559997d1d86014d9b8556eea6d285842dd0368052048cd3a02b19229f1490d6495f0ce90167454619bee090b104bd53021e0b53a9f2c24faa7dbdcc6fcbd6973c995466d41da43401f74bff07d2720bd246b0813028f6b7c1d23424c0d1fda7b7f5e4bf81ba3a8f8a3765fe773b35488284c74def02016a517a9f462987ec8fa9a3441ed5b77c1c4049d640334332154f664a61c5e85625a34a81569e98e6f249a28998d9d6aadb5488d99f2622ff72edaa84f80f1bc56500128c628944eda76c0e5374ea02f240806b5e59f7518f51e35b59c88d4856c800806e58157f4749a18d962ccb855828c4b558d21fb38c1d6bd1b818a7fab3309fe42491feff3ba61a96d177168739e3d884d9f67c0b631b3c5524a8722b0e66a06983876e8dc680ac19af79e0231c5c7a3d5370ad1008c48708c1f6e59e720ce9d4ba98025647ae539ac99096ee8ffe8941c9f3225202a375aa4a8ca067d8c7c445f3a7cf48a75c0d1ba70d079f219e8d37ba9e34d208bc051cbcc955fadb6a34e4c2ef2796200353f61a78837b7fd2c983c90728f3641c5b1f7d765b4c68b1ce04864ad7fdc5c6c22887e456a770766461bf1a3eb8f2fd4da9bc22c76cece603b95d3b96f981039174285c6099be56c3dcdabf1e498ac2d590a5cf20bb339a521e9915606afdb85f7861b0e48cc4c069ffa304f27a763625909846c8cd82d2315ef00003d1d855fec8bc8f52be73ac9da7a89bffb4ca43c80945af1850cf86ad6ec571ab6c97ae1f9d104422b0cafb717fbdb6d8d99a3dd5e77ec9035a15e5aaa1517a44a947527f4f14cd1f154edb2635c818d21ae6ace1d0efde45108d3b3fdd9f70aa2320c2eff4818184ea36862341fcac5c273e659d1658ca4846f3eb4732f099bd97bbfeebc5a639587c68372ca08de8604a9104a7ea293d7ab906dd1822364cd75a0a5d8198d2523778111865222ca21f4d47d2d6952d1d4dea13a2ac404b46454abb8fd8d60ca064eb07e43eb9b1ad4d8e99176ad15c8df5ea1ad03bbcdd7ffd96550a6a4444165577ca9a8bd2936d28fd207130c2252e9699b028f4690f4973942b2c9c187006e7d6eae82759750e0071ad5b498c0746ab4e46ad7c03f4bc4e75b594a0c0ddbc1da2e12ade54dbce59f0ed324845f327540d96ad339109faf75b0250f77c49519b8216e9ffd6c44c4ed399197ee5f6d5b12cda90acfb33999dd856411a9d1de0e856b0220f11fb0909b451cdb0b051e74edd9d306ffb6767fda7bc22d1fc71213bb647ddaea70f6f4de9dfc346b5e93e9f390dfb065c11a2e6ae3dc09de723de2c4d2a7a50ba20348e1841ceac75df57880a865d750fa426593547a660b902c3dec878ab1d14e9bd8eff8fb59a3ef252a7894fa2b3a5553de3c453aa9eb987932cd1142621c6e48f59ab90174cb032f1fdb119f69df2176e6b9cdc466a68cf8343d82ce0cd6a74e6690e0387ee48068e621139ab8ea30acf3efe70cfca917d033478a61c8dde0ce117403e0d14d39b200949fea814b68816cded3ed435884dd1309ba2403c53ecc7928624450719db17c38e7439f7adf78be186b0b2069cae63dd459a8cf10c6773c39505d93186ed9f6b5cc608f831195ebafacc454e9d8e8d94bb87df294929ea453c1fa284e50cfa8d4d7f5204d71abfad0652849de3f3e343c40202d22d85d9565c82cc6d7a6001ccc09a8e129aa9d086c2f6765b94729e2695ddf4c3340b51a1d68b166c88e253f734798d4878fe3a9f874335125e72fab5e993322846c0f1503a99463fc327d23ec4595d6abb961a4087fe7f05091524178dd0c561793a8a45013fc1626ef1bb803d0f123d3703d489a29d7e763e5e3668e0b62e5e4871b75bdbf4f3f71baf972a0f2ed435625dcc446c88da3fa4ad3f02dcb1c59e83261aca9973e341611d57ee89be3134e278754cdf9fde63ee0c4a7ab87cc071a778402f101811385115391d01c321a9003631b48cc854fc263d3fda691454bc68fa36a09d18f1e3df80acb0e8b643db99bd3802422599c64f52ee005918c96cfc7e3ef16992186dda6d2b467483c504fffd6314b81c0b037516c3e3529671a3f3e20885a850d21452b4c3c5fa338b9e305e83511f359b1ad8daa7ffd0011144baf324025cbd3734ca5c59af15290f92e6393edd322e76fad09ae5fbf1f9e9056784ad649c376308cccf88f0a1ec466a54243631f7d0ba2efaee4b4c49ae7349f797a0d1189f771cb404f8063e3507e3acff6c96fc298657458160aec05f188b8ad4b902b3d4e16c1671bd73539495aadfa410ea8aeb0f05280e79dfde9b23b7565f13c88293e070608348e81f51ba14a448cdaf3be928fa2108ab4906d7c94fe6c80ace9ad4d980776b0db2cb185759d0cca8a4fb3550e8668ef591723affd6cc57fa7b0b964538ea64f73329d99a74a167cc16e764c346142895d2a80aba4767acf5037de454df7728137e5bcaf356ad396c671674392310a12c81a3579e119fd3a4a37eba087588d619e927d5238dec5c455e8c8baa134a2b51022dc853233d2df47384d1ee0b44f72fc08a3d1e5eb2f57e98af5b475bd46f2beb19c29ff767ca72ecffcf094c0e2e8995970426c53a9a36b7ad795504eb5d8590a1193694cb32bf3aeb9e9ac1b47c31ef582172cd6624f084d5844d9bedbe73dc287ff14541dd02e7930e0b355f4a727dcd58d9d36dfcc32fa160083db5917a493bffe764806dee95acdbc5d3bbc3ba35af0dc75e9d5e2d9e4a6d2f9d44c10116c42eb8106991d1fefbaf2ae5554a1bbbac0686c39abed2eb5d5f1894d670dd3e1305bd50048b3aba79dc28d1e40aa922ff026197641f8052e3d2b7ab914e1d01b86628eff364adef3327e08d7da2ec69bd3b3c8c16ee98dd88c222c85b19fca2687b2244aa502823bdf0cfa8232edd1c55636b9a0f5d41d23ebef46f4474a6a39ed46913d3137a9ef4242295bcee061594a4eb1f22e3911becbd0604734582c910c69a24cb348f7afbaa224ce5f1d0f7bb8d8177e6b6531f5c3ac212d0545cb9f5bde34620eca2497f27b7b1dc67856b90153cf3d8d1640e63076b0889d55c8e7ca2303df019ef2d079fe97bb39d1e1b8b5793d55c6f23b5535eb90f267eccb87993601163212cdefc80e841e26cdbe6ddfb7741c073933d247e330eab75d081f161081416a9702914c5234abb4b6166d34d1bc4647f6000509e5f9e98d82966a7335039a8b4bf483ed9fcf1d39d1164406e7d66aa800e98e9c047bd3068896d54d1481cf25ef64b8dc8df2ed0bb7f5f0c886339a992e7bfa1c110d6c9f924153c60f2fed5115a32818a38fb06a01426cfa169493cc5f97fb1ef82dde9112b3ea1d9c32c71c6a82eb9369891b156445fd08b63009cfe398174904caf9858fdfda2ca0215200e488e36bebbf0c3fa1fbb14c8e9c9ae5019b3a799642685972b1d531eab0beb2acc97baac6bfa5abfb0082ddde92d2871a4490556af283f9a8b0833b8ed0afcc86bbc5ed3ae40e53d02997a0b9448c5797e3013001a1e039e8f7b574ce287e0f2ad77b2fe7fc86af0d7010f2cff506a7cbd8d7eddec4a80071b9741d86634d4fb706e8ad35fd4a46e2cc415f8bbad1cb756bb1a87804c6c223bb8ac19dab86b4c142ab50076447df8e62fac1c85dcdeb2a01f29f79af2e345241c56a326373f00edc63b000cc4c36cbb0d5a80b62facfb12b1fc81cce19acbcff999c33921bec0116d183fe688f057b67611292c2014a786c7d31eb5a1e68027b4d7c2e3602e46207035fa253cf42948324e443856919c38d3bd967345d1bebfbec7af15ee9e3ba765ec812ae24699860502e61769c74f211ce010b43aade7a5669074e951662b2d3264f22a61591efc74eb77812461dba12d35acf32794cdd68c1d942d817107610c5630646f1bf371b0b8dfd100ac4882c37fce0b552144c2ca37f6bc6aeeff145d4c65e27773c762efac20339570011da70eeb4b4e78a569a461706021892eb304396249d9a533b7e3cb05bc81dbe9ca320319b1cfad054f1027e0e32d88a94025572fcc65423c0b98675a89a3a759e970be904c26bc69bb6a75ab28e3219802c326b71ddaf3d281a58dee2fe1259c23ff32f8ca47ead8fe033c97d10d989d05ae25a85afca82eb07a8247f57b9a525affbef1a08d8c4cf2ffdd842b6a4b95f5c48685873d14f218b775a2c62648586c51c7a7ab95f56609b9ae0a3f73f970af517a728956e4f7c4fb9ec25ac87760b818fbcb6730e325554ce0ed93b83ed78971aec6265acefc4329f6cd7982e42c95e1ba8ee891ae31920301c8da535cd877ede83224542b8418fd112a6b7e67bc7196178697cdbf1a56df9d7b10ed79770d170ed165a1ef4e84eb2f9855177b93d2925ab0df230aa5a106e072fe1c480a3a734ca4f024bbbe0001be9a282ec6a3a645347e463467da445a21bbede6a1de53b9af31653fdcabae2174b7a54457b8afcc24752107e59d9892aff03d3d9d42e3a486c6cdd4dfe1668fc8d5e7b1e2846ebe71542d67ad6351358dac4bd738c4410ab05cbdfa72384333932b37869e73f75cf69676116e7b25ce38710667b869d741c35ad1294251c8d926871fad365f5f3a0ac3c5babd5ce590867ad91ff50bb2041474bd91b7e0de63ef9301bfd8b1679a7102cd7eb95183e2fb3244bde5ab813b22ed859304d4b35900b959899a743066800dff8a867776e409c6400bed4efe8399d28a9bbf24cd47a731cdd4e99a8e97442548d91475cd3699e0cee3f8a8171eeadeb93c23bdffb2d7bc3d0d8c23c9d01b15835ec359126ead9c13407a53acff3ad73fe4aa2d7f0047cb5332c7e958d4a4d0c3bd99172d0698893830e0cdcb8670462b942457f166e5189072343b413a65aa946d23f07bb47caf7aacf86c3fdf6264c627702a7fb30462719720d91ff9f90032b6fd60214854e4d198aee401cb17cb0e94ed19a3b0e4c7475c0822d2cbc8a0eaea4c7074395305c688ed914f15d7468f5249fdea84630dd539a7a9666407d82914cc2a3e015f58d0018f394f5025a3cb5d8f43453eef786891a12c0940e802963b31b6db18848cf65f3278beec29019826a2ae019e875868e8acff76b998561839d9609788f73904ba1955f0833ed9b40eeea06d4dc0baae15b49b571fd67fe8b2fe1a5c0061d190f3dfc10bd71986107289062a2192d36fb050406609e54348874e8a9fe170828f320b259c08e0894923c4c78892ee15c59105693e4e5dd05d55549360bca32a7823c782b67e4ede425f97b3150f144396b4af496dae5d8a2780c5a383a8a4df0916f6fa168261132e9403393881a870df1fff42cf013c9d0a7c7dbe94cc218cd6fbe71bba4bbe76de8ee2ba99cc5070cae6143ac121287fc34efbad2c6c41fdb71e5c7fac927ee0cc370ff74443bdb6e9fb3d06b97b269bfd17a75732afbee7b73b741d89f087d7fb88571bb636da3553eceb992c96c2ae9a885962b7366aca6deff945d632872e5b85b3f42f75ba822ccd17ea5163b77cf0e04c9fd68c5fd9f80e5adc4a351d0c9344b1a29411f05bfa07509e6144dc60a1b2fb27efd7bab96fbbf990ca53d921bfba33db8eb6c43d73a2ccb82c2c728437f4aed37e04b86293840ffa3d4a3b05f43dfbc1ba71fc6bd9defc54fd127a25da0b9b4489714551dcf6c0a3bbe878e1c748e3eca0af51d069f6d9d59696aa276c3b0803e4989776b75052bc255dfd7385989d54a17d656f10c0bfb4928220aec621c2a8e6e2398bf86a5b1c283c5c33db770f00a6fc77944087fa41a6b208e34c216f85205b4733a22ff1943a1d83c1d42c4bc216e7c59d308ee98190115fae854d7047a2c1be06a8a4b9464a6feb355becbc35f459465b86f1b2f2d6b4ae00f6b34ef76cb42f27fee3f4d67cfc90ed4d5cbbf88c5b81aaf244b2aafe647ed457c0bad2411f2842c617f183d11fc1866aa113a3888dee148793b8c930447123cc051348a945028f4d3f2d8d8cc9db219bde56e8f36352e79bfbd9de839537b05aec6fc0b962461451c6b4546a3944b9bf91a94fedf5acbdfbb97494ef420b559465b1b9c51eca4ef2dc5561aabb9b9d5cc4671a4cece80b08c97d6f31eb6fab0e6f0ccca0c0a4ded118667f87c09fec64bee67be9a4e65f20c70c7298f9bf966badd2dafd3dfe5b3da9d72c750d76469c2b447a9f1024726203000aeb157b85be7dd8657555633357063b5e79033eb83eddb7e9b61d3e6e2eb4e3ffc6a10329a0712ae5909a566b15f95bdb2fcbcc160b966306496395ca0fe144b4ef4f507089bca244ac6bd74d8c1686df114395d1c8a5796994a763a2966093b4cfde6cf00ad8bbfc3c53893678c6e681c5096df670f3c2d654d70e591deed1d75b28d64063ff6cec87b2968dda99f171fbdb9024bc6617cbbe5c36c170d5a10fd5ccf862c7f12b410f0e9f9697d5732efe4d684daaaeb5e37cc0c1a2dcf48aaf92e815ca8f408f0f0d411812625caaae781ebbd7a0e3d1c041903ba37e2199a4ba592ee07cd5087e53988949781159d90f54576add567ee9feb2e5ccf52b7017b6930170074d3b159c34787480b19d17f3f84a3d6aed3c00ce69688ed03ad57d0ed6d9da403e2d325fbc7f994c00950e6d904e27dee3956989e001ac5f4c98b7ecac3331df8ed313d65d981d6d1caed0c3adac190a19ea8888b9d66d84d229ec75744f0845ac60fbebe2e05a3111338f2c1a3b0a8d9d87a4726f7bde52d853a40704326e32c9b43a2c7cf06285be01a715cd3c5cf05508ae3e07cdfcbd809c7a73fa02fbd97355e8eaadafae1fe6b17f3c89a53f43f11060d363a59f9a94ec0e88260f7655871fabf6e48dbf62a55ccc87d18708ecf7706688842c5702345a942eb50a6986368cbac42d69891f55467d6df20fb18e22fb268a02d442e7d9f4031683bb3e7af931136f158e3da51adf7269586b6821bcb7bc2e05a6166d3a0d08053ecc32240d1234bc1fa408cd48c5b565bec882eb899a2f5b7fb680713ef8ef1af69a9ca6795ba3e86618562ace30f000355b78a604a64bf04d1d64206c8d05daf726672a335ae4f8b2f7adfffbc0ede237c11dd12de7ae84c079d91b46c8c028ae2be7df92dd64f46d341c53cc9756546b139c06c0bd339d0776174a7bd40071b990968a4e6ddca3d180bb476a102aab1fb61dcf9f6c3f4ed75e49a2b42b5c201c1b6390e7dc397196860d5b26fe1b781d67cfe6d666d5be6cdc17d0d12f99865ea5d67c73e35a316db1c8e91ca49627aceae9bd0afa2d444ff37d0195bb8621c2ee0f63715870c67fd0ace94abfc8722fcac06e56b969faf57842ce4cba4feca685b17d7a5f6fd83357ee87901178488fb0996a360a9523be787ee206ad25dd249ba56a7caf5803ee74b7fa873163d6ef0c10952f2fcb1d1694a3f96efb2fd3c27f1fb8bb23b9ebacac340a7e0d1018fdcc0b156313daa1562b740381bc2de5a5699b0363c06b1812a5328f8e972501f0853c7e7862b723cca5c4d3378c6f2e3a3a23a1c312a52494ef4c635d4868b788488255285c0f71674e56ee145ed79a1ab0fd3e71b7dd5e1bdbbccdecf121c098faba0f2e92c2f31d8fb1bfe3e4174b80cf673454373c8ea05e7da71b159917dfaa74b5ca28a43986e8a17e684f7a65532dd0e5fff8a237faf139d4e0a20fcf501db85434d4117eef88202e4265eb27333871420bb267b2c2dc33dde3d1db13f0f6964de471bf31aa9365242295b6f6a590a5618dad26ec3be750063279bf5799ae7778856b62383a2481e739b65f1516082e1d796986c8972eccec874d16d749ac015608f7b04426513336e5104742e1526871c3bee7826436949b34b7bb16ae4ce7f6d6cf2ac0880e8cb61ffed50ac3bc4aa2c7419a9a2f72416f4ba7d5931ca306301b119df361de48594606b96a8b29e878637a1cf03c382aabc8b0197a046d181ddc9aa0ad9e1bec4e246477f6ba3cdce36a4f8a57c9719f50a6dfc63a0f642b61e976516b62a190cdf0da5896e59a4bf393fb50ed2a3d0bc567af42f9cbf4f303c0a3ad8fc0c035d6837af67f5b6386d11fe9d82403ff8480690f23dfb483e9541cd0e354c0ec3f09c34f54bcd2b975baba7e32adbf765fce6a3f017a5ba78cb2eb65c4ce1b4815f18d3ed445f9c0d59b8c2c69f3d8b5c5f0eef8c2e3509b564d77b626c7b00e466f3420b0358e8cd93c933d3174b40b73fe0a848142fdcd4f8cfd2ff1ee52c81c6ceca9e17a4e92478771a2a5fd52d0f8b1fb8f726d3c20400036942b30012bbd6404e5385bd6f71baaaba264170</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">Hey, password is required here.</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
       <categories>
-        <category>散装知识</category>
+        <category>后端开发</category>
       </categories>
       <tags>
-        <tag>Swift</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>初探koa2</title>
-    <url>/2022/02/25/%E5%88%9D%E6%8E%A2koa2/</url>
-    <content><![CDATA[<h1 id="koa2-的安装"><a href="#koa2-的安装" class="headerlink" title="koa2 的安装"></a>koa2 的安装</h1><ol>
-<li><p>运行<code>npm install koa</code></p>
-<p> 新建一个 <code>index.js</code> 测试一下</p>
- <figure class="highlight zephir"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> Koa = <span class="keyword">require</span>(<span class="string">&#x27;koa&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Koa();</span><br><span class="line"></span><br><span class="line"><span class="comment">// response</span></span><br><span class="line">app.<span class="keyword">use</span>(ctx =&gt; &#123;</span><br><span class="line">  ctx.body = <span class="string">&#x27;Hello Koa&#x27;</span>;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
-<p> 运行下<code>node index.js</code>，访问<a href="http://localhost:3000/">http:localhost:3000</a>查看效果。</p>
-</li>
-<li><p>安装koa2项目生成器并创建项目</p>
-<ol>
-<li>npm install koa-generator -g<blockquote>
-<p>可能需要sudo 否则权限不足</p>
-</blockquote>
-</li>
-<li>生成项目 <code>koa2 项目名</code> </li>
-<li>安装依赖 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> 项目名</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure></li>
-<li>启动服务<code>npm start</code>，浏览器输入：localhost:3000,如果页面中展示了如”Hello Koa 2”的内容，说明项目搭建成功。<h1 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h1></li>
-</ol>
-</li>
-</ol>
-<ul>
-<li>在 Koa2 中 GET 传值通过 <code>ctx</code> 或 <code>ctx.request</code> 接收</li>
-<li>动态路由传值可通过 <code>ctx.params</code> 接收</li>
-<li>query 返回的是格式化好的参数对象</li>
-<li>queryString 返回的是请求字符串<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 引入模块</span></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">Koa</span> = <span class="built_in">require</span>(<span class="string">&#x27;koa&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> router = <span class="built_in">require</span>(<span class="string">&#x27;koa-router&#x27;</span>)() <span class="comment">// 引入并实例化</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 实例化</span></span><br><span class="line"><span class="keyword">let</span> app = <span class="keyword">new</span> <span class="title class_">Koa</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 配置路由</span></span><br><span class="line"><span class="comment">// ctx 上下文 context，包含了 request 和 response 等信息</span></span><br><span class="line">router</span><br><span class="line">  .<span class="title function_">get</span>(<span class="string">&#x27;/&#x27;</span>, <span class="keyword">async</span> ctx =&gt; &#123;</span><br><span class="line">    ctx.<span class="property">body</span> = <span class="string">&#x27;首页&#x27;</span></span><br><span class="line">  &#125;)</span><br><span class="line">  .<span class="title function_">get</span>(<span class="string">&#x27;/news&#x27;</span>, <span class="keyword">async</span> ctx =&gt; &#123;</span><br><span class="line">    ctx.<span class="property">body</span> = <span class="string">&#x27;新闻列表&#x27;</span></span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="comment">// get 传值</span></span><br><span class="line">  .<span class="title function_">get</span>(<span class="string">&#x27;/newscontent&#x27;</span>, <span class="keyword">async</span> ctx =&gt; &#123;</span><br><span class="line">     <span class="comment">// 访问 http://localhost:9000/newscontent?aid=123&amp;name=zhangsan</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(ctx.<span class="property">query</span>)</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(ctx.<span class="property">request</span>.<span class="property">query</span>)          <span class="comment">// &#123; aid: &#x27;123&#x27;, name: &#x27;zhangsan&#x27; &#125;   对象</span></span><br><span class="line">    ctx.<span class="property">body</span> = <span class="string">&#x27;新闻详情&#x27;</span></span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="comment">// 动态路由</span></span><br><span class="line">  .<span class="title function_">get</span>(<span class="string">&#x27;/newsdetail/:id&#x27;</span>, <span class="keyword">async</span> ctx =&gt; &#123;</span><br><span class="line">     <span class="comment">// 访问 http://localhost:9000/newsdetail/1234</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(ctx.<span class="property">params</span>) <span class="comment">// &#123; id: 1234 &#125;</span></span><br><span class="line">    ctx.<span class="property">body</span> = <span class="string">&#x27;新闻详情 - 动态路由&#x27;</span></span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="comment">// 动态路由可以传入多个值</span></span><br><span class="line">  .<span class="title function_">get</span>(<span class="string">&#x27;/newsdetail/:aid/:bid&#x27;</span>, <span class="keyword">async</span> ctx =&gt; &#123;</span><br><span class="line">     <span class="comment">// 访问 http://localhost:9000/newsdetail/1234/5678</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(ctx.<span class="property">params</span>) <span class="comment">// &#123; aid: 1234, bid: 5678 &#125;</span></span><br><span class="line">    ctx.<span class="property">body</span> = <span class="string">&#x27;新闻详情 - 动态路由 - 传入多个值&#x27;</span></span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">app</span><br><span class="line">  .<span class="title function_">use</span>(router.<span class="title function_">routes</span>())           <span class="comment">// 启动路由</span></span><br><span class="line">  .<span class="title function_">use</span>(router.<span class="title function_">allowedMethods</span>())   <span class="comment">// router.allowedMethods() 用在路由匹配 router.routes() 之后，所以在当所有路由中间件最后调用，此时根据 ctx.status 设置 response 响应头</span></span><br><span class="line"></span><br><span class="line">app.<span class="title function_">listen</span>(<span class="number">9000</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;请浏览器打开 http://localhost:9000 或 http://localhost:9000&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<h1 id="写个简单的测试接口"><a href="#写个简单的测试接口" class="headerlink" title="写个简单的测试接口"></a>写个简单的测试接口</h1></li>
-</ul>
-<ol>
-<li>安装 <code>npm i koa-bodyparser</code></li>
-<li>新建一个xxx.js</li>
-</ol>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 引入模块</span></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">Koa</span> = <span class="built_in">require</span>(<span class="string">&#x27;koa&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> router = <span class="built_in">require</span>(<span class="string">&#x27;koa-router&#x27;</span>)() <span class="comment">// 引入并实例化</span></span><br><span class="line"><span class="keyword">const</span> bodyParser = <span class="built_in">require</span>(<span class="string">&#x27;koa-bodyparser&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 实例化</span></span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> <span class="title class_">Koa</span>()</span><br><span class="line"><span class="comment">// 配置中间件，通过 bodyParser 获取 post 请求传递过来的参数</span></span><br><span class="line">app.<span class="title function_">use</span>(<span class="title function_">bodyParser</span>())</span><br><span class="line"></span><br><span class="line"><span class="comment">// GET 接口</span></span><br><span class="line">router.<span class="title function_">get</span>(<span class="string">&#x27;/news&#x27;</span>, <span class="function"><span class="params">ctx</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; search &#125; = ctx.<span class="property">query</span></span><br><span class="line">  ctx.<span class="property">body</span> = &#123;</span><br><span class="line">    <span class="attr">time</span>: <span class="keyword">new</span> <span class="title class_">Date</span>(),</span><br><span class="line">    <span class="attr">data</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">title</span>: <span class="string">`新闻标题 1 - <span class="subst">$&#123; search &#125;</span>`</span></span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">title</span>: <span class="string">`新闻标题 2 - <span class="subst">$&#123; search &#125;</span>`</span></span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// POST 接口</span></span><br><span class="line">router.<span class="title function_">post</span>(<span class="string">&#x27;/say&#x27;</span>, <span class="function"><span class="params">ctx</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; name &#125; = ctx.<span class="property">request</span>.<span class="property">body</span></span><br><span class="line">  ctx.<span class="property">body</span> = &#123;</span><br><span class="line">    <span class="attr">time</span>: <span class="keyword">new</span> <span class="title class_">Date</span>(),</span><br><span class="line">    <span class="attr">reply</span>: <span class="string">`Hello <span class="subst">$&#123; name &#125;</span>!`</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">app.<span class="title function_">use</span>(router.<span class="title function_">routes</span>()) <span class="comment">// 启动路由</span></span><br><span class="line">app.<span class="title function_">listen</span>(<span class="number">3000</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Server is running on 3000&#x27;</span>)</span><br><span class="line">&#125;) <span class="comment">// 启动服务</span></span><br></pre></td></tr></table></figure>
-<ol start="3">
-<li>运行<code>node xxx.js</code>， 访问 <a href="http://localhost:3000/news?search=%E7%A7%91%E6%8A%80">http://localhost:3000/news?search=科技</a> 查看效果</li>
-</ol>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://github.com/koajs/koa">Github koa</a><br><a href="https://www.jianshu.com/p/3e35db2c8d6c">koa2从搭建项目到实现API</a><br><a href="https://liuxianyu.cn/article/learn-koa.html">接触 Koa2 框架</a><br><a href="https://liuxianyu.cn/article/koa-get-post.html">用 Koa2 写 GET、POST 测试接口</a></p>
-]]></content>
-      <categories>
-        <category>散装知识</category>
-      </categories>
-      <tags>
-        <tag>koa2</tag>
-        <tag>node</tag>
+        <tag>Redis</tag>
+        <tag>阿里云</tag>
+        <tag>ECS</tag>
       </tags>
   </entry>
   <entry>
@@ -596,105 +627,6 @@
       </tags>
   </entry>
   <entry>
-    <title>vue安装及创建新项目</title>
-    <url>/2019/11/28/vue%E5%AE%89%E8%A3%85%E5%8F%8A%E5%88%9B%E5%BB%BA%E6%96%B0%E9%A1%B9%E7%9B%AE/</url>
-    <content><![CDATA[<h1 id="Vue了解"><a href="#Vue了解" class="headerlink" title="Vue了解"></a>Vue了解</h1><p>渐进式JavaScript 框架</p>
-<h1 id="Vue开发环境配置"><a href="#Vue开发环境配置" class="headerlink" title="Vue开发环境配置"></a>Vue开发环境配置</h1><ol>
-<li><p>Vue依托nodejs，vue只是node万千包中的一个，所以首先要安装nodejs</p>
-</li>
-<li><p>查看是否安装node，可以使用<code>node -v</code>版本号查看，若未安装<a href="https://nodejs.org/en/download/">下载地址</a></p>
-</li>
-<li><p>查看是否安装vue <code>vue -V</code>注意大写</p>
-</li>
-<li><p>安装Vue <code>npm install -g @vue/cli</code></p>
-<ul>
-<li>前面加sudo 是获取系统的权限，之后需要输入密码，不加sudo可能因为权限的问题安装失败</li>
-<li>如果安装vue出现一些警告和错误，清除一下缓存就行 <code>npm cache clean --force</code></li>
-</ul>
-</li>
-<li><p>3.0以上版本集成了图形界面，所以卸载2.9.6等旧版本的命令：<code>sudo npm uninstall vue-cli -g</code></p>
-</li>
-</ol>
-<h1 id="创建并配置Vue项目"><a href="#创建并配置Vue项目" class="headerlink" title="创建并配置Vue项目"></a>创建并配置Vue项目</h1><p>创建或前往本地文件夹，这里以新创建文件夹 VueProject为例<code>mkdir VueProject</code></p>
-<p>创建项目<code>vue create 项目名</code>，项目名必须小写</p>
-<blockquote>
-<p>3.0以上版本可以直接图形化方式创建项目<code>vue ui</code></p>
-</blockquote>
-<h1 id="启动项目"><a href="#启动项目" class="headerlink" title="启动项目"></a>启动项目</h1><ol>
-<li>前往项目文件夹<code>cd 项目文件夹</code></li>
-<li>启动项目<code>npm run serve</code><h2 id="vue的命令"><a href="#vue的命令" class="headerlink" title="vue的命令"></a>vue的命令</h2></li>
-</ol>
-<ul>
-<li>init 从模板生成新项目</li>
-<li>list 列出可用的官方模板</li>
-<li>build 创建新项目的原型</li>
-<li>create 创建（警告：仅用于v3以上版本）</li>
-<li>vue ui 启动脚手架图形界面（3.0以上版本）<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2></li>
-<li>npm install 安装依赖<ul>
-<li><code>npm install mysql</code> &#x2F;&#x2F;连接mysql数据库的依赖</li>
-</ul>
-</li>
-<li><code>npm run dev</code> 或 <code>npm run serve </code>启动项目<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><a href="https://www.jianshu.com/p/167aaf13346c">Mac安装Vue环境——2019-05-11</a><br><a href="https://blog.csdn.net/gcDdblue/article/details/100171824">正确姿势开发vue后台管理系统</a><br><a href="https://www.cnblogs.com/loveyaxin/p/10107550.html">vue-cli 3.x安装配置步骤详细说明</a><br><a href="https://www.cnblogs.com/doit8791/p/5259436.html">CSS预处理器Sass(Scss)、Less、Stylus</a><br><a href="https://blog.csdn.net/xueboren001/article/details/53389221">ESLint深入使用</a><br><a href="https://blog.csdn.net/weixin_34221276/article/details/91423683">一次学会使用 mocha &amp; jest 编写单元测试</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>散装知识</category>
-      </categories>
-      <tags>
-        <tag>Vue</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>云ECS+云Redis</title>
-    <url>/2022/02/28/%E4%BA%91ECS+%E4%BA%91Redis/</url>
-    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="67fb0033cb55a46b5fa764364a9a2091f29100bff835b8f77dffd7cf7f05d53b">41b535b75251d982879fbe3234d52c0e7edf87b96aeb0858f7affaeadbed6f66493141bdd7c5389c3da95aa715abc85426e7ef7ccae2694a1bb2d397dfa4b8039990fe5b030ba5896e7375bc79568c57fb079e253343d76251d65ec1cdac1c268c34eef98a51074b5ea9bebcaa8d560f2e6d5d5c20cae534d81c2bdf63e6dc7063b99b8f23cc86e4a6f8d09812cf61c92028bc18c834934d99076299a39f0a195235cb50a844bea179133aa5ec928d3b3f2359d160657a6039a0314458865ae15e33386da775783d8bb5eea9874c8e12d075f185fded95d8828aaba55f3eb6f987908d3cc06bbbf2a94d788a11e6b14e0185a9a567d22271b733fb238afd21cf0300b581487ae32728b70130acbd232dbc537cd9cd6cb76cf3f7b6d93fe9a3b0a4d0dce7fe14f00844f506e2d5e8cf9930298a989e4ba023311fbe0281730c24422b0dccdb3ded3f8dede4fbbd4bb933655b4ca94dda45528cae6ab244d3e28a4c7eb0ebbebf58760766a0ac8b2e0397785aea3304e0f72ab8235fd9fb640598800982de27c6731295b6254028c6f3302ea1eb6fb79393f5e542621b2d23644349fe73c9f6df5f5c3a231efb2d19aa28d3a942e4bcb79441d3353300685c9ef8f367a3c3fffa760f8e97e1bef537f3e5488470a9b76cc8206374dedaf3223385e89f019f1e1c42baa9679d10fdb067607bf98f985ec1109cdeff8671522501738e3b8ac043c3f95c72cf6070dc14d8da5c2b96d5b779356a63f29f3c1ccfae3c0837f2d8d56a3918d58ee7bb1ffff4f148e79cfe031f4a398056be31a1fa06f2964b854e6ef59408886d04feb79c2120cf0d5b761d1ca4c74606d7fc7941f8e97b4518222468700824b2cc92b69a1da36db7bf339475e0bd7f595f1665376d4ef955af4d701a7d47ce0efecddc5786d0d5001d36298fe06c4ee0f47e60bbcde8e74173d1ce4f50d9e4762f6879c39fbc7dfc5612e943b5c714d5529a672c123dcd1bddd71c509249da2908e1242139619ee8b0a463b18630d55affcb09aca5393d001a859f1f381cf5181b13bcd8e04936ab486fab3571cb133fa2dae64830be62621e2501e2a9725ee5fc1fa3c0f157a94679b8288e90a19608f8e7559997d1d86014d9b8556eea6d285842dd0368052048cd3a02b19229f1490d6495f0ce90167454619bee090b104bd53021e0b53a9f2c24faa7dbdcc6fcbd6973c995466d41da43401f74bff07d2720bd246b0813028f6b7c1d23424c0d1fda7b7f5e4bf81ba3a8f8a3765fe773b35488284c74def02016a517a9f462987ec8fa9a3441ed5b77c1c4049d640334332154f664a61c5e85625a34a81569e98e6f249a28998d9d6aadb5488d99f2622ff72edaa84f80f1bc56500128c628944eda76c0e5374ea02f240806b5e59f7518f51e35b59c88d4856c800806e58157f4749a18d962ccb855828c4b558d21fb38c1d6bd1b818a7fab3309fe42491feff3ba61a96d177168739e3d884d9f67c0b631b3c5524a8722b0e66a06983876e8dc680ac19af79e0231c5c7a3d5370ad1008c48708c1f6e59e720ce9d4ba98025647ae539ac99096ee8ffe8941c9f3225202a375aa4a8ca067d8c7c445f3a7cf48a75c0d1ba70d079f219e8d37ba9e34d208bc051cbcc955fadb6a34e4c2ef2796200353f61a78837b7fd2c983c90728f3641c5b1f7d765b4c68b1ce04864ad7fdc5c6c22887e456a770766461bf1a3eb8f2fd4da9bc22c76cece603b95d3b96f981039174285c6099be56c3dcdabf1e498ac2d590a5cf20bb339a521e9915606afdb85f7861b0e48cc4c069ffa304f27a763625909846c8cd82d2315ef00003d1d855fec8bc8f52be73ac9da7a89bffb4ca43c80945af1850cf86ad6ec571ab6c97ae1f9d104422b0cafb717fbdb6d8d99a3dd5e77ec9035a15e5aaa1517a44a947527f4f14cd1f154edb2635c818d21ae6ace1d0efde45108d3b3fdd9f70aa2320c2eff4818184ea36862341fcac5c273e659d1658ca4846f3eb4732f099bd97bbfeebc5a639587c68372ca08de8604a9104a7ea293d7ab906dd1822364cd75a0a5d8198d2523778111865222ca21f4d47d2d6952d1d4dea13a2ac404b46454abb8fd8d60ca064eb07e43eb9b1ad4d8e99176ad15c8df5ea1ad03bbcdd7ffd96550a6a4444165577ca9a8bd2936d28fd207130c2252e9699b028f4690f4973942b2c9c187006e7d6eae82759750e0071ad5b498c0746ab4e46ad7c03f4bc4e75b594a0c0ddbc1da2e12ade54dbce59f0ed324845f327540d96ad339109faf75b0250f77c49519b8216e9ffd6c44c4ed399197ee5f6d5b12cda90acfb33999dd856411a9d1de0e856b0220f11fb0909b451cdb0b051e74edd9d306ffb6767fda7bc22d1fc71213bb647ddaea70f6f4de9dfc346b5e93e9f390dfb065c11a2e6ae3dc09de723de2c4d2a7a50ba20348e1841ceac75df57880a865d750fa426593547a660b902c3dec878ab1d14e9bd8eff8fb59a3ef252a7894fa2b3a5553de3c453aa9eb987932cd1142621c6e48f59ab90174cb032f1fdb119f69df2176e6b9cdc466a68cf8343d82ce0cd6a74e6690e0387ee48068e621139ab8ea30acf3efe70cfca917d033478a61c8dde0ce117403e0d14d39b200949fea814b68816cded3ed435884dd1309ba2403c53ecc7928624450719db17c38e7439f7adf78be186b0b2069cae63dd459a8cf10c6773c39505d93186ed9f6b5cc608f831195ebafacc454e9d8e8d94bb87df294929ea453c1fa284e50cfa8d4d7f5204d71abfad0652849de3f3e343c40202d22d85d9565c82cc6d7a6001ccc09a8e129aa9d086c2f6765b94729e2695ddf4c3340b51a1d68b166c88e253f734798d4878fe3a9f874335125e72fab5e993322846c0f1503a99463fc327d23ec4595d6abb961a4087fe7f05091524178dd0c561793a8a45013fc1626ef1bb803d0f123d3703d489a29d7e763e5e3668e0b62e5e4871b75bdbf4f3f71baf972a0f2ed435625dcc446c88da3fa4ad3f02dcb1c59e83261aca9973e341611d57ee89be3134e278754cdf9fde63ee0c4a7ab87cc071a778402f101811385115391d01c321a9003631b48cc854fc263d3fda691454bc68fa36a09d18f1e3df80acb0e8b643db99bd3802422599c64f52ee005918c96cfc7e3ef16992186dda6d2b467483c504fffd6314b81c0b037516c3e3529671a3f3e20885a850d21452b4c3c5fa338b9e305e83511f359b1ad8daa7ffd0011144baf324025cbd3734ca5c59af15290f92e6393edd322e76fad09ae5fbf1f9e9056784ad649c376308cccf88f0a1ec466a54243631f7d0ba2efaee4b4c49ae7349f797a0d1189f771cb404f8063e3507e3acff6c96fc298657458160aec05f188b8ad4b902b3d4e16c1671bd73539495aadfa410ea8aeb0f05280e79dfde9b23b7565f13c88293e070608348e81f51ba14a448cdaf3be928fa2108ab4906d7c94fe6c80ace9ad4d980776b0db2cb185759d0cca8a4fb3550e8668ef591723affd6cc57fa7b0b964538ea64f73329d99a74a167cc16e764c346142895d2a80aba4767acf5037de454df7728137e5bcaf356ad396c671674392310a12c81a3579e119fd3a4a37eba087588d619e927d5238dec5c455e8c8baa134a2b51022dc853233d2df47384d1ee0b44f72fc08a3d1e5eb2f57e98af5b475bd46f2beb19c29ff767ca72ecffcf094c0e2e8995970426c53a9a36b7ad795504eb5d8590a1193694cb32bf3aeb9e9ac1b47c31ef582172cd6624f084d5844d9bedbe73dc287ff14541dd02e7930e0b355f4a727dcd58d9d36dfcc32fa160083db5917a493bffe764806dee95acdbc5d3bbc3ba35af0dc75e9d5e2d9e4a6d2f9d44c10116c42eb8106991d1fefbaf2ae5554a1bbbac0686c39abed2eb5d5f1894d670dd3e1305bd50048b3aba79dc28d1e40aa922ff026197641f8052e3d2b7ab914e1d01b86628eff364adef3327e08d7da2ec69bd3b3c8c16ee98dd88c222c85b19fca2687b2244aa502823bdf0cfa8232edd1c55636b9a0f5d41d23ebef46f4474a6a39ed46913d3137a9ef4242295bcee061594a4eb1f22e3911becbd0604734582c910c69a24cb348f7afbaa224ce5f1d0f7bb8d8177e6b6531f5c3ac212d0545cb9f5bde34620eca2497f27b7b1dc67856b90153cf3d8d1640e63076b0889d55c8e7ca2303df019ef2d079fe97bb39d1e1b8b5793d55c6f23b5535eb90f267eccb87993601163212cdefc80e841e26cdbe6ddfb7741c073933d247e330eab75d081f161081416a9702914c5234abb4b6166d34d1bc4647f6000509e5f9e98d82966a7335039a8b4bf483ed9fcf1d39d1164406e7d66aa800e98e9c047bd3068896d54d1481cf25ef64b8dc8df2ed0bb7f5f0c886339a992e7bfa1c110d6c9f924153c60f2fed5115a32818a38fb06a01426cfa169493cc5f97fb1ef82dde9112b3ea1d9c32c71c6a82eb9369891b156445fd08b63009cfe398174904caf9858fdfda2ca0215200e488e36bebbf0c3fa1fbb14c8e9c9ae5019b3a799642685972b1d531eab0beb2acc97baac6bfa5abfb0082ddde92d2871a4490556af283f9a8b0833b8ed0afcc86bbc5ed3ae40e53d02997a0b9448c5797e3013001a1e039e8f7b574ce287e0f2ad77b2fe7fc86af0d7010f2cff506a7cbd8d7eddec4a80071b9741d86634d4fb706e8ad35fd4a46e2cc415f8bbad1cb756bb1a87804c6c223bb8ac19dab86b4c142ab50076447df8e62fac1c85dcdeb2a01f29f79af2e345241c56a326373f00edc63b000cc4c36cbb0d5a80b62facfb12b1fc81cce19acbcff999c33921bec0116d183fe688f057b67611292c2014a786c7d31eb5a1e68027b4d7c2e3602e46207035fa253cf42948324e443856919c38d3bd967345d1bebfbec7af15ee9e3ba765ec812ae24699860502e61769c74f211ce010b43aade7a5669074e951662b2d3264f22a61591efc74eb77812461dba12d35acf32794cdd68c1d942d817107610c5630646f1bf371b0b8dfd100ac4882c37fce0b552144c2ca37f6bc6aeeff145d4c65e27773c762efac20339570011da70eeb4b4e78a569a461706021892eb304396249d9a533b7e3cb05bc81dbe9ca320319b1cfad054f1027e0e32d88a94025572fcc65423c0b98675a89a3a759e970be904c26bc69bb6a75ab28e3219802c326b71ddaf3d281a58dee2fe1259c23ff32f8ca47ead8fe033c97d10d989d05ae25a85afca82eb07a8247f57b9a525affbef1a08d8c4cf2ffdd842b6a4b95f5c48685873d14f218b775a2c62648586c51c7a7ab95f56609b9ae0a3f73f970af517a728956e4f7c4fb9ec25ac87760b818fbcb6730e325554ce0ed93b83ed78971aec6265acefc4329f6cd7982e42c95e1ba8ee891ae31920301c8da535cd877ede83224542b8418fd112a6b7e67bc7196178697cdbf1a56df9d7b10ed79770d170ed165a1ef4e84eb2f9855177b93d2925ab0df230aa5a106e072fe1c480a3a734ca4f024bbbe0001be9a282ec6a3a645347e463467da445a21bbede6a1de53b9af31653fdcabae2174b7a54457b8afcc24752107e59d9892aff03d3d9d42e3a486c6cdd4dfe1668fc8d5e7b1e2846ebe71542d67ad6351358dac4bd738c4410ab05cbdfa72384333932b37869e73f75cf69676116e7b25ce38710667b869d741c35ad1294251c8d926871fad365f5f3a0ac3c5babd5ce590867ad91ff50bb2041474bd91b7e0de63ef9301bfd8b1679a7102cd7eb95183e2fb3244bde5ab813b22ed859304d4b35900b959899a743066800dff8a867776e409c6400bed4efe8399d28a9bbf24cd47a731cdd4e99a8e97442548d91475cd3699e0cee3f8a8171eeadeb93c23bdffb2d7bc3d0d8c23c9d01b15835ec359126ead9c13407a53acff3ad73fe4aa2d7f0047cb5332c7e958d4a4d0c3bd99172d0698893830e0cdcb8670462b942457f166e5189072343b413a65aa946d23f07bb47caf7aacf86c3fdf6264c627702a7fb30462719720d91ff9f90032b6fd60214854e4d198aee401cb17cb0e94ed19a3b0e4c7475c0822d2cbc8a0eaea4c7074395305c688ed914f15d7468f5249fdea84630dd539a7a9666407d82914cc2a3e015f58d0018f394f5025a3cb5d8f43453eef786891a12c0940e802963b31b6db18848cf65f3278beec29019826a2ae019e875868e8acff76b998561839d9609788f73904ba1955f0833ed9b40eeea06d4dc0baae15b49b571fd67fe8b2fe1a5c0061d190f3dfc10bd71986107289062a2192d36fb050406609e54348874e8a9fe170828f320b259c08e0894923c4c78892ee15c59105693e4e5dd05d55549360bca32a7823c782b67e4ede425f97b3150f144396b4af496dae5d8a2780c5a383a8a4df0916f6fa168261132e9403393881a870df1fff42cf013c9d0a7c7dbe94cc218cd6fbe71bba4bbe76de8ee2ba99cc5070cae6143ac121287fc34efbad2c6c41fdb71e5c7fac927ee0cc370ff74443bdb6e9fb3d06b97b269bfd17a75732afbee7b73b741d89f087d7fb88571bb636da3553eceb992c96c2ae9a885962b7366aca6deff945d632872e5b85b3f42f75ba822ccd17ea5163b77cf0e04c9fd68c5fd9f80e5adc4a351d0c9344b1a29411f05bfa07509e6144dc60a1b2fb27efd7bab96fbbf990ca53d921bfba33db8eb6c43d73a2ccb82c2c728437f4aed37e04b86293840ffa3d4a3b05f43dfbc1ba71fc6bd9defc54fd127a25da0b9b4489714551dcf6c0a3bbe878e1c748e3eca0af51d069f6d9d59696aa276c3b0803e4989776b75052bc255dfd7385989d54a17d656f10c0bfb4928220aec621c2a8e6e2398bf86a5b1c283c5c33db770f00a6fc77944087fa41a6b208e34c216f85205b4733a22ff1943a1d83c1d42c4bc216e7c59d308ee98190115fae854d7047a2c1be06a8a4b9464a6feb355becbc35f459465b86f1b2f2d6b4ae00f6b34ef76cb42f27fee3f4d67cfc90ed4d5cbbf88c5b81aaf244b2aafe647ed457c0bad2411f2842c617f183d11fc1866aa113a3888dee148793b8c930447123cc051348a945028f4d3f2d8d8cc9db219bde56e8f36352e79bfbd9de839537b05aec6fc0b962461451c6b4546a3944b9bf91a94fedf5acbdfbb97494ef420b559465b1b9c51eca4ef2dc5561aabb9b9d5cc4671a4cece80b08c97d6f31eb6fab0e6f0ccca0c0a4ded118667f87c09fec64bee67be9a4e65f20c70c7298f9bf966badd2dafd3dfe5b3da9d72c750d76469c2b447a9f1024726203000aeb157b85be7dd8657555633357063b5e79033eb83eddb7e9b61d3e6e2eb4e3ffc6a10329a0712ae5909a566b15f95bdb2fcbcc160b966306496395ca0fe144b4ef4f507089bca244ac6bd74d8c1686df114395d1c8a5796994a763a2966093b4cfde6cf00ad8bbfc3c53893678c6e681c5096df670f3c2d654d70e591deed1d75b28d64063ff6cec87b2968dda99f171fbdb9024bc6617cbbe5c36c170d5a10fd5ccf862c7f12b410f0e9f9697d5732efe4d684daaaeb5e37cc0c1a2dcf48aaf92e815ca8f408f0f0d411812625caaae781ebbd7a0e3d1c041903ba37e2199a4ba592ee07cd5087e53988949781159d90f54576add567ee9feb2e5ccf52b7017b6930170074d3b159c34787480b19d17f3f84a3d6aed3c00ce69688ed03ad57d0ed6d9da403e2d325fbc7f994c00950e6d904e27dee3956989e001ac5f4c98b7ecac3331df8ed313d65d981d6d1caed0c3adac190a19ea8888b9d66d84d229ec75744f0845ac60fbebe2e05a3111338f2c1a3b0a8d9d87a4726f7bde52d853a40704326e32c9b43a2c7cf06285be01a715cd3c5cf05508ae3e07cdfcbd809c7a73fa02fbd97355e8eaadafae1fe6b17f3c89a53f43f11060d363a59f9a94ec0e88260f7655871fabf6e48dbf62a55ccc87d18708ecf7706688842c5702345a942eb50a6986368cbac42d69891f55467d6df20fb18e22fb268a02d442e7d9f4031683bb3e7af931136f158e3da51adf7269586b6821bcb7bc2e05a6166d3a0d08053ecc32240d1234bc1fa408cd48c5b565bec882eb899a2f5b7fb680713ef8ef1af69a9ca6795ba3e86618562ace30f000355b78a604a64bf04d1d64206c8d05daf726672a335ae4f8b2f7adfffbc0ede237c11dd12de7ae84c079d91b46c8c028ae2be7df92dd64f46d341c53cc9756546b139c06c0bd339d0776174a7bd40071b990968a4e6ddca3d180bb476a102aab1fb61dcf9f6c3f4ed75e49a2b42b5c201c1b6390e7dc397196860d5b26fe1b781d67cfe6d666d5be6cdc17d0d12f99865ea5d67c73e35a316db1c8e91ca49627aceae9bd0afa2d444ff37d0195bb8621c2ee0f63715870c67fd0ace94abfc8722fcac06e56b969faf57842ce4cba4feca685b17d7a5f6fd83357ee87901178488fb0996a360a9523be787ee206ad25dd249ba56a7caf5803ee74b7fa873163d6ef0c10952f2fcb1d1694a3f96efb2fd3c27f1fb8bb23b9ebacac340a7e0d1018fdcc0b156313daa1562b740381bc2de5a5699b0363c06b1812a5328f8e972501f0853c7e7862b723cca5c4d3378c6f2e3a3a23a1c312a52494ef4c635d4868b788488255285c0f71674e56ee145ed79a1ab0fd3e71b7dd5e1bdbbccdecf121c098faba0f2e92c2f31d8fb1bfe3e4174b80cf673454373c8ea05e7da71b159917dfaa74b5ca28a43986e8a17e684f7a65532dd0e5fff8a237faf139d4e0a20fcf501db85434d4117eef88202e4265eb27333871420bb267b2c2dc33dde3d1db13f0f6964de471bf31aa9365242295b6f6a590a5618dad26ec3be750063279bf5799ae7778856b62383a2481e739b65f1516082e1d796986c8972eccec874d16d749ac015608f7b04426513336e5104742e1526871c3bee7826436949b34b7bb16ae4ce7f6d6cf2ac0880e8cb61ffed50ac3bc4aa2c7419a9a2f72416f4ba7d5931ca306301b119df361de48594606b96a8b29e878637a1cf03c382aabc8b0197a046d181ddc9aa0ad9e1bec4e246477f6ba3cdce36a4f8a57c9719f50a6dfc63a0f642b61e976516b62a190cdf0da5896e59a4bf393fb50ed2a3d0bc567af42f9cbf4f303c0a3ad8fc0c035d6837af67f5b6386d11fe9d82403ff8480690f23dfb483e9541cd0e354c0ec3f09c34f54bcd2b975baba7e32adbf765fce6a3f017a5ba78cb2eb65c4ce1b4815f18d3ed445f9c0d59b8c2c69f3d8b5c5f0eef8c2e3509b564d77b626c7b00e466f3420b0358e8cd93c933d3174b40b73fe0a848142fdcd4f8cfd2ff1ee52c81c6ceca9e17a4e92478771a2a5fd52d0f8b1fb8f726d3c20400036942b30012bbd6404e5385bd6f71baaaba264170</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-default">
-      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-default">Hey, password is required here.</span>
-      </label>
-    </div>
-  </div>
-</div>
-<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
-      <categories>
-        <category>后端开发</category>
-      </categories>
-      <tags>
-        <tag>Redis</tag>
-        <tag>阿里云</tag>
-        <tag>ECS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>搭建hexo个人博客</title>
-    <url>/2019/11/25/%E6%90%AD%E5%BB%BAhexo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<h1 id="环境搭建（现在官网有MacOS安装包，傻瓜操作无需以下步骤）"><a href="#环境搭建（现在官网有MacOS安装包，傻瓜操作无需以下步骤）" class="headerlink" title="环境搭建（现在官网有MacOS安装包，傻瓜操作无需以下步骤）"></a>环境搭建（现在官网有MacOS安装包，傻瓜操作无需以下步骤）</h1><ol>
-<li>node.js安装官网</li>
-<li>npm或cnpm <code>npm install -g cnpm --registry-https://registry.npm.taobao.org</code></li>
-<li>验证版本<code>node -v</code> <code>npm -v</code>或<code>cnpm -v</code></li>
-<li>安装hexo <code>cnpm install -g hexo-cli</code></li>
-</ol>
-<h1 id="创建本地Blog"><a href="#创建本地Blog" class="headerlink" title="创建本地Blog"></a>创建本地Blog</h1><ol>
-<li>建立空文件夹作为博客地址，<code>mkdir Blog</code></li>
-<li>前往该文件夹 <code>cd Blog/</code></li>
-<li>初始化hexo <code>hexo init</code> 这里使用命令创建文件夹是因为我通过<code>cmd + N</code>方式创建文件夹会提示为非空导致无法初始化hexo</li>
-<li>启动hexo 服务 <code>hexo s</code> 成功后可访问 <a href="http://localhost:4000/">http://localhost:4000/</a> ，使用 <code>ctl+C</code> 结束服务</li>
-<li>创建一篇Blog <code>hexo n &quot;文件名&quot;</code>，生成的Blog是markdown格式，会在 source&#x2F;_posts&#x2F; 这个文件夹下</li>
-<li>清理缓存<code>hexo clean</code>，生成博客 <code>hexo g</code></li>
-<li>本地启动hexo测试效果 <code>hexo s</code></li>
-</ol>
-]]></content>
-      <categories>
-        <category>博客</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>服务器配置MYSQL并远程连接</title>
     <url>/2019/12/05/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AEMYSQL%E5%B9%B6%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5/</url>
     <content><![CDATA[<h1 id="前期操作"><a href="#前期操作" class="headerlink" title="前期操作"></a>前期操作</h1><p>购买好ECS，我这里选择的CentOS<br>远程连接ECS需要配置安全组——自行百度<br>设置SSH密码，例如：首字母大写+生月日星座六位数<br>按步骤安装MYSQL，设置root及其密码，例如：生月日星座六位数</p>
@@ -736,9 +668,9 @@
         <category>散装知识</category>
       </categories>
       <tags>
-        <tag>后端</tag>
         <tag>实践</tag>
         <tag>MYSQL</tag>
+        <tag>后端</tag>
         <tag>阿里云</tag>
         <tag>服务器</tag>
       </tags>
@@ -803,6 +735,105 @@
       </tags>
   </entry>
   <entry>
+    <title>初探koa2</title>
+    <url>/2022/02/25/%E5%88%9D%E6%8E%A2koa2/</url>
+    <content><![CDATA[<h1 id="koa2-的安装"><a href="#koa2-的安装" class="headerlink" title="koa2 的安装"></a>koa2 的安装</h1><ol>
+<li><p>运行<code>npm install koa</code></p>
+<p> 新建一个 <code>index.js</code> 测试一下</p>
+ <figure class="highlight zephir"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> Koa = <span class="keyword">require</span>(<span class="string">&#x27;koa&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Koa();</span><br><span class="line"></span><br><span class="line"><span class="comment">// response</span></span><br><span class="line">app.<span class="keyword">use</span>(ctx =&gt; &#123;</span><br><span class="line">  ctx.body = <span class="string">&#x27;Hello Koa&#x27;</span>;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
+<p> 运行下<code>node index.js</code>，访问<a href="http://localhost:3000/">http:localhost:3000</a>查看效果。</p>
+</li>
+<li><p>安装koa2项目生成器并创建项目</p>
+<ol>
+<li>npm install koa-generator -g<blockquote>
+<p>可能需要sudo 否则权限不足</p>
+</blockquote>
+</li>
+<li>生成项目 <code>koa2 项目名</code> </li>
+<li>安装依赖 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> 项目名</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure></li>
+<li>启动服务<code>npm start</code>，浏览器输入：localhost:3000,如果页面中展示了如”Hello Koa 2”的内容，说明项目搭建成功。<h1 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h1></li>
+</ol>
+</li>
+</ol>
+<ul>
+<li>在 Koa2 中 GET 传值通过 <code>ctx</code> 或 <code>ctx.request</code> 接收</li>
+<li>动态路由传值可通过 <code>ctx.params</code> 接收</li>
+<li>query 返回的是格式化好的参数对象</li>
+<li>queryString 返回的是请求字符串<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 引入模块</span></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">Koa</span> = <span class="built_in">require</span>(<span class="string">&#x27;koa&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> router = <span class="built_in">require</span>(<span class="string">&#x27;koa-router&#x27;</span>)() <span class="comment">// 引入并实例化</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 实例化</span></span><br><span class="line"><span class="keyword">let</span> app = <span class="keyword">new</span> <span class="title class_">Koa</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 配置路由</span></span><br><span class="line"><span class="comment">// ctx 上下文 context，包含了 request 和 response 等信息</span></span><br><span class="line">router</span><br><span class="line">  .<span class="title function_">get</span>(<span class="string">&#x27;/&#x27;</span>, <span class="keyword">async</span> ctx =&gt; &#123;</span><br><span class="line">    ctx.<span class="property">body</span> = <span class="string">&#x27;首页&#x27;</span></span><br><span class="line">  &#125;)</span><br><span class="line">  .<span class="title function_">get</span>(<span class="string">&#x27;/news&#x27;</span>, <span class="keyword">async</span> ctx =&gt; &#123;</span><br><span class="line">    ctx.<span class="property">body</span> = <span class="string">&#x27;新闻列表&#x27;</span></span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="comment">// get 传值</span></span><br><span class="line">  .<span class="title function_">get</span>(<span class="string">&#x27;/newscontent&#x27;</span>, <span class="keyword">async</span> ctx =&gt; &#123;</span><br><span class="line">     <span class="comment">// 访问 http://localhost:9000/newscontent?aid=123&amp;name=zhangsan</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(ctx.<span class="property">query</span>)</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(ctx.<span class="property">request</span>.<span class="property">query</span>)          <span class="comment">// &#123; aid: &#x27;123&#x27;, name: &#x27;zhangsan&#x27; &#125;   对象</span></span><br><span class="line">    ctx.<span class="property">body</span> = <span class="string">&#x27;新闻详情&#x27;</span></span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="comment">// 动态路由</span></span><br><span class="line">  .<span class="title function_">get</span>(<span class="string">&#x27;/newsdetail/:id&#x27;</span>, <span class="keyword">async</span> ctx =&gt; &#123;</span><br><span class="line">     <span class="comment">// 访问 http://localhost:9000/newsdetail/1234</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(ctx.<span class="property">params</span>) <span class="comment">// &#123; id: 1234 &#125;</span></span><br><span class="line">    ctx.<span class="property">body</span> = <span class="string">&#x27;新闻详情 - 动态路由&#x27;</span></span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="comment">// 动态路由可以传入多个值</span></span><br><span class="line">  .<span class="title function_">get</span>(<span class="string">&#x27;/newsdetail/:aid/:bid&#x27;</span>, <span class="keyword">async</span> ctx =&gt; &#123;</span><br><span class="line">     <span class="comment">// 访问 http://localhost:9000/newsdetail/1234/5678</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(ctx.<span class="property">params</span>) <span class="comment">// &#123; aid: 1234, bid: 5678 &#125;</span></span><br><span class="line">    ctx.<span class="property">body</span> = <span class="string">&#x27;新闻详情 - 动态路由 - 传入多个值&#x27;</span></span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">app</span><br><span class="line">  .<span class="title function_">use</span>(router.<span class="title function_">routes</span>())           <span class="comment">// 启动路由</span></span><br><span class="line">  .<span class="title function_">use</span>(router.<span class="title function_">allowedMethods</span>())   <span class="comment">// router.allowedMethods() 用在路由匹配 router.routes() 之后，所以在当所有路由中间件最后调用，此时根据 ctx.status 设置 response 响应头</span></span><br><span class="line"></span><br><span class="line">app.<span class="title function_">listen</span>(<span class="number">9000</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;请浏览器打开 http://localhost:9000 或 http://localhost:9000&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h1 id="写个简单的测试接口"><a href="#写个简单的测试接口" class="headerlink" title="写个简单的测试接口"></a>写个简单的测试接口</h1></li>
+</ul>
+<ol>
+<li>安装 <code>npm i koa-bodyparser</code></li>
+<li>新建一个xxx.js</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 引入模块</span></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">Koa</span> = <span class="built_in">require</span>(<span class="string">&#x27;koa&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> router = <span class="built_in">require</span>(<span class="string">&#x27;koa-router&#x27;</span>)() <span class="comment">// 引入并实例化</span></span><br><span class="line"><span class="keyword">const</span> bodyParser = <span class="built_in">require</span>(<span class="string">&#x27;koa-bodyparser&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 实例化</span></span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> <span class="title class_">Koa</span>()</span><br><span class="line"><span class="comment">// 配置中间件，通过 bodyParser 获取 post 请求传递过来的参数</span></span><br><span class="line">app.<span class="title function_">use</span>(<span class="title function_">bodyParser</span>())</span><br><span class="line"></span><br><span class="line"><span class="comment">// GET 接口</span></span><br><span class="line">router.<span class="title function_">get</span>(<span class="string">&#x27;/news&#x27;</span>, <span class="function"><span class="params">ctx</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; search &#125; = ctx.<span class="property">query</span></span><br><span class="line">  ctx.<span class="property">body</span> = &#123;</span><br><span class="line">    <span class="attr">time</span>: <span class="keyword">new</span> <span class="title class_">Date</span>(),</span><br><span class="line">    <span class="attr">data</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">title</span>: <span class="string">`新闻标题 1 - <span class="subst">$&#123; search &#125;</span>`</span></span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">title</span>: <span class="string">`新闻标题 2 - <span class="subst">$&#123; search &#125;</span>`</span></span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// POST 接口</span></span><br><span class="line">router.<span class="title function_">post</span>(<span class="string">&#x27;/say&#x27;</span>, <span class="function"><span class="params">ctx</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; name &#125; = ctx.<span class="property">request</span>.<span class="property">body</span></span><br><span class="line">  ctx.<span class="property">body</span> = &#123;</span><br><span class="line">    <span class="attr">time</span>: <span class="keyword">new</span> <span class="title class_">Date</span>(),</span><br><span class="line">    <span class="attr">reply</span>: <span class="string">`Hello <span class="subst">$&#123; name &#125;</span>!`</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">app.<span class="title function_">use</span>(router.<span class="title function_">routes</span>()) <span class="comment">// 启动路由</span></span><br><span class="line">app.<span class="title function_">listen</span>(<span class="number">3000</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Server is running on 3000&#x27;</span>)</span><br><span class="line">&#125;) <span class="comment">// 启动服务</span></span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>运行<code>node xxx.js</code>， 访问 <a href="http://localhost:3000/news?search=%E7%A7%91%E6%8A%80">http://localhost:3000/news?search=科技</a> 查看效果</li>
+</ol>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://github.com/koajs/koa">Github koa</a><br><a href="https://www.jianshu.com/p/3e35db2c8d6c">koa2从搭建项目到实现API</a><br><a href="https://liuxianyu.cn/article/learn-koa.html">接触 Koa2 框架</a><br><a href="https://liuxianyu.cn/article/koa-get-post.html">用 Koa2 写 GET、POST 测试接口</a></p>
+]]></content>
+      <categories>
+        <category>散装知识</category>
+      </categories>
+      <tags>
+        <tag>koa2</tag>
+        <tag>node</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>搭建hexo个人博客</title>
+    <url>/2019/11/25/%E6%90%AD%E5%BB%BAhexo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<h1 id="环境搭建（现在官网有MacOS安装包，傻瓜操作无需以下步骤）"><a href="#环境搭建（现在官网有MacOS安装包，傻瓜操作无需以下步骤）" class="headerlink" title="环境搭建（现在官网有MacOS安装包，傻瓜操作无需以下步骤）"></a>环境搭建（现在官网有MacOS安装包，傻瓜操作无需以下步骤）</h1><ol>
+<li>node.js安装官网</li>
+<li>npm或cnpm <code>npm install -g cnpm --registry-https://registry.npm.taobao.org</code></li>
+<li>验证版本<code>node -v</code> <code>npm -v</code>或<code>cnpm -v</code></li>
+<li>安装hexo <code>cnpm install -g hexo-cli</code></li>
+</ol>
+<h1 id="创建本地Blog"><a href="#创建本地Blog" class="headerlink" title="创建本地Blog"></a>创建本地Blog</h1><ol>
+<li>建立空文件夹作为博客地址，<code>mkdir Blog</code></li>
+<li>前往该文件夹 <code>cd Blog/</code></li>
+<li>初始化hexo <code>hexo init</code> 这里使用命令创建文件夹是因为我通过<code>cmd + N</code>方式创建文件夹会提示为非空导致无法初始化hexo</li>
+<li>启动hexo 服务 <code>hexo s</code> 成功后可访问 <a href="http://localhost:4000/">http://localhost:4000/</a> ，使用 <code>ctl+C</code> 结束服务</li>
+<li>创建一篇Blog <code>hexo n &quot;文件名&quot;</code>，生成的Blog是markdown格式，会在 source&#x2F;_posts&#x2F; 这个文件夹下</li>
+<li>清理缓存<code>hexo clean</code>，生成博客 <code>hexo g</code></li>
+<li>本地启动hexo测试效果 <code>hexo s</code></li>
+</ol>
+]]></content>
+      <categories>
+        <category>博客</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>阿里云搭建个人云服务器</title>
+    <url>/2019/11/27/%E9%98%BF%E9%87%8C%E4%BA%91%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
+    <content><![CDATA[<h1 id="选择服务器系统"><a href="#选择服务器系统" class="headerlink" title="选择服务器系统"></a>选择服务器系统</h1><p>选过CentOS、Alibaba cloud linux</p>
+<h1 id="安装数据库"><a href="#安装数据库" class="headerlink" title="安装数据库"></a>安装数据库</h1><h2 id="安装node"><a href="#安装node" class="headerlink" title="安装node"></a>安装node</h2><p>Node官网下载相应包：<a href="https://nodejs.org/en/download/">官网下载</a><br>我这里下载好的，直接上传到服务器：<code>/usr/node</code> 文件夹自己建的<br>到当前文件夹下解压:<code>tar -xvf xxxxxx.tar.xz</code><br>npm和node命令全局生效：<code>vim /ect/profile</code>，修改后<code>source /etc/profile</code></p>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line"><span class="comment">#set for nodejs</span></span><br><span class="line"><span class="built_in">export</span> <span class="attribute">NODE_HOME</span>=/usr/node/node-v12.16.3-linux-x64#与文件夹路径对应</span><br><span class="line"><span class="built_in">export</span> <span class="attribute">PATH</span>=<span class="variable">$NODE_HOME</span>/bin:$PATH</span><br></pre></td></tr></table></figure>
+<p>查看一下版本，检验是否按照成功<code>node -v</code>、<code>npm -v</code><br>本地调试好项目后，上传到服务器上，别忘了添加依赖<code>npm install</code></p>
+<blockquote>
+<p>注意：阿里云要在安全组里开启 3000 端口</p>
+</blockquote>
+<h1 id="配置相关环境"><a href="#配置相关环境" class="headerlink" title="配置相关环境"></a>配置相关环境</h1><h2 id="ssh远程连接–-gt-sftp"><a href="#ssh远程连接–-gt-sftp" class="headerlink" title="ssh远程连接–&gt;sftp"></a>ssh远程连接–&gt;sftp</h2><p>配置实例安全组，开放22端口<br>ssh 如果连接不成功，提示<code>ssh_exchange_identification: read: Connection reset by peer</code></p>
+<p>解决办法</p>
+<ol>
+<li>前往本地文件夹<code>/Users/jiachenfu/.ssh/</code>删除<code>known_hosts</code>或改为<code>known_hosts.bak</code>，尝试<code>ssh root@ip</code>是否解决</li>
+<li>切换一个网络吧，关闭代理VPN，有的校园网络很坑会连不上</li>
+<li>尝试<code>ping ip</code>，如果成功，前往阿里云网页进行远程登录，修改<code>vi /etc/hosts.allow</code>，在末尾添加<code>sshd: ALL ##允许所有ip主机均能连接本机</code>，然后重启<code>systemctl restart sshd.service</code>，尝试<code>ssh root@ip</code>是否解决</li>
+<li>查看阿里云实例密钥对是否绑定</li>
+</ol>
+]]></content>
+      <categories>
+        <category>散装知识</category>
+      </categories>
+      <tags>
+        <tag>阿里云</tag>
+        <tag>服务器</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>机器学习Tensorflow框架安装</title>
     <url>/2019/12/15/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0Tensorflow%E6%A1%86%E6%9E%B6%E5%AE%89%E8%A3%85/</url>
     <content><![CDATA[<h1 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h1><ul>
@@ -846,33 +877,6 @@
         <tag>实践</tag>
         <tag>Tensorflow</tag>
         <tag>AI</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>阿里云搭建个人云服务器</title>
-    <url>/2019/11/27/%E9%98%BF%E9%87%8C%E4%BA%91%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
-    <content><![CDATA[<h1 id="选择服务器系统"><a href="#选择服务器系统" class="headerlink" title="选择服务器系统"></a>选择服务器系统</h1><p>选过CentOS、Alibaba cloud linux</p>
-<h1 id="安装数据库"><a href="#安装数据库" class="headerlink" title="安装数据库"></a>安装数据库</h1><h2 id="安装node"><a href="#安装node" class="headerlink" title="安装node"></a>安装node</h2><p>Node官网下载相应包：<a href="https://nodejs.org/en/download/">官网下载</a><br>我这里下载好的，直接上传到服务器：<code>/usr/node</code> 文件夹自己建的<br>到当前文件夹下解压:<code>tar -xvf xxxxxx.tar.xz</code><br>npm和node命令全局生效：<code>vim /ect/profile</code>，修改后<code>source /etc/profile</code></p>
-<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line"><span class="comment">#set for nodejs</span></span><br><span class="line"><span class="built_in">export</span> <span class="attribute">NODE_HOME</span>=/usr/node/node-v12.16.3-linux-x64#与文件夹路径对应</span><br><span class="line"><span class="built_in">export</span> <span class="attribute">PATH</span>=<span class="variable">$NODE_HOME</span>/bin:$PATH</span><br></pre></td></tr></table></figure>
-<p>查看一下版本，检验是否按照成功<code>node -v</code>、<code>npm -v</code><br>本地调试好项目后，上传到服务器上，别忘了添加依赖<code>npm install</code></p>
-<blockquote>
-<p>注意：阿里云要在安全组里开启 3000 端口</p>
-</blockquote>
-<h1 id="配置相关环境"><a href="#配置相关环境" class="headerlink" title="配置相关环境"></a>配置相关环境</h1><h2 id="ssh远程连接–-gt-sftp"><a href="#ssh远程连接–-gt-sftp" class="headerlink" title="ssh远程连接–&gt;sftp"></a>ssh远程连接–&gt;sftp</h2><p>配置实例安全组，开放22端口<br>ssh 如果连接不成功，提示<code>ssh_exchange_identification: read: Connection reset by peer</code></p>
-<p>解决办法</p>
-<ol>
-<li>前往本地文件夹<code>/Users/jiachenfu/.ssh/</code>删除<code>known_hosts</code>或改为<code>known_hosts.bak</code>，尝试<code>ssh root@ip</code>是否解决</li>
-<li>切换一个网络吧，关闭代理VPN，有的校园网络很坑会连不上</li>
-<li>尝试<code>ping ip</code>，如果成功，前往阿里云网页进行远程登录，修改<code>vi /etc/hosts.allow</code>，在末尾添加<code>sshd: ALL ##允许所有ip主机均能连接本机</code>，然后重启<code>systemctl restart sshd.service</code>，尝试<code>ssh root@ip</code>是否解决</li>
-<li>查看阿里云实例密钥对是否绑定</li>
-</ol>
-]]></content>
-      <categories>
-        <category>散装知识</category>
-      </categories>
-      <tags>
-        <tag>阿里云</tag>
-        <tag>服务器</tag>
       </tags>
   </entry>
 </search>
