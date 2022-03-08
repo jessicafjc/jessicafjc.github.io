@@ -1,6 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>HTML5+JS+CSS与Bmob云后台实践</title>
+    <url>/2019/12/02/HTML5+JS+CSS%E4%B8%8EBmob%E4%BA%91%E5%90%8E%E5%8F%B0%E5%AE%9E%E8%B7%B5/</url>
+    <content><![CDATA[<h1 id="前置环境"><a href="#前置环境" class="headerlink" title="前置环境"></a>前置环境</h1><ol>
+<li>代码编译器我选择Hbulider X <a href="https://www.dcloud.io/hbuilderx.html">官网下载</a></li>
+<li>在Hbuilder新建一个空白项目test_demo，包含index.html、css文件夹、js文件夹、img文件夹</li>
+<li>前往Bmob<a href="https://bmob.github.io/hydrogen-js-sdk/#/?id=sdk%25e4%25bd%25bf%25e7%2594%25a8%25e6%2596%2587%25e6%25a1%25a3">官网查看文档</a>并下载对应SDKGitHub<a href="https://github.com/bmob/hydrogen-js-sdk/">源码地址</a></li>
+<li>在Bmob的控制台云数据库新建项目、新建表、设计数据结构并导入数据<h1 id="在项目中接入Bmob云数据库"><a href="#在项目中接入Bmob云数据库" class="headerlink" title="在项目中接入Bmob云数据库"></a>在项目中接入Bmob云数据库</h1></li>
+<li>引入bmob.js<br>将sdk中的<code>dist/Bmob-2.2.1.min.js</code>导入项目的js文件夹下,在index.html中引入 <code>&lt;script src=&quot;js/dist/Bmob-2.2.1.min.js&quot;&gt;&lt;/script&gt;</code> 新建一个js文件<code>main.js</code></li>
+<li>连接对应的bmob数据库<code>Bmob.initialize(&quot;你的Secret Key&quot;, &quot;你的API 安全码&quot;);</code></li>
+<li>系统用户表_User<br>获取_User列表内所有数据，因为_User是系统内置用户表，出于隐私安全考虑，密码不可见，且无法用明文方式进行参数传递。<figure class="highlight arcade"><table><tr><td class="code"><pre><span class="line">query.<span class="built_in">find</span>().then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line"> 	<span class="built_in">console</span>.<span class="built_in">log</span>(res)</span><br><span class="line"></span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure>
+判断登陆+本地缓存的方法</li>
+</ol>
+<figure class="highlight arcade"><table><tr><td class="code"><pre><span class="line">Bmob.User.login(<span class="string">&#x27;123&#x27;</span>, <span class="string">&#x27;123456&#x27;</span>).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//若登陆成功更新用户缓存</span></span><br><span class="line">	Bmob.User.updateStorage(res.objectId).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">		<span class="comment">//更新缓存成功，跳转页面</span></span><br><span class="line">		<span class="comment">//跳转到第二个页面-不传参数，href请使用相对路径</span></span><br><span class="line">		window.location.href = <span class="string">&quot;secondPage.html&quot;</span>;</span><br><span class="line">	&#125;).catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">		<span class="built_in">console</span>.<span class="built_in">log</span>(err)</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;).catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">	<span class="built_in">console</span>.<span class="built_in">log</span>(err)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>获取登陆的用户信息</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">let <span class="keyword">current</span> = Bmob.<span class="keyword">User</span>.<span class="keyword">current</span>()</span><br><span class="line">// var data = &#123;&#125;;</span><br><span class="line">var arr = <span class="keyword">Object</span>.keys(<span class="keyword">current</span>);</span><br><span class="line">console.log(arr.length == <span class="number">0</span>) //<span class="keyword">true</span> 为空， <span class="keyword">false</span> 不为空</span><br><span class="line"><span class="keyword">if</span> (arr.length == <span class="number">0</span>) &#123;</span><br><span class="line">	//如果为空,返回登陆页面,防止未登陆用户造成系统崩溃</span><br><span class="line">	<span class="keyword">window</span>.<span class="keyword">location</span>.href = &quot;index.html&quot;</span><br><span class="line">&#125; <span class="keyword">else</span>&#123;</span><br><span class="line">	//如果不为空,则将<span class="keyword">current</span>内的值填入页面内</span><br><span class="line">	console.log(<span class="keyword">current</span>)</span><br><span class="line">	document.getElementById(&quot;username&quot;).innerHTML = <span class="keyword">current</span>.username;</span><br><span class="line">	document.getElementById(&quot;roomNumber&quot;).innerHTML = <span class="keyword">current</span>.roomNumber + <span class="string">&#x27;房间&#x27;</span>;</span><br><span class="line">	var gender = <span class="string">&#x27;&#x27;</span></span><br><span class="line">	<span class="keyword">if</span> (<span class="keyword">current</span>.sex == <span class="number">0</span>) &#123;</span><br><span class="line">		gender = <span class="string">&#x27;男&#x27;</span></span><br><span class="line">	&#125; <span class="keyword">else</span>&#123;</span><br><span class="line">		gender = <span class="string">&#x27;女&#x27;</span></span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	document.getElementById(&quot;gender&quot;).innerHTML = gender;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>获取自创建表TestData内所有数据，并遍历显示在HTML内</p>
+<figure class="highlight arcade"><table><tr><td class="code"><pre><span class="line">query.<span class="built_in">find</span>().then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">	<span class="built_in">console</span>.<span class="built_in">log</span>(res.<span class="built_in">length</span>)</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; res.<span class="built_in">length</span>; i++) &#123; </span><br><span class="line">	    <span class="built_in">text</span> += res[i].name + <span class="string">&quot;&lt;br&gt;&quot;</span>;</span><br><span class="line">		document.getElementById(<span class="string">&quot;name&quot;</span>).innerHTML = <span class="built_in">text</span>;</span><br><span class="line">	 &#125;</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>按objectId获取对应数据（若为_User此方法不可用，但可以使用内置的Bmob<br>.User.current()方法获取登陆后缓存的用户数据）</p>
+<figure class="highlight arcade"><table><tr><td class="code"><pre><span class="line">	<span class="built_in">console</span>.<span class="built_in">log</span>(res.name)</span><br><span class="line">	</span><br><span class="line">&#125;).catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.<span class="built_in">log</span>(err)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>散装知识</category>
+      </categories>
+      <tags>
+        <tag>Bmob</tag>
+        <tag>后端</tag>
+        <tag>实践</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Express+Mysql搭建接口平台</title>
     <url>/2020/05/22/Express+Mysql%E6%90%AD%E5%BB%BA%E6%8E%A5%E5%8F%A3%E5%B9%B3%E5%8F%B0/</url>
     <content><![CDATA[<h1 id="安装Express"><a href="#安装Express" class="headerlink" title="安装Express"></a>安装Express</h1><p>前提已经完成node和mysql的搭建和配置</p>
@@ -55,8 +85,8 @@
         <category>散装知识</category>
       </categories>
       <tags>
-        <tag>Node</tag>
         <tag>实践</tag>
+        <tag>Node</tag>
         <tag>MYSQL</tag>
         <tag>Express</tag>
       </tags>
@@ -329,112 +359,6 @@
       </tags>
   </entry>
   <entry>
-    <title>HTML5+JS+CSS与Bmob云后台实践</title>
-    <url>/2019/12/02/HTML5+JS+CSS%E4%B8%8EBmob%E4%BA%91%E5%90%8E%E5%8F%B0%E5%AE%9E%E8%B7%B5/</url>
-    <content><![CDATA[<h1 id="前置环境"><a href="#前置环境" class="headerlink" title="前置环境"></a>前置环境</h1><ol>
-<li>代码编译器我选择Hbulider X <a href="https://www.dcloud.io/hbuilderx.html">官网下载</a></li>
-<li>在Hbuilder新建一个空白项目test_demo，包含index.html、css文件夹、js文件夹、img文件夹</li>
-<li>前往Bmob<a href="https://bmob.github.io/hydrogen-js-sdk/#/?id=sdk%25e4%25bd%25bf%25e7%2594%25a8%25e6%2596%2587%25e6%25a1%25a3">官网查看文档</a>并下载对应SDKGitHub<a href="https://github.com/bmob/hydrogen-js-sdk/">源码地址</a></li>
-<li>在Bmob的控制台云数据库新建项目、新建表、设计数据结构并导入数据<h1 id="在项目中接入Bmob云数据库"><a href="#在项目中接入Bmob云数据库" class="headerlink" title="在项目中接入Bmob云数据库"></a>在项目中接入Bmob云数据库</h1></li>
-<li>引入bmob.js<br>将sdk中的<code>dist/Bmob-2.2.1.min.js</code>导入项目的js文件夹下,在index.html中引入 <code>&lt;script src=&quot;js/dist/Bmob-2.2.1.min.js&quot;&gt;&lt;/script&gt;</code> 新建一个js文件<code>main.js</code></li>
-<li>连接对应的bmob数据库<code>Bmob.initialize(&quot;你的Secret Key&quot;, &quot;你的API 安全码&quot;);</code></li>
-<li>系统用户表_User<br>获取_User列表内所有数据，因为_User是系统内置用户表，出于隐私安全考虑，密码不可见，且无法用明文方式进行参数传递。<figure class="highlight arcade"><table><tr><td class="code"><pre><span class="line">query.<span class="built_in">find</span>().then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line"> 	<span class="built_in">console</span>.<span class="built_in">log</span>(res)</span><br><span class="line"></span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure>
-判断登陆+本地缓存的方法</li>
-</ol>
-<figure class="highlight arcade"><table><tr><td class="code"><pre><span class="line">Bmob.User.login(<span class="string">&#x27;123&#x27;</span>, <span class="string">&#x27;123456&#x27;</span>).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//若登陆成功更新用户缓存</span></span><br><span class="line">	Bmob.User.updateStorage(res.objectId).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">		<span class="comment">//更新缓存成功，跳转页面</span></span><br><span class="line">		<span class="comment">//跳转到第二个页面-不传参数，href请使用相对路径</span></span><br><span class="line">		window.location.href = <span class="string">&quot;secondPage.html&quot;</span>;</span><br><span class="line">	&#125;).catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">		<span class="built_in">console</span>.<span class="built_in">log</span>(err)</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;).catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">	<span class="built_in">console</span>.<span class="built_in">log</span>(err)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>获取登陆的用户信息</p>
-<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">let <span class="keyword">current</span> = Bmob.<span class="keyword">User</span>.<span class="keyword">current</span>()</span><br><span class="line">// var data = &#123;&#125;;</span><br><span class="line">var arr = <span class="keyword">Object</span>.keys(<span class="keyword">current</span>);</span><br><span class="line">console.log(arr.length == <span class="number">0</span>) //<span class="keyword">true</span> 为空， <span class="keyword">false</span> 不为空</span><br><span class="line"><span class="keyword">if</span> (arr.length == <span class="number">0</span>) &#123;</span><br><span class="line">	//如果为空,返回登陆页面,防止未登陆用户造成系统崩溃</span><br><span class="line">	<span class="keyword">window</span>.<span class="keyword">location</span>.href = &quot;index.html&quot;</span><br><span class="line">&#125; <span class="keyword">else</span>&#123;</span><br><span class="line">	//如果不为空,则将<span class="keyword">current</span>内的值填入页面内</span><br><span class="line">	console.log(<span class="keyword">current</span>)</span><br><span class="line">	document.getElementById(&quot;username&quot;).innerHTML = <span class="keyword">current</span>.username;</span><br><span class="line">	document.getElementById(&quot;roomNumber&quot;).innerHTML = <span class="keyword">current</span>.roomNumber + <span class="string">&#x27;房间&#x27;</span>;</span><br><span class="line">	var gender = <span class="string">&#x27;&#x27;</span></span><br><span class="line">	<span class="keyword">if</span> (<span class="keyword">current</span>.sex == <span class="number">0</span>) &#123;</span><br><span class="line">		gender = <span class="string">&#x27;男&#x27;</span></span><br><span class="line">	&#125; <span class="keyword">else</span>&#123;</span><br><span class="line">		gender = <span class="string">&#x27;女&#x27;</span></span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	document.getElementById(&quot;gender&quot;).innerHTML = gender;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>获取自创建表TestData内所有数据，并遍历显示在HTML内</p>
-<figure class="highlight arcade"><table><tr><td class="code"><pre><span class="line">query.<span class="built_in">find</span>().then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">	<span class="built_in">console</span>.<span class="built_in">log</span>(res.<span class="built_in">length</span>)</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; res.<span class="built_in">length</span>; i++) &#123; </span><br><span class="line">	    <span class="built_in">text</span> += res[i].name + <span class="string">&quot;&lt;br&gt;&quot;</span>;</span><br><span class="line">		document.getElementById(<span class="string">&quot;name&quot;</span>).innerHTML = <span class="built_in">text</span>;</span><br><span class="line">	 &#125;</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>按objectId获取对应数据（若为_User此方法不可用，但可以使用内置的Bmob<br>.User.current()方法获取登陆后缓存的用户数据）</p>
-<figure class="highlight arcade"><table><tr><td class="code"><pre><span class="line">	<span class="built_in">console</span>.<span class="built_in">log</span>(res.name)</span><br><span class="line">	</span><br><span class="line">&#125;).catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.<span class="built_in">log</span>(err)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>散装知识</category>
-      </categories>
-      <tags>
-        <tag>实践</tag>
-        <tag>Bmob</tag>
-        <tag>后端</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>hexo博客实用功能及插件</title>
-    <url>/2022/02/24/hexo%E5%8D%9A%E5%AE%A2%E5%AE%9E%E7%94%A8%E5%8A%9F%E8%83%BD%E5%8F%8A%E6%8F%92%E4%BB%B6/</url>
-    <content><![CDATA[<h2 id="文章加密"><a href="#文章加密" class="headerlink" title="文章加密"></a>文章加密</h2><p>安装<code>npm install --save hexo-blog-encrypt</code><br>将 “password” 字段添加到文章头</p>
-<blockquote>
-<p>纯数字不好使</p>
-</blockquote>
-<h5 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h5><p><a href="https://blog.csdn.net/weixin_58068682/article/details/116614622">Hexo博客技巧：对文章进行加密</a></p>
-<h2 id="插入图片"><a href="#插入图片" class="headerlink" title="插入图片"></a>插入图片</h2><p>安装<code>npm install https://github.com/CodeFalling/hexo-asset-image –save</code></p>
-<blockquote>
-<p>注意这一步一定要使用上面的安装方法，使用官网的代码则会出现保存文件为.com的现象</p>
-</blockquote>
-<h2 id="hexo-添加live2d看板动画"><a href="#hexo-添加live2d看板动画" class="headerlink" title="hexo 添加live2d看板动画"></a>hexo 添加live2d看板动画</h2><ol>
-<li>安装<code>npm install --save hexo-helper-live2d</code></li>
-<li><a href="https://github.com/xiazeyu/live2d-widget-models.git">下载</a>各种动画model</li>
-<li>配置博客站点配置文件，**_config.yml** <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">live2d:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">pluginModelPath:</span> <span class="string">assets/</span></span><br><span class="line">  <span class="attr">model:</span></span><br><span class="line">    <span class="attr">use:</span> <span class="string">live2d-widget-model-epsilon2_1</span>  <span class="comment">#模板目录，在node_modules里</span></span><br><span class="line">  <span class="attr">display:</span></span><br><span class="line">    <span class="attr">position:</span> <span class="string">right</span></span><br><span class="line">    <span class="attr">width:</span> <span class="number">150</span> </span><br><span class="line">    <span class="attr">height:</span> <span class="number">300</span></span><br><span class="line">  <span class="attr">mobile:</span></span><br><span class="line">    <span class="attr">show:</span> <span class="literal">false</span>  <span class="comment">#是否在手机进行显示</span></span><br></pre></td></tr></table></figure>
-<h5 id="参考文章-1"><a href="#参考文章-1" class="headerlink" title="参考文章"></a>参考文章</h5><a href="https://www.jianshu.com/p/3a6342e16e57">hexo 添加live2d看板动画</a><h2 id="首页不显示全文，显示阅读更多"><a href="#首页不显示全文，显示阅读更多" class="headerlink" title="首页不显示全文，显示阅读更多"></a>首页不显示全文，显示阅读更多</h2></li>
-<li>打开博客主题配置文件 <strong>themes&#x2F;next&#x2F;_config.yml</strong>，修改<code>excerpt_description: </code>为<code>true</code>，好像现在版本的next主题默认是true</li>
-<li>两种方式<ol>
-<li>在需要截断的地方输入 <code>&lt;!--more--&gt;</code></li>
-<li>在md开头写摘要 <code>description: 这是显示在首页的概述，正文内容均会被隐藏。</code></li>
-</ol>
-</li>
-<li>重启部署即可 <code>hexo clean</code> <code>hexo d -g</code><h2 id="添加百度统计"><a href="#添加百度统计" class="headerlink" title="添加百度统计"></a>添加百度统计</h2></li>
-<li>登录百度统计<a href="https://tongji.baidu.com/">https://tongji.baidu.com</a> 新增网站，添加完毕后到代码获取拿到统计脚本,找到<code>https://hm.baidu.com/hm.js?</code>后面的key值</li>
-<li>拿到key后，去到Hexo根目录下的<code>themes\next\</code>，打开 <strong>_config.yml</strong> 文件，找到baidu_analytics，在后面加上key值</li>
-<li>然后重新编译，打包上传就可以了 <code>hexo d -g</code></li>
-<li>测试，去到百度统计，找到代码安装检查，就可以测试是否添加上去了<h2 id="LeanCloud阅读次数统计-和-Valine-评论系统"><a href="#LeanCloud阅读次数统计-和-Valine-评论系统" class="headerlink" title="LeanCloud阅读次数统计 和 Valine 评论系统"></a>LeanCloud阅读次数统计 和 Valine 评论系统</h2><h3 id="阅读次数统计次数统计"><a href="#阅读次数统计次数统计" class="headerlink" title="阅读次数统计次数统计"></a>阅读次数统计次数统计</h3></li>
-</ol>
-<ul>
-<li><p>首先，前往Leancloud<a href="https://console.leancloud.app/apps">官网</a>进行注册，并登陆。</p>
-</li>
-<li><p>点击创建应用,输入应用的名称(随便起都行), 选择开发版, 点击创建</p>
-</li>
-<li><p>创建成功后点击右上角的设置小齿轮,点击存储-创建两个 Class</p>
-<ul>
-<li>Class名称设置为<code>Counter</code>(必须为<strong>Counter</strong>)-选择无限制-点击创建</li>
-<li>Class名称设置为 <code>Comment</code>(必须为<strong>Comment</strong>)-选择无限制-点击创建（用于添加 Valine 评论系统，如不需要可以不创建该类）</li>
-</ul>
-</li>
-<li><p>创建后点击设置-点击应用Key-获取App ID和App Key</p>
-</li>
-<li><p>将获取到的App ID和App Key设置到Next主题配置文件 <strong>_config.yml</strong>,配置文件已存在这个配置, 只要把id和key加上去就好了</p>
-</li>
-<li><p>点击安全中心, 填写自己博客对应的域名（注意协议、域名和端口号需严格一致）</p>
-</li>
-<li><p>打开Next主题配置文件 <strong>_config.yml</strong>, 将leancloud_visitors下的security设置为true（如没有则新增）</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">leancloud_visitors:</span></span><br><span class="line">     <span class="attr">enable:</span> <span class="literal">true</span>  <span class="string">//这里其实不需要true，后续设置valine评论系统自带统计，两者取其一为true即可</span></span><br><span class="line">     <span class="attr">app_id:</span> <span class="string">&lt;&lt;your</span> <span class="string">app</span> <span class="string">id&gt;&gt;</span> <span class="comment"># 同前文的id</span></span><br><span class="line">     <span class="attr">app_key:</span> <span class="string">&lt;&lt;your</span> <span class="string">app</span> <span class="string">key&gt;&gt;</span> <span class="comment"># 同前文的key</span></span><br><span class="line">     <span class="comment"># Dependencies: https://github.com/theme-next/hexo-leancloud-counter-security</span></span><br><span class="line">     <span class="attr">security:</span> <span class="literal">true</span></span><br><span class="line">     <span class="comment"># 由于Leancloud免费版的云引擎存在请求线程数和运行时间限制以及休眠机制，</span></span><br><span class="line">     <span class="comment"># 很多时候访客数量加载会很慢。</span></span><br><span class="line">     <span class="comment"># 如果设置betterPerformance为true，</span></span><br><span class="line">     <span class="comment"># 则网页则会在提交请求之前直接显示访客人数为查询到的人数+1，以增加用户体验。</span></span><br><span class="line">     <span class="attr">betterPerformance:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
-<h3 id="Valine-评论系统"><a href="#Valine-评论系统" class="headerlink" title="Valine 评论系统"></a>Valine 评论系统</h3><p>这是基于LeanCloud的无后端评论系统，所以省略注册和创建Class <code>Comment</code>步骤</p>
-</li>
-<li><p>获取到 App ID 和 App key，可以直接用阅读统计的。</p>
-</li>
-<li><p>编辑<code>themes/next/_config.yml</code> 文件</p>
-<ul>
-<li>搜索 valine ，配置 appid 和 appkey 为 LeanCloud 分配的值，language 为 zh-cn，注意大小写，只能是小写，否则初始化 Valine 时会报错，导致看不到评论区域。其它选择根据自己的需求修改。</li>
-<li>修改 valine.min.js 的 cdn 文件地址，到<a href="https://www.jsdelivr.com/package/npm/valine">这里</a> 选择最新版本的Valine，然后获取cdn地址（复制 url ），修改到 主题配置文件 _config.yml 即可。查找valine：  <figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Valine</span></span><br><span class="line"><span class="comment"># valine: //cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js</span></span><br><span class="line"><span class="comment"># valine: //cdnjs.cloudflare.com/ajax/libs/valine/1.3.10/Valine.min.js</span></span><br><span class="line"><span class="attr">valine:</span> <span class="string">https://cdn.jsdelivr.net/npm/valine@1.4.16/dist/Valine.min.js</span></span><br></pre></td></tr></table></figure></li>
-<li>查找 valine ：</li>
-</ul>
-  <figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Valine</span></span><br><span class="line"><span class="comment"># You can get your appid and appkey from https://leancloud.cn</span></span><br><span class="line"><span class="comment"># More info available at https://valine.js.org</span></span><br><span class="line"><span class="attr">valine:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span> </span><br><span class="line">  <span class="attr">appid:</span> <span class="string">粘贴id</span></span><br><span class="line">  <span class="attr">appkey:</span> <span class="string">粘贴key</span> </span><br><span class="line">  <span class="attr">notify:</span> <span class="literal">false</span> <span class="comment"># mail notifier, See: https://github.com/xCss/Valine/wiki</span></span><br><span class="line">  <span class="attr">verify:</span> <span class="literal">false</span> <span class="comment"># Verification code</span></span><br><span class="line">  <span class="attr">placeholder:</span> <span class="string">欢迎交流讨论...</span> <span class="comment"># comment box placeholder</span></span><br><span class="line">  <span class="attr">avatar:</span> <span class="string">mp</span> <span class="comment"># gravatar style</span></span><br><span class="line">  <span class="attr">guest_info:</span> <span class="string">nick,mail,link</span> <span class="comment"># custom comment header</span></span><br><span class="line">  <span class="attr">pageSize:</span> <span class="number">10</span> <span class="comment"># pagination size</span></span><br><span class="line">  <span class="attr">visitor:</span> <span class="literal">true</span> <span class="comment"># 这里和上文的 leancloud_visitors 阅读次数统计冲突，建议这里为true上午为false</span></span><br><span class="line">  <span class="attr">comment_count:</span> <span class="literal">true</span> <span class="comment"># if false, comment count will only be displayed in post page, not in home page</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>设置禁止留言：在禁止留言的文章或者板块添加comments，并将赋值false</p>
-  <figure class="highlight md"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: tags</span><br><span class="line">date: 2019-01-28 10:02:04</span><br><span class="line">type: &quot;tags&quot;</span><br><span class="line"><span class="section">comments: false</span></span><br><span class="line"><span class="section">---</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>点击回复不显示评论内容：我把修改后的注释都删掉就好使了</p>
-</blockquote>
-<h5 id="参考文章-2"><a href="#参考文章-2" class="headerlink" title="参考文章"></a>参考文章</h5><p><a href="https://yuanmomo.net/2019/06/20/hexo-add-valine/">Hexo Next 主题添加 Valine 评论系统</a><br><a href="https://blog.csdn.net/weixin_35009071/article/details/112409778">hexo评论_Hexo博客使用valine评论系统无效果及终极解决方案</a></p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>博客</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Liunx常用指令</title>
     <url>/2019/11/25/liunx%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/</url>
     <content><![CDATA[<h1 id="常用指令"><a href="#常用指令" class="headerlink" title="常用指令"></a>常用指令</h1><ul>
@@ -476,6 +400,87 @@
       </tags>
   </entry>
   <entry>
+    <title>hexo博客实用功能及插件</title>
+    <url>/2022/02/24/hexo%E5%8D%9A%E5%AE%A2%E5%AE%9E%E7%94%A8%E5%8A%9F%E8%83%BD%E5%8F%8A%E6%8F%92%E4%BB%B6/</url>
+    <content><![CDATA[<h2 id="文章加密"><a href="#文章加密" class="headerlink" title="文章加密"></a>文章加密</h2><p>安装<code>npm install --save hexo-blog-encrypt</code><br>将 “password” 字段添加到文章头</p>
+<blockquote>
+<p>纯数字不好使</p>
+</blockquote>
+<h5 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h5><p><a href="https://blog.csdn.net/weixin_58068682/article/details/116614622">Hexo博客技巧：对文章进行加密</a></p>
+<h2 id="插入图片"><a href="#插入图片" class="headerlink" title="插入图片"></a>插入图片</h2><p>安装<code>npm install https://github.com/CodeFalling/hexo-asset-image –save</code></p>
+<blockquote>
+<p>注意这一步一定要使用上面的安装方法，使用官网的代码则会出现保存文件为.com的现象</p>
+</blockquote>
+<h2 id="hexo-添加live2d看板动画"><a href="#hexo-添加live2d看板动画" class="headerlink" title="hexo 添加live2d看板动画"></a>hexo 添加live2d看板动画</h2><ol>
+<li>安装<code>npm install --save hexo-helper-live2d</code></li>
+<li><a href="https://github.com/xiazeyu/live2d-widget-models.git">下载</a>各种动画model</li>
+<li>配置博客站点配置文件，**_config.yml** <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">live2d:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">pluginModelPath:</span> <span class="string">assets/</span></span><br><span class="line">  <span class="attr">model:</span></span><br><span class="line">    <span class="attr">use:</span> <span class="string">live2d-widget-model-epsilon2_1</span>  <span class="comment">#模板目录，在node_modules里</span></span><br><span class="line">  <span class="attr">display:</span></span><br><span class="line">    <span class="attr">position:</span> <span class="string">right</span></span><br><span class="line">    <span class="attr">width:</span> <span class="number">150</span> </span><br><span class="line">    <span class="attr">height:</span> <span class="number">300</span></span><br><span class="line">  <span class="attr">mobile:</span></span><br><span class="line">    <span class="attr">show:</span> <span class="literal">false</span>  <span class="comment">#是否在手机进行显示</span></span><br></pre></td></tr></table></figure>
+<h5 id="参考文章-1"><a href="#参考文章-1" class="headerlink" title="参考文章"></a>参考文章</h5></li>
+</ol>
+<p><a href="https://www.jianshu.com/p/3a6342e16e57">hexo 添加live2d看板动画</a></p>
+<h2 id="首页不显示全文，显示阅读更多"><a href="#首页不显示全文，显示阅读更多" class="headerlink" title="首页不显示全文，显示阅读更多"></a>首页不显示全文，显示阅读更多</h2><ol>
+<li><p>打开博客主题配置文件 <strong>themes&#x2F;next&#x2F;_config.yml</strong>，修改<code>excerpt_description: </code>为<code>true</code>，好像现在版本的next主题默认是true</p>
+</li>
+<li><p>两种方式</p>
+<ol>
+<li>在需要截断的地方输入 <code>&lt;!--more--&gt;</code></li>
+<li>在md开头写摘要 <code>description: 这是显示在首页的概述，正文内容均会被隐藏。</code></li>
+</ol>
+</li>
+<li><p>重启部署即可 <code>hexo clean</code> <code>hexo d -g</code></p>
+<h2 id="添加百度统计"><a href="#添加百度统计" class="headerlink" title="添加百度统计"></a>添加百度统计</h2></li>
+<li><p>登录百度统计<a href="https://tongji.baidu.com/">https://tongji.baidu.com</a> 新增网站，添加完毕后到代码获取拿到统计脚本,找到<code>https://hm.baidu.com/hm.js?</code>后面的key值</p>
+</li>
+<li><p>拿到key后，去到Hexo根目录下的<code>themes\next\</code>，打开 <strong>_config.yml</strong> 文件，找到baidu_analytics，在后面加上key值</p>
+</li>
+<li><p>然后重新编译，打包上传就可以了 <code>hexo d -g</code></p>
+</li>
+<li><p>测试，去到百度统计，找到代码安装检查，就可以测试是否添加上去了</p>
+<h2 id="LeanCloud阅读次数统计-和-Valine-评论系统"><a href="#LeanCloud阅读次数统计-和-Valine-评论系统" class="headerlink" title="LeanCloud阅读次数统计 和 Valine 评论系统"></a>LeanCloud阅读次数统计 和 Valine 评论系统</h2></li>
+</ol>
+<h3 id="阅读次数统计次数统计"><a href="#阅读次数统计次数统计" class="headerlink" title="阅读次数统计次数统计"></a>阅读次数统计次数统计</h3><ul>
+<li>首先，前往Leancloud<a href="https://console.leancloud.app/apps">官网</a>进行注册，并登陆。</li>
+<li>点击创建应用,输入应用的名称(随便起都行), 选择开发版, 点击创建</li>
+<li>创建成功后点击右上角的设置小齿轮,点击存储-创建两个 Class<ul>
+<li>Class名称设置为<code>Counter</code>(必须为<strong>Counter</strong>)-选择无限制-点击创建</li>
+<li>Class名称设置为 <code>Comment</code>(必须为<strong>Comment</strong>)-选择无限制-点击创建（用于添加 Valine 评论系统，如不需要可以不创建该类）</li>
+</ul>
+</li>
+<li>创建后点击设置-点击应用Key-获取App ID和App Key</li>
+<li>将获取到的App ID和App Key设置到Next主题配置文件 <strong>_config.yml</strong>,配置文件已存在这个配置, 只要把id和key加上去就好了</li>
+<li>点击安全中心, 填写自己博客对应的域名（注意协议、域名和端口号需严格一致）</li>
+<li>打开Next主题配置文件 <strong>_config.yml</strong>, 将leancloud_visitors下的security设置为true（如没有则新增）<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">leancloud_visitors:</span></span><br><span class="line">     <span class="attr">enable:</span> <span class="literal">true</span>  <span class="string">//这里其实不需要true，后续设置valine评论系统自带统计，两者取其一为true即可</span></span><br><span class="line">     <span class="attr">app_id:</span> <span class="string">&lt;&lt;your</span> <span class="string">app</span> <span class="string">id&gt;&gt;</span> <span class="comment"># 同前文的id</span></span><br><span class="line">     <span class="attr">app_key:</span> <span class="string">&lt;&lt;your</span> <span class="string">app</span> <span class="string">key&gt;&gt;</span> <span class="comment"># 同前文的key</span></span><br><span class="line">     <span class="comment"># Dependencies: https://github.com/theme-next/hexo-leancloud-counter-security</span></span><br><span class="line">     <span class="attr">security:</span> <span class="literal">true</span></span><br><span class="line">     <span class="comment"># 由于Leancloud免费版的云引擎存在请求线程数和运行时间限制以及休眠机制，</span></span><br><span class="line">     <span class="comment"># 很多时候访客数量加载会很慢。</span></span><br><span class="line">     <span class="comment"># 如果设置betterPerformance为true，</span></span><br><span class="line">     <span class="comment"># 则网页则会在提交请求之前直接显示访客人数为查询到的人数+1，以增加用户体验。</span></span><br><span class="line">     <span class="attr">betterPerformance:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<h3 id="Valine-评论系统"><a href="#Valine-评论系统" class="headerlink" title="Valine 评论系统"></a>Valine 评论系统</h3></li>
+</ul>
+<p>这是基于LeanCloud的无后端评论系统，所以省略注册和创建Class <code>Comment</code>步骤</p>
+<ul>
+<li><p>获取到 App ID 和 App key，可以直接用阅读统计的。</p>
+</li>
+<li><p>编辑<code>themes/next/_config.yml</code> 文件</p>
+<ul>
+<li>搜索 valine ，配置 appid 和 appkey 为 LeanCloud 分配的值，language 为 zh-cn，注意大小写，只能是小写，否则初始化 Valine 时会报错，导致看不到评论区域。其它选择根据自己的需求修改。</li>
+<li>修改 valine.min.js 的 cdn 文件地址，到<a href="https://www.jsdelivr.com/package/npm/valine">这里</a> 选择最新版本的Valine，然后获取cdn地址（复制 url ），修改到 主题配置文件 _config.yml 即可。查找valine：  <figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Valine</span></span><br><span class="line"><span class="comment"># valine: //cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js</span></span><br><span class="line"><span class="comment"># valine: //cdnjs.cloudflare.com/ajax/libs/valine/1.3.10/Valine.min.js</span></span><br><span class="line"><span class="attr">valine:</span> <span class="string">https://cdn.jsdelivr.net/npm/valine@1.4.16/dist/Valine.min.js</span></span><br></pre></td></tr></table></figure></li>
+<li>查找 valine ：</li>
+</ul>
+  <figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Valine</span></span><br><span class="line"><span class="comment"># You can get your appid and appkey from https://leancloud.cn</span></span><br><span class="line"><span class="comment"># More info available at https://valine.js.org</span></span><br><span class="line"><span class="attr">valine:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span> </span><br><span class="line">  <span class="attr">appid:</span> <span class="string">粘贴id</span></span><br><span class="line">  <span class="attr">appkey:</span> <span class="string">粘贴key</span> </span><br><span class="line">  <span class="attr">notify:</span> <span class="literal">false</span> <span class="comment"># mail notifier, See: https://github.com/xCss/Valine/wiki</span></span><br><span class="line">  <span class="attr">verify:</span> <span class="literal">false</span> <span class="comment"># Verification code</span></span><br><span class="line">  <span class="attr">placeholder:</span> <span class="string">欢迎交流讨论...</span> <span class="comment"># comment box placeholder</span></span><br><span class="line">  <span class="attr">avatar:</span> <span class="string">mp</span> <span class="comment"># gravatar style</span></span><br><span class="line">  <span class="attr">guest_info:</span> <span class="string">nick,mail,link</span> <span class="comment"># custom comment header</span></span><br><span class="line">  <span class="attr">pageSize:</span> <span class="number">10</span> <span class="comment"># pagination size</span></span><br><span class="line">  <span class="attr">visitor:</span> <span class="literal">true</span> <span class="comment"># 这里和上文的 leancloud_visitors 阅读次数统计冲突，建议这里为true上午为false</span></span><br><span class="line">  <span class="attr">comment_count:</span> <span class="literal">true</span> <span class="comment"># if false, comment count will only be displayed in post page, not in home page</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置禁止留言：在禁止留言的文章或者板块添加comments，并将赋值false</p>
+  <figure class="highlight md"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: tags</span><br><span class="line">date: 2019-01-28 10:02:04</span><br><span class="line">type: &quot;tags&quot;</span><br><span class="line"><span class="section">comments: false</span></span><br><span class="line"><span class="section">---</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>点击回复不显示评论内容：我把修改后的注释都删掉就好使了</p>
+</blockquote>
+<h5 id="参考文章-2"><a href="#参考文章-2" class="headerlink" title="参考文章"></a>参考文章</h5></li>
+</ul>
+<p><a href="https://yuanmomo.net/2019/06/20/hexo-add-valine/">Hexo Next 主题添加 Valine 评论系统</a><br><a href="https://blog.csdn.net/weixin_35009071/article/details/112409778">hexo评论_Hexo博客使用valine评论系统无效果及终极解决方案</a></p>
+]]></content>
+      <categories>
+        <category>博客</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Swift5.0 UI代码Tips</title>
     <url>/2019/12/02/swift5.0-UI%E4%BB%A3%E7%A0%81Tips/</url>
     <content><![CDATA[<blockquote>
@@ -488,6 +493,106 @@
       </categories>
       <tags>
         <tag>Swift</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>初探koa2</title>
+    <url>/2022/02/25/%E5%88%9D%E6%8E%A2koa2/</url>
+    <content><![CDATA[<h1 id="koa2-的安装"><a href="#koa2-的安装" class="headerlink" title="koa2 的安装"></a>koa2 的安装</h1><ol>
+<li><p>运行<code>npm install koa</code></p>
+<p> 新建一个 <code>index.js</code> 测试一下</p>
+ <figure class="highlight zephir"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> Koa = <span class="keyword">require</span>(<span class="string">&#x27;koa&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Koa();</span><br><span class="line"></span><br><span class="line"><span class="comment">// response</span></span><br><span class="line">app.<span class="keyword">use</span>(ctx =&gt; &#123;</span><br><span class="line">  ctx.body = <span class="string">&#x27;Hello Koa&#x27;</span>;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
+<p> 运行下<code>node index.js</code>，访问<a href="http://localhost:3000/">http:localhost:3000</a>查看效果。</p>
+</li>
+<li><p>安装koa2项目生成器并创建项目</p>
+<ol>
+<li>npm install koa-generator -g<blockquote>
+<p>可能需要sudo 否则权限不足</p>
+</blockquote>
+</li>
+<li>生成项目 <code>koa2 项目名</code> </li>
+<li>安装依赖 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> 项目名</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure></li>
+<li>启动服务<code>npm start</code>，浏览器输入：localhost:3000,如果页面中展示了如”Hello Koa 2”的内容，说明项目搭建成功。<h1 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h1></li>
+</ol>
+</li>
+</ol>
+<ul>
+<li>在 Koa2 中 GET 传值通过 <code>ctx</code> 或 <code>ctx.request</code> 接收</li>
+<li>动态路由传值可通过 <code>ctx.params</code> 接收</li>
+<li>query 返回的是格式化好的参数对象</li>
+<li>queryString 返回的是请求字符串<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 引入模块</span></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">Koa</span> = <span class="built_in">require</span>(<span class="string">&#x27;koa&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> router = <span class="built_in">require</span>(<span class="string">&#x27;koa-router&#x27;</span>)() <span class="comment">// 引入并实例化</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 实例化</span></span><br><span class="line"><span class="keyword">let</span> app = <span class="keyword">new</span> <span class="title class_">Koa</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 配置路由</span></span><br><span class="line"><span class="comment">// ctx 上下文 context，包含了 request 和 response 等信息</span></span><br><span class="line">router</span><br><span class="line">  .<span class="title function_">get</span>(<span class="string">&#x27;/&#x27;</span>, <span class="keyword">async</span> ctx =&gt; &#123;</span><br><span class="line">    ctx.<span class="property">body</span> = <span class="string">&#x27;首页&#x27;</span></span><br><span class="line">  &#125;)</span><br><span class="line">  .<span class="title function_">get</span>(<span class="string">&#x27;/news&#x27;</span>, <span class="keyword">async</span> ctx =&gt; &#123;</span><br><span class="line">    ctx.<span class="property">body</span> = <span class="string">&#x27;新闻列表&#x27;</span></span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="comment">// get 传值</span></span><br><span class="line">  .<span class="title function_">get</span>(<span class="string">&#x27;/newscontent&#x27;</span>, <span class="keyword">async</span> ctx =&gt; &#123;</span><br><span class="line">     <span class="comment">// 访问 http://localhost:9000/newscontent?aid=123&amp;name=zhangsan</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(ctx.<span class="property">query</span>)</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(ctx.<span class="property">request</span>.<span class="property">query</span>)          <span class="comment">// &#123; aid: &#x27;123&#x27;, name: &#x27;zhangsan&#x27; &#125;   对象</span></span><br><span class="line">    ctx.<span class="property">body</span> = <span class="string">&#x27;新闻详情&#x27;</span></span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="comment">// 动态路由</span></span><br><span class="line">  .<span class="title function_">get</span>(<span class="string">&#x27;/newsdetail/:id&#x27;</span>, <span class="keyword">async</span> ctx =&gt; &#123;</span><br><span class="line">     <span class="comment">// 访问 http://localhost:9000/newsdetail/1234</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(ctx.<span class="property">params</span>) <span class="comment">// &#123; id: 1234 &#125;</span></span><br><span class="line">    ctx.<span class="property">body</span> = <span class="string">&#x27;新闻详情 - 动态路由&#x27;</span></span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="comment">// 动态路由可以传入多个值</span></span><br><span class="line">  .<span class="title function_">get</span>(<span class="string">&#x27;/newsdetail/:aid/:bid&#x27;</span>, <span class="keyword">async</span> ctx =&gt; &#123;</span><br><span class="line">     <span class="comment">// 访问 http://localhost:9000/newsdetail/1234/5678</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(ctx.<span class="property">params</span>) <span class="comment">// &#123; aid: 1234, bid: 5678 &#125;</span></span><br><span class="line">    ctx.<span class="property">body</span> = <span class="string">&#x27;新闻详情 - 动态路由 - 传入多个值&#x27;</span></span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">app</span><br><span class="line">  .<span class="title function_">use</span>(router.<span class="title function_">routes</span>())           <span class="comment">// 启动路由</span></span><br><span class="line">  .<span class="title function_">use</span>(router.<span class="title function_">allowedMethods</span>())   <span class="comment">// router.allowedMethods() 用在路由匹配 router.routes() 之后，所以在当所有路由中间件最后调用，此时根据 ctx.status 设置 response 响应头</span></span><br><span class="line"></span><br><span class="line">app.<span class="title function_">listen</span>(<span class="number">9000</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;请浏览器打开 http://localhost:9000 或 http://localhost:9000&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h1 id="写个简单的测试接口"><a href="#写个简单的测试接口" class="headerlink" title="写个简单的测试接口"></a>写个简单的测试接口</h1></li>
+</ul>
+<ol>
+<li>安装 <code>npm i koa-bodyparser</code></li>
+<li>新建一个xxx.js</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 引入模块</span></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">Koa</span> = <span class="built_in">require</span>(<span class="string">&#x27;koa&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> router = <span class="built_in">require</span>(<span class="string">&#x27;koa-router&#x27;</span>)() <span class="comment">// 引入并实例化</span></span><br><span class="line"><span class="keyword">const</span> bodyParser = <span class="built_in">require</span>(<span class="string">&#x27;koa-bodyparser&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 实例化</span></span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> <span class="title class_">Koa</span>()</span><br><span class="line"><span class="comment">// 配置中间件，通过 bodyParser 获取 post 请求传递过来的参数</span></span><br><span class="line">app.<span class="title function_">use</span>(<span class="title function_">bodyParser</span>())</span><br><span class="line"></span><br><span class="line"><span class="comment">// GET 接口</span></span><br><span class="line">router.<span class="title function_">get</span>(<span class="string">&#x27;/news&#x27;</span>, <span class="function"><span class="params">ctx</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; search &#125; = ctx.<span class="property">query</span></span><br><span class="line">  ctx.<span class="property">body</span> = &#123;</span><br><span class="line">    <span class="attr">time</span>: <span class="keyword">new</span> <span class="title class_">Date</span>(),</span><br><span class="line">    <span class="attr">data</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">title</span>: <span class="string">`新闻标题 1 - <span class="subst">$&#123; search &#125;</span>`</span></span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">title</span>: <span class="string">`新闻标题 2 - <span class="subst">$&#123; search &#125;</span>`</span></span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// POST 接口</span></span><br><span class="line">router.<span class="title function_">post</span>(<span class="string">&#x27;/say&#x27;</span>, <span class="function"><span class="params">ctx</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; name &#125; = ctx.<span class="property">request</span>.<span class="property">body</span></span><br><span class="line">  ctx.<span class="property">body</span> = &#123;</span><br><span class="line">    <span class="attr">time</span>: <span class="keyword">new</span> <span class="title class_">Date</span>(),</span><br><span class="line">    <span class="attr">reply</span>: <span class="string">`Hello <span class="subst">$&#123; name &#125;</span>!`</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">app.<span class="title function_">use</span>(router.<span class="title function_">routes</span>()) <span class="comment">// 启动路由</span></span><br><span class="line">app.<span class="title function_">listen</span>(<span class="number">3000</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Server is running on 3000&#x27;</span>)</span><br><span class="line">&#125;) <span class="comment">// 启动服务</span></span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>运行<code>node xxx.js</code>， 访问 <a href="http://localhost:3000/news?search=%E7%A7%91%E6%8A%80">http://localhost:3000/news?search=科技</a> 查看效果</li>
+</ol>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://github.com/koajs/koa">Github koa</a><br><a href="https://www.jianshu.com/p/3e35db2c8d6c">koa2从搭建项目到实现API</a><br><a href="https://liuxianyu.cn/article/learn-koa.html">接触 Koa2 框架</a><br><a href="https://liuxianyu.cn/article/koa-get-post.html">用 Koa2 写 GET、POST 测试接口</a></p>
+]]></content>
+      <categories>
+        <category>散装知识</category>
+      </categories>
+      <tags>
+        <tag>koa2</tag>
+        <tag>node</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>从零开始用ECS+Redis+Mysql搭建API</title>
+    <url>/2022/03/07/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%94%A8ECS+Redis+Mysql%E6%90%AD%E5%BB%BAAPI/</url>
+    <content><![CDATA[<h1 id="服务器配置与环境搭建"><a href="#服务器配置与环境搭建" class="headerlink" title="服务器配置与环境搭建"></a>服务器配置与环境搭建</h1><p>服务器选型：最终选择 Alibaba cloud linux</p>
+<h2 id="Node-安装"><a href="#Node-安装" class="headerlink" title="Node 安装"></a>Node 安装</h2><ul>
+<li>从官网中下载对应的安装包<br>  <code>xz -d XX.xz</code>        #.xz解压命令<br>  <code>tar -xvf  XX.tar</code>   #.tar解压命令</li>
+<li>添加两个全局软连接，地址酌情替换<br>  <code>ln -s /root/node-v16.14.0-linux-x64/bin/node /usr/local/bin/node   </code><br>  <code>ln -s /root/node-v16.14.0-linux-x64/bin/npm /usr/local/bin/npm   </code></li>
+<li>测试一下，能够输出版本号<br>  <code>node -v</code></li>
+</ul>
+<h2 id="koa2-安装"><a href="#koa2-安装" class="headerlink" title="koa2 安装"></a>koa2 安装</h2><ul>
+<li>安装koa <code>npm install koa</code></li>
+<li>安装项目生成器 <code>npm install koa-generator -g</code></li>
+<li>设置软连接，不设置可能会<strong>koa2: command not found</strong><br>  <code>ln -s /root/node-v16.14.0-linux-x64/bin/koa2 /usr/local/bin</code></li>
+</ul>
+<h2 id="Redis-安装"><a href="#Redis-安装" class="headerlink" title="Redis 安装"></a>Redis 安装</h2><ul>
+<li>下载地址：<a href="http://redis.io/download%EF%BC%8C%E4%B8%8B%E8%BD%BD%E6%9C%80%E6%96%B0%E7%A8%B3%E5%AE%9A%E7%89%88%E6%9C%AC">http://redis.io/download，下载最新稳定版本</a></li>
+<li>解压 <code>tar xzf redis-&lt;&lt;对应下载的安装包版本号&gt;&gt;.tar.gz</code></li>
+<li>前往该文件夹下 <code>cd redis-&lt;&lt;对应下载的安装包版本号&gt;&gt;</code></li>
+<li>编译一下 <code>make</code></li>
+<li>安装到指定文件夹 <code>make install PREFIX=/usr/local/redis</code><br><code>cd /usr/local/redis/</code> 使用<code>ll</code>查看是否有<strong>bin</strong>文件</li>
+<li>前往<code>cd bin/</code></li>
+</ul>
+<ol>
+<li>服务器端启动（两种方法，建议用后端启动）</li>
+</ol>
+<ul>
+<li>前端启动 <code>./redis-server</code><ul>
+<li>正常关闭<code>./redis-cli shutdown</code> 强制关闭 Ctrl+c 可能丢失数据</li>
+</ul>
+</li>
+<li>进行后端启动<br>  需要把redis源码目录下的redis.conf文件复制到redis安装目录的bin目录下<br>  修改redis.conf文件，将daemonize的值改为yes后保存<br>  <code>vim redis.conf</code><br>  按<code>:</code>进入命令行模式，输入<code>/daemonize</code>回车查找<br>  按<code>i</code>进入编辑模式，将<code>no</code>改为<code>yes</code><br>  按<code>:wq</code>保存退出<ul>
+<li>后端启动<code>./redis-server redis.conf</code>，不占用窗口，建议使用<br>  检查一下是否成功<code> ps -aux | grep redis</code></li>
+<li>正常关闭<code>./redis-cli shutdown</code> 强制关闭<code>kill -9 进程id</code>可能丢失数据</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>客户端启动（需先开启服务端）</li>
+</ol>
+<ul>
+<li>本地数据库<code>./redis-cli -h 127.0.0.1 -p 6379</code> 或者</li>
+<li>用私有ip启动云Redis<br><code>./redis-cli -h r-uf6lbo0hp2xxeenaxm.redis.rds.aliyuncs.com -p 6379 --raw </code> 替换为自己的ip <strong>xxxx..rds.aliyuncs.com</strong><br>输入账号密码 <code>auth account001:Account001!))</code> 替换为自己的<strong>账号:密码</strong><h2 id="Mysql-安装"><a href="#Mysql-安装" class="headerlink" title="Mysql 安装"></a>Mysql 安装</h2></li>
+</ul>
+<h2 id="Vue-安装"><a href="#Vue-安装" class="headerlink" title="Vue 安装"></a>Vue 安装</h2><h2 id="写一个简单接口"><a href="#写一个简单接口" class="headerlink" title="写一个简单接口"></a>写一个简单接口</h2>]]></content>
+      <categories>
+        <category>后端开发</category>
+      </categories>
+      <tags>
+        <tag>Redis</tag>
+        <tag>阿里云</tag>
+        <tag>ECS</tag>
+        <tag>Mysql</tag>
       </tags>
   </entry>
   <entry>
@@ -564,106 +669,6 @@
       </tags>
   </entry>
   <entry>
-    <title>从零开始用ECS+Redis+Mysql搭建API</title>
-    <url>/2022/03/07/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%94%A8ECS+Redis+Mysql%E6%90%AD%E5%BB%BAAPI/</url>
-    <content><![CDATA[<h1 id="服务器配置与环境搭建"><a href="#服务器配置与环境搭建" class="headerlink" title="服务器配置与环境搭建"></a>服务器配置与环境搭建</h1><p>服务器选型：最终选择 Alibaba cloud linux</p>
-<h2 id="Node-安装"><a href="#Node-安装" class="headerlink" title="Node 安装"></a>Node 安装</h2><ul>
-<li>从官网中下载对应的安装包<br>  <code>xz -d XX.xz</code>        #.xz解压命令<br>  <code>tar -xvf  XX.tar</code>   #.tar解压命令</li>
-<li>添加两个全局软连接，地址酌情替换<br>  <code>ln -s /root/node-v16.14.0-linux-x64/bin/node /usr/local/bin/node   </code><br>  <code>ln -s /root/node-v16.14.0-linux-x64/bin/npm /usr/local/bin/npm   </code></li>
-<li>测试一下，能够输出版本号<br>  <code>node -v</code></li>
-</ul>
-<h2 id="koa2-安装"><a href="#koa2-安装" class="headerlink" title="koa2 安装"></a>koa2 安装</h2><ul>
-<li>安装koa <code>npm install koa</code></li>
-<li>安装项目生成器 <code>npm install koa-generator -g</code></li>
-<li>设置软连接，不设置可能会<strong>koa2: command not found</strong><br>  <code>ln -s /root/node-v16.14.0-linux-x64/bin/koa2 /usr/local/bin</code></li>
-</ul>
-<h2 id="Redis-安装"><a href="#Redis-安装" class="headerlink" title="Redis 安装"></a>Redis 安装</h2><ul>
-<li>下载地址：<a href="http://redis.io/download%EF%BC%8C%E4%B8%8B%E8%BD%BD%E6%9C%80%E6%96%B0%E7%A8%B3%E5%AE%9A%E7%89%88%E6%9C%AC">http://redis.io/download，下载最新稳定版本</a></li>
-<li>解压 <code>tar xzf redis-&lt;&lt;对应下载的安装包版本号&gt;&gt;.tar.gz</code></li>
-<li>前往该文件夹下 <code>cd redis-&lt;&lt;对应下载的安装包版本号&gt;&gt;</code></li>
-<li>编译一下 <code>make</code></li>
-<li>安装到指定文件夹 <code>make install PREFIX=/usr/local/redis</code><br><code>cd /usr/local/redis/</code> 使用<code>ll</code>查看是否有<strong>bin</strong>文件</li>
-<li>前往<code>cd bin/</code></li>
-</ul>
-<ol>
-<li>服务器端启动（两种方法，建议用后端启动）</li>
-</ol>
-<ul>
-<li>前端启动 <code>./redis-server</code><ul>
-<li>正常关闭<code>./redis-cli shutdown</code> 强制关闭 Ctrl+c 可能丢失数据</li>
-</ul>
-</li>
-<li>进行后端启动<br>  需要把redis源码目录下的redis.conf文件复制到redis安装目录的bin目录下<br>  修改redis.conf文件，将daemonize的值改为yes后保存<br>  <code>vim redis.conf</code><br>  按<code>:</code>进入命令行模式，输入<code>/daemonize</code>回车查找<br>  按<code>i</code>进入编辑模式，将<code>no</code>改为<code>yes</code><br>  按<code>:wq</code>保存退出<ul>
-<li>后端启动<code>./redis-server redis.conf</code>，不占用窗口，建议使用<br>  检查一下是否成功<code> ps -aux | grep redis</code></li>
-<li>正常关闭<code>./redis-cli shutdown</code> 强制关闭<code>kill -9 进程id</code>可能丢失数据</li>
-</ul>
-</li>
-</ul>
-<ol>
-<li>客户端启动（需先开启服务端）</li>
-</ol>
-<ul>
-<li>本地数据库<code>./redis-cli -h 127.0.0.1 -p 6379</code> 或者</li>
-<li>用私有ip启动云Redis<br><code>./redis-cli -h r-uf6lbo0hp2xxeenaxm.redis.rds.aliyuncs.com -p 6379 --raw </code> 替换为自己的ip <strong>xxxx..rds.aliyuncs.com</strong><br>输入账号密码 <code>auth account001:Account001!))</code> 替换为自己的<strong>账号:密码</strong><h2 id="Mysql-安装"><a href="#Mysql-安装" class="headerlink" title="Mysql 安装"></a>Mysql 安装</h2></li>
-</ul>
-<h2 id="Vue-安装"><a href="#Vue-安装" class="headerlink" title="Vue 安装"></a>Vue 安装</h2><h2 id="写一个简单接口"><a href="#写一个简单接口" class="headerlink" title="写一个简单接口"></a>写一个简单接口</h2>]]></content>
-      <categories>
-        <category>后端开发</category>
-      </categories>
-      <tags>
-        <tag>Redis</tag>
-        <tag>阿里云</tag>
-        <tag>ECS</tag>
-        <tag>Mysql</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>初探koa2</title>
-    <url>/2022/02/25/%E5%88%9D%E6%8E%A2koa2/</url>
-    <content><![CDATA[<h1 id="koa2-的安装"><a href="#koa2-的安装" class="headerlink" title="koa2 的安装"></a>koa2 的安装</h1><ol>
-<li><p>运行<code>npm install koa</code></p>
-<p> 新建一个 <code>index.js</code> 测试一下</p>
- <figure class="highlight zephir"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> Koa = <span class="keyword">require</span>(<span class="string">&#x27;koa&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Koa();</span><br><span class="line"></span><br><span class="line"><span class="comment">// response</span></span><br><span class="line">app.<span class="keyword">use</span>(ctx =&gt; &#123;</span><br><span class="line">  ctx.body = <span class="string">&#x27;Hello Koa&#x27;</span>;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
-<p> 运行下<code>node index.js</code>，访问<a href="http://localhost:3000/">http:localhost:3000</a>查看效果。</p>
-</li>
-<li><p>安装koa2项目生成器并创建项目</p>
-<ol>
-<li>npm install koa-generator -g<blockquote>
-<p>可能需要sudo 否则权限不足</p>
-</blockquote>
-</li>
-<li>生成项目 <code>koa2 项目名</code> </li>
-<li>安装依赖 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> 项目名</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure></li>
-<li>启动服务<code>npm start</code>，浏览器输入：localhost:3000,如果页面中展示了如”Hello Koa 2”的内容，说明项目搭建成功。<h1 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h1></li>
-</ol>
-</li>
-</ol>
-<ul>
-<li>在 Koa2 中 GET 传值通过 <code>ctx</code> 或 <code>ctx.request</code> 接收</li>
-<li>动态路由传值可通过 <code>ctx.params</code> 接收</li>
-<li>query 返回的是格式化好的参数对象</li>
-<li>queryString 返回的是请求字符串<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 引入模块</span></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">Koa</span> = <span class="built_in">require</span>(<span class="string">&#x27;koa&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> router = <span class="built_in">require</span>(<span class="string">&#x27;koa-router&#x27;</span>)() <span class="comment">// 引入并实例化</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 实例化</span></span><br><span class="line"><span class="keyword">let</span> app = <span class="keyword">new</span> <span class="title class_">Koa</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 配置路由</span></span><br><span class="line"><span class="comment">// ctx 上下文 context，包含了 request 和 response 等信息</span></span><br><span class="line">router</span><br><span class="line">  .<span class="title function_">get</span>(<span class="string">&#x27;/&#x27;</span>, <span class="keyword">async</span> ctx =&gt; &#123;</span><br><span class="line">    ctx.<span class="property">body</span> = <span class="string">&#x27;首页&#x27;</span></span><br><span class="line">  &#125;)</span><br><span class="line">  .<span class="title function_">get</span>(<span class="string">&#x27;/news&#x27;</span>, <span class="keyword">async</span> ctx =&gt; &#123;</span><br><span class="line">    ctx.<span class="property">body</span> = <span class="string">&#x27;新闻列表&#x27;</span></span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="comment">// get 传值</span></span><br><span class="line">  .<span class="title function_">get</span>(<span class="string">&#x27;/newscontent&#x27;</span>, <span class="keyword">async</span> ctx =&gt; &#123;</span><br><span class="line">     <span class="comment">// 访问 http://localhost:9000/newscontent?aid=123&amp;name=zhangsan</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(ctx.<span class="property">query</span>)</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(ctx.<span class="property">request</span>.<span class="property">query</span>)          <span class="comment">// &#123; aid: &#x27;123&#x27;, name: &#x27;zhangsan&#x27; &#125;   对象</span></span><br><span class="line">    ctx.<span class="property">body</span> = <span class="string">&#x27;新闻详情&#x27;</span></span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="comment">// 动态路由</span></span><br><span class="line">  .<span class="title function_">get</span>(<span class="string">&#x27;/newsdetail/:id&#x27;</span>, <span class="keyword">async</span> ctx =&gt; &#123;</span><br><span class="line">     <span class="comment">// 访问 http://localhost:9000/newsdetail/1234</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(ctx.<span class="property">params</span>) <span class="comment">// &#123; id: 1234 &#125;</span></span><br><span class="line">    ctx.<span class="property">body</span> = <span class="string">&#x27;新闻详情 - 动态路由&#x27;</span></span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="comment">// 动态路由可以传入多个值</span></span><br><span class="line">  .<span class="title function_">get</span>(<span class="string">&#x27;/newsdetail/:aid/:bid&#x27;</span>, <span class="keyword">async</span> ctx =&gt; &#123;</span><br><span class="line">     <span class="comment">// 访问 http://localhost:9000/newsdetail/1234/5678</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(ctx.<span class="property">params</span>) <span class="comment">// &#123; aid: 1234, bid: 5678 &#125;</span></span><br><span class="line">    ctx.<span class="property">body</span> = <span class="string">&#x27;新闻详情 - 动态路由 - 传入多个值&#x27;</span></span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">app</span><br><span class="line">  .<span class="title function_">use</span>(router.<span class="title function_">routes</span>())           <span class="comment">// 启动路由</span></span><br><span class="line">  .<span class="title function_">use</span>(router.<span class="title function_">allowedMethods</span>())   <span class="comment">// router.allowedMethods() 用在路由匹配 router.routes() 之后，所以在当所有路由中间件最后调用，此时根据 ctx.status 设置 response 响应头</span></span><br><span class="line"></span><br><span class="line">app.<span class="title function_">listen</span>(<span class="number">9000</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;请浏览器打开 http://localhost:9000 或 http://localhost:9000&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<h1 id="写个简单的测试接口"><a href="#写个简单的测试接口" class="headerlink" title="写个简单的测试接口"></a>写个简单的测试接口</h1></li>
-</ul>
-<ol>
-<li>安装 <code>npm i koa-bodyparser</code></li>
-<li>新建一个xxx.js</li>
-</ol>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 引入模块</span></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">Koa</span> = <span class="built_in">require</span>(<span class="string">&#x27;koa&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> router = <span class="built_in">require</span>(<span class="string">&#x27;koa-router&#x27;</span>)() <span class="comment">// 引入并实例化</span></span><br><span class="line"><span class="keyword">const</span> bodyParser = <span class="built_in">require</span>(<span class="string">&#x27;koa-bodyparser&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 实例化</span></span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> <span class="title class_">Koa</span>()</span><br><span class="line"><span class="comment">// 配置中间件，通过 bodyParser 获取 post 请求传递过来的参数</span></span><br><span class="line">app.<span class="title function_">use</span>(<span class="title function_">bodyParser</span>())</span><br><span class="line"></span><br><span class="line"><span class="comment">// GET 接口</span></span><br><span class="line">router.<span class="title function_">get</span>(<span class="string">&#x27;/news&#x27;</span>, <span class="function"><span class="params">ctx</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; search &#125; = ctx.<span class="property">query</span></span><br><span class="line">  ctx.<span class="property">body</span> = &#123;</span><br><span class="line">    <span class="attr">time</span>: <span class="keyword">new</span> <span class="title class_">Date</span>(),</span><br><span class="line">    <span class="attr">data</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">title</span>: <span class="string">`新闻标题 1 - <span class="subst">$&#123; search &#125;</span>`</span></span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">title</span>: <span class="string">`新闻标题 2 - <span class="subst">$&#123; search &#125;</span>`</span></span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// POST 接口</span></span><br><span class="line">router.<span class="title function_">post</span>(<span class="string">&#x27;/say&#x27;</span>, <span class="function"><span class="params">ctx</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; name &#125; = ctx.<span class="property">request</span>.<span class="property">body</span></span><br><span class="line">  ctx.<span class="property">body</span> = &#123;</span><br><span class="line">    <span class="attr">time</span>: <span class="keyword">new</span> <span class="title class_">Date</span>(),</span><br><span class="line">    <span class="attr">reply</span>: <span class="string">`Hello <span class="subst">$&#123; name &#125;</span>!`</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">app.<span class="title function_">use</span>(router.<span class="title function_">routes</span>()) <span class="comment">// 启动路由</span></span><br><span class="line">app.<span class="title function_">listen</span>(<span class="number">3000</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Server is running on 3000&#x27;</span>)</span><br><span class="line">&#125;) <span class="comment">// 启动服务</span></span><br></pre></td></tr></table></figure>
-<ol start="3">
-<li>运行<code>node xxx.js</code>， 访问 <a href="http://localhost:3000/news?search=%E7%A7%91%E6%8A%80">http://localhost:3000/news?search=科技</a> 查看效果</li>
-</ol>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://github.com/koajs/koa">Github koa</a><br><a href="https://www.jianshu.com/p/3e35db2c8d6c">koa2从搭建项目到实现API</a><br><a href="https://liuxianyu.cn/article/learn-koa.html">接触 Koa2 框架</a><br><a href="https://liuxianyu.cn/article/koa-get-post.html">用 Koa2 写 GET、POST 测试接口</a></p>
-]]></content>
-      <categories>
-        <category>散装知识</category>
-      </categories>
-      <tags>
-        <tag>koa2</tag>
-        <tag>node</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>搭建hexo个人博客</title>
     <url>/2019/11/25/%E6%90%AD%E5%BB%BAhexo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
     <content><![CDATA[<h1 id="环境搭建（现在官网有MacOS安装包，傻瓜操作无需以下步骤）"><a href="#环境搭建（现在官网有MacOS安装包，傻瓜操作无需以下步骤）" class="headerlink" title="环境搭建（现在官网有MacOS安装包，傻瓜操作无需以下步骤）"></a>环境搭建（现在官网有MacOS安装包，傻瓜操作无需以下步骤）</h1><ol>
@@ -731,57 +736,11 @@
         <category>散装知识</category>
       </categories>
       <tags>
+        <tag>后端</tag>
         <tag>实践</tag>
         <tag>MYSQL</tag>
-        <tag>后端</tag>
         <tag>阿里云</tag>
         <tag>服务器</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>机器学习Tensorflow框架安装</title>
-    <url>/2019/12/15/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0Tensorflow%E6%A1%86%E6%9E%B6%E5%AE%89%E8%A3%85/</url>
-    <content><![CDATA[<h1 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h1><ul>
-<li><p>查看本机Python版本<code>python -V</code>，我的默认版本是2.7，去Python<a href="https://www.python.org/downloads/macos/">官网下载</a>一个3.7的版本进行安装。</p>
-</li>
-<li><p>安装完成后，修改默认启动版本为3.7版本</p>
-<ul>
-<li>打开<code>open ~/.bash_profile</code></li>
-<li>添加<code>alias python=&quot;/usr/local/bin/python3.7&quot;</code></li>
-<li>不要忘记<code>source ~/.bash_profile</code>重新加载一下</li>
-<li>再次<code>python -V</code>发现Python成功变成3.7版本。</li>
-</ul>
-</li>
-<li><p>前往Anaconda<a href="https://www.anaconda.com/">官网</a>下载对应的安装包，进行安装。</p>
-</li>
-<li><p>安装Tensorflow，先查看是否有<code>conda --version</code>，有可能报错<strong>conda command not found</strong></p>
-<ul>
-<li><p>先检查anaconda中的bin文件夹内是否有（有）</p>
-</li>
-<li><p>在<code>vi ~/.zshrc</code>中添加<code>export PATH=/Users/jiachenfu/anaconda3/bin:$PATH</code></p>
-</li>
-<li><p>然后<code>source ~/.zshrc</code>，检查一下<code>conda --version</code>成功</p>
-</li>
-<li><p>更改下载源为清华镜像<code>conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</code>，然后<code>conda config --set show_channel_urls yes</code></p>
-</li>
-<li><p>最后安装Tensorflow<code>conda install tensorflow</code></p>
-</li>
-<li><p>打开Anaconda中的jupyter,新建一个Python3文件,运行</p>
-  <figure class="highlight elm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf </span><br><span class="line"><span class="title">tf</span>.__version__</span><br></pre></td></tr></table></figure>
-
-<p>  成功输出1.1.0</p>
-</li>
-</ul>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>机器学习</category>
-      </categories>
-      <tags>
-        <tag>实践</tag>
-        <tag>Tensorflow</tag>
-        <tag>AI</tag>
       </tags>
   </entry>
   <entry>
@@ -841,6 +800,52 @@
       </categories>
       <tags>
         <tag>Vue</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>机器学习Tensorflow框架安装</title>
+    <url>/2019/12/15/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0Tensorflow%E6%A1%86%E6%9E%B6%E5%AE%89%E8%A3%85/</url>
+    <content><![CDATA[<h1 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h1><ul>
+<li><p>查看本机Python版本<code>python -V</code>，我的默认版本是2.7，去Python<a href="https://www.python.org/downloads/macos/">官网下载</a>一个3.7的版本进行安装。</p>
+</li>
+<li><p>安装完成后，修改默认启动版本为3.7版本</p>
+<ul>
+<li>打开<code>open ~/.bash_profile</code></li>
+<li>添加<code>alias python=&quot;/usr/local/bin/python3.7&quot;</code></li>
+<li>不要忘记<code>source ~/.bash_profile</code>重新加载一下</li>
+<li>再次<code>python -V</code>发现Python成功变成3.7版本。</li>
+</ul>
+</li>
+<li><p>前往Anaconda<a href="https://www.anaconda.com/">官网</a>下载对应的安装包，进行安装。</p>
+</li>
+<li><p>安装Tensorflow，先查看是否有<code>conda --version</code>，有可能报错<strong>conda command not found</strong></p>
+<ul>
+<li><p>先检查anaconda中的bin文件夹内是否有（有）</p>
+</li>
+<li><p>在<code>vi ~/.zshrc</code>中添加<code>export PATH=/Users/jiachenfu/anaconda3/bin:$PATH</code></p>
+</li>
+<li><p>然后<code>source ~/.zshrc</code>，检查一下<code>conda --version</code>成功</p>
+</li>
+<li><p>更改下载源为清华镜像<code>conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</code>，然后<code>conda config --set show_channel_urls yes</code></p>
+</li>
+<li><p>最后安装Tensorflow<code>conda install tensorflow</code></p>
+</li>
+<li><p>打开Anaconda中的jupyter,新建一个Python3文件,运行</p>
+  <figure class="highlight elm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf </span><br><span class="line"><span class="title">tf</span>.__version__</span><br></pre></td></tr></table></figure>
+
+<p>  成功输出1.1.0</p>
+</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>实践</tag>
+        <tag>Tensorflow</tag>
+        <tag>AI</tag>
       </tags>
   </entry>
   <entry>
