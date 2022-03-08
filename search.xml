@@ -493,6 +493,60 @@
       </tags>
   </entry>
   <entry>
+    <title>从零开始用ECS+Redis+Mysql搭建API</title>
+    <url>/2022/03/07/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%94%A8ECS+Redis+Mysql%E6%90%AD%E5%BB%BAAPI/</url>
+    <content><![CDATA[<h1 id="服务器配置与环境搭建"><a href="#服务器配置与环境搭建" class="headerlink" title="服务器配置与环境搭建"></a>服务器配置与环境搭建</h1><p>服务器选型：最终选择 Alibaba cloud linux</p>
+<h2 id="Node-安装"><a href="#Node-安装" class="headerlink" title="Node 安装"></a>Node 安装</h2><ul>
+<li>从官网中下载对应的安装包<br>  <code>xz -d XX.xz</code>        #.xz解压命令<br>  <code>tar -xvf  XX.tar</code>   #.tar解压命令</li>
+<li>添加两个全局软连接，地址酌情替换<br>  <code>ln -s /root/node-v16.14.0-linux-x64/bin/node /usr/local/bin/node   </code><br>  <code>ln -s /root/node-v16.14.0-linux-x64/bin/npm /usr/local/bin/npm   </code></li>
+<li>测试一下，能够输出版本号<br>  <code>node -v</code></li>
+</ul>
+<h2 id="koa2-安装"><a href="#koa2-安装" class="headerlink" title="koa2 安装"></a>koa2 安装</h2><ul>
+<li>安装koa <code>npm install koa</code></li>
+<li>安装项目生成器 <code>npm install koa-generator -g</code></li>
+<li>设置软连接，不设置可能会<strong>koa2: command not found</strong><br>  <code>ln -s /root/node-v16.14.0-linux-x64/bin/koa2 /usr/local/bin</code></li>
+</ul>
+<h2 id="Redis-安装"><a href="#Redis-安装" class="headerlink" title="Redis 安装"></a>Redis 安装</h2><ul>
+<li>下载地址：<a href="http://redis.io/download%EF%BC%8C%E4%B8%8B%E8%BD%BD%E6%9C%80%E6%96%B0%E7%A8%B3%E5%AE%9A%E7%89%88%E6%9C%AC">http://redis.io/download，下载最新稳定版本</a></li>
+<li>解压 <code>tar xzf redis-&lt;&lt;对应下载的安装包版本号&gt;&gt;.tar.gz</code></li>
+<li>前往该文件夹下 <code>cd redis-&lt;&lt;对应下载的安装包版本号&gt;&gt;</code></li>
+<li>编译一下 <code>make</code></li>
+<li>安装到指定文件夹 <code>make install PREFIX=/usr/local/redis</code><br><code>cd /usr/local/redis/</code> 使用<code>ll</code>查看是否有<strong>bin</strong>文件</li>
+<li>前往<code>cd bin/</code></li>
+</ul>
+<ol>
+<li>服务器端启动（两种方法，建议用后端启动）</li>
+</ol>
+<ul>
+<li>前端启动 <code>./redis-server</code><ul>
+<li>正常关闭<code>./redis-cli shutdown</code> 强制关闭 Ctrl+c 可能丢失数据</li>
+</ul>
+</li>
+<li>进行后端启动<br>  需要把redis源码目录下的redis.conf文件复制到redis安装目录的bin目录下<br>  修改redis.conf文件，将daemonize的值改为yes后保存<br>  <code>vim redis.conf</code><br>  按<code>:</code>进入命令行模式，输入<code>/daemonize</code>回车查找<br>  按<code>i</code>进入编辑模式，将<code>no</code>改为<code>yes</code><br>  按<code>:wq</code>保存退出<ul>
+<li>后端启动<code>./redis-server redis.conf</code>，不占用窗口，建议使用<br>  检查一下是否成功<code> ps -aux | grep redis</code></li>
+<li>正常关闭<code>./redis-cli shutdown</code> 强制关闭<code>kill -9 进程id</code>可能丢失数据</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>客户端启动（需先开启服务端）</li>
+</ol>
+<ul>
+<li>本地数据库<code>./redis-cli -h 127.0.0.1 -p 6379</code> 或者</li>
+<li>用私有ip启动云Redis<br><code>./redis-cli -h r-uf6lbo0hp2xxeenaxm.redis.rds.aliyuncs.com -p 6379 --raw </code> 替换为自己的ip <strong>xxxx..rds.aliyuncs.com</strong><br>输入账号密码 <code>auth account001:Account001!))</code> 替换为自己的<strong>账号:密码</strong><h2 id="Mysql-安装"><a href="#Mysql-安装" class="headerlink" title="Mysql 安装"></a>Mysql 安装</h2></li>
+</ul>
+<h2 id="Vue-安装"><a href="#Vue-安装" class="headerlink" title="Vue 安装"></a>Vue 安装</h2><h2 id="写一个简单接口"><a href="#写一个简单接口" class="headerlink" title="写一个简单接口"></a>写一个简单接口</h2>]]></content>
+      <categories>
+        <category>后端开发</category>
+      </categories>
+      <tags>
+        <tag>Redis</tag>
+        <tag>阿里云</tag>
+        <tag>ECS</tag>
+        <tag>Mysql</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>vue安装及创建新项目</title>
     <url>/2019/11/28/vue%E5%AE%89%E8%A3%85%E5%8F%8A%E5%88%9B%E5%BB%BA%E6%96%B0%E9%A1%B9%E7%9B%AE/</url>
     <content><![CDATA[<h1 id="Vue了解"><a href="#Vue了解" class="headerlink" title="Vue了解"></a>Vue了解</h1><p>渐进式JavaScript 框架</p>
@@ -566,60 +620,6 @@
       </tags>
   </entry>
   <entry>
-    <title>从零开始用ECS+Redis+Mysql搭建API</title>
-    <url>/2022/03/07/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%94%A8ECS+Redis+Mysql%E6%90%AD%E5%BB%BAAPI/</url>
-    <content><![CDATA[<h1 id="服务器配置与环境搭建"><a href="#服务器配置与环境搭建" class="headerlink" title="服务器配置与环境搭建"></a>服务器配置与环境搭建</h1><p>服务器选型：最终选择 Alibaba cloud linux</p>
-<h2 id="Node-安装"><a href="#Node-安装" class="headerlink" title="Node 安装"></a>Node 安装</h2><ul>
-<li>从官网中下载对应的安装包<br>  <code>xz -d XX.xz</code>        #.xz解压命令<br>  <code>tar -xvf  XX.tar</code>   #.tar解压命令</li>
-<li>添加两个全局软连接，地址酌情替换<br>  <code>ln -s /root/node-v16.14.0-linux-x64/bin/node /usr/local/bin/node   </code><br>  <code>ln -s /root/node-v16.14.0-linux-x64/bin/npm /usr/local/bin/npm   </code></li>
-<li>测试一下，能够输出版本号<br>  <code>node -v</code></li>
-</ul>
-<h2 id="koa2-安装"><a href="#koa2-安装" class="headerlink" title="koa2 安装"></a>koa2 安装</h2><ul>
-<li>安装koa <code>npm install koa</code></li>
-<li>安装项目生成器 <code>npm install koa-generator -g</code></li>
-<li>设置软连接，不设置可能会<strong>koa2: command not found</strong><br>  <code>ln -s /root/node-v16.14.0-linux-x64/bin/koa2 /usr/local/bin</code></li>
-</ul>
-<h2 id="Redis-安装"><a href="#Redis-安装" class="headerlink" title="Redis 安装"></a>Redis 安装</h2><ul>
-<li>下载地址：<a href="http://redis.io/download%EF%BC%8C%E4%B8%8B%E8%BD%BD%E6%9C%80%E6%96%B0%E7%A8%B3%E5%AE%9A%E7%89%88%E6%9C%AC">http://redis.io/download，下载最新稳定版本</a></li>
-<li>解压 <code>tar xzf redis-&lt;&lt;对应下载的安装包版本号&gt;&gt;.tar.gz</code></li>
-<li>前往该文件夹下 <code>cd redis-&lt;&lt;对应下载的安装包版本号&gt;&gt;</code></li>
-<li>编译一下 <code>make</code></li>
-<li>安装到指定文件夹 <code>make install PREFIX=/usr/local/redis</code><br><code>cd /usr/local/redis/</code> 使用<code>ll</code>查看是否有<strong>bin</strong>文件</li>
-<li>前往<code>cd bin/</code></li>
-</ul>
-<ol>
-<li>服务器端启动（两种方法，建议用后端启动）</li>
-</ol>
-<ul>
-<li>前端启动 <code>./redis-server</code><ul>
-<li>正常关闭<code>./redis-cli shutdown</code> 强制关闭 Ctrl+c 可能丢失数据</li>
-</ul>
-</li>
-<li>进行后端启动<br>  需要把redis源码目录下的redis.conf文件复制到redis安装目录的bin目录下<br>  修改redis.conf文件，将daemonize的值改为yes后保存<br>  <code>vim redis.conf</code><br>  按<code>:</code>进入命令行模式，输入<code>/daemonize</code>回车查找<br>  按<code>i</code>进入编辑模式，将<code>no</code>改为<code>yes</code><br>  按<code>:wq</code>保存退出<ul>
-<li>后端启动<code>./redis-server redis.conf</code>，不占用窗口，建议使用<br>  检查一下是否成功<code> ps -aux | grep redis</code></li>
-<li>正常关闭<code>./redis-cli shutdown</code> 强制关闭<code>kill -9 进程id</code>可能丢失数据</li>
-</ul>
-</li>
-</ul>
-<ol>
-<li>客户端启动（需先开启服务端）</li>
-</ol>
-<ul>
-<li>本地数据库<code>./redis-cli -h 127.0.0.1 -p 6379</code> 或者</li>
-<li>用私有ip启动云Redis<br><code>./redis-cli -h r-uf6lbo0hp2xxeenaxm.redis.rds.aliyuncs.com -p 6379 --raw </code> 替换为自己的ip <strong>xxxx..rds.aliyuncs.com</strong><br>输入账号密码 <code>auth account001:Account001!))</code> 替换为自己的<strong>账号:密码</strong><h2 id="Mysql-安装"><a href="#Mysql-安装" class="headerlink" title="Mysql 安装"></a>Mysql 安装</h2></li>
-</ul>
-<h2 id="Vue-安装"><a href="#Vue-安装" class="headerlink" title="Vue 安装"></a>Vue 安装</h2><h2 id="写一个简单接口"><a href="#写一个简单接口" class="headerlink" title="写一个简单接口"></a>写一个简单接口</h2>]]></content>
-      <categories>
-        <category>后端开发</category>
-      </categories>
-      <tags>
-        <tag>Redis</tag>
-        <tag>阿里云</tag>
-        <tag>ECS</tag>
-        <tag>Mysql</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>初探koa2</title>
     <url>/2022/02/25/%E5%88%9D%E6%8E%A2koa2/</url>
     <content><![CDATA[<h1 id="koa2-的安装"><a href="#koa2-的安装" class="headerlink" title="koa2 的安装"></a>koa2 的安装</h1><ol>
@@ -663,6 +663,32 @@
       <tags>
         <tag>koa2</tag>
         <tag>node</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>搭建hexo个人博客</title>
+    <url>/2019/11/25/%E6%90%AD%E5%BB%BAhexo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<h1 id="环境搭建（现在官网有MacOS安装包，傻瓜操作无需以下步骤）"><a href="#环境搭建（现在官网有MacOS安装包，傻瓜操作无需以下步骤）" class="headerlink" title="环境搭建（现在官网有MacOS安装包，傻瓜操作无需以下步骤）"></a>环境搭建（现在官网有MacOS安装包，傻瓜操作无需以下步骤）</h1><ol>
+<li>node.js安装官网</li>
+<li>npm或cnpm <code>npm install -g cnpm --registry-https://registry.npm.taobao.org</code></li>
+<li>验证版本<code>node -v</code> <code>npm -v</code>或<code>cnpm -v</code></li>
+<li>安装hexo <code>cnpm install -g hexo-cli</code></li>
+</ol>
+<h1 id="创建本地Blog"><a href="#创建本地Blog" class="headerlink" title="创建本地Blog"></a>创建本地Blog</h1><ol>
+<li>建立空文件夹作为博客地址，<code>mkdir Blog</code></li>
+<li>前往该文件夹 <code>cd Blog/</code></li>
+<li>初始化hexo <code>hexo init</code> 这里使用命令创建文件夹是因为我通过<code>cmd + N</code>方式创建文件夹会提示为非空导致无法初始化hexo</li>
+<li>启动hexo 服务 <code>hexo s</code> 成功后可访问 <a href="http://localhost:4000/">http://localhost:4000/</a> ，使用 <code>ctl+C</code> 结束服务</li>
+<li>创建一篇Blog <code>hexo n &quot;文件名&quot;</code>，生成的Blog是markdown格式，会在 source&#x2F;_posts&#x2F; 这个文件夹下</li>
+<li>清理缓存<code>hexo clean</code>，生成博客 <code>hexo g</code></li>
+<li>本地启动hexo测试效果 <code>hexo s</code></li>
+</ol>
+]]></content>
+      <categories>
+        <category>博客</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
       </tags>
   </entry>
   <entry>
@@ -715,32 +741,6 @@
       </tags>
   </entry>
   <entry>
-    <title>搭建hexo个人博客</title>
-    <url>/2019/11/25/%E6%90%AD%E5%BB%BAhexo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<h1 id="环境搭建（现在官网有MacOS安装包，傻瓜操作无需以下步骤）"><a href="#环境搭建（现在官网有MacOS安装包，傻瓜操作无需以下步骤）" class="headerlink" title="环境搭建（现在官网有MacOS安装包，傻瓜操作无需以下步骤）"></a>环境搭建（现在官网有MacOS安装包，傻瓜操作无需以下步骤）</h1><ol>
-<li>node.js安装官网</li>
-<li>npm或cnpm <code>npm install -g cnpm --registry-https://registry.npm.taobao.org</code></li>
-<li>验证版本<code>node -v</code> <code>npm -v</code>或<code>cnpm -v</code></li>
-<li>安装hexo <code>cnpm install -g hexo-cli</code></li>
-</ol>
-<h1 id="创建本地Blog"><a href="#创建本地Blog" class="headerlink" title="创建本地Blog"></a>创建本地Blog</h1><ol>
-<li>建立空文件夹作为博客地址，<code>mkdir Blog</code></li>
-<li>前往该文件夹 <code>cd Blog/</code></li>
-<li>初始化hexo <code>hexo init</code> 这里使用命令创建文件夹是因为我通过<code>cmd + N</code>方式创建文件夹会提示为非空导致无法初始化hexo</li>
-<li>启动hexo 服务 <code>hexo s</code> 成功后可访问 <a href="http://localhost:4000/">http://localhost:4000/</a> ，使用 <code>ctl+C</code> 结束服务</li>
-<li>创建一篇Blog <code>hexo n &quot;文件名&quot;</code>，生成的Blog是markdown格式，会在 source&#x2F;_posts&#x2F; 这个文件夹下</li>
-<li>清理缓存<code>hexo clean</code>，生成博客 <code>hexo g</code></li>
-<li>本地启动hexo测试效果 <code>hexo s</code></li>
-</ol>
-]]></content>
-      <categories>
-        <category>博客</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>机器学习Tensorflow框架安装</title>
     <url>/2019/12/15/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0Tensorflow%E6%A1%86%E6%9E%B6%E5%AE%89%E8%A3%85/</url>
     <content><![CDATA[<h1 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h1><ul>
@@ -784,33 +784,6 @@
         <tag>实践</tag>
         <tag>Tensorflow</tag>
         <tag>AI</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>阿里云搭建个人云服务器</title>
-    <url>/2019/11/27/%E9%98%BF%E9%87%8C%E4%BA%91%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
-    <content><![CDATA[<h1 id="选择服务器系统"><a href="#选择服务器系统" class="headerlink" title="选择服务器系统"></a>选择服务器系统</h1><p>选过CentOS、Alibaba cloud linux</p>
-<h1 id="安装数据库"><a href="#安装数据库" class="headerlink" title="安装数据库"></a>安装数据库</h1><h2 id="安装node"><a href="#安装node" class="headerlink" title="安装node"></a>安装node</h2><p>Node官网下载相应包：<a href="https://nodejs.org/en/download/">官网下载</a><br>我这里下载好的，直接上传到服务器：<code>/usr/node</code> 文件夹自己建的<br>到当前文件夹下解压:<code>tar -xvf xxxxxx.tar.xz</code><br>npm和node命令全局生效：<code>vim /ect/profile</code>，修改后<code>source /etc/profile</code></p>
-<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line"><span class="comment">#set for nodejs</span></span><br><span class="line"><span class="built_in">export</span> <span class="attribute">NODE_HOME</span>=/usr/node/node-v12.16.3-linux-x64#与文件夹路径对应</span><br><span class="line"><span class="built_in">export</span> <span class="attribute">PATH</span>=<span class="variable">$NODE_HOME</span>/bin:$PATH</span><br></pre></td></tr></table></figure>
-<p>查看一下版本，检验是否按照成功<code>node -v</code>、<code>npm -v</code><br>本地调试好项目后，上传到服务器上，别忘了添加依赖<code>npm install</code></p>
-<blockquote>
-<p>注意：阿里云要在安全组里开启 3000 端口</p>
-</blockquote>
-<h1 id="配置相关环境"><a href="#配置相关环境" class="headerlink" title="配置相关环境"></a>配置相关环境</h1><h2 id="ssh远程连接–-gt-sftp"><a href="#ssh远程连接–-gt-sftp" class="headerlink" title="ssh远程连接–&gt;sftp"></a>ssh远程连接–&gt;sftp</h2><p>配置实例安全组，开放22端口<br>ssh 如果连接不成功，提示<code>ssh_exchange_identification: read: Connection reset by peer</code></p>
-<p>解决办法</p>
-<ol>
-<li>前往本地文件夹<code>/Users/jiachenfu/.ssh/</code>删除<code>known_hosts</code>或改为<code>known_hosts.bak</code>，尝试<code>ssh root@ip</code>是否解决</li>
-<li>切换一个网络吧，关闭代理VPN，有的校园网络很坑会连不上</li>
-<li>尝试<code>ping ip</code>，如果成功，前往阿里云网页进行远程登录，修改<code>vi /etc/hosts.allow</code>，在末尾添加<code>sshd: ALL ##允许所有ip主机均能连接本机</code>，然后重启<code>systemctl restart sshd.service</code>，尝试<code>ssh root@ip</code>是否解决</li>
-<li>查看阿里云实例密钥对是否绑定</li>
-</ol>
-]]></content>
-      <categories>
-        <category>散装知识</category>
-      </categories>
-      <tags>
-        <tag>阿里云</tag>
-        <tag>服务器</tag>
       </tags>
   </entry>
   <entry>
@@ -870,6 +843,33 @@
       </categories>
       <tags>
         <tag>Vue</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>阿里云搭建个人云服务器</title>
+    <url>/2019/11/27/%E9%98%BF%E9%87%8C%E4%BA%91%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
+    <content><![CDATA[<h1 id="选择服务器系统"><a href="#选择服务器系统" class="headerlink" title="选择服务器系统"></a>选择服务器系统</h1><p>选过CentOS、Alibaba cloud linux</p>
+<h1 id="安装数据库"><a href="#安装数据库" class="headerlink" title="安装数据库"></a>安装数据库</h1><h2 id="安装node"><a href="#安装node" class="headerlink" title="安装node"></a>安装node</h2><p>Node官网下载相应包：<a href="https://nodejs.org/en/download/">官网下载</a><br>我这里下载好的，直接上传到服务器：<code>/usr/node</code> 文件夹自己建的<br>到当前文件夹下解压:<code>tar -xvf xxxxxx.tar.xz</code><br>npm和node命令全局生效：<code>vim /ect/profile</code>，修改后<code>source /etc/profile</code></p>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line"><span class="comment">#set for nodejs</span></span><br><span class="line"><span class="built_in">export</span> <span class="attribute">NODE_HOME</span>=/usr/node/node-v12.16.3-linux-x64#与文件夹路径对应</span><br><span class="line"><span class="built_in">export</span> <span class="attribute">PATH</span>=<span class="variable">$NODE_HOME</span>/bin:$PATH</span><br></pre></td></tr></table></figure>
+<p>查看一下版本，检验是否按照成功<code>node -v</code>、<code>npm -v</code><br>本地调试好项目后，上传到服务器上，别忘了添加依赖<code>npm install</code></p>
+<blockquote>
+<p>注意：阿里云要在安全组里开启 3000 端口</p>
+</blockquote>
+<h1 id="配置相关环境"><a href="#配置相关环境" class="headerlink" title="配置相关环境"></a>配置相关环境</h1><h2 id="ssh远程连接–-gt-sftp"><a href="#ssh远程连接–-gt-sftp" class="headerlink" title="ssh远程连接–&gt;sftp"></a>ssh远程连接–&gt;sftp</h2><p>配置实例安全组，开放22端口<br>ssh 如果连接不成功，提示<code>ssh_exchange_identification: read: Connection reset by peer</code></p>
+<p>解决办法</p>
+<ol>
+<li>前往本地文件夹<code>/Users/jiachenfu/.ssh/</code>删除<code>known_hosts</code>或改为<code>known_hosts.bak</code>，尝试<code>ssh root@ip</code>是否解决</li>
+<li>切换一个网络吧，关闭代理VPN，有的校园网络很坑会连不上</li>
+<li>尝试<code>ping ip</code>，如果成功，前往阿里云网页进行远程登录，修改<code>vi /etc/hosts.allow</code>，在末尾添加<code>sshd: ALL ##允许所有ip主机均能连接本机</code>，然后重启<code>systemctl restart sshd.service</code>，尝试<code>ssh root@ip</code>是否解决</li>
+<li>查看阿里云实例密钥对是否绑定</li>
+</ol>
+]]></content>
+      <categories>
+        <category>散装知识</category>
+      </categories>
+      <tags>
+        <tag>阿里云</tag>
+        <tag>服务器</tag>
       </tags>
   </entry>
 </search>
