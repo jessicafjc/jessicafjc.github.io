@@ -216,10 +216,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2022-03-07 15:00:00 / 修改时间：16:16:21" itemprop="dateCreated datePublished" datetime="2022-03-07T15:00:00+08:00">2022-03-07</time>
+              <time title="创建时间：2022-03-07 15:00:00" itemprop="dateCreated datePublished" datetime="2022-03-07T15:00:00+08:00">2022-03-07</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-03-08 09:45:10" itemprop="dateModified" datetime="2022-03-08T09:45:10+08:00">2022-03-08</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -248,10 +254,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          Here's something encrypted, password is required to continue reading.
+          <p>记录一个从环境搭建到API书写并测试的流程</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2022/03/07/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%94%A8ECS+Redis+Mysql%E6%90%AD%E5%BB%BAAPI/#more" rel="contents">
+              <a class="btn" href="/2022/03/07/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%94%A8ECS+Redis+Mysql%E6%90%AD%E5%BB%BAAPI/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -394,7 +400,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-03-03 23:01:18" itemprop="dateModified" datetime="2022-03-03T23:01:18+08:00">2022-03-03</time>
+                <time title="修改时间：2022-03-08 09:37:05" itemprop="dateModified" datetime="2022-03-08T09:37:05+08:00">2022-03-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -424,41 +430,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="koa2-的安装"><a href="#koa2-的安装" class="headerlink" title="koa2 的安装"></a>koa2 的安装</h1><ol>
-<li><p>运行<code>npm install koa</code></p>
-<p> 新建一个 <code>index.js</code> 测试一下</p>
- <figure class="highlight zephir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Koa = <span class="keyword">require</span>(<span class="string">&#x27;koa&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Koa();</span><br><span class="line"></span><br><span class="line"><span class="comment">// response</span></span><br><span class="line">app.<span class="keyword">use</span>(ctx =&gt; &#123;</span><br><span class="line">  ctx.body = <span class="string">&#x27;Hello Koa&#x27;</span>;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
-<p> 运行下<code>node index.js</code>，访问<a target="_blank" rel="noopener" href="http://localhost:3000/">http:localhost:3000</a>查看效果。</p>
-</li>
-<li><p>安装koa2项目生成器并创建项目</p>
-<ol>
-<li>npm install koa-generator -g<blockquote>
-<p>可能需要sudo 否则权限不足</p>
-</blockquote>
-</li>
-<li>生成项目 <code>koa2 项目名</code> </li>
-<li>安装依赖 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> 项目名</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure></li>
-<li>启动服务<code>npm start</code>，浏览器输入：localhost:3000,如果页面中展示了如”Hello Koa 2”的内容，说明项目搭建成功。<h1 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h1></li>
-</ol>
-</li>
-</ol>
-<ul>
-<li>在 Koa2 中 GET 传值通过 <code>ctx</code> 或 <code>ctx.request</code> 接收</li>
-<li>动态路由传值可通过 <code>ctx.params</code> 接收</li>
-<li>query 返回的是格式化好的参数对象</li>
-<li>queryString 返回的是请求字符串<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引入模块</span></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">Koa</span> = <span class="built_in">require</span>(<span class="string">&#x27;koa&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> router = <span class="built_in">require</span>(<span class="string">&#x27;koa-router&#x27;</span>)() <span class="comment">// 引入并实例化</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 实例化</span></span><br><span class="line"><span class="keyword">let</span> app = <span class="keyword">new</span> <span class="title class_">Koa</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 配置路由</span></span><br><span class="line"><span class="comment">// ctx 上下文 context，包含了 request 和 response 等信息</span></span><br><span class="line">router</span><br><span class="line">  .<span class="title function_">get</span>(<span class="string">&#x27;/&#x27;</span>, <span class="keyword">async</span> ctx =&gt; &#123;</span><br><span class="line">    ctx.<span class="property">body</span> = <span class="string">&#x27;首页&#x27;</span></span><br><span class="line">  &#125;)</span><br><span class="line">  .<span class="title function_">get</span>(<span class="string">&#x27;/news&#x27;</span>, <span class="keyword">async</span> ctx =&gt; &#123;</span><br><span class="line">    ctx.<span class="property">body</span> = <span class="string">&#x27;新闻列表&#x27;</span></span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="comment">// get 传值</span></span><br><span class="line">  .<span class="title function_">get</span>(<span class="string">&#x27;/newscontent&#x27;</span>, <span class="keyword">async</span> ctx =&gt; &#123;</span><br><span class="line">     <span class="comment">// 访问 http://localhost:9000/newscontent?aid=123&amp;name=zhangsan</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(ctx.<span class="property">query</span>)</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(ctx.<span class="property">request</span>.<span class="property">query</span>)          <span class="comment">// &#123; aid: &#x27;123&#x27;, name: &#x27;zhangsan&#x27; &#125;   对象</span></span><br><span class="line">    ctx.<span class="property">body</span> = <span class="string">&#x27;新闻详情&#x27;</span></span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="comment">// 动态路由</span></span><br><span class="line">  .<span class="title function_">get</span>(<span class="string">&#x27;/newsdetail/:id&#x27;</span>, <span class="keyword">async</span> ctx =&gt; &#123;</span><br><span class="line">     <span class="comment">// 访问 http://localhost:9000/newsdetail/1234</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(ctx.<span class="property">params</span>) <span class="comment">// &#123; id: 1234 &#125;</span></span><br><span class="line">    ctx.<span class="property">body</span> = <span class="string">&#x27;新闻详情 - 动态路由&#x27;</span></span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="comment">// 动态路由可以传入多个值</span></span><br><span class="line">  .<span class="title function_">get</span>(<span class="string">&#x27;/newsdetail/:aid/:bid&#x27;</span>, <span class="keyword">async</span> ctx =&gt; &#123;</span><br><span class="line">     <span class="comment">// 访问 http://localhost:9000/newsdetail/1234/5678</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(ctx.<span class="property">params</span>) <span class="comment">// &#123; aid: 1234, bid: 5678 &#125;</span></span><br><span class="line">    ctx.<span class="property">body</span> = <span class="string">&#x27;新闻详情 - 动态路由 - 传入多个值&#x27;</span></span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">app</span><br><span class="line">  .<span class="title function_">use</span>(router.<span class="title function_">routes</span>())           <span class="comment">// 启动路由</span></span><br><span class="line">  .<span class="title function_">use</span>(router.<span class="title function_">allowedMethods</span>())   <span class="comment">// router.allowedMethods() 用在路由匹配 router.routes() 之后，所以在当所有路由中间件最后调用，此时根据 ctx.status 设置 response 响应头</span></span><br><span class="line"></span><br><span class="line">app.<span class="title function_">listen</span>(<span class="number">9000</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;请浏览器打开 http://localhost:9000 或 http://localhost:9000&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<h1 id="写个简单的测试接口"><a href="#写个简单的测试接口" class="headerlink" title="写个简单的测试接口"></a>写个简单的测试接口</h1></li>
-</ul>
-<ol>
-<li>安装 <code>npm i koa-bodyparser</code></li>
-<li>新建一个xxx.js</li>
-</ol>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引入模块</span></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">Koa</span> = <span class="built_in">require</span>(<span class="string">&#x27;koa&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> router = <span class="built_in">require</span>(<span class="string">&#x27;koa-router&#x27;</span>)() <span class="comment">// 引入并实例化</span></span><br><span class="line"><span class="keyword">const</span> bodyParser = <span class="built_in">require</span>(<span class="string">&#x27;koa-bodyparser&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 实例化</span></span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> <span class="title class_">Koa</span>()</span><br><span class="line"><span class="comment">// 配置中间件，通过 bodyParser 获取 post 请求传递过来的参数</span></span><br><span class="line">app.<span class="title function_">use</span>(<span class="title function_">bodyParser</span>())</span><br><span class="line"></span><br><span class="line"><span class="comment">// GET 接口</span></span><br><span class="line">router.<span class="title function_">get</span>(<span class="string">&#x27;/news&#x27;</span>, <span class="function"><span class="params">ctx</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; search &#125; = ctx.<span class="property">query</span></span><br><span class="line">  ctx.<span class="property">body</span> = &#123;</span><br><span class="line">    <span class="attr">time</span>: <span class="keyword">new</span> <span class="title class_">Date</span>(),</span><br><span class="line">    <span class="attr">data</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">title</span>: <span class="string">`新闻标题 1 - <span class="subst">$&#123; search &#125;</span>`</span></span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">title</span>: <span class="string">`新闻标题 2 - <span class="subst">$&#123; search &#125;</span>`</span></span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// POST 接口</span></span><br><span class="line">router.<span class="title function_">post</span>(<span class="string">&#x27;/say&#x27;</span>, <span class="function"><span class="params">ctx</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; name &#125; = ctx.<span class="property">request</span>.<span class="property">body</span></span><br><span class="line">  ctx.<span class="property">body</span> = &#123;</span><br><span class="line">    <span class="attr">time</span>: <span class="keyword">new</span> <span class="title class_">Date</span>(),</span><br><span class="line">    <span class="attr">reply</span>: <span class="string">`Hello <span class="subst">$&#123; name &#125;</span>!`</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">app.<span class="title function_">use</span>(router.<span class="title function_">routes</span>()) <span class="comment">// 启动路由</span></span><br><span class="line">app.<span class="title function_">listen</span>(<span class="number">3000</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Server is running on 3000&#x27;</span>)</span><br><span class="line">&#125;) <span class="comment">// 启动服务</span></span><br></pre></td></tr></table></figure>
-<ol start="3">
-<li>运行<code>node xxx.js</code>， 访问 <a target="_blank" rel="noopener" href="http://localhost:3000/news?search=%E7%A7%91%E6%8A%80">http://localhost:3000/news?search=科技</a> 查看效果</li>
-</ol>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://github.com/koajs/koa">Github koa</a><br><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/3e35db2c8d6c">koa2从搭建项目到实现API</a><br><a target="_blank" rel="noopener" href="https://liuxianyu.cn/article/learn-koa.html">接触 Koa2 框架</a><br><a target="_blank" rel="noopener" href="https://liuxianyu.cn/article/koa-get-post.html">用 Koa2 写 GET、POST 测试接口</a></p>
-
+          <p>基础安装，koa2项目生成，简单接口书写</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/02/25/%E5%88%9D%E6%8E%A2koa2/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -508,7 +488,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-03-07 23:36:58" itemprop="dateModified" datetime="2022-03-07T23:36:58+08:00">2022-03-07</time>
+                <time title="修改时间：2022-03-08 10:38:02" itemprop="dateModified" datetime="2022-03-08T10:38:02+08:00">2022-03-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -538,64 +518,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="文章加密"><a href="#文章加密" class="headerlink" title="文章加密"></a>文章加密</h1><p>安装<code>npm install --save hexo-blog-encrypt</code><br>将 “password” 字段添加到文章头</p>
-<blockquote>
-<p>纯数字不好使</p>
-</blockquote>
-<h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_58068682/article/details/116614622">Hexo博客技巧：对文章进行加密</a></p>
-<h1 id="插入图片"><a href="#插入图片" class="headerlink" title="插入图片"></a>插入图片</h1><p>安装<code>npm install https://github.com/CodeFalling/hexo-asset-image –save</code></p>
-<blockquote>
-<p>注意这一步一定要使用上面的安装方法，使用官网的代码则会出现保存文件为.com的现象</p>
-</blockquote>
-<h1 id="hexo-添加live2d看板动画"><a href="#hexo-添加live2d看板动画" class="headerlink" title="hexo 添加live2d看板动画"></a>hexo 添加live2d看板动画</h1><ol>
-<li>安装<code>npm install --save hexo-helper-live2d</code></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/xiazeyu/live2d-widget-models.git">下载</a>各种动画model</li>
-<li>配置博客站点配置文件，**_config.yml** <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">live2d:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">pluginModelPath:</span> <span class="string">assets/</span></span><br><span class="line">  <span class="attr">model:</span></span><br><span class="line">    <span class="attr">use:</span> <span class="string">live2d-widget-model-epsilon2_1</span>  <span class="comment">#模板目录，在node_modules里</span></span><br><span class="line">  <span class="attr">display:</span></span><br><span class="line">    <span class="attr">position:</span> <span class="string">right</span></span><br><span class="line">    <span class="attr">width:</span> <span class="number">150</span> </span><br><span class="line">    <span class="attr">height:</span> <span class="number">300</span></span><br><span class="line">  <span class="attr">mobile:</span></span><br><span class="line">    <span class="attr">show:</span> <span class="literal">false</span>  <span class="comment">#是否在手机进行显示</span></span><br></pre></td></tr></table></figure></li>
-</ol>
-<h1 id="添加统计数据"><a href="#添加统计数据" class="headerlink" title="添加统计数据"></a>添加统计数据</h1><h2 id="百度统计"><a href="#百度统计" class="headerlink" title="百度统计"></a>百度统计</h2><ol>
-<li>登录百度统计<a target="_blank" rel="noopener" href="https://tongji.baidu.com/">https://tongji.baidu.com</a> 新增网站，添加完毕后到代码获取拿到统计脚本,找到<code>https://hm.baidu.com/hm.js?</code>后面的key值</li>
-<li>拿到key后，去到Hexo根目录下的<code>themes\next\</code>，打开 <strong>_config.yml</strong> 文件，找到baidu_analytics，在后面加上key值</li>
-<li>然后重新编译，打包上传就可以了 <code>hexo d -g</code></li>
-<li>测试，去到百度统计，找到代码安装检查，就可以测试是否添加上去了<h2 id="LeanCloud阅读次数统计"><a href="#LeanCloud阅读次数统计" class="headerlink" title="LeanCloud阅读次数统计"></a>LeanCloud阅读次数统计</h2></li>
-</ol>
-<ul>
-<li><p>首先，前往Leancloud<a target="_blank" rel="noopener" href="https://console.leancloud.app/apps">官网</a>进行注册，并登陆。</p>
-</li>
-<li><p>点击创建应用,输入应用的名称(随便起都行), 选择开发版, 点击创建</p>
-</li>
-<li><p>创建成功后点击右上角的设置小齿轮,点击存储-创建 Class</p>
-</li>
-<li><p>Class名称设置为<code>Counter</code>(必须为<strong>Counter</strong>)-选择无限制-点击创建</p>
-</li>
-<li><p>创建后点击设置-点击应用Key-获取App ID和App Key</p>
-</li>
-<li><p>将获取到的App ID和App Key设置到Next主题配置文件 <strong>_config.yml</strong>,配置文件已存在这个配置, 只要把id和key加上去就好了</p>
-</li>
-<li><p>点击安全中心, 填写自己博客对应的域名（注意协议、域名和端口号需严格一致）</p>
-</li>
-<li><p>点击云引擎-点击部署-点击在线编辑</p>
-</li>
-<li><p>点击创建函数-选择 <code>Hook</code> , AV.Cloud.选择 <code>beforeSave</code> ,类选择Counter-添加代码</p>
-  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> query = <span class="keyword">new</span> <span class="variable constant_">AV</span>.<span class="title class_">Query</span>(<span class="string">&quot;Counter&quot;</span>);</span><br><span class="line"><span class="keyword">if</span> (request.<span class="property">object</span>.<span class="property">updatedKeys</span>.<span class="title function_">indexOf</span>(<span class="string">&#x27;time&#x27;</span>) !== -<span class="number">1</span>) &#123;</span><br><span class="line">     <span class="keyword">return</span> query.<span class="title function_">get</span>(request.<span class="property">object</span>.<span class="property">id</span>).<span class="title function_">then</span>(<span class="keyword">function</span> (<span class="params">obj</span>) &#123;</span><br><span class="line">     <span class="keyword">if</span> (obj.<span class="title function_">get</span>(<span class="string">&quot;time&quot;</span>) + <span class="number">1</span> !== request.<span class="property">object</span>.<span class="title function_">get</span>(<span class="string">&quot;time&quot;</span>)) &#123;</span><br><span class="line">     <span class="keyword">throw</span> <span class="keyword">new</span> <span class="variable constant_">AV</span>.<span class="property">Cloud</span>.<span class="title class_">Error</span>(<span class="string">&#x27;Invalid update!&#x27;</span>);</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>点击保存，点击部署</p>
-</li>
-<li><p>打开Next主题配置文件 <strong>_config.yml</strong>, 将leancloud_visitors下的security设置为true（如没有则新增）</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">leancloud_visitors</span>:</span><br><span class="line">     <span class="attr">enable</span>: <span class="literal">true</span></span><br><span class="line">     <span class="attr">app_id</span>: &lt;&lt;your app id&gt;&gt; # 同前文的id</span><br><span class="line">     <span class="attr">app_key</span>: &lt;&lt;your app key&gt;&gt; # 同前文的key</span><br><span class="line">     # <span class="title class_">Dependencies</span>: <span class="attr">https</span>:<span class="comment">//github.com/theme-next/hexo-leancloud-counter-security</span></span><br><span class="line">     <span class="attr">security</span>: <span class="literal">true</span></span><br><span class="line">     # 由于<span class="title class_">Leancloud</span>免费版的云引擎存在请求线程数和运行时间限制以及休眠机制，</span><br><span class="line">     # 很多时候访客数量加载会很慢。</span><br><span class="line">     # 如果设置betterPerformance为<span class="literal">true</span>，</span><br><span class="line">     # 则网页则会在提交请求之前直接显示访客人数为查询到的人数+<span class="number">1</span>，以增加用户体验。</span><br><span class="line">     <span class="attr">betterPerformance</span>: <span class="literal">false</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>打开命令行cmd并进入站点文件夹，<code>npm install hexo-leancloud-counter-security --save</code></p>
-</li>
-<li><p>设置<code>hexo lc-counter register &lt;&lt;username&gt;&gt; &lt;&lt;password&gt;&gt;</code>，将&lt;&lt; username &gt;&gt;和&lt;&lt; password &gt;&gt;替换为你自己的用户名和密码（不必与leancloud的账号）相同。</p>
-</li>
-<li><p>打开站点配置文件 <strong>_config.yml</strong>，将&lt;&lt; username &gt;&gt;和&lt;&lt; password &gt;&gt;替换为你刚刚设置的用户名和密码</p>
-</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">leancloud_counter_security</span>:</span><br><span class="line">    <span class="attr">enable_sync</span>: <span class="literal">true</span></span><br><span class="line">    <span class="attr">app_id</span>: &lt;&lt;your app id&gt;&gt;   # 同前文的id</span><br><span class="line">    <span class="attr">app_key</span>: &lt;&lt;your app key&gt;&gt; # 同前文的key</span><br><span class="line">    <span class="attr">username</span>: </span><br><span class="line">    <span class="attr">password</span>:</span><br></pre></td></tr></table></figure>
-<ul>
-<li>返回Leancloud控制台的应用内, 检查_User表中是否出现一条记录</li>
-<li>进入Counter表, 打开权限设置，修改<code>add</code>和<code>create</code>为指定用户，修改<code>delete</code>为指定空用户</li>
-</ul>
-<h3 id="参考文章-1"><a href="#参考文章-1" class="headerlink" title="参考文章"></a>参考文章</h3><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/e0a719bac963">Hexo Next leancloud文章阅读次数配置</a><br><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/3a6342e16e57">hexo 添加live2d看板动画</a></p>
-
+          <p>不定时更新一些用过的插件</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/02/24/hexo%E5%8D%9A%E5%AE%A2%E5%AE%9E%E7%94%A8%E5%8A%9F%E8%83%BD%E5%8F%8A%E6%8F%92%E4%BB%B6/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -645,7 +576,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-02-28 14:16:11" itemprop="dateModified" datetime="2022-02-28T14:16:11+08:00">2022-02-28</time>
+                <time title="修改时间：2022-03-08 09:46:13" itemprop="dateModified" datetime="2022-03-08T09:46:13+08:00">2022-03-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -675,186 +606,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <ul>
-<li><a href="#redis%E6%95%B0%E6%8D%AE%E5%9F%BA%E7%A1%80">Redis 数据基础</a><ul>
-<li><a href="#redis%E9%80%9A%E7%94%A8%E6%8C%87%E4%BB%A4">Redis 通用指令</a><ul>
-<li><a href="#1-key%E9%80%9A%E7%94%A8%E6%93%8D%E4%BD%9C">1. key通用操作</a></li>
-<li><a href="#2%E6%95%B0%E6%8D%AE%E5%BA%93%E9%80%9A%E7%94%A8%E6%8C%87%E4%BB%A4">2. 数据库通用指令</a></li>
-</ul>
-</li>
-<li><a href="#string">String</a><ul>
-<li><a href="#1%E9%80%92%E5%A2%9E%E9%80%92%E5%87%8F">1. 递增递减</a></li>
-<li><a href="#2%E6%95%B0%E6%8D%AE%E5%AE%9E%E6%95%88%E6%80%A7">2. 数据实效性</a></li>
-<li><a href="#3%E7%BB%93%E6%9E%84%E5%9E%8B%E5%92%8C%E9%9D%9E%E7%BB%93%E6%9E%84%E5%9E%8B">3. 结构型和非结构型</a></li>
-<li><a href="#4%E7%BB%93%E6%9E%84%E5%9E%8B%E5%92%8C%E9%9D%9E%E7%BB%93%E6%9E%84%E5%9E%8B%E9%AB%98%E7%83%AD%E5%BA%A6%E8%AE%BF%E9%97%AE%E5%8A%A0%E9%80%9F">4. 结构型和非结构型高热度访问加速</a></li>
-<li><a href="#5-key%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83%EF%BC%9A">5. key命名规范：</a></li>
-</ul>
-</li>
-<li><a href="#hash">hash</a><ul>
-<li><a href="#%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86">基础知识</a></li>
-<li><a href="#%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF">使用场景</a></li>
-<li><a href="#string%E5%AD%98%E5%82%A8%E5%AF%B9%E8%B1%A1%EF%BC%88json%EF%BC%89%E4%B8%8Ehash%E5%AD%98%E5%82%A8%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%8C%BA%E5%88%AB">string存储对象（JSON）与hash存储对象的区别</a></li>
-</ul>
-</li>
-<li><a href="#list">list</a><ul>
-<li><a href="#%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86">基础知识</a></li>
-<li><a href="#%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF">使用场景</a></li>
-</ul>
-</li>
-<li><a href="#set%E7%B1%BB%E5%9E%8B">set 类型</a><ul>
-<li><a href="#%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86">基础知识</a></li>
-<li><a href="#%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF">使用场景</a></li>
-</ul>
-</li>
-<li><a href="#sorted-set">sorted_set</a><ul>
-<li><a href="#%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86">基础知识</a></li>
-<li><a href="#%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF">使用场景</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h1 id="Redis-数据基础"><a href="#Redis-数据基础" class="headerlink" title="Redis 数据基础"></a>Redis 数据基础</h1><h2 id="Redis-通用指令"><a href="#Redis-通用指令" class="headerlink" title="Redis 通用指令"></a>Redis 通用指令</h2><h3 id="1-key通用操作"><a href="#1-key通用操作" class="headerlink" title="1. key通用操作"></a>1. key通用操作</h3><ul>
-<li><p>删除指定key<br><code>del key</code></p>
-</li>
-<li><p>获取key是否存在<br><code>exists key</code></p>
-</li>
-<li><p>获取key的类型<br><code>type key</code></p>
-</li>
-<li><p>时效性控制</p>
-<ul>
-<li>为指定key设置有效期<br>  <code>expire key seconds</code><br>  <code>pexpire key milliseconds</code><br>  <code>expireat key timestamp</code><br>  <code>pexpireat key milliseconds-timestamp</code></li>
-<li>获取key的剩余有效期<br>  <code>ttl key</code> 返回-2表示数据已过期，key为nil；返回-1表示key存在且未设置有效期<br>  <code>pttl key</code></li>
-<li>切换key从时效性转换为永久性<br>  <code>persist key</code></li>
-</ul>
-</li>
-<li><p>查询模型</p>
-<ul>
-<li>查询key<br>  <img src="/2022/02/24/Redis%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/16454333387131.jpg"></li>
-</ul>
-</li>
-<li><p>为key改名 </p>
-<ul>
-<li><code>rename key newkey</code>  若已有重名，有覆盖风险</li>
-<li><code>renamenx key newkey</code> 会先进行检索是否重名</li>
-</ul>
-</li>
-<li><p>对所有key排序 <code>sort 集合性数据</code> 集合性数据，排set、list中的元素</p>
-<ul>
-<li>仅排序，不对数据进行修改</li>
-</ul>
-</li>
-<li><p>其他可查帮助 <code>help @generic</code></p>
-</li>
-</ul>
-<h3 id="2-数据库通用指令"><a href="#2-数据库通用指令" class="headerlink" title="2. 数据库通用指令"></a>2. 数据库通用指令</h3><ul>
-<li>切换数据库 <code>select index</code>index为数据库编号<ul>
-<li><code>quit</code> 退出</li>
-<li><code>ping</code> 测试是否联通服务器</li>
-<li><code>echo message</code></li>
-</ul>
-</li>
-<li>数据移动 <code>move key db[index]</code> 若没有对应数据，或key有重复，移动失败返回0</li>
-<li>数据清除<ul>
-<li><code>dbsize</code> 返回数据库现存数据总量（key的数量）</li>
-<li><code>flushdb</code> 删除当前db[index]</li>
-<li><code>flushall</code> 删除全部数据</li>
-</ul>
-</li>
-</ul>
-<h2 id="String"><a href="#String" class="headerlink" title="String"></a>String</h2><h3 id="1-递增递减"><a href="#1-递增递减" class="headerlink" title="1. 递增递减"></a>1. 递增递减</h3><h3 id="2-数据实效性"><a href="#2-数据实效性" class="headerlink" title="2. 数据实效性"></a>2. 数据实效性</h3><h3 id="3-结构型和非结构型"><a href="#3-结构型和非结构型" class="headerlink" title="3. 结构型和非结构型"></a>3. 结构型和非结构型</h3><h3 id="4-结构型和非结构型高热度访问加速"><a href="#4-结构型和非结构型高热度访问加速" class="headerlink" title="4. 结构型和非结构型高热度访问加速"></a>4. 结构型和非结构型高热度访问加速</h3><h3 id="5-key命名规范："><a href="#5-key命名规范：" class="headerlink" title="5. key命名规范："></a>5. key命名规范：</h3><p><strong>表名：主键名：主键值：字段名</strong><br>单一存储格式<br><code>set user:id:3124231:fans 123123123</code><br><code>set user:id:1344345:blogs 789</code></p>
-<p>JSON格式<br><code>set user:id:00789 &#123;id:00789,blog:789,fans:12343234&#125;</code></p>
-<blockquote>
-<p>两者皆有优劣，单一存储修改时仅修改单一数据，JSON格式要修改都修改</p>
-</blockquote>
-<h2 id="hash"><a href="#hash" class="headerlink" title="hash"></a>hash</h2><h3 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h3><p>一个存储空间保存多个键值对数据<br>hash类型：底层使用哈希表结构实现数据存储<br>hash类型下的value只能存储字符串，不存在嵌套，若数据未获取到，则对应值为nil<br><img src="/2022/02/24/Redis%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/16454081278901.jpg"></p>
-<ul>
-<li>添加修改<br><code>hset user name zhangsan</code><br><code>hmset user name zhangsan weight 80</code></li>
-<li>获取数据<br><code>hgetall user</code><br><code>hget user name</code><br><code>hmget user name weight</code></li>
-<li>删除数据<br><code>hdelall user</code><br><code>hdel user name</code></li>
-<li>field 数量查询<br><code>hlen user</code></li>
-<li>判断是否存在指定字段<br><code>hexits user height</code></li>
-<li>获取所有字段名或字段值<br><code>hkeys key</code>（不可能重复）<br><code>hvals key</code>（可能有重复）</li>
-<li>设置指定字段的数值数据递增（可指定范围）<br><code>hincrby user age 1</code><br><code>hincrbyfloat user hight 0.5</code><h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h3></li>
-</ul>
-<ol>
-<li>电商购物车<br><code>hsetnx key field value</code><br>判断是否有该field，有则返回0修改失败，没有则添加value返回1修改成功</li>
-<li>商家抢购限购、限量发放、激活码<br><code>hincrby stop001 item001 -1</code><h3 id="string存储对象（JSON）与hash存储对象的区别"><a href="#string存储对象（JSON）与hash存储对象的区别" class="headerlink" title="string存储对象（JSON）与hash存储对象的区别"></a>string存储对象（JSON）与hash存储对象的区别</h3>JSON：整体性，强调读，一次性获取所有<br>hash：单一性，强调改，可单独分割一个个field进行独立操作</li>
-</ol>
-<h2 id="list"><a href="#list" class="headerlink" title="list"></a>list</h2><p>一个存储空间保存多个数据，强调顺序，底层使用双向链表存储结构实现<br>保存的数据都是string，总容量有限，2^32-1</p>
-<h3 id="基础知识-1"><a href="#基础知识-1" class="headerlink" title="基础知识"></a>基础知识</h3><ul>
-<li><p>添加修改数据，返回value的数量<br><code>lpush key value1 value2</code><br><code>rpush key value1 value2</code></p>
-</li>
-<li><p>获取数据，左进右查则为顺<br><code>lrange key star stop</code> 若想查所有，star为 0 stop为 -1<br><code>lindex key index</code>index为索引<br><code>llen key</code> 返回value的数量</p>
-</li>
-<li><p>获取并移除数据<br><code>lpop key</code><br><code>rpop key</code></p>
-</li>
-<li><p>规定时间内获取并移除数据<br><code>blpop key1 key2... [timeout]</code> timeout以秒为单位<br><code>brpop key1 key2... [timeout]</code></p>
-<h3 id="使用场景-1"><a href="#使用场景-1" class="headerlink" title="使用场景"></a>使用场景</h3></li>
-</ul>
-<ol>
-<li>朋友圈点赞顺序显示好友信息<br><code>lrem key count value</code> 移除指定数据，count为移除个数，value为移除的值</li>
-<li>list 进行分页操作，第一页来自list，第二页及更多通过数据库加载</li>
-<li>自媒体账号个人用户关注列表按顺序展示，粉丝列表将最新关注放前面</li>
-<li>新闻等数据最近发生放前面，最新消息展示</li>
-</ol>
-<h2 id="set-类型"><a href="#set-类型" class="headerlink" title="set 类型"></a>set 类型</h2><p>存储大量数据，便于查询，可进行同类型数据快速去重<br>set类型：与hash存储结构完全相同，仅存储键，不存储值（nil），且<strong>不允许重复</strong><br><img src="/2022/02/24/Redis%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/16454249123420.jpg"></p>
-<h3 id="基础知识-2"><a href="#基础知识-2" class="headerlink" title="基础知识"></a>基础知识</h3><ul>
-<li>添加<br><code>sadd key membel1 membel2...</code></li>
-<li>获取全部<br><code>smembers key</code></li>
-<li>删除数据<br><code>srem key menber1 member2...</code></li>
-<li>获取集合数据总量<br><code>scard key</code></li>
-<li>判断是否包含指定数据<br><code>sismember key member</code></li>
-</ul>
-<h3 id="使用场景-2"><a href="#使用场景-2" class="headerlink" title="使用场景"></a>使用场景</h3><ol>
-<li>随机推荐可能感兴趣的内容，不重复</li>
-</ol>
-<ul>
-<li>随机获取指定数量的数据<br><code>srandmember key [count]</code></li>
-<li>随机获取集合中的某个数据并将该数据移除集合<br><code>spop key</code></li>
-</ul>
-<ol start="2">
-<li>共同关注、共同好友</li>
-</ol>
-<ul>
-<li>集合的交、并、差集<br><code>sinter key1 key2 ...</code><br><code>sunion key1 key2</code><br><code>sdiff key1 key2</code></li>
-<li>集合的交、并、差集并存储到指定集合<br><code>sinterstore [key3] key1 key2 ...</code><br><code>sunionstore [key3] key1 key2</code><br><code>sdiffstore [key3] key1 key2</code></li>
-<li>将指定数据从原始集合中移动到目标集合中<br><code>smove [原始集合key1] [目标集合kye2] [要移动的数据]</code></li>
-</ul>
-<ol start="3">
-<li>统计网站访问量PV\独立访客UV\独立IP</li>
-</ol>
-<ul>
-<li>pv用string类</li>
-<li>uv建立set类型，记录不同cookie数量</li>
-<li>ip建立set模型，记录不同ip数量</li>
-</ul>
-<ol start="4">
-<li>黑白名单</li>
-</ol>
-<h2 id="sorted-set"><a href="#sorted-set" class="headerlink" title="sorted_set"></a>sorted_set</h2><p>可以保持可排序的数据<br>score是有限度的，64位<br>score的数据是双精度double值，基于双精度浮点数特征，可能丢失精度需注意<br>sorted_set底层存储还是基于set结构，数据不能重复，若添加相同的数据，score将被覆盖，保留最后一次结果</p>
-<h3 id="基础知识-3"><a href="#基础知识-3" class="headerlink" title="基础知识"></a>基础知识</h3><ul>
-<li>添加数据<br><code>zadd key [score1] [member1] ....</code></li>
-<li>获取数据<br><code>zrange key star stop withscores</code>withscores可以不加，全部遍历可用 0 -1<br><code>zrevrange key star stop</code> score由大到小</li>
-<li>删除数据<br><code>zrem key member1 member2 ...</code> 注意不是根据score删除</li>
-<li>按条件获取数据<br><code>zrangebyscore key min max withscores limit</code> withscores&#x2F;limit可以不加<br><code>zrerangebyscore key max min withscores limit 0 3</code> limit限制几个，可用于分页 </li>
-<li>条件删除数据<br><code>zremrangebyrank key start stop</code><br><code>zremrangebyscore key min max</code></li>
-<li>获取集合数据总量<br><code>zcard key</code><br><code>zcount key min max</code></li>
-<li>集合交、并操作<br><code>zinterstore [存储集合key3] [进行处理的集合数量] key1 key2 ... </code><br><code>zunionstore [存储集合key3] [进行处理的集合数量] key1 key2 ... </code><h3 id="使用场景-3"><a href="#使用场景-3" class="headerlink" title="使用场景"></a>使用场景</h3></li>
-</ul>
-<ol>
-<li>top10排行榜</li>
-</ol>
-<ul>
-<li>获取数据对应索引(排名)<br><code>zrank key member</code><br><code>zrevrank key member</code></li>
-<li>score 值获取与修改<br><code>zscore key member</code><br><code>zincrby key increment member</code></li>
-</ul>
-<ol start="2">
-<li>基础服务+增值类服务，需要实效性，如体验式vip，试用期</li>
-<li>定期开始投票、讨论、限时进行逾期作废，可用于定时任务执行顺序管理或任务过期管理，建议分段处理</li>
-<li>任务权重设置，采用score记录权重</li>
-</ol>
-
+          <p>数据类型、基础语法、通用指令、通用示例</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/02/24/Redis%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -904,7 +664,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-02-25 14:49:41" itemprop="dateModified" datetime="2022-02-25T14:49:41+08:00">2022-02-25</time>
+                <time title="修改时间：2022-03-08 09:47:48" itemprop="dateModified" datetime="2022-03-08T09:47:48+08:00">2022-03-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -934,54 +694,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="安装Express"><a href="#安装Express" class="headerlink" title="安装Express"></a>安装Express</h1><p>前提已经完成node和mysql的搭建和配置</p>
-<ol>
-<li>安装 Express 应用生成器<code>npm install express-generator -g</code><br> Express 应用生成器 工具可以生成一个 Express 应用的“框架”。可以用 NPM 这样安装它（-g 参数可以把该工具全局安装，那样就可以在任意应用中使用了）</li>
-<li>创建一个名为 “helloworld” 的 Express 应用：<code>express helloworld</code><ol>
-<li>安装成功后会有三个提示：</li>
-<li>change directory:<code>cd helloworld</code></li>
-<li>install dependencies:<code>npm install</code></li>
-<li>run the app:<code>DEBUG=helloworld:* npm start</code>DEBUG 命令可以展示应用运行时返回的有用的日志信息，本地地址是:<a target="_blank" rel="noopener" href="http://localhost:3000/">http://localhost:3000/</a></li>
-</ol>
-</li>
-<li>改写入口文件，将bin下文件改写到app.js<ol>
-<li><p>使用的VScode，Teminal–&gt;new Teminal</p>
-</li>
-<li><p>运行一下<code>node ./bin/www</code>，测试一下没有问题</p>
-</li>
-<li><p>找到bin–&gt;www下的：<code>var http = require(&#39;http&#39;);</code>和<code>var server = http.createServer(app)</code>,复制到app.js下对应位置</p>
-</li>
-<li><p>在app.js中，最下方，注释一行，添加一行</p>
- <figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// module.exports = app;</span></span><br><span class="line">server.listen(&#x27;<span class="number">3000</span>&#x27;);</span><br></pre></td></tr></table></figure></li>
-<li><p>重新运行<code>node app.js</code>即可，测试一下没有问题，可以删除bin文件夹了</p>
-</li>
-</ol>
-</li>
-</ol>
-<h2 id="连接mysql数据库"><a href="#连接mysql数据库" class="headerlink" title="连接mysql数据库"></a>连接mysql数据库</h2><ol>
-<li><p>安装<code>npm install mysql --save</code>，没什么问题</p>
-</li>
-<li><p>新建文件夹util–&gt;数据库连接文件dbconfig.js</p>
- <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">    <span class="keyword">const</span> mysql = <span class="built_in">require</span>(<span class="string">&#x27;mysql&#x27;</span>)</span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">    <span class="comment">//set</span></span><br><span class="line">    <span class="attr">config</span>:&#123;</span><br><span class="line">        <span class="attr">host</span>:<span class="string">&#x27;&#x27;</span>,<span class="comment">//服务器ID，本地为localhost</span></span><br><span class="line">        <span class="attr">port</span>:<span class="string">&#x27;3306&#x27;</span>,<span class="comment">//端口，默认为3306</span></span><br><span class="line">        <span class="attr">user</span>:<span class="string">&#x27;&#x27;</span>,<span class="comment">//用户名</span></span><br><span class="line">        <span class="attr">password</span>:<span class="string">&#x27;&#x27;</span>,<span class="comment">//密码</span></span><br><span class="line">        <span class="attr">database</span>:<span class="string">&#x27;&#x27;</span>,<span class="comment">//数据库</span></span><br><span class="line"></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">//连接数据库，使用mysql的连接池连接方法</span></span><br><span class="line">    <span class="comment">//连接池对象</span></span><br><span class="line">    <span class="attr">sqlConnect</span>:<span class="keyword">function</span>(<span class="params">sql,sqlArr,callBack</span>)&#123;</span><br><span class="line">        <span class="keyword">var</span> pool = mysql.<span class="title function_">createPool</span>(<span class="variable language_">this</span>.<span class="property">config</span>)</span><br><span class="line">        pool.<span class="title function_">getConnection</span>(<span class="function">(<span class="params">err,conn</span>)=&gt;</span>&#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;连接成功&#x27;</span>);</span><br><span class="line">            <span class="keyword">if</span>(err)&#123;</span><br><span class="line">                <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;连接失败&quot;</span>);</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//事件驱动回调</span></span><br><span class="line">            conn.<span class="title function_">query</span>(sql,sqlArr,callBack);</span><br><span class="line">            <span class="comment">//释放连接</span></span><br><span class="line">            conn.<span class="title function_">release</span>()</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>改写文件夹routes下 index.js 文件</p>
- <figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> express = require(<span class="string">&#x27;express&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> router = express.Router();</span><br><span class="line"><span class="keyword">var</span> dbConfig = require(<span class="string">&#x27;../util/dbconfig&#x27;</span>)</span><br><span class="line"><span class="comment">/* GET home page. */</span></span><br><span class="line">router.get(<span class="string">&#x27;/&#x27;</span>, <span class="keyword">function</span>(<span class="params">req, res, next</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> sql = <span class="string">&quot;select * from UserInfo&quot;</span>;<span class="comment">//UserInfo为表名</span></span><br><span class="line">  <span class="keyword">var</span> sqlArr = [];</span><br><span class="line">  <span class="keyword">var</span> callBack = <span class="function">(<span class="params">err,data</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(err)&#123;</span><br><span class="line">      <span class="built_in">console</span>.<span class="built_in">log</span>(<span class="string">&quot;表连接出错了&quot;</span>)</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">      res.send(&#123;</span><br><span class="line">        <span class="string">&#x27;list&#x27;</span>:data</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  dbConfig.sqlConnect(sql,sqlArr,callBack)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// res.render(&#x27;index&#x27;, &#123; title: &#x27;Express&#x27; &#125;);</span></span><br><span class="line">&#125;);</span><br><span class="line">module.exports = router;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>运行一下<code>node app.js</code>成功获取到sql数据，此时<strong>localhost:3000</strong>显示的为该表下所有数据</p>
-</li>
-</ol>
-<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>编写调试Node项目,修改代码后,需要频繁的手动close掉,然后再重新启动,非常繁琐。<br>为了调试方便，建议安装一个自动重启工具<code>npm install -g nodemon</code></p>
-<h2 id="采坑"><a href="#采坑" class="headerlink" title="采坑"></a>采坑</h2><p>阿里云服务器更新npm、node之类的版本ssh连接升级会报错，需要使用：<code>npm config set strict-ssl false</code></p>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a target="_blank" rel="noopener" href="https://www.expressjs.com.cn/starter/installing.html">Express中文网</a><br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1A7411N7KZ?p=2">B站教程Node+Express+Mysql搭建API接口平台</a><br><a target="_blank" rel="noopener" href="https://panjiachen.gitee.io/vue-element-admin-site/zh/guide/#%25E5%258A%259F%25E8%2583%25BD">vue-element-admin By panjiachen</a></p>
-<h1 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h1><h2 id="移植"><a href="#移植" class="headerlink" title="移植"></a>移植</h2><p>将数据请求的内容全部从index.js移植过来</p>
-<ul>
-<li>连接数据库：<code>var dbConfig = require(&#39;../util/dbconfig&#39;)</code></li>
-<li>请求全部数据<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//只显示userID、school</span></span><br><span class="line">getData = <span class="function">(<span class="params">req,res</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> sql = <span class="string">&quot;select userID,school from UserInfo&quot;</span>;<span class="comment">//sql查询语句</span></span><br><span class="line">    <span class="keyword">var</span> sqlArr = [];</span><br><span class="line">    <span class="keyword">var</span> callBack = <span class="function">(<span class="params">err,data</span>)=&gt;</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(err)&#123;</span><br><span class="line">          <span class="built_in">console</span>.<span class="built_in">log</span>(<span class="string">&quot;表连接出错了&quot;</span>)</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">          res.send(&#123;</span><br><span class="line">            <span class="string">&#x27;list&#x27;</span>:data</span><br><span class="line">          &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      dbConfig.sqlConnect(sql,sqlArr,callBack)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li>传参请求<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//传参查询</span></span><br><span class="line">getGender = <span class="function">(<span class="params">req,res</span>)=&gt;</span>&#123;</span><br><span class="line">    let &#123;id&#125; = req.query;</span><br><span class="line">    <span class="keyword">var</span> sql = <span class="string">&quot;select * from UserInfo where gender=?&quot;</span>;<span class="comment">//sql查询语句</span></span><br><span class="line">    <span class="keyword">var</span> sqlArr = [id];</span><br><span class="line">    <span class="keyword">var</span> callBack = <span class="function">(<span class="params">err,data</span>)=&gt;</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(err)&#123;</span><br><span class="line">          <span class="built_in">console</span>.<span class="built_in">log</span>(<span class="string">&quot;查询失败了&quot;</span>)</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">          res.send(&#123;</span><br><span class="line">            <span class="string">&#x27;list&#x27;</span>:data</span><br><span class="line">          &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      dbConfig.sqlConnect(sql,sqlArr,callBack)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li>模块接口，声明对外暴露内容</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span>.<span class="keyword">exports</span> = &#123;</span><br><span class="line">    getData,</span><br><span class="line">    getGender</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="注册路由"><a href="#注册路由" class="headerlink" title="注册路由"></a>注册路由</h2><p>在index.js中，注册路由，完整代码如下：</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var express = require(<span class="string">&#x27;express&#x27;</span>);</span><br><span class="line">var router = express.Router();</span><br><span class="line"><span class="regexp">//</span>注册路由</span><br><span class="line">var api = require(<span class="string">&#x27;../controllers/api&#x27;</span>);router.get(<span class="string">&#x27;/&#x27;</span>,api.getData);</span><br><span class="line"><span class="regexp">//</span>示例：http:<span class="regexp">//</span>localhost:<span class="number">3000</span></span><br><span class="line"></span><br><span class="line">router.get(<span class="string">&#x27;/getGender&#x27;</span>,api.getGender); </span><br><span class="line"><span class="regexp">//</span>示例：http:<span class="regexp">//</span>localhost:<span class="number">3000</span>/getGender?id=<span class="number">0</span></span><br><span class="line"></span><br><span class="line">module.exports = router;</span><br></pre></td></tr></table></figure>
+          <p>Express的安装，连接Mysql并完成一个传参数写</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/05/22/Express+Mysql%E6%90%AD%E5%BB%BA%E6%8E%A5%E5%8F%A3%E5%B9%B3%E5%8F%B0/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1159,7 +880,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-02-24 10:09:14" itemprop="dateModified" datetime="2022-02-24T10:09:14+08:00">2022-02-24</time>
+                <time title="修改时间：2022-03-08 10:35:23" itemprop="dateModified" datetime="2022-03-08T10:35:23+08:00">2022-03-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1189,72 +910,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="课程构架"><a href="#课程构架" class="headerlink" title="课程构架"></a>课程构架</h1><ol>
-<li>第一讲 人工智能导论</li>
-<li>第二讲 环境搭建</li>
-<li>第三讲 TensorFlow编程基础</li>
-<li>第四讲 线性回归问题——函数回归单一神经元</li>
-<li>第五讲 房价预测问题：多元线性回归及TensorFlow编程进阶<ol>
-<li>多因素影响如何处理</li>
-<li>矩阵向量计算</li>
-</ol>
-</li>
-<li>第六讲 MNIST手写数字识别：分类应用入门<ol>
-<li>与线性回归相比，多了一个激活函数</li>
-</ol>
-</li>
-<li>第七讲 MNIST手写数字识别进阶：多层神经网络与应用</li>
-<li>第八讲 图像识别问题：卷积神经网络与应用<ol>
-<li>CIFAR10（数字“10”代表十分类）</li>
-</ol>
-</li>
-<li>第九讲 Deep Dream：理解深度神经网络结构及应用</li>
-<li>第十讲 猫狗大战：迁移学习及应用</li>
-<li>第十一讲 泰坦尼克号上的旅客生存概率预测：TensorFlow的高级框架Keras<ol>
-<li>使用高级框架</li>
-<li>数据处理</li>
-</ol>
-</li>
-<li>第十二讲 电影评论情感分析：RNN循环网络原理及应用<ol>
-<li>自然语言的分析</li>
-<li>如何将自然语言处理为计算机可处理的数据-词嵌入</li>
-<li>模型优化：同义词、近义词、反义词……</li>
-</ol>
-</li>
-<li>第十三讲 FashionMNIST图像生成：生成对抗网原理及应用</li>
-<li>第十四讲 鸢尾花品种——网页落地</li>
-<li>第十五讲 花卉识别——移动应用落地</li>
-<li>第十六讲 课程回顾与大作业<ol>
-<li>Final Project以PPT+源代码+多样性展现形式</li>
-<li>有展示答辩<h1 id="线下课程实施经验"><a href="#线下课程实施经验" class="headerlink" title="线下课程实施经验"></a>线下课程实施经验</h1></li>
-</ol>
-</li>
-</ol>
-<ul>
-<li>偏理工科学生兴趣</li>
-<li>1、2年级学生修读积极</li>
-<li>Talk is cheap, show me the code<h1 id="网课经验"><a href="#网课经验" class="headerlink" title="网课经验"></a>网课经验</h1></li>
-<li>网易云课堂、MOOC</li>
-<li>人出镜减少工作量</li>
-<li>设备：摄像头、背景板、补光、电脑、美颜相机</li>
-<li>适时缩放屏幕，突出焦点，以学习体验为本</li>
-<li>增加激光笔强调鼠标所在位置</li>
-<li>重点内容加字幕提醒</li>
-<li>音量比音质更重要</li>
-<li>提前进入状态</li>
-<li>不一定写出每一句的脚本，做好准备灵活发挥更重要<h1 id="误区"><a href="#误区" class="headerlink" title="误区"></a>误区</h1></li>
-<li>教学中设备不要求高</li>
-<li>先知识后能力——先能力后知识</li>
-<li>需要补充一些相关知识：Python、线性代数、应用开发等<h1 id="讲课要点"><a href="#讲课要点" class="headerlink" title="讲课要点"></a>讲课要点</h1></li>
-<li>核心步骤<ul>
-<li>训练数据的生成和整理</li>
-<li>训练模型的设计和构建</li>
-<li>训练模型</li>
-<li>优化模型</li>
-</ul>
-</li>
-</ul>
-
+          <p>浙江大学城市学院吴明辉老师主讲</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/12/15/Tensorflow%E8%AF%BE%E7%A8%8B%E5%BB%BA%E8%AE%BE%E4%B8%8E%E6%95%99%E5%AD%A6%E7%A0%94%E8%AE%A8-%E5%8D%97%E4%BA%AC%E9%82%AE%E7%94%B5%E5%A4%A7%E5%AD%A6/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1304,7 +968,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-02-24 10:09:26" itemprop="dateModified" datetime="2022-02-24T10:09:26+08:00">2022-02-24</time>
+                <time title="修改时间：2022-03-08 10:37:39" itemprop="dateModified" datetime="2022-03-08T10:37:39+08:00">2022-03-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1334,40 +998,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h1><ul>
-<li><p>查看本机Python版本<code>python -V</code>，我的默认版本是2.7，去Python<a target="_blank" rel="noopener" href="https://www.python.org/downloads/macos/">官网下载</a>一个3.7的版本进行安装。</p>
-</li>
-<li><p>安装完成后，修改默认启动版本为3.7版本</p>
-<ul>
-<li>打开<code>open ~/.bash_profile</code></li>
-<li>添加<code>alias python=&quot;/usr/local/bin/python3.7&quot;</code></li>
-<li>不要忘记<code>source ~/.bash_profile</code>重新加载一下</li>
-<li>再次<code>python -V</code>发现Python成功变成3.7版本。</li>
-</ul>
-</li>
-<li><p>前往Anaconda<a target="_blank" rel="noopener" href="https://www.anaconda.com/">官网</a>下载对应的安装包，进行安装。</p>
-</li>
-<li><p>安装Tensorflow，先查看是否有<code>conda --version</code>，有可能报错<strong>conda command not found</strong></p>
-<ul>
-<li><p>先检查anaconda中的bin文件夹内是否有（有）</p>
-</li>
-<li><p>在<code>vi ~/.zshrc</code>中添加<code>export PATH=/Users/jiachenfu/anaconda3/bin:$PATH</code></p>
-</li>
-<li><p>然后<code>source ~/.zshrc</code>，检查一下<code>conda --version</code>成功</p>
-</li>
-<li><p>更改下载源为清华镜像<code>conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</code>，然后<code>conda config --set show_channel_urls yes</code></p>
-</li>
-<li><p>最后安装Tensorflow<code>conda install tensorflow</code></p>
-</li>
-<li><p>打开Anaconda中的jupyter,新建一个Python3文件,运行</p>
-  <figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf </span><br><span class="line"><span class="title">tf</span>.__version__</span><br></pre></td></tr></table></figure>
-
-<p>  成功输出1.1.0</p>
-</li>
-</ul>
-</li>
-</ul>
-
+          <p>只是安装了一下Tensorflow，用的anaconda</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/12/15/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0Tensorflow%E6%A1%86%E6%9E%B6%E5%AE%89%E8%A3%85/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1417,7 +1056,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-02-24 09:53:04" itemprop="dateModified" datetime="2022-02-24T09:53:04+08:00">2022-02-24</time>
+                <time title="修改时间：2022-03-08 10:40:38" itemprop="dateModified" datetime="2022-03-08T10:40:38+08:00">2022-03-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1447,42 +1086,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h1><p>在阿里云服务器上配置MYSQL数据库，并通过软件进行远程连接和图形化操作</p>
-<p>前期操作<br>购买好ECS，我这里选择的CentOS<br>远程连接ECS需要配置安全组——自行百度<br>设置SSH密码首字母大写+生月日星座六位数<br>按步骤安装MYSQL，设置root及其密码生月日星座六位数</p>
-<h1 id="MYSQL语句"><a href="#MYSQL语句" class="headerlink" title="MYSQL语句"></a>MYSQL语句</h1><h2 id="创建-x2F-删除数据库"><a href="#创建-x2F-删除数据库" class="headerlink" title="创建&#x2F;删除数据库"></a>创建&#x2F;删除数据库</h2><p>用root用户创建一个W3CSCHOOL数据库<br><code>mysqladmin -u root -p create W3CSCHOOL</code><br>用root用户删除一个W3CSCHOOL数据库<br><code>mysqladmin -u root -p drop W3CSCHOOL</code><br>在你连接到 MySQL 数据库后，可能有多个可以操作的数据库，所以你需要选择你要操作的数据库。在 mysql&gt; 提示窗口中可以很简单的选择特定的数据库。你可以使用SQL命令来选择指定的数据库。</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-attr">[root@host]</span># mysql -u root -<span class="selector-tag">p</span></span><br><span class="line">Enter password:******</span><br><span class="line">mysql&gt; use W3CSCHOOL;</span><br><span class="line">Database changed</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="创建-x2F-删除数据表"><a href="#创建-x2F-删除数据表" class="headerlink" title="创建&#x2F;删除数据表"></a>创建&#x2F;删除数据表</h2><p>创建MySQL数据表需要以下信息：</p>
-<ul>
-<li><p>表名</p>
-</li>
-<li><p>表字段名</p>
-</li>
-<li><p>定义每个表字段</p>
-</li>
-<li><p>CREATE TABLE table_name (column_name column_type);</p>
-</li>
-<li><p>如果你不想字段为 NULL 可以设置字段的属性为 NOT NULL， 在操作数据库时如果输入该字段的数据为NULL ，就会报错。</p>
-</li>
-<li><p>AUTO_INCREMENT定义列为自增的属性，一般用于主键，数值会自动加1。</p>
-</li>
-<li><p>PRIMARY KEY关键字用于定义列为主键。 您可以使用多列来定义主键，列间以逗号分隔。</p>
-</li>
-<li><p>MySQL命令终止符为分号</p>
-</li>
-<li><p>示例代码：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">CREATE</span> <span class="keyword">TABLE</span> w3cschool_tbl(</span><br><span class="line">   <span class="operator">-</span><span class="operator">&gt;</span> w3cschool_id <span class="type">INT</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span> AUTO_INCREMENT,</span><br><span class="line">   <span class="operator">-</span><span class="operator">&gt;</span> w3cschool_title <span class="type">VARCHAR</span>(<span class="number">100</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">   <span class="operator">-</span><span class="operator">&gt;</span> w3cschool_author <span class="type">VARCHAR</span>(<span class="number">40</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">   <span class="operator">-</span><span class="operator">&gt;</span> submission_date <span class="type">DATE</span>,</span><br><span class="line">   <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">PRIMARY</span> KEY ( w3cschool_id )</span><br><span class="line">   <span class="operator">-</span><span class="operator">&gt;</span> );</span><br><span class="line">   </span><br></pre></td></tr></table></figure></li>
-</ul>
-<h1 id="数据类型及说明"><a href="#数据类型及说明" class="headerlink" title="数据类型及说明"></a>数据类型及说明</h1><h2 id="常用建表字段"><a href="#常用建表字段" class="headerlink" title="常用建表字段"></a>常用建表字段</h2><p>自增长有0占位的userID：</p>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`userID` <span class="keyword">int</span>(<span class="number">6</span>) <span class="keyword">unsigned</span> zerofill NOT <span class="literal">NULL</span> AUTO_INCREMENT,</span><br></pre></td></tr></table></figure>
-<p>提交&#x2F;修改时间:</p>
-<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`submission_date` <span class="type">timestamp</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span> <span class="keyword">DEFAULT</span> <span class="built_in">CURRENT_TIMESTAMP</span> <span class="keyword">ON</span> <span class="keyword">UPDATE</span> <span class="built_in">CURRENT_TIMESTAMP</span>,</span><br></pre></td></tr></table></figure>
-
-<p>首次创建时间:</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`create_time` <span class="type">timestamp</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span> <span class="keyword">DEFAULT</span> <span class="built_in">CURRENT_TIMESTAMP</span>,</span><br></pre></td></tr></table></figure>
-<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://www.w3cschool.cn/mysql/mysql-create-database.html">W3C MYSQL教程</a></p>
-
+          <p>在阿里云服务器上配置MYSQL数据库，并通过软件进行远程连接和图形化操作</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/12/05/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AEMYSQL%E5%B9%B6%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1532,7 +1144,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-02-23 22:24:23" itemprop="dateModified" datetime="2022-02-23T22:24:23+08:00">2022-02-23</time>
+                <time title="修改时间：2022-03-08 10:36:51" itemprop="dateModified" datetime="2022-03-08T10:36:51+08:00">2022-03-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1562,24 +1174,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="前置环境"><a href="#前置环境" class="headerlink" title="前置环境"></a>前置环境</h1><ol>
-<li>代码编译器我选择Hbulider X <a target="_blank" rel="noopener" href="https://www.dcloud.io/hbuilderx.html">官网下载</a></li>
-<li>在Hbuilder新建一个空白项目test_demo，包含index.html、css文件夹、js文件夹、img文件夹</li>
-<li>前往Bmob<a target="_blank" rel="noopener" href="https://bmob.github.io/hydrogen-js-sdk/#/?id=sdk%25e4%25bd%25bf%25e7%2594%25a8%25e6%2596%2587%25e6%25a1%25a3">官网查看文档</a>并下载对应SDKGitHub<a target="_blank" rel="noopener" href="https://github.com/bmob/hydrogen-js-sdk/">源码地址</a></li>
-<li>在Bmob的控制台云数据库新建项目、新建表、设计数据结构并导入数据<h1 id="在项目中接入Bmob云数据库"><a href="#在项目中接入Bmob云数据库" class="headerlink" title="在项目中接入Bmob云数据库"></a>在项目中接入Bmob云数据库</h1></li>
-<li>引入bmob.js<br>将sdk中的<code>dist/Bmob-2.2.1.min.js</code>导入项目的js文件夹下,在index.html中引入 <code>&lt;script src=&quot;js/dist/Bmob-2.2.1.min.js&quot;&gt;&lt;/script&gt;</code> 新建一个js文件<code>main.js</code></li>
-<li>连接对应的bmob数据库<code>Bmob.initialize(&quot;你的Secret Key&quot;, &quot;你的API 安全码&quot;);</code></li>
-<li>系统用户表_User<br>获取_User列表内所有数据，因为_User是系统内置用户表，出于隐私安全考虑，密码不可见，且无法用明文方式进行参数传递。<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">query.<span class="built_in">find</span>().then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line"> 	<span class="built_in">console</span>.<span class="built_in">log</span>(res)</span><br><span class="line"></span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure>
-判断登陆+本地缓存的方法</li>
-</ol>
-<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Bmob.User.login(<span class="string">&#x27;123&#x27;</span>, <span class="string">&#x27;123456&#x27;</span>).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//若登陆成功更新用户缓存</span></span><br><span class="line">	Bmob.User.updateStorage(res.objectId).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">		<span class="comment">//更新缓存成功，跳转页面</span></span><br><span class="line">		<span class="comment">//跳转到第二个页面-不传参数，href请使用相对路径</span></span><br><span class="line">		window.location.href = <span class="string">&quot;secondPage.html&quot;</span>;</span><br><span class="line">	&#125;).catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">		<span class="built_in">console</span>.<span class="built_in">log</span>(err)</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;).catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">	<span class="built_in">console</span>.<span class="built_in">log</span>(err)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>获取登陆的用户信息</p>
-<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">let <span class="keyword">current</span> = Bmob.<span class="keyword">User</span>.<span class="keyword">current</span>()</span><br><span class="line">// var data = &#123;&#125;;</span><br><span class="line">var arr = <span class="keyword">Object</span>.keys(<span class="keyword">current</span>);</span><br><span class="line">console.log(arr.length == <span class="number">0</span>) //<span class="keyword">true</span> 为空， <span class="keyword">false</span> 不为空</span><br><span class="line"><span class="keyword">if</span> (arr.length == <span class="number">0</span>) &#123;</span><br><span class="line">	//如果为空,返回登陆页面,防止未登陆用户造成系统崩溃</span><br><span class="line">	<span class="keyword">window</span>.<span class="keyword">location</span>.href = &quot;index.html&quot;</span><br><span class="line">&#125; <span class="keyword">else</span>&#123;</span><br><span class="line">	//如果不为空,则将<span class="keyword">current</span>内的值填入页面内</span><br><span class="line">	console.log(<span class="keyword">current</span>)</span><br><span class="line">	document.getElementById(&quot;username&quot;).innerHTML = <span class="keyword">current</span>.username;</span><br><span class="line">	document.getElementById(&quot;roomNumber&quot;).innerHTML = <span class="keyword">current</span>.roomNumber + <span class="string">&#x27;房间&#x27;</span>;</span><br><span class="line">	var gender = <span class="string">&#x27;&#x27;</span></span><br><span class="line">	<span class="keyword">if</span> (<span class="keyword">current</span>.sex == <span class="number">0</span>) &#123;</span><br><span class="line">		gender = <span class="string">&#x27;男&#x27;</span></span><br><span class="line">	&#125; <span class="keyword">else</span>&#123;</span><br><span class="line">		gender = <span class="string">&#x27;女&#x27;</span></span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	document.getElementById(&quot;gender&quot;).innerHTML = gender;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>获取自创建表TestData内所有数据，并遍历显示在HTML内</p>
-<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">query.<span class="built_in">find</span>().then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">	<span class="built_in">console</span>.<span class="built_in">log</span>(res.<span class="built_in">length</span>)</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; res.<span class="built_in">length</span>; i++) &#123; </span><br><span class="line">	    <span class="built_in">text</span> += res[i].name + <span class="string">&quot;&lt;br&gt;&quot;</span>;</span><br><span class="line">		document.getElementById(<span class="string">&quot;name&quot;</span>).innerHTML = <span class="built_in">text</span>;</span><br><span class="line">	 &#125;</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>按objectId获取对应数据（若为_User此方法不可用，但可以使用内置的Bmob<br>.User.current()方法获取登陆后缓存的用户数据）</p>
-<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">	<span class="built_in">console</span>.<span class="built_in">log</span>(res.name)</span><br><span class="line">	</span><br><span class="line">&#125;).catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.<span class="built_in">log</span>(err)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <p>bmob官方文档更新很不及时，建议直接联系客服进技术交流群</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/12/02/HTML5+JS+CSS%E4%B8%8EBmob%E4%BA%91%E5%90%8E%E5%8F%B0%E5%AE%9E%E8%B7%B5/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1629,7 +1232,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-02-23 22:14:34" itemprop="dateModified" datetime="2022-02-23T22:14:34+08:00">2022-02-23</time>
+                <time title="修改时间：2022-03-08 10:34:44" itemprop="dateModified" datetime="2022-03-08T10:34:44+08:00">2022-03-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1659,11 +1262,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <blockquote>
-<p>记录开发过程中用到的纯代码写UI及一些经验心得<br>记录一些自己写的UI库封装<br>记录一些用过的第三方UI类库</p>
-</blockquote>
-<h1 id="文字类"><a href="#文字类" class="headerlink" title="文字类"></a>文字类</h1><h2 id="label圆角"><a href="#label圆角" class="headerlink" title="label圆角"></a>label圆角</h2><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">label.layer.cornerRadius</span> = <span class="number">5</span><span class="comment">;</span></span><br><span class="line"><span class="attr">label.clipsToBounds</span> = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-<h1 id="按钮类"><a href="#按钮类" class="headerlink" title="按钮类"></a>按钮类</h1><h1 id="图片类"><a href="#图片类" class="headerlink" title="图片类"></a>图片类</h1>
+          <p>不定时记录一下与前端UI相关的代码片段</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/12/02/swift5.0-UI%E4%BB%A3%E7%A0%81Tips/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1713,7 +1320,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-02-24 10:58:14" itemprop="dateModified" datetime="2022-02-24T10:58:14+08:00">2022-02-24</time>
+                <time title="修改时间：2022-03-08 10:36:10" itemprop="dateModified" datetime="2022-03-08T10:36:10+08:00">2022-03-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1743,45 +1350,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Vue了解"><a href="#Vue了解" class="headerlink" title="Vue了解"></a>Vue了解</h1><p>渐进式JavaScript 框架</p>
-<h1 id="Vue开发环境配置"><a href="#Vue开发环境配置" class="headerlink" title="Vue开发环境配置"></a>Vue开发环境配置</h1><ol>
-<li><p>Vue依托nodejs，vue只是node万千包中的一个，所以首先要安装nodejs</p>
-</li>
-<li><p>查看是否安装node，可以使用<code>node -v</code>版本号查看，若未安装<a target="_blank" rel="noopener" href="https://nodejs.org/en/download/">下载地址</a></p>
-</li>
-<li><p>查看是否安装vue <code>vue -V</code>注意大写</p>
-</li>
-<li><p>安装Vue <code>npm install -g @vue/cli</code></p>
-<ul>
-<li>前面加sudo 是获取系统的权限，之后需要输入密码，不加sudo可能因为权限的问题安装失败</li>
-<li>如果安装vue出现一些警告和错误，清除一下缓存就行 <code>npm cache clean --force</code></li>
-</ul>
-</li>
-<li><p>3.0以上版本集成了图形界面，所以卸载2.9.6等旧版本的命令：<code>sudo npm uninstall vue-cli -g</code></p>
-</li>
-</ol>
-<h1 id="创建并配置Vue项目"><a href="#创建并配置Vue项目" class="headerlink" title="创建并配置Vue项目"></a>创建并配置Vue项目</h1><p>创建或前往本地文件夹，这里以新创建文件夹 VueProject为例<code>mkdir VueProject</code></p>
-<p>创建项目<code>vue create 项目名</code>，项目名必须小写</p>
-<blockquote>
-<p>3.0以上版本可以直接图形化方式创建项目<code>vue ui</code></p>
-</blockquote>
-<h1 id="启动项目"><a href="#启动项目" class="headerlink" title="启动项目"></a>启动项目</h1><ol>
-<li>前往项目文件夹<code>cd 项目文件夹</code></li>
-<li>启动项目<code>npm run serve</code><h2 id="vue的命令"><a href="#vue的命令" class="headerlink" title="vue的命令"></a>vue的命令</h2></li>
-</ol>
-<ul>
-<li>init 从模板生成新项目</li>
-<li>list 列出可用的官方模板</li>
-<li>build 创建新项目的原型</li>
-<li>create 创建（警告：仅用于v3以上版本）</li>
-<li>vue ui 启动脚手架图形界面（3.0以上版本）<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2></li>
-<li>npm install 安装依赖<ul>
-<li><code>npm install mysql</code> &#x2F;&#x2F;连接mysql数据库的依赖</li>
-</ul>
-</li>
-<li><code>npm run dev</code> 或 <code>npm run serve </code>启动项目<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/167aaf13346c">Mac安装Vue环境——2019-05-11</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/gcDdblue/article/details/100171824">正确姿势开发vue后台管理系统</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/loveyaxin/p/10107550.html">vue-cli 3.x安装配置步骤详细说明</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/doit8791/p/5259436.html">CSS预处理器Sass(Scss)、Less、Stylus</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/xueboren001/article/details/53389221">ESLint深入使用</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_34221276/article/details/91423683">一次学会使用 mocha &amp; jest 编写单元测试</a></li>
-</ul>
-
+          <p>vue的本地安装</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/11/28/vue%E5%AE%89%E8%A3%85%E5%8F%8A%E5%88%9B%E5%BB%BA%E6%96%B0%E9%A1%B9%E7%9B%AE/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1926,7 +1503,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-02-23 21:36:11" itemprop="dateModified" datetime="2022-02-23T21:36:11+08:00">2022-02-23</time>
+                <time title="修改时间：2022-03-08 10:35:43" itemprop="dateModified" datetime="2022-03-08T10:35:43+08:00">2022-03-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1956,37 +1533,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="常用指令"><a href="#常用指令" class="headerlink" title="常用指令"></a>常用指令</h1><ul>
-<li>查看当前地址<code>pwd</code></li>
-<li>查看当前位置内所有文件<code>ls</code></li>
-<li>查看当前位置内所有文件及详细信息<code>ls -s</code></li>
-<li>前往某地址<code>cd 前往的地址目录</code></li>
-<li>回到上一级目录 <code>cd ..</code>回到上上级<code>cd ../..</code></li>
-<li>新建文件夹 <code>mkdir</code> 文件夹名</li>
-<li>断开连接<code>ctl + c</code></li>
-<li>解压到当前位置：<code>tar -zxvf 压缩包名称</code></li>
-<li>删除文件夹及旗下所有文件<code>rm -rf 文件夹路径</code></li>
-<li>删除文件<code>rm -f 文件路径+文件名.扩展名</code></li>
-</ul>
-<h1 id="vim编辑器"><a href="#vim编辑器" class="headerlink" title="vim编辑器"></a>vim编辑器</h1><h2 id="vim几种模式"><a href="#vim几种模式" class="headerlink" title="vim几种模式"></a>vim几种模式</h2><ul>
-<li>正常模式：可以使用快捷键命令，或按<code>:</code>输入命令行。</li>
-<li>插入模式：可以输入文本，在正常模式下，按<code>i</code>、<code>a</code>、<code>o</code>等都可以进入插入模式。</li>
-<li>可视模式：正常模式下按<code>v</code>可以进入可视模式， 在可视模式下，移动光标可以选择文&#96;&#96;本。按<code>v</code>进入可视行模式， 总是整行整行的选中。<code>ctrl+v</code>进入可视块模式。</li>
-<li>替换模式：正常模式下，按<code>r</code>进入。</li>
-</ul>
-<h1 id="vim常用指令"><a href="#vim常用指令" class="headerlink" title="vim常用指令"></a>vim常用指令</h1><ul>
-<li>行号显示<code>:set nu</code></li>
-<li>关键词查找<code>:/+关键词</code></li>
-<li>修改<code>i</code></li>
-<li>保存退出<code>:wq</code></li>
-<li>在后面的文本中查找<code>/</code></li>
-<li><code>?something</code>: 在前面的文本中查找something。</li>
-<li><code>/pattern/+number</code>: 将光标停在包含pattern的行后面第number行上。</li>
-<li><code>/pattern/-number</code>: 将光标停在包含pattern的行前面第number行上。</li>
-<li><code>n</code>: 向后查找下一个。</li>
-<li><code>N</code>: 向前查找下一个。</li>
-</ul>
-
+          <p>记录一些常用指令</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/11/25/liunx%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
