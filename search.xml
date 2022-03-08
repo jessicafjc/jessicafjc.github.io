@@ -92,83 +92,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Tensorflow课程建设与教学研讨-南京邮电大学</title>
-    <url>/2019/12/15/Tensorflow%E8%AF%BE%E7%A8%8B%E5%BB%BA%E8%AE%BE%E4%B8%8E%E6%95%99%E5%AD%A6%E7%A0%94%E8%AE%A8-%E5%8D%97%E4%BA%AC%E9%82%AE%E7%94%B5%E5%A4%A7%E5%AD%A6/</url>
-    <content><![CDATA[<h1 id="课程构架"><a href="#课程构架" class="headerlink" title="课程构架"></a>课程构架</h1><ol>
-<li>第一讲 人工智能导论</li>
-<li>第二讲 环境搭建</li>
-<li>第三讲 TensorFlow编程基础</li>
-<li>第四讲 线性回归问题——函数回归单一神经元</li>
-<li>第五讲 房价预测问题：多元线性回归及TensorFlow编程进阶<ol>
-<li>多因素影响如何处理</li>
-<li>矩阵向量计算</li>
-</ol>
-</li>
-<li>第六讲 MNIST手写数字识别：分类应用入门<ol>
-<li>与线性回归相比，多了一个激活函数</li>
-</ol>
-</li>
-<li>第七讲 MNIST手写数字识别进阶：多层神经网络与应用</li>
-<li>第八讲 图像识别问题：卷积神经网络与应用<ol>
-<li>CIFAR10（数字“10”代表十分类）</li>
-</ol>
-</li>
-<li>第九讲 Deep Dream：理解深度神经网络结构及应用</li>
-<li>第十讲 猫狗大战：迁移学习及应用</li>
-<li>第十一讲 泰坦尼克号上的旅客生存概率预测：TensorFlow的高级框架Keras<ol>
-<li>使用高级框架</li>
-<li>数据处理</li>
-</ol>
-</li>
-<li>第十二讲 电影评论情感分析：RNN循环网络原理及应用<ol>
-<li>自然语言的分析</li>
-<li>如何将自然语言处理为计算机可处理的数据-词嵌入</li>
-<li>模型优化：同义词、近义词、反义词……</li>
-</ol>
-</li>
-<li>第十三讲 FashionMNIST图像生成：生成对抗网原理及应用</li>
-<li>第十四讲 鸢尾花品种——网页落地</li>
-<li>第十五讲 花卉识别——移动应用落地</li>
-<li>第十六讲 课程回顾与大作业<ol>
-<li>Final Project以PPT+源代码+多样性展现形式</li>
-<li>有展示答辩<h1 id="线下课程实施经验"><a href="#线下课程实施经验" class="headerlink" title="线下课程实施经验"></a>线下课程实施经验</h1></li>
-</ol>
-</li>
-</ol>
-<ul>
-<li>偏理工科学生兴趣</li>
-<li>1、2年级学生修读积极</li>
-<li>Talk is cheap, show me the code<h1 id="网课经验"><a href="#网课经验" class="headerlink" title="网课经验"></a>网课经验</h1></li>
-<li>网易云课堂、MOOC</li>
-<li>人出镜减少工作量</li>
-<li>设备：摄像头、背景板、补光、电脑、美颜相机</li>
-<li>适时缩放屏幕，突出焦点，以学习体验为本</li>
-<li>增加激光笔强调鼠标所在位置</li>
-<li>重点内容加字幕提醒</li>
-<li>音量比音质更重要</li>
-<li>提前进入状态</li>
-<li>不一定写出每一句的脚本，做好准备灵活发挥更重要<h1 id="误区"><a href="#误区" class="headerlink" title="误区"></a>误区</h1></li>
-<li>教学中设备不要求高</li>
-<li>先知识后能力——先能力后知识</li>
-<li>需要补充一些相关知识：Python、线性代数、应用开发等<h1 id="讲课要点"><a href="#讲课要点" class="headerlink" title="讲课要点"></a>讲课要点</h1></li>
-<li>核心步骤<ul>
-<li>训练数据的生成和整理</li>
-<li>训练模型的设计和构建</li>
-<li>训练模型</li>
-<li>优化模型</li>
-</ul>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>教学研讨</category>
-      </categories>
-      <tags>
-        <tag>Tensorflow</tag>
-        <tag>AI</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Redis数据库基础</title>
     <url>/2022/02/24/Redis%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/</url>
     <content><![CDATA[<ul>
@@ -359,6 +282,147 @@
       </tags>
   </entry>
   <entry>
+    <title>Tensorflow课程建设与教学研讨-南京邮电大学</title>
+    <url>/2019/12/15/Tensorflow%E8%AF%BE%E7%A8%8B%E5%BB%BA%E8%AE%BE%E4%B8%8E%E6%95%99%E5%AD%A6%E7%A0%94%E8%AE%A8-%E5%8D%97%E4%BA%AC%E9%82%AE%E7%94%B5%E5%A4%A7%E5%AD%A6/</url>
+    <content><![CDATA[<h1 id="课程构架"><a href="#课程构架" class="headerlink" title="课程构架"></a>课程构架</h1><ol>
+<li>第一讲 人工智能导论</li>
+<li>第二讲 环境搭建</li>
+<li>第三讲 TensorFlow编程基础</li>
+<li>第四讲 线性回归问题——函数回归单一神经元</li>
+<li>第五讲 房价预测问题：多元线性回归及TensorFlow编程进阶<ol>
+<li>多因素影响如何处理</li>
+<li>矩阵向量计算</li>
+</ol>
+</li>
+<li>第六讲 MNIST手写数字识别：分类应用入门<ol>
+<li>与线性回归相比，多了一个激活函数</li>
+</ol>
+</li>
+<li>第七讲 MNIST手写数字识别进阶：多层神经网络与应用</li>
+<li>第八讲 图像识别问题：卷积神经网络与应用<ol>
+<li>CIFAR10（数字“10”代表十分类）</li>
+</ol>
+</li>
+<li>第九讲 Deep Dream：理解深度神经网络结构及应用</li>
+<li>第十讲 猫狗大战：迁移学习及应用</li>
+<li>第十一讲 泰坦尼克号上的旅客生存概率预测：TensorFlow的高级框架Keras<ol>
+<li>使用高级框架</li>
+<li>数据处理</li>
+</ol>
+</li>
+<li>第十二讲 电影评论情感分析：RNN循环网络原理及应用<ol>
+<li>自然语言的分析</li>
+<li>如何将自然语言处理为计算机可处理的数据-词嵌入</li>
+<li>模型优化：同义词、近义词、反义词……</li>
+</ol>
+</li>
+<li>第十三讲 FashionMNIST图像生成：生成对抗网原理及应用</li>
+<li>第十四讲 鸢尾花品种——网页落地</li>
+<li>第十五讲 花卉识别——移动应用落地</li>
+<li>第十六讲 课程回顾与大作业<ol>
+<li>Final Project以PPT+源代码+多样性展现形式</li>
+<li>有展示答辩<h1 id="线下课程实施经验"><a href="#线下课程实施经验" class="headerlink" title="线下课程实施经验"></a>线下课程实施经验</h1></li>
+</ol>
+</li>
+</ol>
+<ul>
+<li>偏理工科学生兴趣</li>
+<li>1、2年级学生修读积极</li>
+<li>Talk is cheap, show me the code<h1 id="网课经验"><a href="#网课经验" class="headerlink" title="网课经验"></a>网课经验</h1></li>
+<li>网易云课堂、MOOC</li>
+<li>人出镜减少工作量</li>
+<li>设备：摄像头、背景板、补光、电脑、美颜相机</li>
+<li>适时缩放屏幕，突出焦点，以学习体验为本</li>
+<li>增加激光笔强调鼠标所在位置</li>
+<li>重点内容加字幕提醒</li>
+<li>音量比音质更重要</li>
+<li>提前进入状态</li>
+<li>不一定写出每一句的脚本，做好准备灵活发挥更重要<h1 id="误区"><a href="#误区" class="headerlink" title="误区"></a>误区</h1></li>
+<li>教学中设备不要求高</li>
+<li>先知识后能力——先能力后知识</li>
+<li>需要补充一些相关知识：Python、线性代数、应用开发等<h1 id="讲课要点"><a href="#讲课要点" class="headerlink" title="讲课要点"></a>讲课要点</h1></li>
+<li>核心步骤<ul>
+<li>训练数据的生成和整理</li>
+<li>训练模型的设计和构建</li>
+<li>训练模型</li>
+<li>优化模型</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>教学研讨</category>
+      </categories>
+      <tags>
+        <tag>Tensorflow</tag>
+        <tag>AI</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Swift5.0 UI代码Tips</title>
+    <url>/2019/12/02/swift5.0-UI%E4%BB%A3%E7%A0%81Tips/</url>
+    <content><![CDATA[<blockquote>
+<p>记录开发过程中用到的纯代码写UI及一些经验心得<br>记录一些自己写的UI库封装<br>记录一些用过的第三方UI类库</p>
+</blockquote>
+<h1 id="文字类"><a href="#文字类" class="headerlink" title="文字类"></a>文字类</h1><h2 id="label圆角"><a href="#label圆角" class="headerlink" title="label圆角"></a>label圆角</h2><figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="attr">label.layer.cornerRadius</span> = <span class="number">5</span><span class="comment">;</span></span><br><span class="line"><span class="attr">label.clipsToBounds</span> = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<h1 id="按钮类"><a href="#按钮类" class="headerlink" title="按钮类"></a>按钮类</h1><h1 id="图片类"><a href="#图片类" class="headerlink" title="图片类"></a>图片类</h1>]]></content>
+      <categories>
+        <category>散装知识</category>
+      </categories>
+      <tags>
+        <tag>Swift</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>vue安装及创建新项目</title>
+    <url>/2019/11/28/vue%E5%AE%89%E8%A3%85%E5%8F%8A%E5%88%9B%E5%BB%BA%E6%96%B0%E9%A1%B9%E7%9B%AE/</url>
+    <content><![CDATA[<h1 id="Vue了解"><a href="#Vue了解" class="headerlink" title="Vue了解"></a>Vue了解</h1><p>渐进式JavaScript 框架</p>
+<h1 id="Vue开发环境配置"><a href="#Vue开发环境配置" class="headerlink" title="Vue开发环境配置"></a>Vue开发环境配置</h1><ol>
+<li><p>Vue依托nodejs，vue只是node万千包中的一个，所以首先要安装nodejs</p>
+</li>
+<li><p>查看是否安装node，可以使用<code>node -v</code>版本号查看，若未安装<a href="https://nodejs.org/en/download/">下载地址</a></p>
+</li>
+<li><p>查看是否安装vue <code>vue -V</code>注意大写</p>
+</li>
+<li><p>安装Vue <code>npm install -g @vue/cli</code></p>
+<ul>
+<li>前面加sudo 是获取系统的权限，之后需要输入密码，不加sudo可能因为权限的问题安装失败</li>
+<li>如果安装vue出现一些警告和错误，清除一下缓存就行 <code>npm cache clean --force</code></li>
+</ul>
+</li>
+<li><p>3.0以上版本集成了图形界面，所以卸载2.9.6等旧版本的命令：<code>sudo npm uninstall vue-cli -g</code></p>
+</li>
+</ol>
+<h1 id="创建并配置Vue项目"><a href="#创建并配置Vue项目" class="headerlink" title="创建并配置Vue项目"></a>创建并配置Vue项目</h1><p>创建或前往本地文件夹，这里以新创建文件夹 VueProject为例<code>mkdir VueProject</code></p>
+<p>创建项目<code>vue create 项目名</code>，项目名必须小写</p>
+<blockquote>
+<p>3.0以上版本可以直接图形化方式创建项目<code>vue ui</code></p>
+</blockquote>
+<h1 id="启动项目"><a href="#启动项目" class="headerlink" title="启动项目"></a>启动项目</h1><ol>
+<li>前往项目文件夹<code>cd 项目文件夹</code></li>
+<li>启动项目<code>npm run serve</code><h2 id="vue的命令"><a href="#vue的命令" class="headerlink" title="vue的命令"></a>vue的命令</h2></li>
+</ol>
+<ul>
+<li>init 从模板生成新项目</li>
+<li>list 列出可用的官方模板</li>
+<li>build 创建新项目的原型</li>
+<li>create 创建（警告：仅用于v3以上版本）</li>
+<li>vue ui 启动脚手架图形界面（3.0以上版本）<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2></li>
+<li>npm install 安装依赖<ul>
+<li><code>npm install mysql</code> &#x2F;&#x2F;连接mysql数据库的依赖</li>
+</ul>
+</li>
+<li><code>npm run dev</code> 或 <code>npm run serve </code>启动项目<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><a href="https://www.jianshu.com/p/167aaf13346c">Mac安装Vue环境——2019-05-11</a><br><a href="https://blog.csdn.net/gcDdblue/article/details/100171824">正确姿势开发vue后台管理系统</a><br><a href="https://www.cnblogs.com/loveyaxin/p/10107550.html">vue-cli 3.x安装配置步骤详细说明</a><br><a href="https://www.cnblogs.com/doit8791/p/5259436.html">CSS预处理器Sass(Scss)、Less、Stylus</a><br><a href="https://blog.csdn.net/xueboren001/article/details/53389221">ESLint深入使用</a><br><a href="https://blog.csdn.net/weixin_34221276/article/details/91423683">一次学会使用 mocha &amp; jest 编写单元测试</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>散装知识</category>
+      </categories>
+      <tags>
+        <tag>Vue</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>hexo博客实用功能及插件</title>
     <url>/2022/02/24/hexo%E5%8D%9A%E5%AE%A2%E5%AE%9E%E7%94%A8%E5%8A%9F%E8%83%BD%E5%8F%8A%E6%8F%92%E4%BB%B6/</url>
     <content><![CDATA[<h1 id="文章加密"><a href="#文章加密" class="headerlink" title="文章加密"></a>文章加密</h1><p>安装<code>npm install --save hexo-blog-encrypt</code><br>将 “password” 字段添加到文章头</p>
@@ -475,70 +539,6 @@
       </categories>
       <tags>
         <tag>Liunx</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Swift5.0 UI代码Tips</title>
-    <url>/2019/12/02/swift5.0-UI%E4%BB%A3%E7%A0%81Tips/</url>
-    <content><![CDATA[<blockquote>
-<p>记录开发过程中用到的纯代码写UI及一些经验心得<br>记录一些自己写的UI库封装<br>记录一些用过的第三方UI类库</p>
-</blockquote>
-<h1 id="文字类"><a href="#文字类" class="headerlink" title="文字类"></a>文字类</h1><h2 id="label圆角"><a href="#label圆角" class="headerlink" title="label圆角"></a>label圆角</h2><figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="attr">label.layer.cornerRadius</span> = <span class="number">5</span><span class="comment">;</span></span><br><span class="line"><span class="attr">label.clipsToBounds</span> = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-<h1 id="按钮类"><a href="#按钮类" class="headerlink" title="按钮类"></a>按钮类</h1><h1 id="图片类"><a href="#图片类" class="headerlink" title="图片类"></a>图片类</h1>]]></content>
-      <categories>
-        <category>散装知识</category>
-      </categories>
-      <tags>
-        <tag>Swift</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>vue安装及创建新项目</title>
-    <url>/2019/11/28/vue%E5%AE%89%E8%A3%85%E5%8F%8A%E5%88%9B%E5%BB%BA%E6%96%B0%E9%A1%B9%E7%9B%AE/</url>
-    <content><![CDATA[<h1 id="Vue了解"><a href="#Vue了解" class="headerlink" title="Vue了解"></a>Vue了解</h1><p>渐进式JavaScript 框架</p>
-<h1 id="Vue开发环境配置"><a href="#Vue开发环境配置" class="headerlink" title="Vue开发环境配置"></a>Vue开发环境配置</h1><ol>
-<li><p>Vue依托nodejs，vue只是node万千包中的一个，所以首先要安装nodejs</p>
-</li>
-<li><p>查看是否安装node，可以使用<code>node -v</code>版本号查看，若未安装<a href="https://nodejs.org/en/download/">下载地址</a></p>
-</li>
-<li><p>查看是否安装vue <code>vue -V</code>注意大写</p>
-</li>
-<li><p>安装Vue <code>npm install -g @vue/cli</code></p>
-<ul>
-<li>前面加sudo 是获取系统的权限，之后需要输入密码，不加sudo可能因为权限的问题安装失败</li>
-<li>如果安装vue出现一些警告和错误，清除一下缓存就行 <code>npm cache clean --force</code></li>
-</ul>
-</li>
-<li><p>3.0以上版本集成了图形界面，所以卸载2.9.6等旧版本的命令：<code>sudo npm uninstall vue-cli -g</code></p>
-</li>
-</ol>
-<h1 id="创建并配置Vue项目"><a href="#创建并配置Vue项目" class="headerlink" title="创建并配置Vue项目"></a>创建并配置Vue项目</h1><p>创建或前往本地文件夹，这里以新创建文件夹 VueProject为例<code>mkdir VueProject</code></p>
-<p>创建项目<code>vue create 项目名</code>，项目名必须小写</p>
-<blockquote>
-<p>3.0以上版本可以直接图形化方式创建项目<code>vue ui</code></p>
-</blockquote>
-<h1 id="启动项目"><a href="#启动项目" class="headerlink" title="启动项目"></a>启动项目</h1><ol>
-<li>前往项目文件夹<code>cd 项目文件夹</code></li>
-<li>启动项目<code>npm run serve</code><h2 id="vue的命令"><a href="#vue的命令" class="headerlink" title="vue的命令"></a>vue的命令</h2></li>
-</ol>
-<ul>
-<li>init 从模板生成新项目</li>
-<li>list 列出可用的官方模板</li>
-<li>build 创建新项目的原型</li>
-<li>create 创建（警告：仅用于v3以上版本）</li>
-<li>vue ui 启动脚手架图形界面（3.0以上版本）<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2></li>
-<li>npm install 安装依赖<ul>
-<li><code>npm install mysql</code> &#x2F;&#x2F;连接mysql数据库的依赖</li>
-</ul>
-</li>
-<li><code>npm run dev</code> 或 <code>npm run serve </code>启动项目<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><a href="https://www.jianshu.com/p/167aaf13346c">Mac安装Vue环境——2019-05-11</a><br><a href="https://blog.csdn.net/gcDdblue/article/details/100171824">正确姿势开发vue后台管理系统</a><br><a href="https://www.cnblogs.com/loveyaxin/p/10107550.html">vue-cli 3.x安装配置步骤详细说明</a><br><a href="https://www.cnblogs.com/doit8791/p/5259436.html">CSS预处理器Sass(Scss)、Less、Stylus</a><br><a href="https://blog.csdn.net/xueboren001/article/details/53389221">ESLint深入使用</a><br><a href="https://blog.csdn.net/weixin_34221276/article/details/91423683">一次学会使用 mocha &amp; jest 编写单元测试</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>散装知识</category>
-      </categories>
-      <tags>
-        <tag>Vue</tag>
       </tags>
   </entry>
   <entry>
