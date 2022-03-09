@@ -28,7 +28,7 @@
 <meta property="og:description" content="记录一个从阿里云服务器环境搭建到API书写并测试的流程">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-03-07T07:00:00.000Z">
-<meta property="article:modified_time" content="2022-03-09T01:18:56.330Z">
+<meta property="article:modified_time" content="2022-03-09T15:19:07.859Z">
 <meta property="article:author" content="Jiachen Fu">
 <meta property="article:tag" content="Redis">
 <meta property="article:tag" content="阿里云">
@@ -229,7 +229,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-03-09 09:18:56" itemprop="dateModified" datetime="2022-03-09T09:18:56+08:00">2022-03-09</time>
+                <time title="修改时间：2022-03-09 23:19:07" itemprop="dateModified" datetime="2022-03-09T23:19:07+08:00">2022-03-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -274,7 +274,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="服务器配置与环境搭建"><a href="#服务器配置与环境搭建" class="headerlink" title="服务器配置与环境搭建"></a>服务器配置与环境搭建</h1><p>服务器选型：最终选择 Alibaba cloud linux</p>
+        <h1 id="服务器配置与环境搭建"><a href="#服务器配置与环境搭建" class="headerlink" title="服务器配置与环境搭建"></a>服务器配置与环境搭建</h1><p>服务器选型：最终选择 Alibaba cloud linux<br>远程连接记好自己的密码</p>
 <h2 id="Node-安装"><a href="#Node-安装" class="headerlink" title="Node 安装"></a>Node 安装</h2><ul>
 <li>从官网中下载对应的安装包<br>  <code>xz -d XX.xz</code>        #.xz解压命令<br>  <code>tar -xvf  XX.tar</code>   #.tar解压命令</li>
 <li>添加两个全局软连接，地址酌情替换<br>  <code>ln -s /root/node-v16.14.0-linux-x64/bin/node /usr/local/bin/node   </code><br>  <code>ln -s /root/node-v16.14.0-linux-x64/bin/npm /usr/local/bin/npm   </code></li>
@@ -314,7 +314,18 @@
 <li>本地数据库<code>./redis-cli -h 127.0.0.1 -p 6379</code> 或者</li>
 <li>用私有ip启动云Redis<br><code>./redis-cli -h r-uf6lbo0hp2xxeenaxm.redis.rds.aliyuncs.com -p 6379 --raw </code> 替换为自己的ip <strong>xxxx..rds.aliyuncs.com</strong><br>输入账号密码 <code>auth account001:Account001!))</code> 替换为自己的<strong>账号:密码</strong><h2 id="Mysql-安装"><a href="#Mysql-安装" class="headerlink" title="Mysql 安装"></a>Mysql 安装</h2></li>
 </ul>
-<h2 id="Vue-安装"><a href="#Vue-安装" class="headerlink" title="Vue 安装"></a>Vue 安装</h2><h2 id="写一个简单接口"><a href="#写一个简单接口" class="headerlink" title="写一个简单接口"></a>写一个简单接口</h2>
+<h2 id="Vue-安装"><a href="#Vue-安装" class="headerlink" title="Vue 安装"></a>Vue 安装</h2><h1 id="实现云Redis连接并测试传输数据"><a href="#实现云Redis连接并测试传输数据" class="headerlink" title="实现云Redis连接并测试传输数据"></a>实现云Redis连接并测试传输数据</h1><ol>
+<li><p>生成项目 <code>koa2 &lt;&lt;项目名称&gt;&gt;</code> 我这里设置为 testAPI</p>
+</li>
+<li><p>在项目中新建一个 <strong>db.js</strong></p>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">Redis</span> = <span class="built_in">require</span>(<span class="string">&#x27;ioredis&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> redis = &#123;</span><br><span class="line">   <span class="attr">port</span>: <span class="number">6379</span>,</span><br><span class="line">   <span class="attr">host</span>: <span class="string">&#x27;r-uf6lbo0hp2xxeenaxm.redis.rds.aliyuncs.com&#x27;</span>, #私有ip</span><br><span class="line">   <span class="attr">username</span>: <span class="string">&#x27;account001&#x27;</span>,</span><br><span class="line">   <span class="attr">password</span>: <span class="string">&#x27;Account001!))&#x27;</span>,</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> newRedis = <span class="keyword">new</span> <span class="title class_">Redis</span>(redis)</span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = newRedis</span><br></pre></td></tr></table></figure></li>
+<li><p>在 <strong>index.js</strong>中测试一下，在index.js传输一个set类型，返回其值</p>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> redis = <span class="built_in">require</span>(<span class="string">&quot;../dbs/redis&quot;</span>) <span class="comment">// redis.js配置文件路径</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ioredis supports all Redis commands:</span></span><br><span class="line">redis.<span class="title function_">set</span>(<span class="string">&quot;foo&quot;</span>, <span class="string">&quot;bar&quot;</span>); <span class="comment">// returns promise which resolves to string, &quot;OK&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// the format is: redis[SOME_REDIS_COMMAND_IN_LOWERCASE](ARGUMENTS_ARE_JOINED_INTO_COMMAND_STRING)</span></span><br><span class="line"><span class="comment">// the js: ` redis.set(&quot;mykey&quot;, &quot;Hello&quot;) ` is equivalent to the cli: ` redis&gt; SET mykey &quot;Hello&quot; `</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ioredis supports the node.js callback style</span></span><br><span class="line">redis.<span class="title function_">get</span>(<span class="string">&quot;foo&quot;</span>, <span class="keyword">function</span> (<span class="params">err, result</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (err) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">error</span>(err);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(result); <span class="comment">// Promise resolves to &quot;bar&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li>
+<li><p>运行<code>npm start</code>，成功打印 bar，前往云Redis中查看，成功增加一条数据</p>
+</li>
+</ol>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/4c51e5a1fcb7">koa2 配置 redis</a><br><a target="_blank" rel="noopener" href="https://github.com/luin/ioredis/tree/e4c9d01ecae78e601f6d03df50d92144de67a1b9">Github ioredis</a></p>
+
     </div>
 
     
@@ -398,7 +409,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE%E4%B8%8E%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="nav-text">服务器配置与环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Node-%E5%AE%89%E8%A3%85"><span class="nav-text">Node 安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#koa2-%E5%AE%89%E8%A3%85"><span class="nav-text">koa2 安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis-%E5%AE%89%E8%A3%85"><span class="nav-text">Redis 安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mysql-%E5%AE%89%E8%A3%85"><span class="nav-text">Mysql 安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue-%E5%AE%89%E8%A3%85"><span class="nav-text">Vue 安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E6%8E%A5%E5%8F%A3"><span class="nav-text">写一个简单接口</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE%E4%B8%8E%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="nav-text">服务器配置与环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Node-%E5%AE%89%E8%A3%85"><span class="nav-text">Node 安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#koa2-%E5%AE%89%E8%A3%85"><span class="nav-text">koa2 安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis-%E5%AE%89%E8%A3%85"><span class="nav-text">Redis 安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mysql-%E5%AE%89%E8%A3%85"><span class="nav-text">Mysql 安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue-%E5%AE%89%E8%A3%85"><span class="nav-text">Vue 安装</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E4%BA%91Redis%E8%BF%9E%E6%8E%A5%E5%B9%B6%E6%B5%8B%E8%AF%95%E4%BC%A0%E8%BE%93%E6%95%B0%E6%8D%AE"><span class="nav-text">实现云Redis连接并测试传输数据</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-text">参考</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
