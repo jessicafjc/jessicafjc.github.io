@@ -92,83 +92,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Tensorflow课程建设与教学研讨-南京邮电大学</title>
-    <url>/2019/12/15/Tensorflow%E8%AF%BE%E7%A8%8B%E5%BB%BA%E8%AE%BE%E4%B8%8E%E6%95%99%E5%AD%A6%E7%A0%94%E8%AE%A8-%E5%8D%97%E4%BA%AC%E9%82%AE%E7%94%B5%E5%A4%A7%E5%AD%A6/</url>
-    <content><![CDATA[<h1 id="课程构架"><a href="#课程构架" class="headerlink" title="课程构架"></a>课程构架</h1><ol>
-<li>第一讲 人工智能导论</li>
-<li>第二讲 环境搭建</li>
-<li>第三讲 TensorFlow编程基础</li>
-<li>第四讲 线性回归问题——函数回归单一神经元</li>
-<li>第五讲 房价预测问题：多元线性回归及TensorFlow编程进阶<ol>
-<li>多因素影响如何处理</li>
-<li>矩阵向量计算</li>
-</ol>
-</li>
-<li>第六讲 MNIST手写数字识别：分类应用入门<ol>
-<li>与线性回归相比，多了一个激活函数</li>
-</ol>
-</li>
-<li>第七讲 MNIST手写数字识别进阶：多层神经网络与应用</li>
-<li>第八讲 图像识别问题：卷积神经网络与应用<ol>
-<li>CIFAR10（数字“10”代表十分类）</li>
-</ol>
-</li>
-<li>第九讲 Deep Dream：理解深度神经网络结构及应用</li>
-<li>第十讲 猫狗大战：迁移学习及应用</li>
-<li>第十一讲 泰坦尼克号上的旅客生存概率预测：TensorFlow的高级框架Keras<ol>
-<li>使用高级框架</li>
-<li>数据处理</li>
-</ol>
-</li>
-<li>第十二讲 电影评论情感分析：RNN循环网络原理及应用<ol>
-<li>自然语言的分析</li>
-<li>如何将自然语言处理为计算机可处理的数据-词嵌入</li>
-<li>模型优化：同义词、近义词、反义词……</li>
-</ol>
-</li>
-<li>第十三讲 FashionMNIST图像生成：生成对抗网原理及应用</li>
-<li>第十四讲 鸢尾花品种——网页落地</li>
-<li>第十五讲 花卉识别——移动应用落地</li>
-<li>第十六讲 课程回顾与大作业<ol>
-<li>Final Project以PPT+源代码+多样性展现形式</li>
-<li>有展示答辩<h1 id="线下课程实施经验"><a href="#线下课程实施经验" class="headerlink" title="线下课程实施经验"></a>线下课程实施经验</h1></li>
-</ol>
-</li>
-</ol>
-<ul>
-<li>偏理工科学生兴趣</li>
-<li>1、2年级学生修读积极</li>
-<li>Talk is cheap, show me the code<h1 id="网课经验"><a href="#网课经验" class="headerlink" title="网课经验"></a>网课经验</h1></li>
-<li>网易云课堂、MOOC</li>
-<li>人出镜减少工作量</li>
-<li>设备：摄像头、背景板、补光、电脑、美颜相机</li>
-<li>适时缩放屏幕，突出焦点，以学习体验为本</li>
-<li>增加激光笔强调鼠标所在位置</li>
-<li>重点内容加字幕提醒</li>
-<li>音量比音质更重要</li>
-<li>提前进入状态</li>
-<li>不一定写出每一句的脚本，做好准备灵活发挥更重要<h1 id="误区"><a href="#误区" class="headerlink" title="误区"></a>误区</h1></li>
-<li>教学中设备不要求高</li>
-<li>先知识后能力——先能力后知识</li>
-<li>需要补充一些相关知识：Python、线性代数、应用开发等<h1 id="讲课要点"><a href="#讲课要点" class="headerlink" title="讲课要点"></a>讲课要点</h1></li>
-<li>核心步骤<ul>
-<li>训练数据的生成和整理</li>
-<li>训练模型的设计和构建</li>
-<li>训练模型</li>
-<li>优化模型</li>
-</ul>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>教学研讨</category>
-      </categories>
-      <tags>
-        <tag>Tensorflow</tag>
-        <tag>AI</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Redis数据库基础</title>
     <url>/2022/02/24/Redis%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/</url>
     <content><![CDATA[<ul>
@@ -359,6 +282,83 @@
       </tags>
   </entry>
   <entry>
+    <title>Tensorflow课程建设与教学研讨-南京邮电大学</title>
+    <url>/2019/12/15/Tensorflow%E8%AF%BE%E7%A8%8B%E5%BB%BA%E8%AE%BE%E4%B8%8E%E6%95%99%E5%AD%A6%E7%A0%94%E8%AE%A8-%E5%8D%97%E4%BA%AC%E9%82%AE%E7%94%B5%E5%A4%A7%E5%AD%A6/</url>
+    <content><![CDATA[<h1 id="课程构架"><a href="#课程构架" class="headerlink" title="课程构架"></a>课程构架</h1><ol>
+<li>第一讲 人工智能导论</li>
+<li>第二讲 环境搭建</li>
+<li>第三讲 TensorFlow编程基础</li>
+<li>第四讲 线性回归问题——函数回归单一神经元</li>
+<li>第五讲 房价预测问题：多元线性回归及TensorFlow编程进阶<ol>
+<li>多因素影响如何处理</li>
+<li>矩阵向量计算</li>
+</ol>
+</li>
+<li>第六讲 MNIST手写数字识别：分类应用入门<ol>
+<li>与线性回归相比，多了一个激活函数</li>
+</ol>
+</li>
+<li>第七讲 MNIST手写数字识别进阶：多层神经网络与应用</li>
+<li>第八讲 图像识别问题：卷积神经网络与应用<ol>
+<li>CIFAR10（数字“10”代表十分类）</li>
+</ol>
+</li>
+<li>第九讲 Deep Dream：理解深度神经网络结构及应用</li>
+<li>第十讲 猫狗大战：迁移学习及应用</li>
+<li>第十一讲 泰坦尼克号上的旅客生存概率预测：TensorFlow的高级框架Keras<ol>
+<li>使用高级框架</li>
+<li>数据处理</li>
+</ol>
+</li>
+<li>第十二讲 电影评论情感分析：RNN循环网络原理及应用<ol>
+<li>自然语言的分析</li>
+<li>如何将自然语言处理为计算机可处理的数据-词嵌入</li>
+<li>模型优化：同义词、近义词、反义词……</li>
+</ol>
+</li>
+<li>第十三讲 FashionMNIST图像生成：生成对抗网原理及应用</li>
+<li>第十四讲 鸢尾花品种——网页落地</li>
+<li>第十五讲 花卉识别——移动应用落地</li>
+<li>第十六讲 课程回顾与大作业<ol>
+<li>Final Project以PPT+源代码+多样性展现形式</li>
+<li>有展示答辩<h1 id="线下课程实施经验"><a href="#线下课程实施经验" class="headerlink" title="线下课程实施经验"></a>线下课程实施经验</h1></li>
+</ol>
+</li>
+</ol>
+<ul>
+<li>偏理工科学生兴趣</li>
+<li>1、2年级学生修读积极</li>
+<li>Talk is cheap, show me the code<h1 id="网课经验"><a href="#网课经验" class="headerlink" title="网课经验"></a>网课经验</h1></li>
+<li>网易云课堂、MOOC</li>
+<li>人出镜减少工作量</li>
+<li>设备：摄像头、背景板、补光、电脑、美颜相机</li>
+<li>适时缩放屏幕，突出焦点，以学习体验为本</li>
+<li>增加激光笔强调鼠标所在位置</li>
+<li>重点内容加字幕提醒</li>
+<li>音量比音质更重要</li>
+<li>提前进入状态</li>
+<li>不一定写出每一句的脚本，做好准备灵活发挥更重要<h1 id="误区"><a href="#误区" class="headerlink" title="误区"></a>误区</h1></li>
+<li>教学中设备不要求高</li>
+<li>先知识后能力——先能力后知识</li>
+<li>需要补充一些相关知识：Python、线性代数、应用开发等<h1 id="讲课要点"><a href="#讲课要点" class="headerlink" title="讲课要点"></a>讲课要点</h1></li>
+<li>核心步骤<ul>
+<li>训练数据的生成和整理</li>
+<li>训练模型的设计和构建</li>
+<li>训练模型</li>
+<li>优化模型</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>教学研讨</category>
+      </categories>
+      <tags>
+        <tag>Tensorflow</tag>
+        <tag>AI</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>hexo博客实用功能及插件</title>
     <url>/2022/02/24/hexo%E5%8D%9A%E5%AE%A2%E5%AE%9E%E7%94%A8%E5%8A%9F%E8%83%BD%E5%8F%8A%E6%8F%92%E4%BB%B6/</url>
     <content><![CDATA[<h1 id="设置文章目录"><a href="#设置文章目录" class="headerlink" title="设置文章目录"></a>设置文章目录</h1><ol>
@@ -449,21 +449,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Swift5.0 UI代码Tips</title>
-    <url>/2019/12/02/swift5.0-UI%E4%BB%A3%E7%A0%81Tips/</url>
-    <content><![CDATA[<blockquote>
-<p>记录开发过程中用到的纯代码写UI及一些经验心得<br>记录一些自己写的UI库封装<br>记录一些用过的第三方UI类库</p>
-</blockquote>
-<h1 id="文字类"><a href="#文字类" class="headerlink" title="文字类"></a>文字类</h1><h2 id="label圆角"><a href="#label圆角" class="headerlink" title="label圆角"></a>label圆角</h2><figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="attr">label.layer.cornerRadius</span> = <span class="number">5</span><span class="comment">;</span></span><br><span class="line"><span class="attr">label.clipsToBounds</span> = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-<h1 id="按钮类"><a href="#按钮类" class="headerlink" title="按钮类"></a>按钮类</h1><h1 id="图片类"><a href="#图片类" class="headerlink" title="图片类"></a>图片类</h1>]]></content>
-      <categories>
-        <category>散装知识</category>
-      </categories>
-      <tags>
-        <tag>Swift</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Liunx常用指令</title>
     <url>/2019/11/25/liunx%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/</url>
     <content><![CDATA[<h1 id="常用指令"><a href="#常用指令" class="headerlink" title="常用指令"></a>常用指令</h1><ul>
@@ -474,9 +459,18 @@
 <li>回到上一级目录 <code>cd ..</code>回到上上级<code>cd ../..</code></li>
 <li>新建文件夹 <code>mkdir</code> 文件夹名</li>
 <li>断开连接<code>ctl + c</code></li>
-<li>解压到当前位置：<code>tar -zxvf 压缩包名称</code></li>
+<li>解压<code>.tar</code>到当前位置：<code>tar -zxvf 压缩包名称</code></li>
+<li>解压<code>.tar.gz</code>到当前位置：<code>tar xzf xxxxx.tar.gz</code><ul>
+<li>到指定目录 <code>tar xzf xxxxx.tar.gz -C 指定目录</code></li>
+</ul>
+</li>
 <li>删除文件夹及旗下所有文件<code>rm -rf 文件夹路径</code></li>
 <li>删除文件<code>rm -f 文件路径+文件名.扩展名</code></li>
+<li>显示所有打开80端口的进程 <code>lsof -i:80</code>或者<code>netstat -tunlp | grep 80</code><ul>
+<li>杀死进程 <code>kill &lt;&lt;pid&gt;&gt;</code></li>
+</ul>
+</li>
+<li>修改权限为可读可写 <code>chmod 777 &lt;&lt;文件名&gt;&gt;</code></li>
 </ul>
 <h1 id="vim编辑器"><a href="#vim编辑器" class="headerlink" title="vim编辑器"></a>vim编辑器</h1><h2 id="vim几种模式"><a href="#vim几种模式" class="headerlink" title="vim几种模式"></a>vim几种模式</h2><ul>
 <li>正常模式：可以使用快捷键命令，或按<code>:</code>输入命令行。</li>
@@ -502,6 +496,21 @@
       </categories>
       <tags>
         <tag>Liunx</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Swift5.0 UI代码Tips</title>
+    <url>/2019/12/02/swift5.0-UI%E4%BB%A3%E7%A0%81Tips/</url>
+    <content><![CDATA[<blockquote>
+<p>记录开发过程中用到的纯代码写UI及一些经验心得<br>记录一些自己写的UI库封装<br>记录一些用过的第三方UI类库</p>
+</blockquote>
+<h1 id="文字类"><a href="#文字类" class="headerlink" title="文字类"></a>文字类</h1><h2 id="label圆角"><a href="#label圆角" class="headerlink" title="label圆角"></a>label圆角</h2><figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="attr">label.layer.cornerRadius</span> = <span class="number">5</span><span class="comment">;</span></span><br><span class="line"><span class="attr">label.clipsToBounds</span> = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<h1 id="按钮类"><a href="#按钮类" class="headerlink" title="按钮类"></a>按钮类</h1><h1 id="图片类"><a href="#图片类" class="headerlink" title="图片类"></a>图片类</h1>]]></content>
+      <categories>
+        <category>散装知识</category>
+      </categories>
+      <tags>
+        <tag>Swift</tag>
       </tags>
   </entry>
   <entry>
@@ -557,7 +566,7 @@
     <title>云ECS+云Redis</title>
     <url>/2022/02/28/%E4%BA%91ECS+%E4%BA%91Redis/</url>
     <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="30b5b1e593c86e3a5bc76250d039082a7f0fffec62eaf3f813beedc2f850f04c">41b535b75251d982879fbe3234d52c0e7edf87b96aeb0858f7affaeadbed6f66493141bdd7c5389c3da95aa715abc85426e7ef7ccae2694a1bb2d397dfa4b8039990fe5b030ba5896e7375bc79568c57fb079e253343d76251d65ec1cdac1c268c34eef98a51074b5ea9bebcaa8d560f2e6d5d5c20cae534d81c2bdf63e6dc7063b99b8f23cc86e4a6f8d09812cf61c92028bc18c834934d99076299a39f0a195235cb50a844bea179133aa5ec928d3b3f2359d160657a6039a0314458865ae15e33386da775783d8bb5eea9874c8e12d075f185fded95d8828aaba55f3eb6f987908d3cc06bbbf2a94d788a11e6b14e0185a9a567d22271b733fb238afd21cf0300b581487ae32728b70130acbd232dbc537cd9cd6cb76cf3f7b6d93fe9a3b0a4d0dce7fe14f00844f506e2d5e8cf9930298a989e4ba023311fbe0281730c24422b0dccdb3ded3f8dede4fbbd4bb933655b4ca94dda45528cae6ab244d3e28a4c7eb0ebbebf58760766a0ac8b2e0397785aea3304e0f72ab8235fd9fb640598800982de27c6731295b6254028c6f3302ea1eb6fb79393f5e542621b2d23644349fe73c9f6df5f5c3a231efb2d19aa28d3a942e4bcb79441d3353300685c9ef8f367a3c3fffa760f8e97e1bef537f3e5488470a9b76cc8206374dedaf3223385e89f019f1e1c42baa9679d10fdb067607bf98f985ec1109cdeff8671522501738e3b8ac043c3f95c72cf6070dc14d8da5c2b96d5b779356a63f29f3c1ccfae3c0837f2d8d56a3918d58ee7bb1ffff4f148e79cfe031f4a398056be31a1fa06f2964b854e6ef59408886d04feb79c2120cf0d5b761d1ca4c74606d7fc7941f8e97b4518222468700824b2cc92b69a1da36db7bf339475e0bd7f595f1665376d4ef955af4d701a7d47ce0efecddc5786d0d5001d36298fe06c4ee0f47e60bbcde8e74173d1ce4f50d9e4762f6879c39fbc7dfc5612e943b5c714d5529a672c123dcd1bddd71c509249da2908e1242139619ee8b0a463b18630d55affcb09aca5393d001a859f1f381cf5181b13bcd8e04936ab486fab3571cb133fa2dae64830be62621e2501e2a9725ee5fc1fa3c0f157a94679b8288e90a19608f8e7559997d1d86014d9b8556eea6d285842dd0368052048cd3a02b19229f1490d6495f0ce90167454619bee090b104bd53021e0b53a9f2c24faa7dbdcc6fcbd6973c995466d41da43401f74bff07d2720bd246b0813028f6b7c1d23424c0d1fda7b7f5e4bf81ba3a8f8a3765fe773b35488284c74def02016a517a9f462987ec8fa9a3441ed5b77c1c4049d640334332154f664a61c5e85625a34a81569e98e6f249a28998d9d6aadb5488d99f2622ff72edaa84f80f1bc56500128c628944eda76c0e5374ea02f240806b5e59f7518f51e35b59c88d4856c800806e58157f4749a18d962ccb855828c4b558d21fb38c1d6bd1b818a7fab3309fe42491feff3ba61a96d177168739e3d884d9f67c0b631b3c5524a8722b0e66a06983876e8dc680ac19af79e0231c5c7a3d5370ad1008c48708c1f6e59e720ce9d4ba98025647ae539ac99096ee8ffe8941c9f3225202a375aa4a8ca067d8c7c445f3a7cf48a75c0d1ba70d079f219e8d37ba9e34d208bc051cbcc955fadb6a34e4c2ef2796200353f61a78837b7fd2c983c90728f3641c5b1f7d765b4c68b1ce04864ad7fdc5c6c22887e456a770766461bf1a3eb8f2fd4da9bc22c76cece603b95d3b96f981039174285c6099be56c3dcdabf1e498ac2d590a5cf20bb339a521e9915606afdb85f7861b0e48cc4c069ffa304f27a763625909846c8cd82d2315ef00003d1d855fec8bc8f52be73ac9da7a89bffb4ca43c80945af1850cf86ad6ec571ab6c97ae1f9d104422b0cafb717fbdb6d8d99a3dd5e77ec9035a15e5aaa1517a44a947527f4f14cd1f154edb2635c818d21ae6ace1d0efde45108d3b3fdd9f70aa2320c2eff4818184ea36862341fcac5c273e659d1658ca4846f3eb4732f099bd97bbfeebc5a639587c68372ca08de8604a9104a7ea293d7ab906dd1822364cd75a0a5d8198d2523778111865222ca21f4d47d2d6952d1d4dea13a2ac404b46454abb8fd8d60ca064eb07e43eb9b1ad4d8e99176ad15c8df5ea1ad03bbcdd7ffd96550a6a4444165577ca9a8bd2936d28fd207130c2252e9699b028f4690f4973942b2c9c187006e7d6eae82759750e0071ad5b498c0746ab4e46ad7c03f4bc4e75b594a0c0ddbc1da2e12ade54dbce59f0ed324845f327540d96ad339109faf75b0250f77c49519b8216e9ffd6c44c4ed399197ee5f6d5b12cda90acfb33999dd856411a9d1de0e856b0220f11fb0909b451cdb0b051e74edd9d306ffb6767fda7bc22d1fc71213bb647ddaea70f6f4de9dfc346b5e93e9f390dfb065c11a2e6ae3dc09de723de2c4d2a7a50ba20348e1841ceac75df57880a865d750fa426593547a660b902c3dec878ab1d14e9bd8eff8fb59a3ef252a47cd1875fb0d2459c36a817bb9a52d4f</script>
+  <script id="hbeData" type="hbeData" data-hmacdigest="ac64443828e137e4e045e1c5c63c0e396fa9dab83427841579e8f8a7717cce88">41b535b75251d982879fbe3234d52c0e7edf87b96aeb0858f7affaeadbed6f66493141bdd7c5389c3da95aa715abc85426e7ef7ccae2694a1bb2d397dfa4b8039990fe5b030ba5896e7375bc79568c57fb079e253343d76251d65ec1cdac1c268c34eef98a51074b5ea9bebcaa8d560f2e6d5d5c20cae534d81c2bdf63e6dc7063b99b8f23cc86e4a6f8d09812cf61c92028bc18c834934d99076299a39f0a195235cb50a844bea179133aa5ec928d3b3f2359d160657a6039a0314458865ae15e33386da775783d8bb5eea9874c8e12d075f185fded95d8828aaba55f3eb6f987908d3cc06bbbf2a94d788a11e6b14e0185a9a567d22271b733fb238afd21cf0300b581487ae32728b70130acbd232dbc537cd9cd6cb76cf3f7b6d93fe9a3b0a4d0dce7fe14f00844f506e2d5e8cf9930298a989e4ba023311fbe0281730c24422b0dccdb3ded3f8dede4fbbd4bb933655b4ca94dda45528cae6ab244d3e28a4c7eb0ebbebf58760766a0ac8b2e0397785aea3304e0f72ab8235fd9fb640598800982de27c6731295b6254028c6f3302ea1eb6fb79393f5e542621b2d23644349fe73c9f6df5f5c3a231efb2d19aa28d3a942e4bcb79441d3353300685c9ef8f367a3c3fffa760f8e97e1bef537f3e5488470a9b76cc8206374dedaf3223385e89f019f1e1c42baa9679d10fdb067607bf98f985ec1109cdeff8671522501738e3b8ac043c3f95c72cf6070dc14d8da5c2b96d5b779356a63f29f3c1ccfae3c0837f2d8d56a3918d58ee7bb1ffff4f148e79cfe031f4a398056be31a1fa06f2964b854e6ef59408886d04feb79c2120cf0d5b761d1ca4c74606d7fc7941f8e97b4518222468700824b2cc92b69a1da36db7bf339475e0bd7f595f1665376d4ef955af4d701a7d47ce0efecddc5786d0d5001d36298fe06c4ee0f47e60bbcde8e74173d1ce4f50d9e4762f6879c39fbc7dfc5612e943b5c714d5529a672c123dcd1bddd71c509249da2908e1242139619ee8b0a463b18630d55affcb09aca5393d001a859f1f381cf5181b13bcd8e04936ab486fab3571cb133fa2dae64830be62621e2501e2a9725ee5fc1fa3c0f157a94679b8288e90a19608f8e7559997d1d86014d9b8556eea6d285842dd0368052048cd3a02b19229f1490d6495f0ce90f53eb4ad627e4e8c768147d9c84247bcec149efe0b9665dcd5d1ef6ad1a2203e225c17d2a9475726ee21816fa5cfeaea912d25a4adf2100893f10099672fe2edfaed4749bad6dc17568fa5c495a8bbb650d4b7f878ed21f9b53a6412f7e60a4d8f2fc9ab5e0a50553667839d006f2d74d4e7d3f14483b0ca5f49ee7107762b46f25814f7428eee92dc0e42a23babddfe79e06f7f4df4241a1082880e5285c09bc97bb8d180f9955ea90b1a8903c1ea021143356b622ecd88cdf6c55eb28e0aa4e959f0e98640a5720932d03fb321fc6790515a80f499405cba3f3e3838e0a145fb1bb3df5e6be40a3d93def3c85208afdb08e461694474f6a4aaf1e69dc883a1e31973e27c5dead090fe162dac5be06c6516fc34a99510b22e658557afe8cb4bd9a2b71acd5218539cf731f1916004b2c53c0172d789ab77c4893f4fffe88ad79bcb6332b0de5eb93b876f5cf413bbf4b611e98cf42cc100fbf43bf4ef5d1fb8893dba359a00f5b857adde44228fe54220814f61be410c66b014e57c1da16e3b4c7f0bed938d824e59b900f9fc2a843c13852b8d640581529bbf4105c1f554bc6df68b8939730270cc056f86adab7c7175f4980005871cfcc64da8bcc0c565f85e28da24c76a291fe041b299a517ceed7b5705b215652b0aaa27170948404cd5ca3403b9886496af820c2b11fcf1abe2ef3990e48e93902b37b357a00ea41306c94bf5cc0285e262cc5ef66dfd1715e38c175e485fdbc42047ca5748ccc7fb5d7ad9cce10f6b06e184c587bb2a8f3b9b34201e17a371a5ced18c486e6664b9d78a5873cd2c21881f67ceb48c42b47728bff8f6fb35248f0bb895d32e0edf8c1a6ea7ca5c58cd21603b6b776aacf1afb9a6fde6c0c6d302412fc37a6ccb8419730a39cc8a8945066cd2a49e87a8b39b8c7f15b55dda8436cdf108748e62c72b1a0a43bcec4bd2a214eca2b6d728ee7e216c336121a96d06401919b6ec27cad5dc6b6ae4b95cf23bc7edee33a2a2413385742a02ab1bc719815e2323777eed49041efbfcd7741e90828c96eb4faf3bc39345c958018083115ab91add854cb129b03019f5a56dc636ae85fbacb1ffb3cd30b9f759669d314c9bf6455df8fc51d9612517fe682315b30d3a2783e0ee636f50933e1355ee9c1a85e1fe3a041c5adbd41073ed96b53d3a5ed69b01941b5654f33afa05c57166d833376601e7228f7bdbdeef5a73298963790c5151936072522dd258d84e394e2d8e3c0647c78edf27cc1243f053839308257419c5eb76bb3472a01bf9448132e9f16c140e7435db7778dba5299964e8fc1931f9664329f86d09560f2df5e27db01fbf04d025ee2204e1fc4c30744efe1050312a111bec66274a59a104440a4d9a0f8ca1649c993e74130c8c685e9233ec23ddd4f7c25c75b89ff101f53b662333ede4ed539286ecbff994823b2461d956d93cace636d07d07fd467f92abef72a45e54755ff5aca3883e</script>
   <div class="hbe hbe-content">
     <div class="hbe hbe-input hbe-input-default">
       <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
@@ -575,71 +584,6 @@
         <tag>Redis</tag>
         <tag>阿里云</tag>
         <tag>ECS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>从零开始用Koa2+Redis+Mysql搭建API</title>
-    <url>/2022/03/07/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%94%A8Koa2+Redis+Mysql%E6%90%AD%E5%BB%BAAPI/</url>
-    <content><![CDATA[<h1 id="服务器配置与环境搭建"><a href="#服务器配置与环境搭建" class="headerlink" title="服务器配置与环境搭建"></a>服务器配置与环境搭建</h1><p>服务器选型：最终选择 Alibaba cloud linux<br>远程连接记好自己的密码</p>
-<h2 id="Node-安装"><a href="#Node-安装" class="headerlink" title="Node 安装"></a>Node 安装</h2><ul>
-<li>从官网中下载对应的安装包<br>  <code>xz -d XX.xz</code>        #.xz解压命令<br>  <code>tar -xvf  XX.tar</code>   #.tar解压命令</li>
-<li>添加两个全局软连接，地址酌情替换<br>  <code>ln -s /root/node-v16.14.0-linux-x64/bin/node /usr/local/bin/node   </code><br>  <code>ln -s /root/node-v16.14.0-linux-x64/bin/npm /usr/local/bin/npm   </code></li>
-<li>测试一下，能够输出版本号<br>  <code>node -v</code></li>
-</ul>
-<h2 id="koa2-安装"><a href="#koa2-安装" class="headerlink" title="koa2 安装"></a>koa2 安装</h2><ul>
-<li>安装koa <code>npm install koa</code></li>
-<li>安装项目生成器 <code>npm install koa-generator -g</code></li>
-<li>设置软连接，不设置可能会<strong>koa2: command not found</strong><br>  <code>ln -s /root/node-v16.14.0-linux-x64/bin/koa2 /usr/local/bin</code></li>
-</ul>
-<h2 id="Redis-安装"><a href="#Redis-安装" class="headerlink" title="Redis 安装"></a>Redis 安装</h2><ul>
-<li>下载地址：<a href="http://redis.io/download%EF%BC%8C%E4%B8%8B%E8%BD%BD%E6%9C%80%E6%96%B0%E7%A8%B3%E5%AE%9A%E7%89%88%E6%9C%AC">http://redis.io/download，下载最新稳定版本</a></li>
-<li>解压 <code>tar xzf redis-&lt;&lt;对应下载的安装包版本号&gt;&gt;.tar.gz</code></li>
-<li>前往该文件夹下 <code>cd redis-&lt;&lt;对应下载的安装包版本号&gt;&gt;</code></li>
-<li>编译一下 <code>make</code></li>
-<li>安装到指定文件夹 <code>make install PREFIX=/usr/local/redis</code><br><code>cd /usr/local/redis/</code> 使用<code>ll</code>查看是否有<strong>bin</strong>文件</li>
-<li>前往<code>cd bin/</code></li>
-</ul>
-<ol>
-<li>服务器端启动（两种方法，建议用后端启动）</li>
-</ol>
-<ul>
-<li>前端启动 <code>./redis-server</code><ul>
-<li>正常关闭<code>./redis-cli shutdown</code> 强制关闭 Ctrl+c 可能丢失数据</li>
-</ul>
-</li>
-<li>进行后端启动<br>  需要把redis源码目录下的redis.conf文件复制到redis安装目录的bin目录下<br>  修改redis.conf文件，将daemonize的值改为yes后保存<br>  <code>vim redis.conf</code><br>  按<code>:</code>进入命令行模式，输入<code>/daemonize</code>回车查找<br>  按<code>i</code>进入编辑模式，将<code>no</code>改为<code>yes</code><br>  按<code>:wq</code>保存退出<ul>
-<li>后端启动<code>./redis-server redis.conf</code>，不占用窗口，建议使用<br>  检查一下是否成功<code> ps -aux | grep redis</code></li>
-<li>正常关闭<code>./redis-cli shutdown</code> 强制关闭<code>kill -9 进程id</code>可能丢失数据</li>
-</ul>
-</li>
-</ul>
-<ol>
-<li>客户端启动（需先开启服务端）</li>
-</ol>
-<ul>
-<li>本地数据库<code>./redis-cli -h 127.0.0.1 -p 6379</code> 或者</li>
-<li>用私有ip启动云Redis<br><code>./redis-cli -h r-uf6lbo0hp2xxeenaxm.redis.rds.aliyuncs.com -p 6379 --raw </code> 替换为自己的ip <strong>xxxx..rds.aliyuncs.com</strong><br>输入账号密码 <code>auth account001:Account001!))</code> 替换为自己的<strong>账号:密码</strong><h2 id="Mysql-安装"><a href="#Mysql-安装" class="headerlink" title="Mysql 安装"></a>Mysql 安装</h2></li>
-</ul>
-<h2 id="Vue-安装"><a href="#Vue-安装" class="headerlink" title="Vue 安装"></a>Vue 安装</h2><h1 id="实现云Redis连接并测试传输数据"><a href="#实现云Redis连接并测试传输数据" class="headerlink" title="实现云Redis连接并测试传输数据"></a>实现云Redis连接并测试传输数据</h1><ol>
-<li><p>生成项目 <code>koa2 &lt;&lt;项目名称&gt;&gt;</code> 我这里设置为 testAPI</p>
-</li>
-<li><p>在项目中新建一个 <strong>db.js</strong></p>
- <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">Redis</span> = <span class="built_in">require</span>(<span class="string">&#x27;ioredis&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> redis = &#123;</span><br><span class="line">   <span class="attr">port</span>: <span class="number">6379</span>,</span><br><span class="line">   <span class="attr">host</span>: <span class="string">&#x27;r-uf6lbo0hp2xxeenaxm.redis.rds.aliyuncs.com&#x27;</span>, #私有ip</span><br><span class="line">   <span class="attr">username</span>: <span class="string">&#x27;account001&#x27;</span>,</span><br><span class="line">   <span class="attr">password</span>: <span class="string">&#x27;Account001!))&#x27;</span>,</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> newRedis = <span class="keyword">new</span> <span class="title class_">Redis</span>(redis)</span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = newRedis</span><br></pre></td></tr></table></figure></li>
-<li><p>在 <strong>index.js</strong>中测试一下，在index.js传输一个set类型，返回其值</p>
- <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> redis = <span class="built_in">require</span>(<span class="string">&quot;../dbs/redis&quot;</span>) <span class="comment">// redis.js配置文件路径</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ioredis supports all Redis commands:</span></span><br><span class="line">redis.<span class="title function_">set</span>(<span class="string">&quot;foo&quot;</span>, <span class="string">&quot;bar&quot;</span>); <span class="comment">// returns promise which resolves to string, &quot;OK&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// the format is: redis[SOME_REDIS_COMMAND_IN_LOWERCASE](ARGUMENTS_ARE_JOINED_INTO_COMMAND_STRING)</span></span><br><span class="line"><span class="comment">// the js: ` redis.set(&quot;mykey&quot;, &quot;Hello&quot;) ` is equivalent to the cli: ` redis&gt; SET mykey &quot;Hello&quot; `</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ioredis supports the node.js callback style</span></span><br><span class="line">redis.<span class="title function_">get</span>(<span class="string">&quot;foo&quot;</span>, <span class="keyword">function</span> (<span class="params">err, result</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (err) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">error</span>(err);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(result); <span class="comment">// Promise resolves to &quot;bar&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li>
-<li><p>运行<code>npm start</code>，成功打印 bar，前往云Redis中查看，成功增加一条数据</p>
-</li>
-</ol>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.jianshu.com/p/4c51e5a1fcb7">koa2 配置 redis</a><br><a href="https://github.com/luin/ioredis/tree/e4c9d01ecae78e601f6d03df50d92144de67a1b9">Github ioredis</a></p>
-]]></content>
-      <categories>
-        <category>后端开发</category>
-      </categories>
-      <tags>
-        <tag>Redis</tag>
-        <tag>阿里云</tag>
-        <tag>ECS</tag>
-        <tag>Mysql</tag>
       </tags>
   </entry>
   <entry>
@@ -686,6 +630,183 @@
       <tags>
         <tag>koa2</tag>
         <tag>node</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>搭建hexo个人博客</title>
+    <url>/2019/11/25/%E6%90%AD%E5%BB%BAhexo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<h1 id="环境搭建（现在官网有MacOS安装包，傻瓜操作无需以下步骤）"><a href="#环境搭建（现在官网有MacOS安装包，傻瓜操作无需以下步骤）" class="headerlink" title="环境搭建（现在官网有MacOS安装包，傻瓜操作无需以下步骤）"></a>环境搭建（现在官网有MacOS安装包，傻瓜操作无需以下步骤）</h1><ol>
+<li>node.js安装官网</li>
+<li>npm或cnpm <code>npm install -g cnpm --registry-https://registry.npm.taobao.org</code></li>
+<li>验证版本<code>node -v</code> <code>npm -v</code>或<code>cnpm -v</code></li>
+<li>安装hexo <code>cnpm install -g hexo-cli</code></li>
+</ol>
+<h1 id="创建本地Blog"><a href="#创建本地Blog" class="headerlink" title="创建本地Blog"></a>创建本地Blog</h1><ol>
+<li>建立空文件夹作为博客地址，<code>mkdir Blog</code></li>
+<li>前往该文件夹 <code>cd Blog/</code></li>
+<li>初始化hexo <code>hexo init</code> 这里使用命令创建文件夹是因为我通过<code>cmd + N</code>方式创建文件夹会提示为非空导致无法初始化hexo</li>
+<li>启动hexo 服务 <code>hexo s</code> 成功后可访问 <a href="http://localhost:4000/">http://localhost:4000/</a> ，使用 <code>ctl+C</code> 结束服务</li>
+<li>创建一篇Blog <code>hexo n &quot;文件名&quot;</code>，生成的Blog是markdown格式，会在 source&#x2F;_posts&#x2F; 这个文件夹下</li>
+<li>清理缓存<code>hexo clean</code>，生成博客 <code>hexo g</code></li>
+<li>本地启动hexo测试效果 <code>hexo s</code></li>
+</ol>
+]]></content>
+      <categories>
+        <category>博客</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>从零开始用Koa2+Redis+Mysql搭建API</title>
+    <url>/2022/03/07/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%94%A8Koa2+Redis+Mysql%E6%90%AD%E5%BB%BAAPI/</url>
+    <content><![CDATA[<h1 id="服务器配置与环境搭建"><a href="#服务器配置与环境搭建" class="headerlink" title="服务器配置与环境搭建"></a>服务器配置与环境搭建</h1><p>服务器选型：最终选择 Alibaba cloud linux<br>远程连接记好自己的密码</p>
+<h2 id="Node-安装"><a href="#Node-安装" class="headerlink" title="Node 安装"></a>Node 安装</h2><ul>
+<li>从官网中下载对应的安装包<br>  <code>xz -d XX.xz</code>        #.xz解压命令<br>  <code>tar -xvf  XX.tar</code>   #.tar解压命令</li>
+<li>添加两个全局软连接，地址酌情替换<br>  <code>ln -s /root/node-v16.14.0-linux-x64/bin/node /usr/local/bin/node   </code><br>  <code>ln -s /root/node-v16.14.0-linux-x64/bin/npm /usr/local/bin/npm   </code></li>
+<li>测试一下，能够输出版本号<br>  <code>node -v</code> <h2 id="pm2-安装"><a href="#pm2-安装" class="headerlink" title="pm2 安装"></a>pm2 安装</h2>一个带有负载均衡功能的 Node 应用的进程管理器，用于后台启动项目和管理</li>
+<li>全局安装PM2 <code>npm install pm2 -g</code><ul>
+<li>可能需要管理员权限<code>sudo npm install pm2 -g</code></li>
+</ul>
+</li>
+<li>使用<code>pm2 list</code>查看运行的项目</li>
+<li>使用<code>pm2 start &lt;&lt;项目名称&gt;&gt;</code></li>
+<li>使用<code>pm2 stop id</code>停止项目</li>
+<li>使用<code>pm2 delete id</code>删除id<h2 id="koa2-安装"><a href="#koa2-安装" class="headerlink" title="koa2 安装"></a>koa2 安装</h2></li>
+<li>安装koa <code>npm install koa</code></li>
+<li>安装项目生成器 <code>npm install koa-generator -g</code></li>
+<li>设置软连接，不设置可能会<strong>koa2: command not found</strong><br>  <code>ln -s /root/node-v16.14.0-linux-x64/bin/koa2 /usr/local/bin</code></li>
+</ul>
+<h2 id="Redis-安装"><a href="#Redis-安装" class="headerlink" title="Redis 安装"></a>Redis 安装</h2><ul>
+<li>下载地址：<a href="http://redis.io/download%EF%BC%8C%E4%B8%8B%E8%BD%BD%E6%9C%80%E6%96%B0%E7%A8%B3%E5%AE%9A%E7%89%88%E6%9C%AC">http://redis.io/download，下载最新稳定版本</a></li>
+<li>解压 <code>tar xzf redis-&lt;&lt;对应下载的安装包版本号&gt;&gt;.tar.gz</code></li>
+<li>前往该文件夹下 <code>cd redis-&lt;&lt;对应下载的安装包版本号&gt;&gt;</code></li>
+<li>编译一下 <code>make</code></li>
+<li>安装到指定文件夹 <code>make install PREFIX=/usr/local/redis</code><br><code>cd /usr/local/redis/</code> 使用<code>ll</code>查看是否有<strong>bin</strong>文件</li>
+<li>前往<code>cd bin/</code></li>
+</ul>
+<ol>
+<li>服务器端启动（两种方法，建议用后端启动）</li>
+</ol>
+<ul>
+<li>前端启动 <code>./redis-server</code><ul>
+<li>正常关闭<code>./redis-cli shutdown</code> 强制关闭 Ctrl+c 可能丢失数据</li>
+</ul>
+</li>
+<li>进行后端启动<br>  需要把redis源码目录下的redis.conf文件复制到redis安装目录的bin目录下<br>  修改redis.conf文件，将daemonize的值改为yes后保存<br>  <code>vim redis.conf</code><br>  按<code>:</code>进入命令行模式，输入<code>/daemonize</code>回车查找<br>  按<code>i</code>进入编辑模式，将<code>no</code>改为<code>yes</code><br>  按<code>:wq</code>保存退出<ul>
+<li>后端启动<code>./redis-server redis.conf</code>，不占用窗口，建议使用<br>  检查一下是否成功<code> ps -aux | grep redis</code></li>
+<li>正常关闭<code>./redis-cli shutdown</code> 强制关闭<code>kill -9 进程id</code>可能丢失数据</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>客户端启动（需先开启服务端）</li>
+</ol>
+<ul>
+<li>本地数据库<code>./redis-cli -h 127.0.0.1 -p 6379</code> 或者</li>
+<li>用私有ip启动云Redis<br><code>./redis-cli -h r-uf6lbo0hp2xxeenaxm.redis.rds.aliyuncs.com -p 6379 --raw </code> 替换为自己的ip <strong>xxxx..rds.aliyuncs.com</strong><br>输入账号密码 <code>auth account001:Account001!))</code> 替换为自己的<strong>账号:密码</strong><h2 id="Caddy2-安装"><a href="#Caddy2-安装" class="headerlink" title="Caddy2 安装"></a>Caddy2 安装</h2></li>
+</ul>
+<ol>
+<li>去<a href="https://caddyserver.com/docs/install">官网</a>下载</li>
+<li>服务器中新建文件夹 caddy</li>
+<li>将下载的二进制文件放置在 caddy&#x2F; 下</li>
+<li>前往文件夹内运行<code>./caddy</code> <ol>
+<li>设置软连接<code>ln -s /root/caddy/caddy /usr/local/bin</code>可在任意位置进行<code>caddy start</code></li>
+<li>输入 <code>caddy &lt;&lt;代码&gt;&gt;</code></li>
+</ol>
+</li>
+<li>新建文件 <code>Caddyfile</code>进行配置</li>
+</ol>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line"><span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">80</span> &#123; </span><br><span class="line">	root * ..<span class="regexp">/www/</span></span><br><span class="line">	file_server</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">http:<span class="regexp">//</span><span class="number">139.224</span>.<span class="number">62.107</span>:<span class="number">80</span> &#123; <span class="comment">#若不说明http，将默认为https，但目前未进行证书配置，将无法访问</span></span><br><span class="line">	root * ..<span class="regexp">/www/</span> <span class="comment"># 我自己写了个简单的index.html</span></span><br><span class="line">	file_server</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="6">
+<li>浏览器访问<a href="http://139.224.62.107/">http://139.224.62.107:80</a>，成功访问到<blockquote>
+<p>首次运行可能提示权限问题，需要修改权限<code>chmod u+x caddy</code><br>能正常访问的是http，https访问需格外设置ssl证书<br>设置软连接需注意，启动服务器仅在对应位置下启用<strong>Caddyfile</strong>，例如：在&#x2F;usr 下启动caddy，则需配置一个 Caddyfile 在 &#x2F;usr</p>
+</blockquote>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://www.jianshu.com/p/0985644d4fd9">阿里云Linux部署Caddy</a><br><a href="https://www.psvmc.cn/article/2021-02-22-caddy-01.html">Caddy2安装配置</a></p>
+<h2 id="Mysql-安装"><a href="#Mysql-安装" class="headerlink" title="Mysql 安装"></a>Mysql 安装</h2></li>
+</ol>
+<h2 id="Vue-安装"><a href="#Vue-安装" class="headerlink" title="Vue 安装"></a>Vue 安装</h2><h1 id="实现云Redis连接并测试传输数据"><a href="#实现云Redis连接并测试传输数据" class="headerlink" title="实现云Redis连接并测试传输数据"></a>实现云Redis连接并测试传输数据</h1><ol>
+<li><p>生成项目 <code>koa2 &lt;&lt;项目名称&gt;&gt;</code> 我这里设置为 testAPI</p>
+</li>
+<li><p>在项目中新建一个 <strong>db.js</strong></p>
+ <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">Redis</span> = <span class="built_in">require</span>(<span class="string">&#x27;ioredis&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> redis = &#123;</span><br><span class="line">   <span class="attr">port</span>: <span class="number">6379</span>,</span><br><span class="line">   <span class="attr">host</span>: <span class="string">&#x27;r-uf6lbo0hp2xxeenaxm.redis.rds.aliyuncs.com&#x27;</span>, #私有ip</span><br><span class="line">   <span class="attr">username</span>: <span class="string">&#x27;account001&#x27;</span>,</span><br><span class="line">   <span class="attr">password</span>: <span class="string">&#x27;Account001!))&#x27;</span>,</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> newRedis = <span class="keyword">new</span> <span class="title class_">Redis</span>(redis)</span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = newRedis</span><br></pre></td></tr></table></figure></li>
+<li><p>在 <strong>index.js</strong>中测试一下，在index.js传输一个set类型，返回其值</p>
+ <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> redis = <span class="built_in">require</span>(<span class="string">&quot;../dbs/redis&quot;</span>) <span class="comment">// redis.js配置文件路径</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ioredis supports all Redis commands:</span></span><br><span class="line">redis.<span class="title function_">set</span>(<span class="string">&quot;foo&quot;</span>, <span class="string">&quot;bar&quot;</span>); <span class="comment">// returns promise which resolves to string, &quot;OK&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// the format is: redis[SOME_REDIS_COMMAND_IN_LOWERCASE](ARGUMENTS_ARE_JOINED_INTO_COMMAND_STRING)</span></span><br><span class="line"><span class="comment">// the js: ` redis.set(&quot;mykey&quot;, &quot;Hello&quot;) ` is equivalent to the cli: ` redis&gt; SET mykey &quot;Hello&quot; `</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ioredis supports the node.js callback style</span></span><br><span class="line">redis.<span class="title function_">get</span>(<span class="string">&quot;foo&quot;</span>, <span class="keyword">function</span> (<span class="params">err, result</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (err) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">error</span>(err);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(result); <span class="comment">// Promise resolves to &quot;bar&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li>
+<li><p>运行<code>npm start</code>，成功打印 bar，前往云Redis中查看，成功增加一条数据</p>
+</li>
+<li><p>关闭项目<code>pkill node</code></p>
+</li>
+</ol>
+<h3 id="参考-1"><a href="#参考-1" class="headerlink" title="参考"></a>参考</h3><p><a href="https://www.jianshu.com/p/4c51e5a1fcb7">koa2 配置 redis</a><br><a href="https://github.com/luin/ioredis/tree/e4c9d01ecae78e601f6d03df50d92144de67a1b9">Github ioredis</a></p>
+<h1 id="使用Swagger生成接口文档"><a href="#使用Swagger生成接口文档" class="headerlink" title="使用Swagger生成接口文档"></a>使用Swagger生成接口文档</h1><p>接续testAPI内容</p>
+<ol>
+<li>前往<code>cd testAPI</code></li>
+<li>安装相关依赖 <code>npm install koa2-swagger-ui swagger-jsdoc --save</code><ol>
+<li>koa2-swagger-ui UI视图组件  swagger-jsdoc 识别写的 &#x2F;***&#x2F; 转 json</li>
+</ol>
+</li>
+<li>在项目中新建 <strong>swagger.js</strong>，我放在routes文件夹下，建议后期在根目录下新建util文件夹，放置相关配置文件 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> router = <span class="built_in">require</span>(<span class="string">&#x27;koa-router&#x27;</span>)() <span class="comment">//引入路由函数</span></span><br><span class="line"><span class="keyword">const</span> swaggerJSDoc = <span class="built_in">require</span>(<span class="string">&#x27;swagger-jsdoc&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> swaggerDefinition = &#123;</span><br><span class="line">    <span class="attr">info</span>: &#123;</span><br><span class="line">        <span class="attr">title</span>: <span class="string">&#x27;网站api借口&#x27;</span>,</span><br><span class="line">        <span class="attr">version</span>: <span class="string">&#x27;1.0.0&#x27;</span>,</span><br><span class="line">        <span class="attr">description</span>: <span class="string">&#x27;API&#x27;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">host</span>: <span class="string">&#x27;localhost:3000&#x27;</span>,</span><br><span class="line">    <span class="attr">basePath</span>: <span class="string">&#x27;/&#x27;</span> <span class="comment">// Base path (optional)</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> options = &#123;</span><br><span class="line">    swaggerDefinition,</span><br><span class="line">    <span class="attr">apis</span>: [<span class="string">&#x27;./routes/*.js&#x27;</span>]</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> swaggerSpec = <span class="title function_">swaggerJSDoc</span>(options)</span><br><span class="line"><span class="comment">// 通过路由获取生成的注解文件</span></span><br><span class="line">router.<span class="title function_">get</span>(<span class="string">&#x27;/swagger.json&#x27;</span>, <span class="keyword">async</span> <span class="keyword">function</span> (<span class="params">ctx</span>) &#123;</span><br><span class="line">    ctx.<span class="title function_">set</span>(<span class="string">&#x27;Content-Type&#x27;</span>, <span class="string">&#x27;application/json&#x27;</span>);</span><br><span class="line">    ctx.<span class="property">body</span> = swaggerSpec;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = router</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li>在 app.js 中添加如下代码： <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> swagger = <span class="built_in">require</span>(<span class="string">&#x27;./routes/swagger&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> &#123; koaSwagger &#125; = <span class="built_in">require</span>(<span class="string">&#x27;koa2-swagger-ui&#x27;</span>)</span><br><span class="line"></span><br><span class="line">app.<span class="title function_">use</span>(swagger.<span class="title function_">routes</span>(), swagger.<span class="title function_">allowedMethods</span>())</span><br><span class="line">app.<span class="title function_">use</span>(</span><br><span class="line">  <span class="title function_">koaSwagger</span>(&#123;</span><br><span class="line">    <span class="attr">routePrefix</span>: <span class="string">&#x27;/swagger&#x27;</span>, <span class="comment">// host at /swagger instead of default /docs</span></span><br><span class="line">    <span class="attr">swaggerOptions</span>: &#123;</span><br><span class="line">      <span class="attr">url</span>: <span class="string">&#x27;/swagger.json&#x27;</span>, <span class="comment">// example path to json</span></span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;),</span><br><span class="line">);</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li>修改<strong>Caddyfile</strong>，添加如下内容，注意，若需强制<strong>http</strong>访问请加上 <figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">http:<span class="regexp">//</span><span class="number">139.224</span>.<span class="number">62.107</span>:<span class="number">8080</span> &#123; <span class="regexp">//</span><span class="number">8080</span>是随意指定的端口号</span><br><span class="line">	reverse_proxy http:<span class="regexp">//</span><span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">3000</span>  <span class="regexp">//</span>对应swagger.js内的地址</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>启动 testAPI 项目<code>npm run start</code></li>
+<li>新打开一个终端窗口，启动Caddy <code>caddy start</code></li>
+<li>访问 <a href="http://139.224.62.107:8080/swagger">http://139.224.62.107:8080/swagger</a>，成功！</li>
+</ol>
+<blockquote>
+<p>目前，Caddy的反向代理 reverse_proxy 仅支持 地址+端口号<br>注意，若没有https证书，需强调http访问，否则浏览器会因为安全问题拒绝访问（chrome这里是大坑不支持http，最后用Safari成功访问的http）</p>
+</blockquote>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><h2 id="Nginx-安装"><a href="#Nginx-安装" class="headerlink" title="Nginx 安装"></a>Nginx 安装</h2><ol>
+<li><p>前往<a href="http://nginx.org/en/download.html">Nginx 下载</a>下载，本次安装版本为v1.21.6稳定版</p>
+</li>
+<li><p>解压缩后，切换至新文件夹</p>
+</li>
+<li><p>运行<code>./configure</code>完成安装</p>
+<ol>
+<li>建议运行<code>./configure --prefix=/usr/local/nginx</code>指定安装目录</li>
+<li>运行<code>make</code>和<code>make install</code></li>
+<li>安装完成后生成的安装目录为 <code>/usr/local/nginx</code></li>
+<li>nginx主配置文件：**&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;conf&#x2F;nginx.conf**</li>
+<li>nginx日志文件：**&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;logs&#x2F;access.log**</li>
+<li>启动Nginx：&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;sbin&#x2F;nginx</li>
+</ol>
+</li>
+<li><p>前往阿里云控制台开放端口:</p>
+<ol>
+<li>控制台→安全→防火墙→添加规则→应用类型选择自定义→端口填2019→确定</li>
+</ol>
+</li>
+<li><p>检查服务器防火墙 <code>firewall-cmd --query-port=80/tcp</code><br> 1. 打开80、433等相应端口<code>firewall-cmd --permanent --add-port=80/tcp</code></p>
+ <figure class="highlight awk"><table><tr><td class="code"><pre><span class="line"><span class="regexp">//</span>重新载入配置，比如添加规则之后，需要执行此命令</span><br><span class="line">firewall-cmd --reload </span><br><span class="line"></span><br><span class="line"><span class="regexp">//</span>若移除端口<span class="number">666</span></span><br><span class="line">firewall-cmd --permanent --remove-port=<span class="number">666</span>/tcp</span><br><span class="line"></span><br><span class="line"><span class="regexp">//</span> 关闭防火墙命令</span><br><span class="line">systemctl stop firewalld</span><br><span class="line"> </span><br><span class="line"><span class="regexp">//</span> 开启防火墙</span><br><span class="line">systemctl start firewalld</span><br><span class="line"> </span><br><span class="line"><span class="regexp">//</span> 关闭 开机自启动</span><br><span class="line">systemctl disable firewalld</span><br><span class="line"> </span><br><span class="line"><span class="regexp">//</span> 开启 开机启动</span><br><span class="line">systemctl enable firewalld</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>./configure: error: the HTTP rewrite module requires the PCRE library.</code>,安装pcre-devel解决问题，<code>yum -y install pcre-devel</code><br><code>yum install -y zlib-devel</code></p>
+</blockquote>
+</li>
+<li><p>切换到nginx安装目录中的启动目录下： <code>cd /usr/local/nginx/sbin</code>执行nginx命令：</p>
+<ol>
+<li>测试配置文件：.&#x2F;nginx -t</li>
+<li>启动命令：.&#x2F;nginx</li>
+<li>停止命令：.&#x2F;nginx -s stop&#x2F;quit</li>
+<li>重启命令：.&#x2F;nginx -s reload</li>
+<li>查看进程命令：ps -ef | grep nginx</li>
+<li>杀死nginx进程：kill -9 pid（ps命令中查询到的进程id）</li>
+</ol>
+</li>
+<li><p>在浏览器输入 <a href="http://139.224.62.107/">http://139.224.62.107:80</a></p>
+</li>
+<li><p>设置开机自启动 Nginx</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>后端开发</category>
+      </categories>
+      <tags>
+        <tag>Redis</tag>
+        <tag>阿里云</tag>
+        <tag>ECS</tag>
+        <tag>Mysql</tag>
+        <tag>Caddy2</tag>
       </tags>
   </entry>
   <entry>
@@ -738,6 +859,33 @@
       </tags>
   </entry>
   <entry>
+    <title>阿里云搭建个人云服务器</title>
+    <url>/2019/11/27/%E9%98%BF%E9%87%8C%E4%BA%91%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
+    <content><![CDATA[<h1 id="选择服务器系统"><a href="#选择服务器系统" class="headerlink" title="选择服务器系统"></a>选择服务器系统</h1><p>选过CentOS、Alibaba cloud linux</p>
+<h1 id="安装数据库"><a href="#安装数据库" class="headerlink" title="安装数据库"></a>安装数据库</h1><h2 id="安装node"><a href="#安装node" class="headerlink" title="安装node"></a>安装node</h2><p>Node官网下载相应包：<a href="https://nodejs.org/en/download/">官网下载</a><br>我这里下载好的，直接上传到服务器：<code>/usr/node</code> 文件夹自己建的<br>到当前文件夹下解压:<code>tar -xvf xxxxxx.tar.xz</code><br>npm和node命令全局生效：<code>vim /ect/profile</code>，修改后<code>source /etc/profile</code></p>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line"><span class="comment">#set for nodejs</span></span><br><span class="line"><span class="built_in">export</span> <span class="attribute">NODE_HOME</span>=/usr/node/node-v12.16.3-linux-x64#与文件夹路径对应</span><br><span class="line"><span class="built_in">export</span> <span class="attribute">PATH</span>=<span class="variable">$NODE_HOME</span>/bin:$PATH</span><br></pre></td></tr></table></figure>
+<p>查看一下版本，检验是否按照成功<code>node -v</code>、<code>npm -v</code><br>本地调试好项目后，上传到服务器上，别忘了添加依赖<code>npm install</code></p>
+<blockquote>
+<p>注意：阿里云要在安全组里开启 3000 端口</p>
+</blockquote>
+<h1 id="配置相关环境"><a href="#配置相关环境" class="headerlink" title="配置相关环境"></a>配置相关环境</h1><h2 id="ssh远程连接–-gt-sftp"><a href="#ssh远程连接–-gt-sftp" class="headerlink" title="ssh远程连接–&gt;sftp"></a>ssh远程连接–&gt;sftp</h2><p>配置实例安全组，开放22端口<br>ssh 如果连接不成功，提示<code>ssh_exchange_identification: read: Connection reset by peer</code></p>
+<p>解决办法</p>
+<ol>
+<li>前往本地文件夹<code>/Users/jiachenfu/.ssh/</code>删除<code>known_hosts</code>或改为<code>known_hosts.bak</code>，尝试<code>ssh root@ip</code>是否解决</li>
+<li>切换一个网络吧，关闭代理VPN，有的校园网络很坑会连不上</li>
+<li>尝试<code>ping ip</code>，如果成功，前往阿里云网页进行远程登录，修改<code>vi /etc/hosts.allow</code>，在末尾添加<code>sshd: ALL ##允许所有ip主机均能连接本机</code>，然后重启<code>systemctl restart sshd.service</code>，尝试<code>ssh root@ip</code>是否解决</li>
+<li>查看阿里云实例密钥对是否绑定</li>
+</ol>
+]]></content>
+      <categories>
+        <category>散装知识</category>
+      </categories>
+      <tags>
+        <tag>阿里云</tag>
+        <tag>服务器</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>机器学习Tensorflow框架安装</title>
     <url>/2019/12/15/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0Tensorflow%E6%A1%86%E6%9E%B6%E5%AE%89%E8%A3%85/</url>
     <content><![CDATA[<h1 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h1><ul>
@@ -781,32 +929,6 @@
         <tag>实践</tag>
         <tag>Tensorflow</tag>
         <tag>AI</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>搭建hexo个人博客</title>
-    <url>/2019/11/25/%E6%90%AD%E5%BB%BAhexo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<h1 id="环境搭建（现在官网有MacOS安装包，傻瓜操作无需以下步骤）"><a href="#环境搭建（现在官网有MacOS安装包，傻瓜操作无需以下步骤）" class="headerlink" title="环境搭建（现在官网有MacOS安装包，傻瓜操作无需以下步骤）"></a>环境搭建（现在官网有MacOS安装包，傻瓜操作无需以下步骤）</h1><ol>
-<li>node.js安装官网</li>
-<li>npm或cnpm <code>npm install -g cnpm --registry-https://registry.npm.taobao.org</code></li>
-<li>验证版本<code>node -v</code> <code>npm -v</code>或<code>cnpm -v</code></li>
-<li>安装hexo <code>cnpm install -g hexo-cli</code></li>
-</ol>
-<h1 id="创建本地Blog"><a href="#创建本地Blog" class="headerlink" title="创建本地Blog"></a>创建本地Blog</h1><ol>
-<li>建立空文件夹作为博客地址，<code>mkdir Blog</code></li>
-<li>前往该文件夹 <code>cd Blog/</code></li>
-<li>初始化hexo <code>hexo init</code> 这里使用命令创建文件夹是因为我通过<code>cmd + N</code>方式创建文件夹会提示为非空导致无法初始化hexo</li>
-<li>启动hexo 服务 <code>hexo s</code> 成功后可访问 <a href="http://localhost:4000/">http://localhost:4000/</a> ，使用 <code>ctl+C</code> 结束服务</li>
-<li>创建一篇Blog <code>hexo n &quot;文件名&quot;</code>，生成的Blog是markdown格式，会在 source&#x2F;_posts&#x2F; 这个文件夹下</li>
-<li>清理缓存<code>hexo clean</code>，生成博客 <code>hexo g</code></li>
-<li>本地启动hexo测试效果 <code>hexo s</code></li>
-</ol>
-]]></content>
-      <categories>
-        <category>博客</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
       </tags>
   </entry>
   <entry>
@@ -866,33 +988,6 @@
       </categories>
       <tags>
         <tag>Vue</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>阿里云搭建个人云服务器</title>
-    <url>/2019/11/27/%E9%98%BF%E9%87%8C%E4%BA%91%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
-    <content><![CDATA[<h1 id="选择服务器系统"><a href="#选择服务器系统" class="headerlink" title="选择服务器系统"></a>选择服务器系统</h1><p>选过CentOS、Alibaba cloud linux</p>
-<h1 id="安装数据库"><a href="#安装数据库" class="headerlink" title="安装数据库"></a>安装数据库</h1><h2 id="安装node"><a href="#安装node" class="headerlink" title="安装node"></a>安装node</h2><p>Node官网下载相应包：<a href="https://nodejs.org/en/download/">官网下载</a><br>我这里下载好的，直接上传到服务器：<code>/usr/node</code> 文件夹自己建的<br>到当前文件夹下解压:<code>tar -xvf xxxxxx.tar.xz</code><br>npm和node命令全局生效：<code>vim /ect/profile</code>，修改后<code>source /etc/profile</code></p>
-<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line"><span class="comment">#set for nodejs</span></span><br><span class="line"><span class="built_in">export</span> <span class="attribute">NODE_HOME</span>=/usr/node/node-v12.16.3-linux-x64#与文件夹路径对应</span><br><span class="line"><span class="built_in">export</span> <span class="attribute">PATH</span>=<span class="variable">$NODE_HOME</span>/bin:$PATH</span><br></pre></td></tr></table></figure>
-<p>查看一下版本，检验是否按照成功<code>node -v</code>、<code>npm -v</code><br>本地调试好项目后，上传到服务器上，别忘了添加依赖<code>npm install</code></p>
-<blockquote>
-<p>注意：阿里云要在安全组里开启 3000 端口</p>
-</blockquote>
-<h1 id="配置相关环境"><a href="#配置相关环境" class="headerlink" title="配置相关环境"></a>配置相关环境</h1><h2 id="ssh远程连接–-gt-sftp"><a href="#ssh远程连接–-gt-sftp" class="headerlink" title="ssh远程连接–&gt;sftp"></a>ssh远程连接–&gt;sftp</h2><p>配置实例安全组，开放22端口<br>ssh 如果连接不成功，提示<code>ssh_exchange_identification: read: Connection reset by peer</code></p>
-<p>解决办法</p>
-<ol>
-<li>前往本地文件夹<code>/Users/jiachenfu/.ssh/</code>删除<code>known_hosts</code>或改为<code>known_hosts.bak</code>，尝试<code>ssh root@ip</code>是否解决</li>
-<li>切换一个网络吧，关闭代理VPN，有的校园网络很坑会连不上</li>
-<li>尝试<code>ping ip</code>，如果成功，前往阿里云网页进行远程登录，修改<code>vi /etc/hosts.allow</code>，在末尾添加<code>sshd: ALL ##允许所有ip主机均能连接本机</code>，然后重启<code>systemctl restart sshd.service</code>，尝试<code>ssh root@ip</code>是否解决</li>
-<li>查看阿里云实例密钥对是否绑定</li>
-</ol>
-]]></content>
-      <categories>
-        <category>散装知识</category>
-      </categories>
-      <tags>
-        <tag>阿里云</tag>
-        <tag>服务器</tag>
       </tags>
   </entry>
 </search>

@@ -28,12 +28,13 @@
 <meta property="og:description" content="记录一个从阿里云服务器环境搭建到API书写并测试的流程">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-03-07T07:00:00.000Z">
-<meta property="article:modified_time" content="2022-03-09T15:19:07.859Z">
+<meta property="article:modified_time" content="2022-03-20T14:29:47.002Z">
 <meta property="article:author" content="Jiachen Fu">
 <meta property="article:tag" content="Redis">
 <meta property="article:tag" content="阿里云">
 <meta property="article:tag" content="ECS">
 <meta property="article:tag" content="Mysql">
+<meta property="article:tag" content="Caddy2">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://example.com/2022/03/07/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%94%A8Koa2+Redis+Mysql%E6%90%AD%E5%BB%BAAPI/">
@@ -135,7 +136,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">19</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">20</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -229,7 +230,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-03-09 23:19:07" itemprop="dateModified" datetime="2022-03-09T23:19:07+08:00">2022-03-09</time>
+                <time title="修改时间：2022-03-20 22:29:47" itemprop="dateModified" datetime="2022-03-20T22:29:47+08:00">2022-03-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -278,9 +279,15 @@
 <h2 id="Node-安装"><a href="#Node-安装" class="headerlink" title="Node 安装"></a>Node 安装</h2><ul>
 <li>从官网中下载对应的安装包<br>  <code>xz -d XX.xz</code>        #.xz解压命令<br>  <code>tar -xvf  XX.tar</code>   #.tar解压命令</li>
 <li>添加两个全局软连接，地址酌情替换<br>  <code>ln -s /root/node-v16.14.0-linux-x64/bin/node /usr/local/bin/node   </code><br>  <code>ln -s /root/node-v16.14.0-linux-x64/bin/npm /usr/local/bin/npm   </code></li>
-<li>测试一下，能够输出版本号<br>  <code>node -v</code></li>
+<li>测试一下，能够输出版本号<br>  <code>node -v</code> <h2 id="pm2-安装"><a href="#pm2-安装" class="headerlink" title="pm2 安装"></a>pm2 安装</h2>一个带有负载均衡功能的 Node 应用的进程管理器，用于后台启动项目和管理</li>
+<li>全局安装PM2 <code>npm install pm2 -g</code><ul>
+<li>可能需要管理员权限<code>sudo npm install pm2 -g</code></li>
 </ul>
-<h2 id="koa2-安装"><a href="#koa2-安装" class="headerlink" title="koa2 安装"></a>koa2 安装</h2><ul>
+</li>
+<li>使用<code>pm2 list</code>查看运行的项目</li>
+<li>使用<code>pm2 start &lt;&lt;项目名称&gt;&gt;</code></li>
+<li>使用<code>pm2 stop id</code>停止项目</li>
+<li>使用<code>pm2 delete id</code>删除id<h2 id="koa2-安装"><a href="#koa2-安装" class="headerlink" title="koa2 安装"></a>koa2 安装</h2></li>
 <li>安装koa <code>npm install koa</code></li>
 <li>安装项目生成器 <code>npm install koa-generator -g</code></li>
 <li>设置软连接，不设置可能会<strong>koa2: command not found</strong><br>  <code>ln -s /root/node-v16.14.0-linux-x64/bin/koa2 /usr/local/bin</code></li>
@@ -312,8 +319,27 @@
 </ol>
 <ul>
 <li>本地数据库<code>./redis-cli -h 127.0.0.1 -p 6379</code> 或者</li>
-<li>用私有ip启动云Redis<br><code>./redis-cli -h r-uf6lbo0hp2xxeenaxm.redis.rds.aliyuncs.com -p 6379 --raw </code> 替换为自己的ip <strong>xxxx..rds.aliyuncs.com</strong><br>输入账号密码 <code>auth account001:Account001!))</code> 替换为自己的<strong>账号:密码</strong><h2 id="Mysql-安装"><a href="#Mysql-安装" class="headerlink" title="Mysql 安装"></a>Mysql 安装</h2></li>
+<li>用私有ip启动云Redis<br><code>./redis-cli -h r-uf6lbo0hp2xxeenaxm.redis.rds.aliyuncs.com -p 6379 --raw </code> 替换为自己的ip <strong>xxxx..rds.aliyuncs.com</strong><br>输入账号密码 <code>auth account001:Account001!))</code> 替换为自己的<strong>账号:密码</strong><h2 id="Caddy2-安装"><a href="#Caddy2-安装" class="headerlink" title="Caddy2 安装"></a>Caddy2 安装</h2></li>
 </ul>
+<ol>
+<li>去<a target="_blank" rel="noopener" href="https://caddyserver.com/docs/install">官网</a>下载</li>
+<li>服务器中新建文件夹 caddy</li>
+<li>将下载的二进制文件放置在 caddy&#x2F; 下</li>
+<li>前往文件夹内运行<code>./caddy</code> <ol>
+<li>设置软连接<code>ln -s /root/caddy/caddy /usr/local/bin</code>可在任意位置进行<code>caddy start</code></li>
+<li>输入 <code>caddy &lt;&lt;代码&gt;&gt;</code></li>
+</ol>
+</li>
+<li>新建文件 <code>Caddyfile</code>进行配置</li>
+</ol>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">80</span> &#123; </span><br><span class="line">	root * ..<span class="regexp">/www/</span></span><br><span class="line">	file_server</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">http:<span class="regexp">//</span><span class="number">139.224</span>.<span class="number">62.107</span>:<span class="number">80</span> &#123; <span class="comment">#若不说明http，将默认为https，但目前未进行证书配置，将无法访问</span></span><br><span class="line">	root * ..<span class="regexp">/www/</span> <span class="comment"># 我自己写了个简单的index.html</span></span><br><span class="line">	file_server</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="6">
+<li>浏览器访问<a target="_blank" rel="noopener" href="http://139.224.62.107/">http://139.224.62.107:80</a>，成功访问到<blockquote>
+<p>首次运行可能提示权限问题，需要修改权限<code>chmod u+x caddy</code><br>能正常访问的是http，https访问需格外设置ssl证书<br>设置软连接需注意，启动服务器仅在对应位置下启用<strong>Caddyfile</strong>，例如：在&#x2F;usr 下启动caddy，则需配置一个 Caddyfile 在 &#x2F;usr</p>
+</blockquote>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/0985644d4fd9">阿里云Linux部署Caddy</a><br><a target="_blank" rel="noopener" href="https://www.psvmc.cn/article/2021-02-22-caddy-01.html">Caddy2安装配置</a></p>
+<h2 id="Mysql-安装"><a href="#Mysql-安装" class="headerlink" title="Mysql 安装"></a>Mysql 安装</h2></li>
+</ol>
 <h2 id="Vue-安装"><a href="#Vue-安装" class="headerlink" title="Vue 安装"></a>Vue 安装</h2><h1 id="实现云Redis连接并测试传输数据"><a href="#实现云Redis连接并测试传输数据" class="headerlink" title="实现云Redis连接并测试传输数据"></a>实现云Redis连接并测试传输数据</h1><ol>
 <li><p>生成项目 <code>koa2 &lt;&lt;项目名称&gt;&gt;</code> 我这里设置为 testAPI</p>
 </li>
@@ -323,8 +349,68 @@
  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> redis = <span class="built_in">require</span>(<span class="string">&quot;../dbs/redis&quot;</span>) <span class="comment">// redis.js配置文件路径</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ioredis supports all Redis commands:</span></span><br><span class="line">redis.<span class="title function_">set</span>(<span class="string">&quot;foo&quot;</span>, <span class="string">&quot;bar&quot;</span>); <span class="comment">// returns promise which resolves to string, &quot;OK&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// the format is: redis[SOME_REDIS_COMMAND_IN_LOWERCASE](ARGUMENTS_ARE_JOINED_INTO_COMMAND_STRING)</span></span><br><span class="line"><span class="comment">// the js: ` redis.set(&quot;mykey&quot;, &quot;Hello&quot;) ` is equivalent to the cli: ` redis&gt; SET mykey &quot;Hello&quot; `</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ioredis supports the node.js callback style</span></span><br><span class="line">redis.<span class="title function_">get</span>(<span class="string">&quot;foo&quot;</span>, <span class="keyword">function</span> (<span class="params">err, result</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (err) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">error</span>(err);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(result); <span class="comment">// Promise resolves to &quot;bar&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li>
 <li><p>运行<code>npm start</code>，成功打印 bar，前往云Redis中查看，成功增加一条数据</p>
 </li>
+<li><p>关闭项目<code>pkill node</code></p>
+</li>
 </ol>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/4c51e5a1fcb7">koa2 配置 redis</a><br><a target="_blank" rel="noopener" href="https://github.com/luin/ioredis/tree/e4c9d01ecae78e601f6d03df50d92144de67a1b9">Github ioredis</a></p>
+<h3 id="参考-1"><a href="#参考-1" class="headerlink" title="参考"></a>参考</h3><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/4c51e5a1fcb7">koa2 配置 redis</a><br><a target="_blank" rel="noopener" href="https://github.com/luin/ioredis/tree/e4c9d01ecae78e601f6d03df50d92144de67a1b9">Github ioredis</a></p>
+<h1 id="使用Swagger生成接口文档"><a href="#使用Swagger生成接口文档" class="headerlink" title="使用Swagger生成接口文档"></a>使用Swagger生成接口文档</h1><p>接续testAPI内容</p>
+<ol>
+<li>前往<code>cd testAPI</code></li>
+<li>安装相关依赖 <code>npm install koa2-swagger-ui swagger-jsdoc --save</code><ol>
+<li>koa2-swagger-ui UI视图组件  swagger-jsdoc 识别写的 &#x2F;***&#x2F; 转 json</li>
+</ol>
+</li>
+<li>在项目中新建 <strong>swagger.js</strong>，我放在routes文件夹下，建议后期在根目录下新建util文件夹，放置相关配置文件 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> router = <span class="built_in">require</span>(<span class="string">&#x27;koa-router&#x27;</span>)() <span class="comment">//引入路由函数</span></span><br><span class="line"><span class="keyword">const</span> swaggerJSDoc = <span class="built_in">require</span>(<span class="string">&#x27;swagger-jsdoc&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> swaggerDefinition = &#123;</span><br><span class="line">    <span class="attr">info</span>: &#123;</span><br><span class="line">        <span class="attr">title</span>: <span class="string">&#x27;网站api借口&#x27;</span>,</span><br><span class="line">        <span class="attr">version</span>: <span class="string">&#x27;1.0.0&#x27;</span>,</span><br><span class="line">        <span class="attr">description</span>: <span class="string">&#x27;API&#x27;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">host</span>: <span class="string">&#x27;localhost:3000&#x27;</span>,</span><br><span class="line">    <span class="attr">basePath</span>: <span class="string">&#x27;/&#x27;</span> <span class="comment">// Base path (optional)</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> options = &#123;</span><br><span class="line">    swaggerDefinition,</span><br><span class="line">    <span class="attr">apis</span>: [<span class="string">&#x27;./routes/*.js&#x27;</span>]</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> swaggerSpec = <span class="title function_">swaggerJSDoc</span>(options)</span><br><span class="line"><span class="comment">// 通过路由获取生成的注解文件</span></span><br><span class="line">router.<span class="title function_">get</span>(<span class="string">&#x27;/swagger.json&#x27;</span>, <span class="keyword">async</span> <span class="keyword">function</span> (<span class="params">ctx</span>) &#123;</span><br><span class="line">    ctx.<span class="title function_">set</span>(<span class="string">&#x27;Content-Type&#x27;</span>, <span class="string">&#x27;application/json&#x27;</span>);</span><br><span class="line">    ctx.<span class="property">body</span> = swaggerSpec;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = router</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li>在 app.js 中添加如下代码： <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> swagger = <span class="built_in">require</span>(<span class="string">&#x27;./routes/swagger&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> &#123; koaSwagger &#125; = <span class="built_in">require</span>(<span class="string">&#x27;koa2-swagger-ui&#x27;</span>)</span><br><span class="line"></span><br><span class="line">app.<span class="title function_">use</span>(swagger.<span class="title function_">routes</span>(), swagger.<span class="title function_">allowedMethods</span>())</span><br><span class="line">app.<span class="title function_">use</span>(</span><br><span class="line">  <span class="title function_">koaSwagger</span>(&#123;</span><br><span class="line">    <span class="attr">routePrefix</span>: <span class="string">&#x27;/swagger&#x27;</span>, <span class="comment">// host at /swagger instead of default /docs</span></span><br><span class="line">    <span class="attr">swaggerOptions</span>: &#123;</span><br><span class="line">      <span class="attr">url</span>: <span class="string">&#x27;/swagger.json&#x27;</span>, <span class="comment">// example path to json</span></span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;),</span><br><span class="line">);</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li>修改<strong>Caddyfile</strong>，添加如下内容，注意，若需强制<strong>http</strong>访问请加上 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">http:<span class="regexp">//</span><span class="number">139.224</span>.<span class="number">62.107</span>:<span class="number">8080</span> &#123; <span class="regexp">//</span><span class="number">8080</span>是随意指定的端口号</span><br><span class="line">	reverse_proxy http:<span class="regexp">//</span><span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">3000</span>  <span class="regexp">//</span>对应swagger.js内的地址</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>启动 testAPI 项目<code>npm run start</code></li>
+<li>新打开一个终端窗口，启动Caddy <code>caddy start</code></li>
+<li>访问 <a target="_blank" rel="noopener" href="http://139.224.62.107:8080/swagger">http://139.224.62.107:8080/swagger</a>，成功！</li>
+</ol>
+<blockquote>
+<p>目前，Caddy的反向代理 reverse_proxy 仅支持 地址+端口号<br>注意，若没有https证书，需强调http访问，否则浏览器会因为安全问题拒绝访问（chrome这里是大坑不支持http，最后用Safari成功访问的http）</p>
+</blockquote>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><h2 id="Nginx-安装"><a href="#Nginx-安装" class="headerlink" title="Nginx 安装"></a>Nginx 安装</h2><ol>
+<li><p>前往<a target="_blank" rel="noopener" href="http://nginx.org/en/download.html">Nginx 下载</a>下载，本次安装版本为v1.21.6稳定版</p>
+</li>
+<li><p>解压缩后，切换至新文件夹</p>
+</li>
+<li><p>运行<code>./configure</code>完成安装</p>
+<ol>
+<li>建议运行<code>./configure --prefix=/usr/local/nginx</code>指定安装目录</li>
+<li>运行<code>make</code>和<code>make install</code></li>
+<li>安装完成后生成的安装目录为 <code>/usr/local/nginx</code></li>
+<li>nginx主配置文件：**&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;conf&#x2F;nginx.conf**</li>
+<li>nginx日志文件：**&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;logs&#x2F;access.log**</li>
+<li>启动Nginx：&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;sbin&#x2F;nginx</li>
+</ol>
+</li>
+<li><p>前往阿里云控制台开放端口:</p>
+<ol>
+<li>控制台→安全→防火墙→添加规则→应用类型选择自定义→端口填2019→确定</li>
+</ol>
+</li>
+<li><p>检查服务器防火墙 <code>firewall-cmd --query-port=80/tcp</code><br> 1. 打开80、433等相应端口<code>firewall-cmd --permanent --add-port=80/tcp</code></p>
+ <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">//</span>重新载入配置，比如添加规则之后，需要执行此命令</span><br><span class="line">firewall-cmd --reload </span><br><span class="line"></span><br><span class="line"><span class="regexp">//</span>若移除端口<span class="number">666</span></span><br><span class="line">firewall-cmd --permanent --remove-port=<span class="number">666</span>/tcp</span><br><span class="line"></span><br><span class="line"><span class="regexp">//</span> 关闭防火墙命令</span><br><span class="line">systemctl stop firewalld</span><br><span class="line"> </span><br><span class="line"><span class="regexp">//</span> 开启防火墙</span><br><span class="line">systemctl start firewalld</span><br><span class="line"> </span><br><span class="line"><span class="regexp">//</span> 关闭 开机自启动</span><br><span class="line">systemctl disable firewalld</span><br><span class="line"> </span><br><span class="line"><span class="regexp">//</span> 开启 开机启动</span><br><span class="line">systemctl enable firewalld</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>./configure: error: the HTTP rewrite module requires the PCRE library.</code>,安装pcre-devel解决问题，<code>yum -y install pcre-devel</code><br><code>yum install -y zlib-devel</code></p>
+</blockquote>
+</li>
+<li><p>切换到nginx安装目录中的启动目录下： <code>cd /usr/local/nginx/sbin</code>执行nginx命令：</p>
+<ol>
+<li>测试配置文件：.&#x2F;nginx -t</li>
+<li>启动命令：.&#x2F;nginx</li>
+<li>停止命令：.&#x2F;nginx -s stop&#x2F;quit</li>
+<li>重启命令：.&#x2F;nginx -s reload</li>
+<li>查看进程命令：ps -ef | grep nginx</li>
+<li>杀死nginx进程：kill -9 pid（ps命令中查询到的进程id）</li>
+</ol>
+</li>
+<li><p>在浏览器输入 <a target="_blank" rel="noopener" href="http://139.224.62.107/">http://139.224.62.107:80</a></p>
+</li>
+<li><p>设置开机自启动 Nginx</p>
+</li>
+</ol>
 
     </div>
 
@@ -338,6 +424,7 @@
               <a href="/tags/%E9%98%BF%E9%87%8C%E4%BA%91/" rel="tag"># 阿里云</a>
               <a href="/tags/ECS/" rel="tag"># ECS</a>
               <a href="/tags/Mysql/" rel="tag"># Mysql</a>
+              <a href="/tags/Caddy2/" rel="tag"># Caddy2</a>
           </div>
 
         
@@ -409,7 +496,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE%E4%B8%8E%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="nav-text">服务器配置与环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Node-%E5%AE%89%E8%A3%85"><span class="nav-text">Node 安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#koa2-%E5%AE%89%E8%A3%85"><span class="nav-text">koa2 安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis-%E5%AE%89%E8%A3%85"><span class="nav-text">Redis 安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mysql-%E5%AE%89%E8%A3%85"><span class="nav-text">Mysql 安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue-%E5%AE%89%E8%A3%85"><span class="nav-text">Vue 安装</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E4%BA%91Redis%E8%BF%9E%E6%8E%A5%E5%B9%B6%E6%B5%8B%E8%AF%95%E4%BC%A0%E8%BE%93%E6%95%B0%E6%8D%AE"><span class="nav-text">实现云Redis连接并测试传输数据</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-text">参考</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE%E4%B8%8E%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="nav-text">服务器配置与环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Node-%E5%AE%89%E8%A3%85"><span class="nav-text">Node 安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pm2-%E5%AE%89%E8%A3%85"><span class="nav-text">pm2 安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#koa2-%E5%AE%89%E8%A3%85"><span class="nav-text">koa2 安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis-%E5%AE%89%E8%A3%85"><span class="nav-text">Redis 安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Caddy2-%E5%AE%89%E8%A3%85"><span class="nav-text">Caddy2 安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-text">参考</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mysql-%E5%AE%89%E8%A3%85"><span class="nav-text">Mysql 安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue-%E5%AE%89%E8%A3%85"><span class="nav-text">Vue 安装</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E4%BA%91Redis%E8%BF%9E%E6%8E%A5%E5%B9%B6%E6%B5%8B%E8%AF%95%E4%BC%A0%E8%BE%93%E6%95%B0%E6%8D%AE"><span class="nav-text">实现云Redis连接并测试传输数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83-1"><span class="nav-text">参考</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8Swagger%E7%94%9F%E6%88%90%E6%8E%A5%E5%8F%A3%E6%96%87%E6%A1%A3"><span class="nav-text">使用Swagger生成接口文档</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-text">其他</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Nginx-%E5%AE%89%E8%A3%85"><span class="nav-text">Nginx 安装</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -438,7 +525,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-count">20</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
