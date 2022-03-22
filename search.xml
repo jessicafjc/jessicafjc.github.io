@@ -587,78 +587,6 @@
       </tags>
   </entry>
   <entry>
-    <title>初探koa2</title>
-    <url>/2022/02/25/%E5%88%9D%E6%8E%A2koa2/</url>
-    <content><![CDATA[<h1 id="koa2-的安装"><a href="#koa2-的安装" class="headerlink" title="koa2 的安装"></a>koa2 的安装</h1><ol>
-<li><p>运行<code>npm install koa</code></p>
-<p> 新建一个 <code>index.js</code> 测试一下</p>
- <figure class="highlight zephir"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> Koa = <span class="keyword">require</span>(<span class="string">&#x27;koa&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Koa();</span><br><span class="line"></span><br><span class="line"><span class="comment">// response</span></span><br><span class="line">app.<span class="keyword">use</span>(ctx =&gt; &#123;</span><br><span class="line">  ctx.body = <span class="string">&#x27;Hello Koa&#x27;</span>;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
-<p> 运行下<code>node index.js</code>，访问<a href="http://localhost:3000/">http:localhost:3000</a>查看效果。</p>
-</li>
-<li><p>安装koa2项目生成器并创建项目</p>
-<ol>
-<li>npm install koa-generator -g<blockquote>
-<p>可能需要sudo 否则权限不足</p>
-</blockquote>
-</li>
-<li>生成项目 <code>koa2 项目名</code> </li>
-<li>安装依赖 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> 项目名</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure></li>
-<li>启动服务<code>npm start</code>，浏览器输入：localhost:3000,如果页面中展示了如”Hello Koa 2”的内容，说明项目搭建成功。<h1 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h1></li>
-</ol>
-</li>
-</ol>
-<ul>
-<li>在 Koa2 中 GET 传值通过 <code>ctx</code> 或 <code>ctx.request</code> 接收</li>
-<li>动态路由传值可通过 <code>ctx.params</code> 接收</li>
-<li>query 返回的是格式化好的参数对象</li>
-<li>queryString 返回的是请求字符串<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 引入模块</span></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">Koa</span> = <span class="built_in">require</span>(<span class="string">&#x27;koa&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> router = <span class="built_in">require</span>(<span class="string">&#x27;koa-router&#x27;</span>)() <span class="comment">// 引入并实例化</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 实例化</span></span><br><span class="line"><span class="keyword">let</span> app = <span class="keyword">new</span> <span class="title class_">Koa</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 配置路由</span></span><br><span class="line"><span class="comment">// ctx 上下文 context，包含了 request 和 response 等信息</span></span><br><span class="line">router</span><br><span class="line">  .<span class="title function_">get</span>(<span class="string">&#x27;/&#x27;</span>, <span class="keyword">async</span> ctx =&gt; &#123;</span><br><span class="line">    ctx.<span class="property">body</span> = <span class="string">&#x27;首页&#x27;</span></span><br><span class="line">  &#125;)</span><br><span class="line">  .<span class="title function_">get</span>(<span class="string">&#x27;/news&#x27;</span>, <span class="keyword">async</span> ctx =&gt; &#123;</span><br><span class="line">    ctx.<span class="property">body</span> = <span class="string">&#x27;新闻列表&#x27;</span></span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="comment">// get 传值</span></span><br><span class="line">  .<span class="title function_">get</span>(<span class="string">&#x27;/newscontent&#x27;</span>, <span class="keyword">async</span> ctx =&gt; &#123;</span><br><span class="line">     <span class="comment">// 访问 http://localhost:9000/newscontent?aid=123&amp;name=zhangsan</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(ctx.<span class="property">query</span>)</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(ctx.<span class="property">request</span>.<span class="property">query</span>)          <span class="comment">// &#123; aid: &#x27;123&#x27;, name: &#x27;zhangsan&#x27; &#125;   对象</span></span><br><span class="line">    ctx.<span class="property">body</span> = <span class="string">&#x27;新闻详情&#x27;</span></span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="comment">// 动态路由</span></span><br><span class="line">  .<span class="title function_">get</span>(<span class="string">&#x27;/newsdetail/:id&#x27;</span>, <span class="keyword">async</span> ctx =&gt; &#123;</span><br><span class="line">     <span class="comment">// 访问 http://localhost:9000/newsdetail/1234</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(ctx.<span class="property">params</span>) <span class="comment">// &#123; id: 1234 &#125;</span></span><br><span class="line">    ctx.<span class="property">body</span> = <span class="string">&#x27;新闻详情 - 动态路由&#x27;</span></span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="comment">// 动态路由可以传入多个值</span></span><br><span class="line">  .<span class="title function_">get</span>(<span class="string">&#x27;/newsdetail/:aid/:bid&#x27;</span>, <span class="keyword">async</span> ctx =&gt; &#123;</span><br><span class="line">     <span class="comment">// 访问 http://localhost:9000/newsdetail/1234/5678</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(ctx.<span class="property">params</span>) <span class="comment">// &#123; aid: 1234, bid: 5678 &#125;</span></span><br><span class="line">    ctx.<span class="property">body</span> = <span class="string">&#x27;新闻详情 - 动态路由 - 传入多个值&#x27;</span></span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">app</span><br><span class="line">  .<span class="title function_">use</span>(router.<span class="title function_">routes</span>())           <span class="comment">// 启动路由</span></span><br><span class="line">  .<span class="title function_">use</span>(router.<span class="title function_">allowedMethods</span>())   <span class="comment">// router.allowedMethods() 用在路由匹配 router.routes() 之后，所以在当所有路由中间件最后调用，此时根据 ctx.status 设置 response 响应头</span></span><br><span class="line"></span><br><span class="line">app.<span class="title function_">listen</span>(<span class="number">9000</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;请浏览器打开 http://localhost:9000 或 http://localhost:9000&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<h1 id="写个简单的测试接口"><a href="#写个简单的测试接口" class="headerlink" title="写个简单的测试接口"></a>写个简单的测试接口</h1></li>
-</ul>
-<ol>
-<li>安装 <code>npm i koa-bodyparser</code></li>
-<li>新建一个xxx.js</li>
-</ol>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 引入模块</span></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">Koa</span> = <span class="built_in">require</span>(<span class="string">&#x27;koa&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> router = <span class="built_in">require</span>(<span class="string">&#x27;koa-router&#x27;</span>)() <span class="comment">// 引入并实例化</span></span><br><span class="line"><span class="keyword">const</span> bodyParser = <span class="built_in">require</span>(<span class="string">&#x27;koa-bodyparser&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 实例化</span></span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> <span class="title class_">Koa</span>()</span><br><span class="line"><span class="comment">// 配置中间件，通过 bodyParser 获取 post 请求传递过来的参数</span></span><br><span class="line">app.<span class="title function_">use</span>(<span class="title function_">bodyParser</span>())</span><br><span class="line"></span><br><span class="line"><span class="comment">// GET 接口</span></span><br><span class="line">router.<span class="title function_">get</span>(<span class="string">&#x27;/news&#x27;</span>, <span class="function"><span class="params">ctx</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; search &#125; = ctx.<span class="property">query</span></span><br><span class="line">  ctx.<span class="property">body</span> = &#123;</span><br><span class="line">    <span class="attr">time</span>: <span class="keyword">new</span> <span class="title class_">Date</span>(),</span><br><span class="line">    <span class="attr">data</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">title</span>: <span class="string">`新闻标题 1 - <span class="subst">$&#123; search &#125;</span>`</span></span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">title</span>: <span class="string">`新闻标题 2 - <span class="subst">$&#123; search &#125;</span>`</span></span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// POST 接口</span></span><br><span class="line">router.<span class="title function_">post</span>(<span class="string">&#x27;/say&#x27;</span>, <span class="function"><span class="params">ctx</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; name &#125; = ctx.<span class="property">request</span>.<span class="property">body</span></span><br><span class="line">  ctx.<span class="property">body</span> = &#123;</span><br><span class="line">    <span class="attr">time</span>: <span class="keyword">new</span> <span class="title class_">Date</span>(),</span><br><span class="line">    <span class="attr">reply</span>: <span class="string">`Hello <span class="subst">$&#123; name &#125;</span>!`</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">app.<span class="title function_">use</span>(router.<span class="title function_">routes</span>()) <span class="comment">// 启动路由</span></span><br><span class="line">app.<span class="title function_">listen</span>(<span class="number">3000</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Server is running on 3000&#x27;</span>)</span><br><span class="line">&#125;) <span class="comment">// 启动服务</span></span><br></pre></td></tr></table></figure>
-<ol start="3">
-<li>运行<code>node xxx.js</code>， 访问 <a href="http://localhost:3000/news?search=%E7%A7%91%E6%8A%80">http://localhost:3000/news?search=科技</a> 查看效果</li>
-</ol>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://github.com/koajs/koa">Github koa</a><br><a href="https://www.jianshu.com/p/3e35db2c8d6c">koa2从搭建项目到实现API</a><br><a href="https://liuxianyu.cn/article/learn-koa.html">接触 Koa2 框架</a><br><a href="https://liuxianyu.cn/article/koa-get-post.html">用 Koa2 写 GET、POST 测试接口</a></p>
-]]></content>
-      <categories>
-        <category>散装知识</category>
-      </categories>
-      <tags>
-        <tag>koa2</tag>
-        <tag>node</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>搭建hexo个人博客</title>
-    <url>/2019/11/25/%E6%90%AD%E5%BB%BAhexo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<h1 id="环境搭建（现在官网有MacOS安装包，傻瓜操作无需以下步骤）"><a href="#环境搭建（现在官网有MacOS安装包，傻瓜操作无需以下步骤）" class="headerlink" title="环境搭建（现在官网有MacOS安装包，傻瓜操作无需以下步骤）"></a>环境搭建（现在官网有MacOS安装包，傻瓜操作无需以下步骤）</h1><ol>
-<li>node.js安装官网</li>
-<li>npm或cnpm <code>npm install -g cnpm --registry-https://registry.npm.taobao.org</code></li>
-<li>验证版本<code>node -v</code> <code>npm -v</code>或<code>cnpm -v</code></li>
-<li>安装hexo <code>cnpm install -g hexo-cli</code></li>
-</ol>
-<h1 id="创建本地Blog"><a href="#创建本地Blog" class="headerlink" title="创建本地Blog"></a>创建本地Blog</h1><ol>
-<li>建立空文件夹作为博客地址，<code>mkdir Blog</code></li>
-<li>前往该文件夹 <code>cd Blog/</code></li>
-<li>初始化hexo <code>hexo init</code> 这里使用命令创建文件夹是因为我通过<code>cmd + N</code>方式创建文件夹会提示为非空导致无法初始化hexo</li>
-<li>启动hexo 服务 <code>hexo s</code> 成功后可访问 <a href="http://localhost:4000/">http://localhost:4000/</a> ，使用 <code>ctl+C</code> 结束服务</li>
-<li>创建一篇Blog <code>hexo n &quot;文件名&quot;</code>，生成的Blog是markdown格式，会在 source&#x2F;_posts&#x2F; 这个文件夹下</li>
-<li>清理缓存<code>hexo clean</code>，生成博客 <code>hexo g</code></li>
-<li>本地启动hexo测试效果 <code>hexo s</code></li>
-</ol>
-]]></content>
-      <categories>
-        <category>博客</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>从零开始用Koa2+Redis+Mysql搭建API</title>
     <url>/2022/03/07/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%94%A8Koa2+Redis+Mysql%E6%90%AD%E5%BB%BAAPI/</url>
     <content><![CDATA[<h1 id="服务器配置与环境搭建"><a href="#服务器配置与环境搭建" class="headerlink" title="服务器配置与环境搭建"></a>服务器配置与环境搭建</h1><p>服务器选型：最终选择 Alibaba cloud linux<br>远程连接记好自己的密码</p>
@@ -738,9 +666,9 @@
 <li><p>关闭项目<code>pkill node</code></p>
 </li>
 </ol>
-<h3 id="参考-1"><a href="#参考-1" class="headerlink" title="参考"></a>参考</h3><p><a href="https://www.jianshu.com/p/4c51e5a1fcb7">koa2 配置 redis</a><br><a href="https://github.com/luin/ioredis/tree/e4c9d01ecae78e601f6d03df50d92144de67a1b9">Github ioredis</a></p>
+<h2 id="参考-1"><a href="#参考-1" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.jianshu.com/p/4c51e5a1fcb7">koa2 配置 redis</a><br><a href="https://github.com/luin/ioredis/tree/e4c9d01ecae78e601f6d03df50d92144de67a1b9">Github ioredis</a></p>
 <h1 id="使用Swagger生成接口文档"><a href="#使用Swagger生成接口文档" class="headerlink" title="使用Swagger生成接口文档"></a>使用Swagger生成接口文档</h1><p>接续testAPI内容</p>
-<ol>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ol>
 <li>前往<code>cd testAPI</code></li>
 <li>安装相关依赖 <code>npm install koa2-swagger-ui swagger-jsdoc --save</code><ol>
 <li>koa2-swagger-ui UI视图组件  swagger-jsdoc 识别写的 &#x2F;***&#x2F; 转 json</li>
@@ -756,7 +684,9 @@
 <blockquote>
 <p>目前，Caddy的反向代理 reverse_proxy 仅支持 地址+端口号<br>注意，若没有https证书，需强调http访问，否则浏览器会因为安全问题拒绝访问（chrome这里是大坑不支持http，最后用Safari成功访问的http）</p>
 </blockquote>
-<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><h2 id="Nginx-安装"><a href="#Nginx-安装" class="headerlink" title="Nginx 安装"></a>Nginx 安装</h2><ol>
+<h3 id="参考-2"><a href="#参考-2" class="headerlink" title="参考"></a>参考</h3><p><a href="https://www.jianshu.com/p/71e4b3920aea">node koa2 swaggerUI 生成接口文档</a></p>
+<h2 id="美化文档页面"><a href="#美化文档页面" class="headerlink" title="美化文档页面"></a>美化文档页面</h2><p>参考<a href="https://editor.swagger.io/?_ga=2.132017415.928281264.1596593063-247237175.1594971087">swagger 文档说明</a>（YAML语言）<br>学习YAML语言<a href="http://www.ruanyifeng.com/blog/2016/07/yaml.html?f=tt">教程</a>，了解它与JavaScript语言之间的写法转换</p>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><h2 id="Nginx-安装（不再使用，现已替换为Caddy）"><a href="#Nginx-安装（不再使用，现已替换为Caddy）" class="headerlink" title="Nginx 安装（不再使用，现已替换为Caddy）"></a>Nginx 安装（不再使用，现已替换为Caddy）</h2><ol>
 <li><p>前往<a href="http://nginx.org/en/download.html">Nginx 下载</a>下载，本次安装版本为v1.21.6稳定版</p>
 </li>
 <li><p>解压缩后，切换至新文件夹</p>
@@ -810,6 +740,52 @@
       </tags>
   </entry>
   <entry>
+    <title>初探koa2</title>
+    <url>/2022/02/25/%E5%88%9D%E6%8E%A2koa2/</url>
+    <content><![CDATA[<h1 id="koa2-的安装"><a href="#koa2-的安装" class="headerlink" title="koa2 的安装"></a>koa2 的安装</h1><ol>
+<li><p>运行<code>npm install koa</code></p>
+<p> 新建一个 <code>index.js</code> 测试一下</p>
+ <figure class="highlight zephir"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> Koa = <span class="keyword">require</span>(<span class="string">&#x27;koa&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Koa();</span><br><span class="line"></span><br><span class="line"><span class="comment">// response</span></span><br><span class="line">app.<span class="keyword">use</span>(ctx =&gt; &#123;</span><br><span class="line">  ctx.body = <span class="string">&#x27;Hello Koa&#x27;</span>;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
+<p> 运行下<code>node index.js</code>，访问<a href="http://localhost:3000/">http:localhost:3000</a>查看效果。</p>
+</li>
+<li><p>安装koa2项目生成器并创建项目</p>
+<ol>
+<li>npm install koa-generator -g<blockquote>
+<p>可能需要sudo 否则权限不足</p>
+</blockquote>
+</li>
+<li>生成项目 <code>koa2 项目名</code> </li>
+<li>安装依赖 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> 项目名</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure></li>
+<li>启动服务<code>npm start</code>，浏览器输入：localhost:3000,如果页面中展示了如”Hello Koa 2”的内容，说明项目搭建成功。<h1 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h1></li>
+</ol>
+</li>
+</ol>
+<ul>
+<li>在 Koa2 中 GET 传值通过 <code>ctx</code> 或 <code>ctx.request</code> 接收</li>
+<li>动态路由传值可通过 <code>ctx.params</code> 接收</li>
+<li>query 返回的是格式化好的参数对象</li>
+<li>queryString 返回的是请求字符串<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 引入模块</span></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">Koa</span> = <span class="built_in">require</span>(<span class="string">&#x27;koa&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> router = <span class="built_in">require</span>(<span class="string">&#x27;koa-router&#x27;</span>)() <span class="comment">// 引入并实例化</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 实例化</span></span><br><span class="line"><span class="keyword">let</span> app = <span class="keyword">new</span> <span class="title class_">Koa</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 配置路由</span></span><br><span class="line"><span class="comment">// ctx 上下文 context，包含了 request 和 response 等信息</span></span><br><span class="line">router</span><br><span class="line">  .<span class="title function_">get</span>(<span class="string">&#x27;/&#x27;</span>, <span class="keyword">async</span> ctx =&gt; &#123;</span><br><span class="line">    ctx.<span class="property">body</span> = <span class="string">&#x27;首页&#x27;</span></span><br><span class="line">  &#125;)</span><br><span class="line">  .<span class="title function_">get</span>(<span class="string">&#x27;/news&#x27;</span>, <span class="keyword">async</span> ctx =&gt; &#123;</span><br><span class="line">    ctx.<span class="property">body</span> = <span class="string">&#x27;新闻列表&#x27;</span></span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="comment">// get 传值</span></span><br><span class="line">  .<span class="title function_">get</span>(<span class="string">&#x27;/newscontent&#x27;</span>, <span class="keyword">async</span> ctx =&gt; &#123;</span><br><span class="line">     <span class="comment">// 访问 http://localhost:9000/newscontent?aid=123&amp;name=zhangsan</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(ctx.<span class="property">query</span>)</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(ctx.<span class="property">request</span>.<span class="property">query</span>)          <span class="comment">// &#123; aid: &#x27;123&#x27;, name: &#x27;zhangsan&#x27; &#125;   对象</span></span><br><span class="line">    ctx.<span class="property">body</span> = <span class="string">&#x27;新闻详情&#x27;</span></span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="comment">// 动态路由</span></span><br><span class="line">  .<span class="title function_">get</span>(<span class="string">&#x27;/newsdetail/:id&#x27;</span>, <span class="keyword">async</span> ctx =&gt; &#123;</span><br><span class="line">     <span class="comment">// 访问 http://localhost:9000/newsdetail/1234</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(ctx.<span class="property">params</span>) <span class="comment">// &#123; id: 1234 &#125;</span></span><br><span class="line">    ctx.<span class="property">body</span> = <span class="string">&#x27;新闻详情 - 动态路由&#x27;</span></span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="comment">// 动态路由可以传入多个值</span></span><br><span class="line">  .<span class="title function_">get</span>(<span class="string">&#x27;/newsdetail/:aid/:bid&#x27;</span>, <span class="keyword">async</span> ctx =&gt; &#123;</span><br><span class="line">     <span class="comment">// 访问 http://localhost:9000/newsdetail/1234/5678</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(ctx.<span class="property">params</span>) <span class="comment">// &#123; aid: 1234, bid: 5678 &#125;</span></span><br><span class="line">    ctx.<span class="property">body</span> = <span class="string">&#x27;新闻详情 - 动态路由 - 传入多个值&#x27;</span></span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">app</span><br><span class="line">  .<span class="title function_">use</span>(router.<span class="title function_">routes</span>())           <span class="comment">// 启动路由</span></span><br><span class="line">  .<span class="title function_">use</span>(router.<span class="title function_">allowedMethods</span>())   <span class="comment">// router.allowedMethods() 用在路由匹配 router.routes() 之后，所以在当所有路由中间件最后调用，此时根据 ctx.status 设置 response 响应头</span></span><br><span class="line"></span><br><span class="line">app.<span class="title function_">listen</span>(<span class="number">9000</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;请浏览器打开 http://localhost:9000 或 http://localhost:9000&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h1 id="写个简单的测试接口"><a href="#写个简单的测试接口" class="headerlink" title="写个简单的测试接口"></a>写个简单的测试接口</h1></li>
+</ul>
+<ol>
+<li>安装 <code>npm i koa-bodyparser</code></li>
+<li>新建一个xxx.js</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 引入模块</span></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">Koa</span> = <span class="built_in">require</span>(<span class="string">&#x27;koa&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> router = <span class="built_in">require</span>(<span class="string">&#x27;koa-router&#x27;</span>)() <span class="comment">// 引入并实例化</span></span><br><span class="line"><span class="keyword">const</span> bodyParser = <span class="built_in">require</span>(<span class="string">&#x27;koa-bodyparser&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 实例化</span></span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> <span class="title class_">Koa</span>()</span><br><span class="line"><span class="comment">// 配置中间件，通过 bodyParser 获取 post 请求传递过来的参数</span></span><br><span class="line">app.<span class="title function_">use</span>(<span class="title function_">bodyParser</span>())</span><br><span class="line"></span><br><span class="line"><span class="comment">// GET 接口</span></span><br><span class="line">router.<span class="title function_">get</span>(<span class="string">&#x27;/news&#x27;</span>, <span class="function"><span class="params">ctx</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; search &#125; = ctx.<span class="property">query</span></span><br><span class="line">  ctx.<span class="property">body</span> = &#123;</span><br><span class="line">    <span class="attr">time</span>: <span class="keyword">new</span> <span class="title class_">Date</span>(),</span><br><span class="line">    <span class="attr">data</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">title</span>: <span class="string">`新闻标题 1 - <span class="subst">$&#123; search &#125;</span>`</span></span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">title</span>: <span class="string">`新闻标题 2 - <span class="subst">$&#123; search &#125;</span>`</span></span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// POST 接口</span></span><br><span class="line">router.<span class="title function_">post</span>(<span class="string">&#x27;/say&#x27;</span>, <span class="function"><span class="params">ctx</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; name &#125; = ctx.<span class="property">request</span>.<span class="property">body</span></span><br><span class="line">  ctx.<span class="property">body</span> = &#123;</span><br><span class="line">    <span class="attr">time</span>: <span class="keyword">new</span> <span class="title class_">Date</span>(),</span><br><span class="line">    <span class="attr">reply</span>: <span class="string">`Hello <span class="subst">$&#123; name &#125;</span>!`</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">app.<span class="title function_">use</span>(router.<span class="title function_">routes</span>()) <span class="comment">// 启动路由</span></span><br><span class="line">app.<span class="title function_">listen</span>(<span class="number">3000</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Server is running on 3000&#x27;</span>)</span><br><span class="line">&#125;) <span class="comment">// 启动服务</span></span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>运行<code>node xxx.js</code>， 访问 <a href="http://localhost:3000/news?search=%E7%A7%91%E6%8A%80">http://localhost:3000/news?search=科技</a> 查看效果</li>
+</ol>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://github.com/koajs/koa">Github koa</a><br><a href="https://www.jianshu.com/p/3e35db2c8d6c">koa2从搭建项目到实现API</a><br><a href="https://liuxianyu.cn/article/learn-koa.html">接触 Koa2 框架</a><br><a href="https://liuxianyu.cn/article/koa-get-post.html">用 Koa2 写 GET、POST 测试接口</a></p>
+]]></content>
+      <categories>
+        <category>散装知识</category>
+      </categories>
+      <tags>
+        <tag>koa2</tag>
+        <tag>node</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>服务器配置MYSQL并远程连接</title>
     <url>/2019/12/05/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AEMYSQL%E5%B9%B6%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5/</url>
     <content><![CDATA[<h1 id="前期操作"><a href="#前期操作" class="headerlink" title="前期操作"></a>前期操作</h1><p>购买好ECS，我这里选择的CentOS<br>远程连接ECS需要配置安全组——自行百度<br>设置SSH密码，例如：首字母大写+生月日星座六位数<br>按步骤安装MYSQL，设置root及其密码，例如：生月日星座六位数</p>
@@ -859,30 +835,29 @@
       </tags>
   </entry>
   <entry>
-    <title>阿里云搭建个人云服务器</title>
-    <url>/2019/11/27/%E9%98%BF%E9%87%8C%E4%BA%91%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
-    <content><![CDATA[<h1 id="选择服务器系统"><a href="#选择服务器系统" class="headerlink" title="选择服务器系统"></a>选择服务器系统</h1><p>选过CentOS、Alibaba cloud linux</p>
-<h1 id="安装数据库"><a href="#安装数据库" class="headerlink" title="安装数据库"></a>安装数据库</h1><h2 id="安装node"><a href="#安装node" class="headerlink" title="安装node"></a>安装node</h2><p>Node官网下载相应包：<a href="https://nodejs.org/en/download/">官网下载</a><br>我这里下载好的，直接上传到服务器：<code>/usr/node</code> 文件夹自己建的<br>到当前文件夹下解压:<code>tar -xvf xxxxxx.tar.xz</code><br>npm和node命令全局生效：<code>vim /ect/profile</code>，修改后<code>source /etc/profile</code></p>
-<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line"><span class="comment">#set for nodejs</span></span><br><span class="line"><span class="built_in">export</span> <span class="attribute">NODE_HOME</span>=/usr/node/node-v12.16.3-linux-x64#与文件夹路径对应</span><br><span class="line"><span class="built_in">export</span> <span class="attribute">PATH</span>=<span class="variable">$NODE_HOME</span>/bin:$PATH</span><br></pre></td></tr></table></figure>
-<p>查看一下版本，检验是否按照成功<code>node -v</code>、<code>npm -v</code><br>本地调试好项目后，上传到服务器上，别忘了添加依赖<code>npm install</code></p>
-<blockquote>
-<p>注意：阿里云要在安全组里开启 3000 端口</p>
-</blockquote>
-<h1 id="配置相关环境"><a href="#配置相关环境" class="headerlink" title="配置相关环境"></a>配置相关环境</h1><h2 id="ssh远程连接–-gt-sftp"><a href="#ssh远程连接–-gt-sftp" class="headerlink" title="ssh远程连接–&gt;sftp"></a>ssh远程连接–&gt;sftp</h2><p>配置实例安全组，开放22端口<br>ssh 如果连接不成功，提示<code>ssh_exchange_identification: read: Connection reset by peer</code></p>
-<p>解决办法</p>
-<ol>
-<li>前往本地文件夹<code>/Users/jiachenfu/.ssh/</code>删除<code>known_hosts</code>或改为<code>known_hosts.bak</code>，尝试<code>ssh root@ip</code>是否解决</li>
-<li>切换一个网络吧，关闭代理VPN，有的校园网络很坑会连不上</li>
-<li>尝试<code>ping ip</code>，如果成功，前往阿里云网页进行远程登录，修改<code>vi /etc/hosts.allow</code>，在末尾添加<code>sshd: ALL ##允许所有ip主机均能连接本机</code>，然后重启<code>systemctl restart sshd.service</code>，尝试<code>ssh root@ip</code>是否解决</li>
-<li>查看阿里云实例密钥对是否绑定</li>
+    <title>搭建hexo个人博客</title>
+    <url>/2019/11/25/%E6%90%AD%E5%BB%BAhexo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<h1 id="环境搭建（现在官网有MacOS安装包，傻瓜操作无需以下步骤）"><a href="#环境搭建（现在官网有MacOS安装包，傻瓜操作无需以下步骤）" class="headerlink" title="环境搭建（现在官网有MacOS安装包，傻瓜操作无需以下步骤）"></a>环境搭建（现在官网有MacOS安装包，傻瓜操作无需以下步骤）</h1><ol>
+<li>node.js安装官网</li>
+<li>npm或cnpm <code>npm install -g cnpm --registry-https://registry.npm.taobao.org</code></li>
+<li>验证版本<code>node -v</code> <code>npm -v</code>或<code>cnpm -v</code></li>
+<li>安装hexo <code>cnpm install -g hexo-cli</code></li>
+</ol>
+<h1 id="创建本地Blog"><a href="#创建本地Blog" class="headerlink" title="创建本地Blog"></a>创建本地Blog</h1><ol>
+<li>建立空文件夹作为博客地址，<code>mkdir Blog</code></li>
+<li>前往该文件夹 <code>cd Blog/</code></li>
+<li>初始化hexo <code>hexo init</code> 这里使用命令创建文件夹是因为我通过<code>cmd + N</code>方式创建文件夹会提示为非空导致无法初始化hexo</li>
+<li>启动hexo 服务 <code>hexo s</code> 成功后可访问 <a href="http://localhost:4000/">http://localhost:4000/</a> ，使用 <code>ctl+C</code> 结束服务</li>
+<li>创建一篇Blog <code>hexo n &quot;文件名&quot;</code>，生成的Blog是markdown格式，会在 source&#x2F;_posts&#x2F; 这个文件夹下</li>
+<li>清理缓存<code>hexo clean</code>，生成博客 <code>hexo g</code></li>
+<li>本地启动hexo测试效果 <code>hexo s</code></li>
 </ol>
 ]]></content>
       <categories>
-        <category>散装知识</category>
+        <category>博客</category>
       </categories>
       <tags>
-        <tag>阿里云</tag>
-        <tag>服务器</tag>
+        <tag>hexo</tag>
       </tags>
   </entry>
   <entry>
@@ -988,6 +963,33 @@
       </categories>
       <tags>
         <tag>Vue</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>阿里云搭建个人云服务器</title>
+    <url>/2019/11/27/%E9%98%BF%E9%87%8C%E4%BA%91%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
+    <content><![CDATA[<h1 id="选择服务器系统"><a href="#选择服务器系统" class="headerlink" title="选择服务器系统"></a>选择服务器系统</h1><p>选过CentOS、Alibaba cloud linux</p>
+<h1 id="安装数据库"><a href="#安装数据库" class="headerlink" title="安装数据库"></a>安装数据库</h1><h2 id="安装node"><a href="#安装node" class="headerlink" title="安装node"></a>安装node</h2><p>Node官网下载相应包：<a href="https://nodejs.org/en/download/">官网下载</a><br>我这里下载好的，直接上传到服务器：<code>/usr/node</code> 文件夹自己建的<br>到当前文件夹下解压:<code>tar -xvf xxxxxx.tar.xz</code><br>npm和node命令全局生效：<code>vim /ect/profile</code>，修改后<code>source /etc/profile</code></p>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line"><span class="comment">#set for nodejs</span></span><br><span class="line"><span class="built_in">export</span> <span class="attribute">NODE_HOME</span>=/usr/node/node-v12.16.3-linux-x64#与文件夹路径对应</span><br><span class="line"><span class="built_in">export</span> <span class="attribute">PATH</span>=<span class="variable">$NODE_HOME</span>/bin:$PATH</span><br></pre></td></tr></table></figure>
+<p>查看一下版本，检验是否按照成功<code>node -v</code>、<code>npm -v</code><br>本地调试好项目后，上传到服务器上，别忘了添加依赖<code>npm install</code></p>
+<blockquote>
+<p>注意：阿里云要在安全组里开启 3000 端口</p>
+</blockquote>
+<h1 id="配置相关环境"><a href="#配置相关环境" class="headerlink" title="配置相关环境"></a>配置相关环境</h1><h2 id="ssh远程连接–-gt-sftp"><a href="#ssh远程连接–-gt-sftp" class="headerlink" title="ssh远程连接–&gt;sftp"></a>ssh远程连接–&gt;sftp</h2><p>配置实例安全组，开放22端口<br>ssh 如果连接不成功，提示<code>ssh_exchange_identification: read: Connection reset by peer</code></p>
+<p>解决办法</p>
+<ol>
+<li>前往本地文件夹<code>/Users/jiachenfu/.ssh/</code>删除<code>known_hosts</code>或改为<code>known_hosts.bak</code>，尝试<code>ssh root@ip</code>是否解决</li>
+<li>切换一个网络吧，关闭代理VPN，有的校园网络很坑会连不上</li>
+<li>尝试<code>ping ip</code>，如果成功，前往阿里云网页进行远程登录，修改<code>vi /etc/hosts.allow</code>，在末尾添加<code>sshd: ALL ##允许所有ip主机均能连接本机</code>，然后重启<code>systemctl restart sshd.service</code>，尝试<code>ssh root@ip</code>是否解决</li>
+<li>查看阿里云实例密钥对是否绑定</li>
+</ol>
+]]></content>
+      <categories>
+        <category>散装知识</category>
+      </categories>
+      <tags>
+        <tag>阿里云</tag>
+        <tag>服务器</tag>
       </tags>
   </entry>
 </search>
