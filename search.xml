@@ -1,36 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>HTML5+JS+CSS与Bmob云后台实践</title>
-    <url>/2019/12/02/HTML5+JS+CSS%E4%B8%8EBmob%E4%BA%91%E5%90%8E%E5%8F%B0%E5%AE%9E%E8%B7%B5/</url>
-    <content><![CDATA[<h1 id="前置环境"><a href="#前置环境" class="headerlink" title="前置环境"></a>前置环境</h1><ol>
-<li>代码编译器我选择Hbulider X <a href="https://www.dcloud.io/hbuilderx.html">官网下载</a></li>
-<li>在Hbuilder新建一个空白项目test_demo，包含index.html、css文件夹、js文件夹、img文件夹</li>
-<li>前往Bmob<a href="https://bmob.github.io/hydrogen-js-sdk/#/?id=sdk%25e4%25bd%25bf%25e7%2594%25a8%25e6%2596%2587%25e6%25a1%25a3">官网查看文档</a>并下载对应SDKGitHub<a href="https://github.com/bmob/hydrogen-js-sdk/">源码地址</a></li>
-<li>在Bmob的控制台云数据库新建项目、新建表、设计数据结构并导入数据<h1 id="在项目中接入Bmob云数据库"><a href="#在项目中接入Bmob云数据库" class="headerlink" title="在项目中接入Bmob云数据库"></a>在项目中接入Bmob云数据库</h1></li>
-<li>引入bmob.js<br>将sdk中的<code>dist/Bmob-2.2.1.min.js</code>导入项目的js文件夹下,在index.html中引入 <code>&lt;script src=&quot;js/dist/Bmob-2.2.1.min.js&quot;&gt;&lt;/script&gt;</code> 新建一个js文件<code>main.js</code></li>
-<li>连接对应的bmob数据库<code>Bmob.initialize(&quot;你的Secret Key&quot;, &quot;你的API 安全码&quot;);</code></li>
-<li>系统用户表_User<br>获取_User列表内所有数据，因为_User是系统内置用户表，出于隐私安全考虑，密码不可见，且无法用明文方式进行参数传递。<figure class="highlight arcade"><table><tr><td class="code"><pre><span class="line">query.<span class="built_in">find</span>().then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line"> 	<span class="built_in">console</span>.<span class="built_in">log</span>(res)</span><br><span class="line"></span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure>
-判断登陆+本地缓存的方法</li>
-</ol>
-<figure class="highlight arcade"><table><tr><td class="code"><pre><span class="line">Bmob.User.login(<span class="string">&#x27;123&#x27;</span>, <span class="string">&#x27;123456&#x27;</span>).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//若登陆成功更新用户缓存</span></span><br><span class="line">	Bmob.User.updateStorage(res.objectId).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">		<span class="comment">//更新缓存成功，跳转页面</span></span><br><span class="line">		<span class="comment">//跳转到第二个页面-不传参数，href请使用相对路径</span></span><br><span class="line">		window.location.href = <span class="string">&quot;secondPage.html&quot;</span>;</span><br><span class="line">	&#125;).catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">		<span class="built_in">console</span>.<span class="built_in">log</span>(err)</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;).catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">	<span class="built_in">console</span>.<span class="built_in">log</span>(err)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>获取登陆的用户信息</p>
-<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">let <span class="keyword">current</span> = Bmob.<span class="keyword">User</span>.<span class="keyword">current</span>()</span><br><span class="line">// var data = &#123;&#125;;</span><br><span class="line">var arr = <span class="keyword">Object</span>.keys(<span class="keyword">current</span>);</span><br><span class="line">console.log(arr.length == <span class="number">0</span>) //<span class="keyword">true</span> 为空， <span class="keyword">false</span> 不为空</span><br><span class="line"><span class="keyword">if</span> (arr.length == <span class="number">0</span>) &#123;</span><br><span class="line">	//如果为空,返回登陆页面,防止未登陆用户造成系统崩溃</span><br><span class="line">	<span class="keyword">window</span>.<span class="keyword">location</span>.href = &quot;index.html&quot;</span><br><span class="line">&#125; <span class="keyword">else</span>&#123;</span><br><span class="line">	//如果不为空,则将<span class="keyword">current</span>内的值填入页面内</span><br><span class="line">	console.log(<span class="keyword">current</span>)</span><br><span class="line">	document.getElementById(&quot;username&quot;).innerHTML = <span class="keyword">current</span>.username;</span><br><span class="line">	document.getElementById(&quot;roomNumber&quot;).innerHTML = <span class="keyword">current</span>.roomNumber + <span class="string">&#x27;房间&#x27;</span>;</span><br><span class="line">	var gender = <span class="string">&#x27;&#x27;</span></span><br><span class="line">	<span class="keyword">if</span> (<span class="keyword">current</span>.sex == <span class="number">0</span>) &#123;</span><br><span class="line">		gender = <span class="string">&#x27;男&#x27;</span></span><br><span class="line">	&#125; <span class="keyword">else</span>&#123;</span><br><span class="line">		gender = <span class="string">&#x27;女&#x27;</span></span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	document.getElementById(&quot;gender&quot;).innerHTML = gender;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>获取自创建表TestData内所有数据，并遍历显示在HTML内</p>
-<figure class="highlight arcade"><table><tr><td class="code"><pre><span class="line">query.<span class="built_in">find</span>().then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">	<span class="built_in">console</span>.<span class="built_in">log</span>(res.<span class="built_in">length</span>)</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; res.<span class="built_in">length</span>; i++) &#123; </span><br><span class="line">	    <span class="built_in">text</span> += res[i].name + <span class="string">&quot;&lt;br&gt;&quot;</span>;</span><br><span class="line">		document.getElementById(<span class="string">&quot;name&quot;</span>).innerHTML = <span class="built_in">text</span>;</span><br><span class="line">	 &#125;</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>按objectId获取对应数据（若为_User此方法不可用，但可以使用内置的Bmob<br>.User.current()方法获取登陆后缓存的用户数据）</p>
-<figure class="highlight arcade"><table><tr><td class="code"><pre><span class="line">	<span class="built_in">console</span>.<span class="built_in">log</span>(res.name)</span><br><span class="line">	</span><br><span class="line">&#125;).catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.<span class="built_in">log</span>(err)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>散装知识</category>
-      </categories>
-      <tags>
-        <tag>Bmob</tag>
-        <tag>后端</tag>
-        <tag>实践</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Express+Mysql搭建接口平台</title>
     <url>/2020/05/22/Express+Mysql%E6%90%AD%E5%BB%BA%E6%8E%A5%E5%8F%A3%E5%B9%B3%E5%8F%B0/</url>
     <content><![CDATA[<h1 id="安装Express"><a href="#安装Express" class="headerlink" title="安装Express"></a>安装Express</h1><p>前提已经完成node和mysql的搭建和配置</p>
@@ -85,10 +55,117 @@
         <category>散装知识</category>
       </categories>
       <tags>
-        <tag>实践</tag>
         <tag>Node</tag>
+        <tag>实践</tag>
         <tag>MYSQL</tag>
         <tag>Express</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>HTML5+JS+CSS与Bmob云后台实践</title>
+    <url>/2019/12/02/HTML5+JS+CSS%E4%B8%8EBmob%E4%BA%91%E5%90%8E%E5%8F%B0%E5%AE%9E%E8%B7%B5/</url>
+    <content><![CDATA[<h1 id="前置环境"><a href="#前置环境" class="headerlink" title="前置环境"></a>前置环境</h1><ol>
+<li>代码编译器我选择Hbulider X <a href="https://www.dcloud.io/hbuilderx.html">官网下载</a></li>
+<li>在Hbuilder新建一个空白项目test_demo，包含index.html、css文件夹、js文件夹、img文件夹</li>
+<li>前往Bmob<a href="https://bmob.github.io/hydrogen-js-sdk/#/?id=sdk%25e4%25bd%25bf%25e7%2594%25a8%25e6%2596%2587%25e6%25a1%25a3">官网查看文档</a>并下载对应SDKGitHub<a href="https://github.com/bmob/hydrogen-js-sdk/">源码地址</a></li>
+<li>在Bmob的控制台云数据库新建项目、新建表、设计数据结构并导入数据<h1 id="在项目中接入Bmob云数据库"><a href="#在项目中接入Bmob云数据库" class="headerlink" title="在项目中接入Bmob云数据库"></a>在项目中接入Bmob云数据库</h1></li>
+<li>引入bmob.js<br>将sdk中的<code>dist/Bmob-2.2.1.min.js</code>导入项目的js文件夹下,在index.html中引入 <code>&lt;script src=&quot;js/dist/Bmob-2.2.1.min.js&quot;&gt;&lt;/script&gt;</code> 新建一个js文件<code>main.js</code></li>
+<li>连接对应的bmob数据库<code>Bmob.initialize(&quot;你的Secret Key&quot;, &quot;你的API 安全码&quot;);</code></li>
+<li>系统用户表_User<br>获取_User列表内所有数据，因为_User是系统内置用户表，出于隐私安全考虑，密码不可见，且无法用明文方式进行参数传递。<figure class="highlight arcade"><table><tr><td class="code"><pre><span class="line">query.<span class="built_in">find</span>().then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line"> 	<span class="built_in">console</span>.<span class="built_in">log</span>(res)</span><br><span class="line"></span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure>
+判断登陆+本地缓存的方法</li>
+</ol>
+<figure class="highlight arcade"><table><tr><td class="code"><pre><span class="line">Bmob.User.login(<span class="string">&#x27;123&#x27;</span>, <span class="string">&#x27;123456&#x27;</span>).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//若登陆成功更新用户缓存</span></span><br><span class="line">	Bmob.User.updateStorage(res.objectId).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">		<span class="comment">//更新缓存成功，跳转页面</span></span><br><span class="line">		<span class="comment">//跳转到第二个页面-不传参数，href请使用相对路径</span></span><br><span class="line">		window.location.href = <span class="string">&quot;secondPage.html&quot;</span>;</span><br><span class="line">	&#125;).catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">		<span class="built_in">console</span>.<span class="built_in">log</span>(err)</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;).catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">	<span class="built_in">console</span>.<span class="built_in">log</span>(err)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>获取登陆的用户信息</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">let <span class="keyword">current</span> = Bmob.<span class="keyword">User</span>.<span class="keyword">current</span>()</span><br><span class="line">// var data = &#123;&#125;;</span><br><span class="line">var arr = <span class="keyword">Object</span>.keys(<span class="keyword">current</span>);</span><br><span class="line">console.log(arr.length == <span class="number">0</span>) //<span class="keyword">true</span> 为空， <span class="keyword">false</span> 不为空</span><br><span class="line"><span class="keyword">if</span> (arr.length == <span class="number">0</span>) &#123;</span><br><span class="line">	//如果为空,返回登陆页面,防止未登陆用户造成系统崩溃</span><br><span class="line">	<span class="keyword">window</span>.<span class="keyword">location</span>.href = &quot;index.html&quot;</span><br><span class="line">&#125; <span class="keyword">else</span>&#123;</span><br><span class="line">	//如果不为空,则将<span class="keyword">current</span>内的值填入页面内</span><br><span class="line">	console.log(<span class="keyword">current</span>)</span><br><span class="line">	document.getElementById(&quot;username&quot;).innerHTML = <span class="keyword">current</span>.username;</span><br><span class="line">	document.getElementById(&quot;roomNumber&quot;).innerHTML = <span class="keyword">current</span>.roomNumber + <span class="string">&#x27;房间&#x27;</span>;</span><br><span class="line">	var gender = <span class="string">&#x27;&#x27;</span></span><br><span class="line">	<span class="keyword">if</span> (<span class="keyword">current</span>.sex == <span class="number">0</span>) &#123;</span><br><span class="line">		gender = <span class="string">&#x27;男&#x27;</span></span><br><span class="line">	&#125; <span class="keyword">else</span>&#123;</span><br><span class="line">		gender = <span class="string">&#x27;女&#x27;</span></span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	document.getElementById(&quot;gender&quot;).innerHTML = gender;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>获取自创建表TestData内所有数据，并遍历显示在HTML内</p>
+<figure class="highlight arcade"><table><tr><td class="code"><pre><span class="line">query.<span class="built_in">find</span>().then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">	<span class="built_in">console</span>.<span class="built_in">log</span>(res.<span class="built_in">length</span>)</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; res.<span class="built_in">length</span>; i++) &#123; </span><br><span class="line">	    <span class="built_in">text</span> += res[i].name + <span class="string">&quot;&lt;br&gt;&quot;</span>;</span><br><span class="line">		document.getElementById(<span class="string">&quot;name&quot;</span>).innerHTML = <span class="built_in">text</span>;</span><br><span class="line">	 &#125;</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>按objectId获取对应数据（若为_User此方法不可用，但可以使用内置的Bmob<br>.User.current()方法获取登陆后缓存的用户数据）</p>
+<figure class="highlight arcade"><table><tr><td class="code"><pre><span class="line">	<span class="built_in">console</span>.<span class="built_in">log</span>(res.name)</span><br><span class="line">	</span><br><span class="line">&#125;).catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.<span class="built_in">log</span>(err)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>散装知识</category>
+      </categories>
+      <tags>
+        <tag>实践</tag>
+        <tag>Bmob</tag>
+        <tag>后端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Tensorflow课程建设与教学研讨-南京邮电大学</title>
+    <url>/2019/12/15/Tensorflow%E8%AF%BE%E7%A8%8B%E5%BB%BA%E8%AE%BE%E4%B8%8E%E6%95%99%E5%AD%A6%E7%A0%94%E8%AE%A8-%E5%8D%97%E4%BA%AC%E9%82%AE%E7%94%B5%E5%A4%A7%E5%AD%A6/</url>
+    <content><![CDATA[<h1 id="课程构架"><a href="#课程构架" class="headerlink" title="课程构架"></a>课程构架</h1><ol>
+<li>第一讲 人工智能导论</li>
+<li>第二讲 环境搭建</li>
+<li>第三讲 TensorFlow编程基础</li>
+<li>第四讲 线性回归问题——函数回归单一神经元</li>
+<li>第五讲 房价预测问题：多元线性回归及TensorFlow编程进阶<ol>
+<li>多因素影响如何处理</li>
+<li>矩阵向量计算</li>
+</ol>
+</li>
+<li>第六讲 MNIST手写数字识别：分类应用入门<ol>
+<li>与线性回归相比，多了一个激活函数</li>
+</ol>
+</li>
+<li>第七讲 MNIST手写数字识别进阶：多层神经网络与应用</li>
+<li>第八讲 图像识别问题：卷积神经网络与应用<ol>
+<li>CIFAR10（数字“10”代表十分类）</li>
+</ol>
+</li>
+<li>第九讲 Deep Dream：理解深度神经网络结构及应用</li>
+<li>第十讲 猫狗大战：迁移学习及应用</li>
+<li>第十一讲 泰坦尼克号上的旅客生存概率预测：TensorFlow的高级框架Keras<ol>
+<li>使用高级框架</li>
+<li>数据处理</li>
+</ol>
+</li>
+<li>第十二讲 电影评论情感分析：RNN循环网络原理及应用<ol>
+<li>自然语言的分析</li>
+<li>如何将自然语言处理为计算机可处理的数据-词嵌入</li>
+<li>模型优化：同义词、近义词、反义词……</li>
+</ol>
+</li>
+<li>第十三讲 FashionMNIST图像生成：生成对抗网原理及应用</li>
+<li>第十四讲 鸢尾花品种——网页落地</li>
+<li>第十五讲 花卉识别——移动应用落地</li>
+<li>第十六讲 课程回顾与大作业<ol>
+<li>Final Project以PPT+源代码+多样性展现形式</li>
+<li>有展示答辩<h1 id="线下课程实施经验"><a href="#线下课程实施经验" class="headerlink" title="线下课程实施经验"></a>线下课程实施经验</h1></li>
+</ol>
+</li>
+</ol>
+<ul>
+<li>偏理工科学生兴趣</li>
+<li>1、2年级学生修读积极</li>
+<li>Talk is cheap, show me the code<h1 id="网课经验"><a href="#网课经验" class="headerlink" title="网课经验"></a>网课经验</h1></li>
+<li>网易云课堂、MOOC</li>
+<li>人出镜减少工作量</li>
+<li>设备：摄像头、背景板、补光、电脑、美颜相机</li>
+<li>适时缩放屏幕，突出焦点，以学习体验为本</li>
+<li>增加激光笔强调鼠标所在位置</li>
+<li>重点内容加字幕提醒</li>
+<li>音量比音质更重要</li>
+<li>提前进入状态</li>
+<li>不一定写出每一句的脚本，做好准备灵活发挥更重要<h1 id="误区"><a href="#误区" class="headerlink" title="误区"></a>误区</h1></li>
+<li>教学中设备不要求高</li>
+<li>先知识后能力——先能力后知识</li>
+<li>需要补充一些相关知识：Python、线性代数、应用开发等<h1 id="讲课要点"><a href="#讲课要点" class="headerlink" title="讲课要点"></a>讲课要点</h1></li>
+<li>核心步骤<ul>
+<li>训练数据的生成和整理</li>
+<li>训练模型的设计和构建</li>
+<li>训练模型</li>
+<li>优化模型</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>教学研讨</category>
+      </categories>
+      <tags>
+        <tag>Tensorflow</tag>
+        <tag>AI</tag>
       </tags>
   </entry>
   <entry>
@@ -332,6 +409,21 @@
       </tags>
   </entry>
   <entry>
+    <title>Swift5.0 UI代码Tips</title>
+    <url>/2019/12/02/swift5.0-UI%E4%BB%A3%E7%A0%81Tips/</url>
+    <content><![CDATA[<blockquote>
+<p>记录开发过程中用到的纯代码写UI及一些经验心得<br>记录一些自己写的UI库封装<br>记录一些用过的第三方UI类库</p>
+</blockquote>
+<h1 id="文字类"><a href="#文字类" class="headerlink" title="文字类"></a>文字类</h1><h2 id="label圆角"><a href="#label圆角" class="headerlink" title="label圆角"></a>label圆角</h2><figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="attr">label.layer.cornerRadius</span> = <span class="number">5</span><span class="comment">;</span></span><br><span class="line"><span class="attr">label.clipsToBounds</span> = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<h1 id="按钮类"><a href="#按钮类" class="headerlink" title="按钮类"></a>按钮类</h1><h1 id="图片类"><a href="#图片类" class="headerlink" title="图片类"></a>图片类</h1>]]></content>
+      <categories>
+        <category>散装知识</category>
+      </categories>
+      <tags>
+        <tag>Swift</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>vue安装及创建新项目</title>
     <url>/2019/11/28/vue%E5%AE%89%E8%A3%85%E5%8F%8A%E5%88%9B%E5%BB%BA%E6%96%B0%E9%A1%B9%E7%9B%AE/</url>
     <content><![CDATA[<h1 id="Vue了解"><a href="#Vue了解" class="headerlink" title="Vue了解"></a>Vue了解</h1><p>渐进式JavaScript 框架</p>
@@ -384,7 +476,7 @@
     <title>云ECS+云Redis</title>
     <url>/2022/02/28/%E4%BA%91ECS+%E4%BA%91Redis/</url>
     <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="ac64443828e137e4e045e1c5c63c0e396fa9dab83427841579e8f8a7717cce88">41b535b75251d982879fbe3234d52c0e7edf87b96aeb0858f7affaeadbed6f66493141bdd7c5389c3da95aa715abc85426e7ef7ccae2694a1bb2d397dfa4b8039990fe5b030ba5896e7375bc79568c57fb079e253343d76251d65ec1cdac1c268c34eef98a51074b5ea9bebcaa8d560f2e6d5d5c20cae534d81c2bdf63e6dc7063b99b8f23cc86e4a6f8d09812cf61c92028bc18c834934d99076299a39f0a195235cb50a844bea179133aa5ec928d3b3f2359d160657a6039a0314458865ae15e33386da775783d8bb5eea9874c8e12d075f185fded95d8828aaba55f3eb6f987908d3cc06bbbf2a94d788a11e6b14e0185a9a567d22271b733fb238afd21cf0300b581487ae32728b70130acbd232dbc537cd9cd6cb76cf3f7b6d93fe9a3b0a4d0dce7fe14f00844f506e2d5e8cf9930298a989e4ba023311fbe0281730c24422b0dccdb3ded3f8dede4fbbd4bb933655b4ca94dda45528cae6ab244d3e28a4c7eb0ebbebf58760766a0ac8b2e0397785aea3304e0f72ab8235fd9fb640598800982de27c6731295b6254028c6f3302ea1eb6fb79393f5e542621b2d23644349fe73c9f6df5f5c3a231efb2d19aa28d3a942e4bcb79441d3353300685c9ef8f367a3c3fffa760f8e97e1bef537f3e5488470a9b76cc8206374dedaf3223385e89f019f1e1c42baa9679d10fdb067607bf98f985ec1109cdeff8671522501738e3b8ac043c3f95c72cf6070dc14d8da5c2b96d5b779356a63f29f3c1ccfae3c0837f2d8d56a3918d58ee7bb1ffff4f148e79cfe031f4a398056be31a1fa06f2964b854e6ef59408886d04feb79c2120cf0d5b761d1ca4c74606d7fc7941f8e97b4518222468700824b2cc92b69a1da36db7bf339475e0bd7f595f1665376d4ef955af4d701a7d47ce0efecddc5786d0d5001d36298fe06c4ee0f47e60bbcde8e74173d1ce4f50d9e4762f6879c39fbc7dfc5612e943b5c714d5529a672c123dcd1bddd71c509249da2908e1242139619ee8b0a463b18630d55affcb09aca5393d001a859f1f381cf5181b13bcd8e04936ab486fab3571cb133fa2dae64830be62621e2501e2a9725ee5fc1fa3c0f157a94679b8288e90a19608f8e7559997d1d86014d9b8556eea6d285842dd0368052048cd3a02b19229f1490d6495f0ce90f53eb4ad627e4e8c768147d9c84247bcec149efe0b9665dcd5d1ef6ad1a2203e225c17d2a9475726ee21816fa5cfeaea912d25a4adf2100893f10099672fe2edfaed4749bad6dc17568fa5c495a8bbb650d4b7f878ed21f9b53a6412f7e60a4d8f2fc9ab5e0a50553667839d006f2d74d4e7d3f14483b0ca5f49ee7107762b46f25814f7428eee92dc0e42a23babddfe79e06f7f4df4241a1082880e5285c09bc97bb8d180f9955ea90b1a8903c1ea021143356b622ecd88cdf6c55eb28e0aa4e959f0e98640a5720932d03fb321fc6790515a80f499405cba3f3e3838e0a145fb1bb3df5e6be40a3d93def3c85208afdb08e461694474f6a4aaf1e69dc883a1e31973e27c5dead090fe162dac5be06c6516fc34a99510b22e658557afe8cb4bd9a2b71acd5218539cf731f1916004b2c53c0172d789ab77c4893f4fffe88ad79bcb6332b0de5eb93b876f5cf413bbf4b611e98cf42cc100fbf43bf4ef5d1fb8893dba359a00f5b857adde44228fe54220814f61be410c66b014e57c1da16e3b4c7f0bed938d824e59b900f9fc2a843c13852b8d640581529bbf4105c1f554bc6df68b8939730270cc056f86adab7c7175f4980005871cfcc64da8bcc0c565f85e28da24c76a291fe041b299a517ceed7b5705b215652b0aaa27170948404cd5ca3403b9886496af820c2b11fcf1abe2ef3990e48e93902b37b357a00ea41306c94bf5cc0285e262cc5ef66dfd1715e38c175e485fdbc42047ca5748ccc7fb5d7ad9cce10f6b06e184c587bb2a8f3b9b34201e17a371a5ced18c486e6664b9d78a5873cd2c21881f67ceb48c42b47728bff8f6fb35248f0bb895d32e0edf8c1a6ea7ca5c58cd21603b6b776aacf1afb9a6fde6c0c6d302412fc37a6ccb8419730a39cc8a8945066cd2a49e87a8b39b8c7f15b55dda8436cdf108748e62c72b1a0a43bcec4bd2a214eca2b6d728ee7e216c336121a96d06401919b6ec27cad5dc6b6ae4b95cf23bc7edee33a2a2413385742a02ab1bc719815e2323777eed49041efbfcd7741e90828c96eb4faf3bc39345c958018083115ab91add854cb129b03019f5a56dc636ae85fbacb1ffb3cd30b9f759669d314c9bf6455df8fc51d9612517fe682315b30d3a2783e0ee636f50933e1355ee9c1a85e1fe3a041c5adbd41073ed96b53d3a5ed69b01941b5654f33afa05c57166d833376601e7228f7bdbdeef5a73298963790c5151936072522dd258d84e394e2d8e3c0647c78edf27cc1243f053839308257419c5eb76bb3472a01bf9448132e9f16c140e7435db7778dba5299964e8fc1931f9664329f86d09560f2df5e27db01fbf04d025ee2204e1fc4c30744efe1050312a111bec66274a59a104440a4d9a0f8ca1649c993e74130c8c685e9233ec23ddd4f7c25c75b89ff101f53b662333ede4ed539286ecbff994823b2461d956d93cace636d07d07fd467f92abef72a45e54755ff5aca3883e</script>
+  <script id="hbeData" type="hbeData" data-hmacdigest="95260a04d10894b079eeca11ded0b62646374b04c0e31f900a1d042a2491609b">41b535b75251d982879fbe3234d52c0e7edf87b96aeb0858f7affaeadbed6f66493141bdd7c5389c3da95aa715abc85426e7ef7ccae2694a1bb2d397dfa4b8039990fe5b030ba5896e7375bc79568c57fb079e253343d76251d65ec1cdac1c268c34eef98a51074b5ea9bebcaa8d560f2e6d5d5c20cae534d81c2bdf63e6dc7063b99b8f23cc86e4a6f8d09812cf61c92028bc18c834934d99076299a39f0a195235cb50a844bea179133aa5ec928d3ba817701e1d76c1f25edf397556dbf2b7d3b58ce1ee184b94d566c81f3dc2f01fba13c732de034337bf3dbdf6936fa2e8e9926e340ff0c9ec5f0e3844381d1417fb2b91dc22a6bfe544e61cfddb36941c7ab531b72c962b07098059f180613912bdcf6c060a900fe5517690b93ee5f737d552534e5dcc261fead001f77d022a4394245240aa8a906876d8bf3ff27b05d03893ebf58416c96826cd1ffd511deafde0396b919630e05107b15ebf506676ec3656ed310c8feb967424f257f5cfe8c39698c59a00256b4a3465c3884e3c4e1047163bd20e8b9fb0df49645daac53ec4f2887b912db92f00a6e4059c48f6b8b8a629687ff3c8cb55615e97a616eed091827c70b4c50caef72c0bac078ee63271ed49e070c7f5f5983c4d962e750a8f1aca99f4f7e9f89091972facc0178a9886f8991b3a1ca3f9f39d28b296f7ec6df76b140c8b201a0bc2b2fe2edf4445c3759645b7e64d4b239fb6ff672edc3c33c6f7a172d9674dc8959b309454816c2dd6c8ac24103da5837fbd7a7f3f675456d1af31f7f101a70aae307ceae98c2c9bfce339006b74f3931cb8318e77bc00b94d2571116eb3316321fba5e892609bb9fa0cc53fade0f7b3ad1d612e32db7cf628f5ef1431f41ebdea1845ba25f05a23396ac2ea0e692edee4a6b4ddc2bac57ccf1099f29bbb16d4075974bb4e90c5a7412ac6ffb6b7a63b7dd7ad0a9fcc5cf9d843b5e328e48d4ccc7102c9f6225d86c5b5a323561a4e433632ad08e7137ac617e1c4035246249c45c4d179e41a99a6d6dfd43e59f7f493061f8c645728eefcdcc254c061661eb921f1bd9eda184e57ad9fd62cd0be6f4bcef861634fbdfa0636f34cbf45d6cdb1026c4ff34cfd50aaedd1325089a81e5cf495e7f9083f02a50d3d39c9ae6f1346900152cbbb733f2dc85e4c6efcd0bea088844bdc8b60881e52de8ffe0f6ca48dbca507f71ff607910f93b495a8419efc62bbf9143cfe3dac326f89b1657187c4e86f236a1f93a765e76424629b1e534ec0154df95d99a5002a146847818d36d9acddb33bee71211220c6eec041c5f42ad4d3e45421c0b001974d02e2853f3984d5d1a7a336ac6e778a61ee61b1bee8f2031a6df5cf4ecfa9fdf3fec0066c6b4dd635a5de726611851e5ba712de4dd402bb3d17916c423e2b55e2fda5c4b24b68f0ce407f2ca94e069c9a515dcdc51fc063769cbe18522d37c3e6f6726eed095e85a7e66d28314fc8729c33de12f6edec7fa584120b90434ea724f761299a160b5c1a34c02bf1e5aeac42781ebba6dbe838274ea3c2ad6a10e8fdaeab870dae940b5fca49c61a6a6b5e656dba4315a664da12d582f47563a0f917961932957de10725e0c83eeb96c25c09764efc63e4aa73e812f963166da781ff1b941381352cba303c515d81ca7f5f2cfea87b157d0d980e88847c3b07dae9bf87e9016e5f5035ef4c20073f57928e4b5691e501db507fd79cf6c856b0eb6803dc3a20236f4ea54208c7992521be55a87c06168b5e3b9530a098435ed3318d08a313e0305383d9cf4a13b5fc27b4829f6099eb198b0a3090322c05737dce3e064192913f44068f6ee9797956f1ee46e8b3d6aa038f12e3714eef7dbdc40f01181d3449d533d84e253093bd40682376fe0eca69dc8d33f7cf054ec2ae4f8f76ad6d31951ec8bd3789fabc7245a44dd98c9ea1b61866e6dbd67fcc890523744abdb38b32bf9c76250cce9f5777b93bade906f06d1d065a7a337b818c09bf65fc3ba82beb0b7fd260435aff7f8e204bc47b0c61446b853e20b61af8ad8620eaf217ef69bae473c5a4db38d810abd9c4dd18f35bf7374d0a857e34b79ced4ee319627b7b65b793a5083715b0ba0873b377de557ad83b4fa670b264cf104b041857a710c6ee9af3bad6f61934a682eb3cb93a92560c313098c3c0a7f7888347c2d5af49bb75abc46786a532d65b5ef6c5dd1103771bdb2e334ee1e158430258f260ad940787737d4e164c7939c8800340968444a42b3ef504cc297ba43f2dbaddce01506b784d32ac1f7f09c475d62b47f32d80812e93e0554c81c7f49ed9b0bcd2b081038386249f4226dac6ae43c8b327c4cc77a7e5b573fabc823e4f1c6f34d8823b4b9b29501dcce2fcf928fbe8a7492339dd7cfaafa5a1240c4007408fc5a9c7678f44444cc39cc7916109ba8b89c9cb278378f561159f5e34ab92cf8f2f9b0af002a8a276c290ab2810ac79924e0d0ee9ee863a3f4653512bc79f85a2556f7c00bfc2e090e4ef84d4256d551bf64efb90d1b8b3e5a3fb284d4b790b9b1702163d8af56322995295995fd47b0566b2b731b071060b93ed2d6d0d85c383acc543bc4b21e663a1d1a36da1092fa3b63fb50fa5b68718705567f851e443c915fe4dd7f9793c5b4b09eb62516351b23b6b44c532b3c34afe79f84f8c1aaedb6a82bf7773bc16c3664c53959e1be8db150b3858cb43c6e6cb0f9f0271f72dfbfaf3cfd86389225d81dd355be09f117c5fc833cbf05cb6b61d4fe75b653931e6cc6961eba56f30e570dc07d86c9b4e91870dae96678084e2ac76736ef615077625443c61442e6f7a9a60467ccb22d4a1d5c31516d55666285b2cdf4e2f95abc305b6e7e66a81c2c1619d7ae722a9a95ce791dc305bbce95e88b2a57c8f691d55c974c48bc5e247735258f2a74265d0ccb3770e97884b067ab8e8565c0c4fa53ef04c4dff26d5cff74bb0eb97e67b8beff44e945bce70b643ce881a23736772459dd61dc619a2f69514021a4f824c2528c75ea7fc95631d72c9dc6626df847625671a</script>
   <div class="hbe hbe-content">
     <div class="hbe hbe-input hbe-input-default">
       <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
@@ -411,7 +503,10 @@
 <h2 id="Node-安装"><a href="#Node-安装" class="headerlink" title="Node 安装"></a>Node 安装</h2><ul>
 <li>从官网中下载对应的安装包<br>  <code>xz -d XX.xz</code>        #.xz解压命令<br>  <code>tar -xvf  XX.tar</code>   #.tar解压命令</li>
 <li>添加两个全局软连接，地址酌情替换<br>  <code>ln -s /root/node-v16.14.0-linux-x64/bin/node /usr/local/bin/node   </code><br>  <code>ln -s /root/node-v16.14.0-linux-x64/bin/npm /usr/local/bin/npm   </code></li>
-<li>测试一下，能够输出版本号<br>  <code>node -v</code> <h2 id="pm2-安装"><a href="#pm2-安装" class="headerlink" title="pm2 安装"></a>pm2 安装</h2>一个带有负载均衡功能的 Node 应用的进程管理器，用于后台启动项目和管理</li>
+<li>测试一下，能够输出版本号<br>  <code>node -v</code></li>
+</ul>
+<h2 id="pm2-安装"><a href="#pm2-安装" class="headerlink" title="pm2 安装"></a>pm2 安装</h2><p>一个带有负载均衡功能的 Node 应用的进程管理器，用于后台启动项目和管理</p>
+<ul>
 <li>全局安装PM2 <code>npm install pm2 -g</code><ul>
 <li>可能需要管理员权限<code>sudo npm install pm2 -g</code></li>
 </ul>
@@ -419,12 +514,15 @@
 <li>使用<code>pm2 list</code>查看运行的项目</li>
 <li>使用<code>pm2 start &lt;&lt;项目名称&gt;&gt;</code></li>
 <li>使用<code>pm2 stop id</code>停止项目</li>
-<li>使用<code>pm2 delete id</code>删除id<h2 id="koa2-安装"><a href="#koa2-安装" class="headerlink" title="koa2 安装"></a>koa2 安装</h2></li>
+<li>使用<code>pm2 delete id</code>删除id</li>
+<li>若找不到命令，可以设置软连接<code>ln -s /root/node-v16.14.0-linux-x64/bin/pm2 /usr/local/bin</code></li>
+</ul>
+<h2 id="koa2-安装"><a href="#koa2-安装" class="headerlink" title="koa2 安装"></a>koa2 安装</h2><ul>
 <li>安装koa <code>npm install koa</code></li>
 <li>安装项目生成器 <code>npm install koa-generator -g</code></li>
 <li>设置软连接，不设置可能会<strong>koa2: command not found</strong><br>  <code>ln -s /root/node-v16.14.0-linux-x64/bin/koa2 /usr/local/bin</code></li>
 </ul>
-<h2 id="Redis-安装"><a href="#Redis-安装" class="headerlink" title="Redis 安装"></a>Redis 安装</h2><ul>
+<h2 id="Redis-安装（用云数据库可以不需要）"><a href="#Redis-安装（用云数据库可以不需要）" class="headerlink" title="Redis 安装（用云数据库可以不需要）"></a>Redis 安装（用云数据库可以不需要）</h2><ul>
 <li>下载地址：<a href="http://redis.io/download%EF%BC%8C%E4%B8%8B%E8%BD%BD%E6%9C%80%E6%96%B0%E7%A8%B3%E5%AE%9A%E7%89%88%E6%9C%AC">http://redis.io/download，下载最新稳定版本</a></li>
 <li>解压 <code>tar xzf redis-&lt;&lt;对应下载的安装包版本号&gt;&gt;.tar.gz</code></li>
 <li>前往该文件夹下 <code>cd redis-&lt;&lt;对应下载的安装包版本号&gt;&gt;</code></li>
@@ -451,9 +549,9 @@
 </ol>
 <ul>
 <li>本地数据库<code>./redis-cli -h 127.0.0.1 -p 6379</code> 或者</li>
-<li>用私有ip启动云Redis<br><code>./redis-cli -h r-uf6lbo0hp2xxeenaxm.redis.rds.aliyuncs.com -p 6379 --raw </code> 替换为自己的ip <strong>xxxx..rds.aliyuncs.com</strong><br>输入账号密码 <code>auth account001:Account001!))</code> 替换为自己的<strong>账号:密码</strong><h2 id="Caddy2-安装"><a href="#Caddy2-安装" class="headerlink" title="Caddy2 安装"></a>Caddy2 安装</h2></li>
+<li>用私有ip启动云Redis<br><code>./redis-cli -h r-uf6lbo0hp2xxeenaxm.redis.rds.aliyuncs.com -p 6379 --raw </code> 替换为自己的ip <strong>xxxx..rds.aliyuncs.com</strong><br>输入账号密码 <code>auth account001:Account001!))</code> 替换为自己的<strong>账号:密码</strong></li>
 </ul>
-<ol>
+<h2 id="Caddy2-安装"><a href="#Caddy2-安装" class="headerlink" title="Caddy2 安装"></a>Caddy2 安装</h2><ol>
 <li>去<a href="https://caddyserver.com/docs/install">官网</a>下载</li>
 <li>服务器中新建文件夹 caddy</li>
 <li>将下载的二进制文件放置在 caddy&#x2F; 下</li>
@@ -469,11 +567,17 @@
 <li>浏览器访问<a href="http://139.224.62.107/">http://139.224.62.107:80</a>，成功访问到<blockquote>
 <p>首次运行可能提示权限问题，需要修改权限<code>chmod u+x caddy</code><br>能正常访问的是http，https访问需格外设置ssl证书<br>设置软连接需注意，启动服务器仅在对应位置下启用<strong>Caddyfile</strong>，例如：在&#x2F;usr 下启动caddy，则需配置一个 Caddyfile 在 &#x2F;usr</p>
 </blockquote>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://www.jianshu.com/p/0985644d4fd9">阿里云Linux部署Caddy</a><br><a href="https://www.psvmc.cn/article/2021-02-22-caddy-01.html">Caddy2安装配置</a></p>
-<h2 id="Mysql-安装"><a href="#Mysql-安装" class="headerlink" title="Mysql 安装"></a>Mysql 安装</h2></li>
+</li>
 </ol>
-<h2 id="Vue-安装"><a href="#Vue-安装" class="headerlink" title="Vue 安装"></a>Vue 安装</h2><h1 id="实现云数据库连接并测试传输数据"><a href="#实现云数据库连接并测试传输数据" class="headerlink" title="实现云数据库连接并测试传输数据"></a>实现云数据库连接并测试传输数据</h1><h2 id="云Redis数据库连接"><a href="#云Redis数据库连接" class="headerlink" title="云Redis数据库连接"></a>云Redis数据库连接</h2><ol>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://www.jianshu.com/p/0985644d4fd9">阿里云Linux部署Caddy</a><br><a href="https://www.psvmc.cn/article/2021-02-22-caddy-01.html">Caddy2安装配置</a></p>
+<h2 id="Mysql-安装（用的云数据库就没安装）"><a href="#Mysql-安装（用的云数据库就没安装）" class="headerlink" title="Mysql 安装（用的云数据库就没安装）"></a>Mysql 安装（用的云数据库就没安装）</h2><h3 id="踩坑记录"><a href="#踩坑记录" class="headerlink" title="踩坑记录"></a>踩坑记录</h3><ol>
+<li>云数据库需要添加事件时提示权限不足无法开启<br>描述：<br>想要实现一个定时每天0点刷新签到状态为未签到，设置好存储过程和事件后，<br><code>SHOW VARIABLES LIKE &#39;event_scheduler&#39;;</code> 为<strong>off</strong><br>且<code>SET GLOBAL event_scheduler = ON;</code> 提示权限不足，但此时为root账号<br>解决：<br>前往阿里云控制台–&gt;修改数据库实例的参数设置，在其中找到<code>event_scheduler</code>词条，修改为<strong>ON</strong>，提交，等待生效即可。<br><img src="/2022/03/07/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%94%A8Koa2+Redis+Mysql%E6%90%AD%E5%BB%BAAPI/20200404.png" alt="20200404"></li>
+</ol>
+<h2 id="Vue-安装"><a href="#Vue-安装" class="headerlink" title="Vue 安装"></a>Vue 安装</h2><p>未</p>
+<h1 id="实现云数据库连接并测试传输数据"><a href="#实现云数据库连接并测试传输数据" class="headerlink" title="实现云数据库连接并测试传输数据"></a>实现云数据库连接并测试传输数据</h1><h2 id="云Redis数据库连接"><a href="#云Redis数据库连接" class="headerlink" title="云Redis数据库连接"></a>云Redis数据库连接</h2><ol>
 <li><p>生成项目 <code>koa2 &lt;&lt;项目名称&gt;&gt;</code> 我这里设置为 testAPI</p>
+</li>
+<li><p>安装<code>npm install ioredis</code></p>
 </li>
 <li><p>在项目中新建一个 <strong>db.js</strong></p>
  <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">Redis</span> = <span class="built_in">require</span>(<span class="string">&#x27;ioredis&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> redis = &#123;</span><br><span class="line">   <span class="attr">port</span>: <span class="number">6379</span>,</span><br><span class="line">   <span class="attr">host</span>: <span class="string">&#x27;r-uf6lbo0hp2xxeenaxm.redis.rds.aliyuncs.com&#x27;</span>, #私有ip</span><br><span class="line">   <span class="attr">username</span>: <span class="string">&#x27;account001&#x27;</span>,</span><br><span class="line">   <span class="attr">password</span>: <span class="string">&#x27;Account001!))&#x27;</span>,</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> newRedis = <span class="keyword">new</span> <span class="title class_">Redis</span>(redis)</span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = newRedis</span><br></pre></td></tr></table></figure></li>
@@ -486,7 +590,7 @@
 <li><p>安装<code>npm install mysql --save</code></p>
 </li>
 <li><p>在 dbs文件夹下，新建<strong>mysql_config.js</strong>和<strong>mysql_query.js</strong></p>
- <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// mysql_config.js</span></span><br><span class="line"><span class="keyword">const</span> mysqlConfig = &#123;</span><br><span class="line">    <span class="comment">// 数据库配置</span></span><br><span class="line">    <span class="attr">database</span>: &#123;</span><br><span class="line">        <span class="attr">DATABASE</span>: <span class="string">&#x27;XXXXX&#x27;</span>, <span class="comment">//数据库名称</span></span><br><span class="line">        <span class="attr">USERNAME</span>: <span class="string">&#x27;xxxxx&#x27;</span>, <span class="comment">//mysql用户名</span></span><br><span class="line">        <span class="attr">PASSWORD</span>: <span class="string">&#x27;xxxxxxxx&#x27;</span>, <span class="comment">//mysql密码</span></span><br><span class="line">        <span class="attr">PORT</span>: <span class="string">&#x27;3306&#x27;</span>, <span class="comment">//mysql端口号</span></span><br><span class="line">        <span class="attr">HOST</span>: <span class="string">&#x27;xxxxxxxxx&#x27;</span> <span class="comment">//服务器ip</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = mysqlConfig</span><br></pre></td></tr></table></figure>
+ <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// mysql_config.js</span></span><br><span class="line"><span class="keyword">const</span> mysqlConfig = &#123;</span><br><span class="line">    <span class="comment">// 数据库配置</span></span><br><span class="line">    <span class="attr">database</span>: &#123;</span><br><span class="line">        <span class="attr">DATABASE</span>: <span class="string">&#x27;XXXXX&#x27;</span>, <span class="comment">//数据库名称</span></span><br><span class="line">        <span class="attr">USERNAME</span>: <span class="string">&#x27;xxxxx&#x27;</span>, <span class="comment">//mysql用户名</span></span><br><span class="line">        <span class="attr">PASSWORD</span>: <span class="string">&#x27;xxxxxxxx&#x27;</span>, <span class="comment">//mysql密码</span></span><br><span class="line">        <span class="attr">PORT</span>: <span class="string">&#x27;3306&#x27;</span>, <span class="comment">//mysql端口号</span></span><br><span class="line">        <span class="attr">HOST</span>: <span class="string">&#x27;xxxxxxxxx&#x27;</span> <span class="comment">//服务器ip，注意内外网区分</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = mysqlConfig</span><br></pre></td></tr></table></figure>
  <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//mysql_query.js </span></span><br><span class="line"><span class="keyword">const</span> mysql = <span class="built_in">require</span>(<span class="string">&quot;mysql&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> config = <span class="built_in">require</span>(<span class="string">&quot;./mysql_config.js&quot;</span>); <span class="comment">//引入上一个文件</span></span><br><span class="line"><span class="comment">//创建连接池</span></span><br><span class="line"><span class="keyword">var</span> pool = mysql.<span class="title function_">createPool</span>(&#123;</span><br><span class="line">	<span class="attr">host</span>: config.<span class="property">database</span>.<span class="property">HOST</span>,</span><br><span class="line">	<span class="attr">user</span>: config.<span class="property">database</span>.<span class="property">USERNAME</span>,</span><br><span class="line">	<span class="attr">password</span>: config.<span class="property">database</span>.<span class="property">PASSWORD</span>,</span><br><span class="line">	<span class="attr">database</span>: config.<span class="property">database</span>.<span class="property">DATABASE</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//封装异步</span></span><br><span class="line"><span class="keyword">let</span> query = <span class="keyword">function</span>(<span class="params">sql, values</span>) &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">		pool.<span class="title function_">getConnection</span>(<span class="keyword">function</span>(<span class="params">err, connection</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span> (err) &#123;</span><br><span class="line">				<span class="title function_">resolve</span>(err)</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				connection.<span class="title function_">query</span>(sql, values, <span class="function">(<span class="params">err, rows</span>) =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">					<span class="keyword">if</span> (err) &#123;</span><br><span class="line">						<span class="title function_">reject</span>(err)</span><br><span class="line">					&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">						<span class="title function_">resolve</span>(rows)</span><br><span class="line">					&#125;</span><br><span class="line">					connection.<span class="title function_">release</span>()</span><br><span class="line">				&#125;)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 封装一个查询方法</span></span><br><span class="line"><span class="keyword">let</span> findAllinTable = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">	<span class="keyword">let</span> _sql = <span class="string">&quot;SELECT * FROM &lt;&lt;TABLE_NAME&gt;&gt;&quot;</span></span><br><span class="line">	<span class="keyword">return</span> <span class="title function_">query</span>(_sql)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">	findAllinTable</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
 </ol>
 <p>3.在<strong>index.js</strong> 中添加如下内容</p>
@@ -501,7 +605,7 @@
 <li>koa2-swagger-ui UI视图组件  swagger-jsdoc 识别写的 &#x2F;***&#x2F; 转 json</li>
 </ol>
 </li>
-<li>在项目中新建 <strong>swagger.js</strong>，我放在routes文件夹下，建议后期在根目录下新建util文件夹，放置相关配置文件 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> router = <span class="built_in">require</span>(<span class="string">&#x27;koa-router&#x27;</span>)() <span class="comment">//引入路由函数</span></span><br><span class="line"><span class="keyword">const</span> swaggerJSDoc = <span class="built_in">require</span>(<span class="string">&#x27;swagger-jsdoc&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> swaggerDefinition = &#123;</span><br><span class="line">    <span class="attr">info</span>: &#123;</span><br><span class="line">        <span class="attr">title</span>: <span class="string">&#x27;网站api借口&#x27;</span>,</span><br><span class="line">        <span class="attr">version</span>: <span class="string">&#x27;1.0.0&#x27;</span>,</span><br><span class="line">        <span class="attr">description</span>: <span class="string">&#x27;API&#x27;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">host</span>: <span class="string">&#x27;localhost:3000&#x27;</span>,</span><br><span class="line">    <span class="attr">basePath</span>: <span class="string">&#x27;/&#x27;</span> <span class="comment">// Base path (optional)</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> options = &#123;</span><br><span class="line">    swaggerDefinition,</span><br><span class="line">    <span class="attr">apis</span>: [<span class="string">&#x27;./routes/*.js&#x27;</span>]</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> swaggerSpec = <span class="title function_">swaggerJSDoc</span>(options)</span><br><span class="line"><span class="comment">// 通过路由获取生成的注解文件</span></span><br><span class="line">router.<span class="title function_">get</span>(<span class="string">&#x27;/swagger.json&#x27;</span>, <span class="keyword">async</span> <span class="keyword">function</span> (<span class="params">ctx</span>) &#123;</span><br><span class="line">    ctx.<span class="title function_">set</span>(<span class="string">&#x27;Content-Type&#x27;</span>, <span class="string">&#x27;application/json&#x27;</span>);</span><br><span class="line">    ctx.<span class="property">body</span> = swaggerSpec;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = router</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li>在项目中新建 <strong>swagger.js</strong>，我放在routes文件夹下，建议后期在根目录下新建util文件夹，放置相关配置文件 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> router = <span class="built_in">require</span>(<span class="string">&#x27;koa-router&#x27;</span>)() <span class="comment">//引入路由函数</span></span><br><span class="line"><span class="keyword">const</span> swaggerJSDoc = <span class="built_in">require</span>(<span class="string">&#x27;swagger-jsdoc&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> swaggerDefinition = &#123;</span><br><span class="line">    <span class="attr">info</span>: &#123;</span><br><span class="line">        <span class="attr">title</span>: <span class="string">&#x27;网站api借口&#x27;</span>,</span><br><span class="line">        <span class="attr">version</span>: <span class="string">&#x27;1.0.0&#x27;</span>,</span><br><span class="line">        <span class="attr">description</span>: <span class="string">&#x27;API&#x27;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">host</span>: <span class="string">&#x27;localhost:3000&#x27;</span>, <span class="comment">//传服务器需改为139.224.62.107:8080</span></span><br><span class="line">    <span class="attr">basePath</span>: <span class="string">&#x27;/&#x27;</span> <span class="comment">// Base path (optional)</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> options = &#123;</span><br><span class="line">    swaggerDefinition,</span><br><span class="line">    <span class="attr">apis</span>: [<span class="string">&#x27;./routes/*.js&#x27;</span>]</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> swaggerSpec = <span class="title function_">swaggerJSDoc</span>(options)</span><br><span class="line"><span class="comment">// 通过路由获取生成的注解文件</span></span><br><span class="line">router.<span class="title function_">get</span>(<span class="string">&#x27;/swagger.json&#x27;</span>, <span class="keyword">async</span> <span class="keyword">function</span> (<span class="params">ctx</span>) &#123;</span><br><span class="line">    ctx.<span class="title function_">set</span>(<span class="string">&#x27;Content-Type&#x27;</span>, <span class="string">&#x27;application/json&#x27;</span>);</span><br><span class="line">    ctx.<span class="property">body</span> = swaggerSpec;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = router</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
 <li>在 app.js 中添加如下代码： <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> swagger = <span class="built_in">require</span>(<span class="string">&#x27;./routes/swagger&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> &#123; koaSwagger &#125; = <span class="built_in">require</span>(<span class="string">&#x27;koa2-swagger-ui&#x27;</span>)</span><br><span class="line"></span><br><span class="line">app.<span class="title function_">use</span>(swagger.<span class="title function_">routes</span>(), swagger.<span class="title function_">allowedMethods</span>())</span><br><span class="line">app.<span class="title function_">use</span>(</span><br><span class="line">  <span class="title function_">koaSwagger</span>(&#123;</span><br><span class="line">    <span class="attr">routePrefix</span>: <span class="string">&#x27;/swagger&#x27;</span>, <span class="comment">// host at /swagger instead of default /docs</span></span><br><span class="line">    <span class="attr">swaggerOptions</span>: &#123;</span><br><span class="line">      <span class="attr">url</span>: <span class="string">&#x27;/swagger.json&#x27;</span>, <span class="comment">// example path to json</span></span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;),</span><br><span class="line">);</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
 <li>修改<strong>Caddyfile</strong>，添加如下内容，注意，若需强制<strong>http</strong>访问请加上 <figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">http:<span class="regexp">//</span><span class="number">139.224</span>.<span class="number">62.107</span>:<span class="number">8080</span> &#123; <span class="regexp">//</span><span class="number">8080</span>是随意指定的端口号</span><br><span class="line">	reverse_proxy http:<span class="regexp">//</span><span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">3000</span>  <span class="regexp">//</span>对应swagger.js内的地址</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 <li>启动 testAPI 项目<code>npm run start</code></li>
@@ -577,6 +681,52 @@
         <tag>ECS</tag>
         <tag>Mysql</tag>
         <tag>Caddy2</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>初探koa2</title>
+    <url>/2022/02/25/%E5%88%9D%E6%8E%A2koa2/</url>
+    <content><![CDATA[<h1 id="koa2-的安装"><a href="#koa2-的安装" class="headerlink" title="koa2 的安装"></a>koa2 的安装</h1><ol>
+<li><p>运行<code>npm install koa</code></p>
+<p> 新建一个 <code>index.js</code> 测试一下</p>
+ <figure class="highlight zephir"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> Koa = <span class="keyword">require</span>(<span class="string">&#x27;koa&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Koa();</span><br><span class="line"></span><br><span class="line"><span class="comment">// response</span></span><br><span class="line">app.<span class="keyword">use</span>(ctx =&gt; &#123;</span><br><span class="line">  ctx.body = <span class="string">&#x27;Hello Koa&#x27;</span>;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
+<p> 运行下<code>node index.js</code>，访问<a href="http://localhost:3000/">http:localhost:3000</a>查看效果。</p>
+</li>
+<li><p>安装koa2项目生成器并创建项目</p>
+<ol>
+<li>npm install koa-generator -g<blockquote>
+<p>可能需要sudo 否则权限不足</p>
+</blockquote>
+</li>
+<li>生成项目 <code>koa2 项目名</code> </li>
+<li>安装依赖 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> 项目名</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure></li>
+<li>启动服务<code>npm start</code>，浏览器输入：localhost:3000,如果页面中展示了如”Hello Koa 2”的内容，说明项目搭建成功。<h1 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h1></li>
+</ol>
+</li>
+</ol>
+<ul>
+<li>在 Koa2 中 GET 传值通过 <code>ctx</code> 或 <code>ctx.request</code> 接收</li>
+<li>动态路由传值可通过 <code>ctx.params</code> 接收</li>
+<li>query 返回的是格式化好的参数对象</li>
+<li>queryString 返回的是请求字符串<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 引入模块</span></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">Koa</span> = <span class="built_in">require</span>(<span class="string">&#x27;koa&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> router = <span class="built_in">require</span>(<span class="string">&#x27;koa-router&#x27;</span>)() <span class="comment">// 引入并实例化</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 实例化</span></span><br><span class="line"><span class="keyword">let</span> app = <span class="keyword">new</span> <span class="title class_">Koa</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 配置路由</span></span><br><span class="line"><span class="comment">// ctx 上下文 context，包含了 request 和 response 等信息</span></span><br><span class="line">router</span><br><span class="line">  .<span class="title function_">get</span>(<span class="string">&#x27;/&#x27;</span>, <span class="keyword">async</span> ctx =&gt; &#123;</span><br><span class="line">    ctx.<span class="property">body</span> = <span class="string">&#x27;首页&#x27;</span></span><br><span class="line">  &#125;)</span><br><span class="line">  .<span class="title function_">get</span>(<span class="string">&#x27;/news&#x27;</span>, <span class="keyword">async</span> ctx =&gt; &#123;</span><br><span class="line">    ctx.<span class="property">body</span> = <span class="string">&#x27;新闻列表&#x27;</span></span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="comment">// get 传值</span></span><br><span class="line">  .<span class="title function_">get</span>(<span class="string">&#x27;/newscontent&#x27;</span>, <span class="keyword">async</span> ctx =&gt; &#123;</span><br><span class="line">     <span class="comment">// 访问 http://localhost:9000/newscontent?aid=123&amp;name=zhangsan</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(ctx.<span class="property">query</span>)</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(ctx.<span class="property">request</span>.<span class="property">query</span>)          <span class="comment">// &#123; aid: &#x27;123&#x27;, name: &#x27;zhangsan&#x27; &#125;   对象</span></span><br><span class="line">    ctx.<span class="property">body</span> = <span class="string">&#x27;新闻详情&#x27;</span></span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="comment">// 动态路由</span></span><br><span class="line">  .<span class="title function_">get</span>(<span class="string">&#x27;/newsdetail/:id&#x27;</span>, <span class="keyword">async</span> ctx =&gt; &#123;</span><br><span class="line">     <span class="comment">// 访问 http://localhost:9000/newsdetail/1234</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(ctx.<span class="property">params</span>) <span class="comment">// &#123; id: 1234 &#125;</span></span><br><span class="line">    ctx.<span class="property">body</span> = <span class="string">&#x27;新闻详情 - 动态路由&#x27;</span></span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="comment">// 动态路由可以传入多个值</span></span><br><span class="line">  .<span class="title function_">get</span>(<span class="string">&#x27;/newsdetail/:aid/:bid&#x27;</span>, <span class="keyword">async</span> ctx =&gt; &#123;</span><br><span class="line">     <span class="comment">// 访问 http://localhost:9000/newsdetail/1234/5678</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(ctx.<span class="property">params</span>) <span class="comment">// &#123; aid: 1234, bid: 5678 &#125;</span></span><br><span class="line">    ctx.<span class="property">body</span> = <span class="string">&#x27;新闻详情 - 动态路由 - 传入多个值&#x27;</span></span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">app</span><br><span class="line">  .<span class="title function_">use</span>(router.<span class="title function_">routes</span>())           <span class="comment">// 启动路由</span></span><br><span class="line">  .<span class="title function_">use</span>(router.<span class="title function_">allowedMethods</span>())   <span class="comment">// router.allowedMethods() 用在路由匹配 router.routes() 之后，所以在当所有路由中间件最后调用，此时根据 ctx.status 设置 response 响应头</span></span><br><span class="line"></span><br><span class="line">app.<span class="title function_">listen</span>(<span class="number">9000</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;请浏览器打开 http://localhost:9000 或 http://localhost:9000&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h1 id="写个简单的测试接口"><a href="#写个简单的测试接口" class="headerlink" title="写个简单的测试接口"></a>写个简单的测试接口</h1></li>
+</ul>
+<ol>
+<li>安装 <code>npm i koa-bodyparser</code></li>
+<li>新建一个xxx.js</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 引入模块</span></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">Koa</span> = <span class="built_in">require</span>(<span class="string">&#x27;koa&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> router = <span class="built_in">require</span>(<span class="string">&#x27;koa-router&#x27;</span>)() <span class="comment">// 引入并实例化</span></span><br><span class="line"><span class="keyword">const</span> bodyParser = <span class="built_in">require</span>(<span class="string">&#x27;koa-bodyparser&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 实例化</span></span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> <span class="title class_">Koa</span>()</span><br><span class="line"><span class="comment">// 配置中间件，通过 bodyParser 获取 post 请求传递过来的参数</span></span><br><span class="line">app.<span class="title function_">use</span>(<span class="title function_">bodyParser</span>())</span><br><span class="line"></span><br><span class="line"><span class="comment">// GET 接口</span></span><br><span class="line">router.<span class="title function_">get</span>(<span class="string">&#x27;/news&#x27;</span>, <span class="function"><span class="params">ctx</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; search &#125; = ctx.<span class="property">query</span></span><br><span class="line">  ctx.<span class="property">body</span> = &#123;</span><br><span class="line">    <span class="attr">time</span>: <span class="keyword">new</span> <span class="title class_">Date</span>(),</span><br><span class="line">    <span class="attr">data</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">title</span>: <span class="string">`新闻标题 1 - <span class="subst">$&#123; search &#125;</span>`</span></span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">title</span>: <span class="string">`新闻标题 2 - <span class="subst">$&#123; search &#125;</span>`</span></span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// POST 接口</span></span><br><span class="line">router.<span class="title function_">post</span>(<span class="string">&#x27;/say&#x27;</span>, <span class="function"><span class="params">ctx</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; name &#125; = ctx.<span class="property">request</span>.<span class="property">body</span></span><br><span class="line">  ctx.<span class="property">body</span> = &#123;</span><br><span class="line">    <span class="attr">time</span>: <span class="keyword">new</span> <span class="title class_">Date</span>(),</span><br><span class="line">    <span class="attr">reply</span>: <span class="string">`Hello <span class="subst">$&#123; name &#125;</span>!`</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">app.<span class="title function_">use</span>(router.<span class="title function_">routes</span>()) <span class="comment">// 启动路由</span></span><br><span class="line">app.<span class="title function_">listen</span>(<span class="number">3000</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Server is running on 3000&#x27;</span>)</span><br><span class="line">&#125;) <span class="comment">// 启动服务</span></span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>运行<code>node xxx.js</code>， 访问 <a href="http://localhost:3000/news?search=%E7%A7%91%E6%8A%80">http://localhost:3000/news?search=科技</a> 查看效果</li>
+</ol>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://github.com/koajs/koa">Github koa</a><br><a href="https://www.jianshu.com/p/3e35db2c8d6c">koa2从搭建项目到实现API</a><br><a href="https://liuxianyu.cn/article/learn-koa.html">接触 Koa2 框架</a><br><a href="https://liuxianyu.cn/article/koa-get-post.html">用 Koa2 写 GET、POST 测试接口</a></p>
+]]></content>
+      <categories>
+        <category>散装知识</category>
+      </categories>
+      <tags>
+        <tag>koa2</tag>
+        <tag>node</tag>
       </tags>
   </entry>
   <entry>
@@ -670,141 +820,29 @@
       </tags>
   </entry>
   <entry>
-    <title>初探koa2</title>
-    <url>/2022/02/25/%E5%88%9D%E6%8E%A2koa2/</url>
-    <content><![CDATA[<h1 id="koa2-的安装"><a href="#koa2-的安装" class="headerlink" title="koa2 的安装"></a>koa2 的安装</h1><ol>
-<li><p>运行<code>npm install koa</code></p>
-<p> 新建一个 <code>index.js</code> 测试一下</p>
- <figure class="highlight zephir"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> Koa = <span class="keyword">require</span>(<span class="string">&#x27;koa&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Koa();</span><br><span class="line"></span><br><span class="line"><span class="comment">// response</span></span><br><span class="line">app.<span class="keyword">use</span>(ctx =&gt; &#123;</span><br><span class="line">  ctx.body = <span class="string">&#x27;Hello Koa&#x27;</span>;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
-<p> 运行下<code>node index.js</code>，访问<a href="http://localhost:3000/">http:localhost:3000</a>查看效果。</p>
-</li>
-<li><p>安装koa2项目生成器并创建项目</p>
-<ol>
-<li>npm install koa-generator -g<blockquote>
-<p>可能需要sudo 否则权限不足</p>
-</blockquote>
-</li>
-<li>生成项目 <code>koa2 项目名</code> </li>
-<li>安装依赖 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> 项目名</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure></li>
-<li>启动服务<code>npm start</code>，浏览器输入：localhost:3000,如果页面中展示了如”Hello Koa 2”的内容，说明项目搭建成功。<h1 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h1></li>
+    <title>搭建hexo个人博客</title>
+    <url>/2019/11/25/%E6%90%AD%E5%BB%BAhexo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<h1 id="环境搭建（现在官网有MacOS安装包，傻瓜操作无需以下步骤）"><a href="#环境搭建（现在官网有MacOS安装包，傻瓜操作无需以下步骤）" class="headerlink" title="环境搭建（现在官网有MacOS安装包，傻瓜操作无需以下步骤）"></a>环境搭建（现在官网有MacOS安装包，傻瓜操作无需以下步骤）</h1><ol>
+<li>node.js安装官网</li>
+<li>npm或cnpm <code>npm install -g cnpm --registry-https://registry.npm.taobao.org</code></li>
+<li>验证版本<code>node -v</code> <code>npm -v</code>或<code>cnpm -v</code></li>
+<li>安装hexo <code>cnpm install -g hexo-cli</code></li>
 </ol>
-</li>
+<h1 id="创建本地Blog"><a href="#创建本地Blog" class="headerlink" title="创建本地Blog"></a>创建本地Blog</h1><ol>
+<li>建立空文件夹作为博客地址，<code>mkdir Blog</code></li>
+<li>前往该文件夹 <code>cd Blog/</code></li>
+<li>初始化hexo <code>hexo init</code> 这里使用命令创建文件夹是因为我通过<code>cmd + N</code>方式创建文件夹会提示为非空导致无法初始化hexo</li>
+<li>启动hexo 服务 <code>hexo s</code> 成功后可访问 <a href="http://localhost:4000/">http://localhost:4000/</a> ，使用 <code>ctl+C</code> 结束服务</li>
+<li>创建一篇Blog <code>hexo n &quot;文件名&quot;</code>，生成的Blog是markdown格式，会在 source&#x2F;_posts&#x2F; 这个文件夹下</li>
+<li>清理缓存<code>hexo clean</code>，生成博客 <code>hexo g</code></li>
+<li>本地启动hexo测试效果 <code>hexo s</code></li>
 </ol>
-<ul>
-<li>在 Koa2 中 GET 传值通过 <code>ctx</code> 或 <code>ctx.request</code> 接收</li>
-<li>动态路由传值可通过 <code>ctx.params</code> 接收</li>
-<li>query 返回的是格式化好的参数对象</li>
-<li>queryString 返回的是请求字符串<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 引入模块</span></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">Koa</span> = <span class="built_in">require</span>(<span class="string">&#x27;koa&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> router = <span class="built_in">require</span>(<span class="string">&#x27;koa-router&#x27;</span>)() <span class="comment">// 引入并实例化</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 实例化</span></span><br><span class="line"><span class="keyword">let</span> app = <span class="keyword">new</span> <span class="title class_">Koa</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 配置路由</span></span><br><span class="line"><span class="comment">// ctx 上下文 context，包含了 request 和 response 等信息</span></span><br><span class="line">router</span><br><span class="line">  .<span class="title function_">get</span>(<span class="string">&#x27;/&#x27;</span>, <span class="keyword">async</span> ctx =&gt; &#123;</span><br><span class="line">    ctx.<span class="property">body</span> = <span class="string">&#x27;首页&#x27;</span></span><br><span class="line">  &#125;)</span><br><span class="line">  .<span class="title function_">get</span>(<span class="string">&#x27;/news&#x27;</span>, <span class="keyword">async</span> ctx =&gt; &#123;</span><br><span class="line">    ctx.<span class="property">body</span> = <span class="string">&#x27;新闻列表&#x27;</span></span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="comment">// get 传值</span></span><br><span class="line">  .<span class="title function_">get</span>(<span class="string">&#x27;/newscontent&#x27;</span>, <span class="keyword">async</span> ctx =&gt; &#123;</span><br><span class="line">     <span class="comment">// 访问 http://localhost:9000/newscontent?aid=123&amp;name=zhangsan</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(ctx.<span class="property">query</span>)</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(ctx.<span class="property">request</span>.<span class="property">query</span>)          <span class="comment">// &#123; aid: &#x27;123&#x27;, name: &#x27;zhangsan&#x27; &#125;   对象</span></span><br><span class="line">    ctx.<span class="property">body</span> = <span class="string">&#x27;新闻详情&#x27;</span></span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="comment">// 动态路由</span></span><br><span class="line">  .<span class="title function_">get</span>(<span class="string">&#x27;/newsdetail/:id&#x27;</span>, <span class="keyword">async</span> ctx =&gt; &#123;</span><br><span class="line">     <span class="comment">// 访问 http://localhost:9000/newsdetail/1234</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(ctx.<span class="property">params</span>) <span class="comment">// &#123; id: 1234 &#125;</span></span><br><span class="line">    ctx.<span class="property">body</span> = <span class="string">&#x27;新闻详情 - 动态路由&#x27;</span></span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="comment">// 动态路由可以传入多个值</span></span><br><span class="line">  .<span class="title function_">get</span>(<span class="string">&#x27;/newsdetail/:aid/:bid&#x27;</span>, <span class="keyword">async</span> ctx =&gt; &#123;</span><br><span class="line">     <span class="comment">// 访问 http://localhost:9000/newsdetail/1234/5678</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(ctx.<span class="property">params</span>) <span class="comment">// &#123; aid: 1234, bid: 5678 &#125;</span></span><br><span class="line">    ctx.<span class="property">body</span> = <span class="string">&#x27;新闻详情 - 动态路由 - 传入多个值&#x27;</span></span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">app</span><br><span class="line">  .<span class="title function_">use</span>(router.<span class="title function_">routes</span>())           <span class="comment">// 启动路由</span></span><br><span class="line">  .<span class="title function_">use</span>(router.<span class="title function_">allowedMethods</span>())   <span class="comment">// router.allowedMethods() 用在路由匹配 router.routes() 之后，所以在当所有路由中间件最后调用，此时根据 ctx.status 设置 response 响应头</span></span><br><span class="line"></span><br><span class="line">app.<span class="title function_">listen</span>(<span class="number">9000</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;请浏览器打开 http://localhost:9000 或 http://localhost:9000&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<h1 id="写个简单的测试接口"><a href="#写个简单的测试接口" class="headerlink" title="写个简单的测试接口"></a>写个简单的测试接口</h1></li>
-</ul>
-<ol>
-<li>安装 <code>npm i koa-bodyparser</code></li>
-<li>新建一个xxx.js</li>
-</ol>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 引入模块</span></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">Koa</span> = <span class="built_in">require</span>(<span class="string">&#x27;koa&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> router = <span class="built_in">require</span>(<span class="string">&#x27;koa-router&#x27;</span>)() <span class="comment">// 引入并实例化</span></span><br><span class="line"><span class="keyword">const</span> bodyParser = <span class="built_in">require</span>(<span class="string">&#x27;koa-bodyparser&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 实例化</span></span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> <span class="title class_">Koa</span>()</span><br><span class="line"><span class="comment">// 配置中间件，通过 bodyParser 获取 post 请求传递过来的参数</span></span><br><span class="line">app.<span class="title function_">use</span>(<span class="title function_">bodyParser</span>())</span><br><span class="line"></span><br><span class="line"><span class="comment">// GET 接口</span></span><br><span class="line">router.<span class="title function_">get</span>(<span class="string">&#x27;/news&#x27;</span>, <span class="function"><span class="params">ctx</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; search &#125; = ctx.<span class="property">query</span></span><br><span class="line">  ctx.<span class="property">body</span> = &#123;</span><br><span class="line">    <span class="attr">time</span>: <span class="keyword">new</span> <span class="title class_">Date</span>(),</span><br><span class="line">    <span class="attr">data</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">title</span>: <span class="string">`新闻标题 1 - <span class="subst">$&#123; search &#125;</span>`</span></span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">title</span>: <span class="string">`新闻标题 2 - <span class="subst">$&#123; search &#125;</span>`</span></span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// POST 接口</span></span><br><span class="line">router.<span class="title function_">post</span>(<span class="string">&#x27;/say&#x27;</span>, <span class="function"><span class="params">ctx</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; name &#125; = ctx.<span class="property">request</span>.<span class="property">body</span></span><br><span class="line">  ctx.<span class="property">body</span> = &#123;</span><br><span class="line">    <span class="attr">time</span>: <span class="keyword">new</span> <span class="title class_">Date</span>(),</span><br><span class="line">    <span class="attr">reply</span>: <span class="string">`Hello <span class="subst">$&#123; name &#125;</span>!`</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">app.<span class="title function_">use</span>(router.<span class="title function_">routes</span>()) <span class="comment">// 启动路由</span></span><br><span class="line">app.<span class="title function_">listen</span>(<span class="number">3000</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Server is running on 3000&#x27;</span>)</span><br><span class="line">&#125;) <span class="comment">// 启动服务</span></span><br></pre></td></tr></table></figure>
-<ol start="3">
-<li>运行<code>node xxx.js</code>， 访问 <a href="http://localhost:3000/news?search=%E7%A7%91%E6%8A%80">http://localhost:3000/news?search=科技</a> 查看效果</li>
-</ol>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://github.com/koajs/koa">Github koa</a><br><a href="https://www.jianshu.com/p/3e35db2c8d6c">koa2从搭建项目到实现API</a><br><a href="https://liuxianyu.cn/article/learn-koa.html">接触 Koa2 框架</a><br><a href="https://liuxianyu.cn/article/koa-get-post.html">用 Koa2 写 GET、POST 测试接口</a></p>
 ]]></content>
       <categories>
-        <category>散装知识</category>
+        <category>博客</category>
       </categories>
       <tags>
-        <tag>koa2</tag>
-        <tag>node</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Tensorflow课程建设与教学研讨-南京邮电大学</title>
-    <url>/2019/12/15/Tensorflow%E8%AF%BE%E7%A8%8B%E5%BB%BA%E8%AE%BE%E4%B8%8E%E6%95%99%E5%AD%A6%E7%A0%94%E8%AE%A8-%E5%8D%97%E4%BA%AC%E9%82%AE%E7%94%B5%E5%A4%A7%E5%AD%A6/</url>
-    <content><![CDATA[<h1 id="课程构架"><a href="#课程构架" class="headerlink" title="课程构架"></a>课程构架</h1><ol>
-<li>第一讲 人工智能导论</li>
-<li>第二讲 环境搭建</li>
-<li>第三讲 TensorFlow编程基础</li>
-<li>第四讲 线性回归问题——函数回归单一神经元</li>
-<li>第五讲 房价预测问题：多元线性回归及TensorFlow编程进阶<ol>
-<li>多因素影响如何处理</li>
-<li>矩阵向量计算</li>
-</ol>
-</li>
-<li>第六讲 MNIST手写数字识别：分类应用入门<ol>
-<li>与线性回归相比，多了一个激活函数</li>
-</ol>
-</li>
-<li>第七讲 MNIST手写数字识别进阶：多层神经网络与应用</li>
-<li>第八讲 图像识别问题：卷积神经网络与应用<ol>
-<li>CIFAR10（数字“10”代表十分类）</li>
-</ol>
-</li>
-<li>第九讲 Deep Dream：理解深度神经网络结构及应用</li>
-<li>第十讲 猫狗大战：迁移学习及应用</li>
-<li>第十一讲 泰坦尼克号上的旅客生存概率预测：TensorFlow的高级框架Keras<ol>
-<li>使用高级框架</li>
-<li>数据处理</li>
-</ol>
-</li>
-<li>第十二讲 电影评论情感分析：RNN循环网络原理及应用<ol>
-<li>自然语言的分析</li>
-<li>如何将自然语言处理为计算机可处理的数据-词嵌入</li>
-<li>模型优化：同义词、近义词、反义词……</li>
-</ol>
-</li>
-<li>第十三讲 FashionMNIST图像生成：生成对抗网原理及应用</li>
-<li>第十四讲 鸢尾花品种——网页落地</li>
-<li>第十五讲 花卉识别——移动应用落地</li>
-<li>第十六讲 课程回顾与大作业<ol>
-<li>Final Project以PPT+源代码+多样性展现形式</li>
-<li>有展示答辩<h1 id="线下课程实施经验"><a href="#线下课程实施经验" class="headerlink" title="线下课程实施经验"></a>线下课程实施经验</h1></li>
-</ol>
-</li>
-</ol>
-<ul>
-<li>偏理工科学生兴趣</li>
-<li>1、2年级学生修读积极</li>
-<li>Talk is cheap, show me the code<h1 id="网课经验"><a href="#网课经验" class="headerlink" title="网课经验"></a>网课经验</h1></li>
-<li>网易云课堂、MOOC</li>
-<li>人出镜减少工作量</li>
-<li>设备：摄像头、背景板、补光、电脑、美颜相机</li>
-<li>适时缩放屏幕，突出焦点，以学习体验为本</li>
-<li>增加激光笔强调鼠标所在位置</li>
-<li>重点内容加字幕提醒</li>
-<li>音量比音质更重要</li>
-<li>提前进入状态</li>
-<li>不一定写出每一句的脚本，做好准备灵活发挥更重要<h1 id="误区"><a href="#误区" class="headerlink" title="误区"></a>误区</h1></li>
-<li>教学中设备不要求高</li>
-<li>先知识后能力——先能力后知识</li>
-<li>需要补充一些相关知识：Python、线性代数、应用开发等<h1 id="讲课要点"><a href="#讲课要点" class="headerlink" title="讲课要点"></a>讲课要点</h1></li>
-<li>核心步骤<ul>
-<li>训练数据的生成和整理</li>
-<li>训练模型的设计和构建</li>
-<li>训练模型</li>
-<li>优化模型</li>
-</ul>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>教学研讨</category>
-      </categories>
-      <tags>
-        <tag>Tensorflow</tag>
-        <tag>AI</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Swift5.0 UI代码Tips</title>
-    <url>/2019/12/02/swift5.0-UI%E4%BB%A3%E7%A0%81Tips/</url>
-    <content><![CDATA[<blockquote>
-<p>记录开发过程中用到的纯代码写UI及一些经验心得<br>记录一些自己写的UI库封装<br>记录一些用过的第三方UI类库</p>
-</blockquote>
-<h1 id="文字类"><a href="#文字类" class="headerlink" title="文字类"></a>文字类</h1><h2 id="label圆角"><a href="#label圆角" class="headerlink" title="label圆角"></a>label圆角</h2><figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="attr">label.layer.cornerRadius</span> = <span class="number">5</span><span class="comment">;</span></span><br><span class="line"><span class="attr">label.clipsToBounds</span> = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-<h1 id="按钮类"><a href="#按钮类" class="headerlink" title="按钮类"></a>按钮类</h1><h1 id="图片类"><a href="#图片类" class="headerlink" title="图片类"></a>图片类</h1>]]></content>
-      <categories>
-        <category>散装知识</category>
-      </categories>
-      <tags>
-        <tag>Swift</tag>
+        <tag>hexo</tag>
       </tags>
   </entry>
   <entry>
@@ -849,9 +887,9 @@
         <category>散装知识</category>
       </categories>
       <tags>
-        <tag>后端</tag>
         <tag>实践</tag>
         <tag>MYSQL</tag>
+        <tag>后端</tag>
         <tag>阿里云</tag>
         <tag>服务器</tag>
       </tags>
@@ -986,32 +1024,6 @@
       <tags>
         <tag>阿里云</tag>
         <tag>服务器</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>搭建hexo个人博客</title>
-    <url>/2019/11/25/%E6%90%AD%E5%BB%BAhexo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<h1 id="环境搭建（现在官网有MacOS安装包，傻瓜操作无需以下步骤）"><a href="#环境搭建（现在官网有MacOS安装包，傻瓜操作无需以下步骤）" class="headerlink" title="环境搭建（现在官网有MacOS安装包，傻瓜操作无需以下步骤）"></a>环境搭建（现在官网有MacOS安装包，傻瓜操作无需以下步骤）</h1><ol>
-<li>node.js安装官网</li>
-<li>npm或cnpm <code>npm install -g cnpm --registry-https://registry.npm.taobao.org</code></li>
-<li>验证版本<code>node -v</code> <code>npm -v</code>或<code>cnpm -v</code></li>
-<li>安装hexo <code>cnpm install -g hexo-cli</code></li>
-</ol>
-<h1 id="创建本地Blog"><a href="#创建本地Blog" class="headerlink" title="创建本地Blog"></a>创建本地Blog</h1><ol>
-<li>建立空文件夹作为博客地址，<code>mkdir Blog</code></li>
-<li>前往该文件夹 <code>cd Blog/</code></li>
-<li>初始化hexo <code>hexo init</code> 这里使用命令创建文件夹是因为我通过<code>cmd + N</code>方式创建文件夹会提示为非空导致无法初始化hexo</li>
-<li>启动hexo 服务 <code>hexo s</code> 成功后可访问 <a href="http://localhost:4000/">http://localhost:4000/</a> ，使用 <code>ctl+C</code> 结束服务</li>
-<li>创建一篇Blog <code>hexo n &quot;文件名&quot;</code>，生成的Blog是markdown格式，会在 source&#x2F;_posts&#x2F; 这个文件夹下</li>
-<li>清理缓存<code>hexo clean</code>，生成博客 <code>hexo g</code></li>
-<li>本地启动hexo测试效果 <code>hexo s</code></li>
-</ol>
-]]></content>
-      <categories>
-        <category>博客</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
       </tags>
   </entry>
 </search>
