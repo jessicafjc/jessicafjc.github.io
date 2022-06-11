@@ -92,6 +92,83 @@
       </tags>
   </entry>
   <entry>
+    <title>Tensorflow课程建设与教学研讨-南京邮电大学</title>
+    <url>/2019/12/15/Tensorflow%E8%AF%BE%E7%A8%8B%E5%BB%BA%E8%AE%BE%E4%B8%8E%E6%95%99%E5%AD%A6%E7%A0%94%E8%AE%A8-%E5%8D%97%E4%BA%AC%E9%82%AE%E7%94%B5%E5%A4%A7%E5%AD%A6/</url>
+    <content><![CDATA[<h1 id="课程构架"><a href="#课程构架" class="headerlink" title="课程构架"></a>课程构架</h1><ol>
+<li>第一讲 人工智能导论</li>
+<li>第二讲 环境搭建</li>
+<li>第三讲 TensorFlow编程基础</li>
+<li>第四讲 线性回归问题——函数回归单一神经元</li>
+<li>第五讲 房价预测问题：多元线性回归及TensorFlow编程进阶<ol>
+<li>多因素影响如何处理</li>
+<li>矩阵向量计算</li>
+</ol>
+</li>
+<li>第六讲 MNIST手写数字识别：分类应用入门<ol>
+<li>与线性回归相比，多了一个激活函数</li>
+</ol>
+</li>
+<li>第七讲 MNIST手写数字识别进阶：多层神经网络与应用</li>
+<li>第八讲 图像识别问题：卷积神经网络与应用<ol>
+<li>CIFAR10（数字“10”代表十分类）</li>
+</ol>
+</li>
+<li>第九讲 Deep Dream：理解深度神经网络结构及应用</li>
+<li>第十讲 猫狗大战：迁移学习及应用</li>
+<li>第十一讲 泰坦尼克号上的旅客生存概率预测：TensorFlow的高级框架Keras<ol>
+<li>使用高级框架</li>
+<li>数据处理</li>
+</ol>
+</li>
+<li>第十二讲 电影评论情感分析：RNN循环网络原理及应用<ol>
+<li>自然语言的分析</li>
+<li>如何将自然语言处理为计算机可处理的数据-词嵌入</li>
+<li>模型优化：同义词、近义词、反义词……</li>
+</ol>
+</li>
+<li>第十三讲 FashionMNIST图像生成：生成对抗网原理及应用</li>
+<li>第十四讲 鸢尾花品种——网页落地</li>
+<li>第十五讲 花卉识别——移动应用落地</li>
+<li>第十六讲 课程回顾与大作业<ol>
+<li>Final Project以PPT+源代码+多样性展现形式</li>
+<li>有展示答辩<h1 id="线下课程实施经验"><a href="#线下课程实施经验" class="headerlink" title="线下课程实施经验"></a>线下课程实施经验</h1></li>
+</ol>
+</li>
+</ol>
+<ul>
+<li>偏理工科学生兴趣</li>
+<li>1、2年级学生修读积极</li>
+<li>Talk is cheap, show me the code<h1 id="网课经验"><a href="#网课经验" class="headerlink" title="网课经验"></a>网课经验</h1></li>
+<li>网易云课堂、MOOC</li>
+<li>人出镜减少工作量</li>
+<li>设备：摄像头、背景板、补光、电脑、美颜相机</li>
+<li>适时缩放屏幕，突出焦点，以学习体验为本</li>
+<li>增加激光笔强调鼠标所在位置</li>
+<li>重点内容加字幕提醒</li>
+<li>音量比音质更重要</li>
+<li>提前进入状态</li>
+<li>不一定写出每一句的脚本，做好准备灵活发挥更重要<h1 id="误区"><a href="#误区" class="headerlink" title="误区"></a>误区</h1></li>
+<li>教学中设备不要求高</li>
+<li>先知识后能力——先能力后知识</li>
+<li>需要补充一些相关知识：Python、线性代数、应用开发等<h1 id="讲课要点"><a href="#讲课要点" class="headerlink" title="讲课要点"></a>讲课要点</h1></li>
+<li>核心步骤<ul>
+<li>训练数据的生成和整理</li>
+<li>训练模型的设计和构建</li>
+<li>训练模型</li>
+<li>优化模型</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>教学研讨</category>
+      </categories>
+      <tags>
+        <tag>Tensorflow</tag>
+        <tag>AI</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Redis数据库基础</title>
     <url>/2022/02/24/Redis%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/</url>
     <content><![CDATA[<ul>
@@ -279,83 +356,6 @@
       </categories>
       <tags>
         <tag>Redis</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Tensorflow课程建设与教学研讨-南京邮电大学</title>
-    <url>/2019/12/15/Tensorflow%E8%AF%BE%E7%A8%8B%E5%BB%BA%E8%AE%BE%E4%B8%8E%E6%95%99%E5%AD%A6%E7%A0%94%E8%AE%A8-%E5%8D%97%E4%BA%AC%E9%82%AE%E7%94%B5%E5%A4%A7%E5%AD%A6/</url>
-    <content><![CDATA[<h1 id="课程构架"><a href="#课程构架" class="headerlink" title="课程构架"></a>课程构架</h1><ol>
-<li>第一讲 人工智能导论</li>
-<li>第二讲 环境搭建</li>
-<li>第三讲 TensorFlow编程基础</li>
-<li>第四讲 线性回归问题——函数回归单一神经元</li>
-<li>第五讲 房价预测问题：多元线性回归及TensorFlow编程进阶<ol>
-<li>多因素影响如何处理</li>
-<li>矩阵向量计算</li>
-</ol>
-</li>
-<li>第六讲 MNIST手写数字识别：分类应用入门<ol>
-<li>与线性回归相比，多了一个激活函数</li>
-</ol>
-</li>
-<li>第七讲 MNIST手写数字识别进阶：多层神经网络与应用</li>
-<li>第八讲 图像识别问题：卷积神经网络与应用<ol>
-<li>CIFAR10（数字“10”代表十分类）</li>
-</ol>
-</li>
-<li>第九讲 Deep Dream：理解深度神经网络结构及应用</li>
-<li>第十讲 猫狗大战：迁移学习及应用</li>
-<li>第十一讲 泰坦尼克号上的旅客生存概率预测：TensorFlow的高级框架Keras<ol>
-<li>使用高级框架</li>
-<li>数据处理</li>
-</ol>
-</li>
-<li>第十二讲 电影评论情感分析：RNN循环网络原理及应用<ol>
-<li>自然语言的分析</li>
-<li>如何将自然语言处理为计算机可处理的数据-词嵌入</li>
-<li>模型优化：同义词、近义词、反义词……</li>
-</ol>
-</li>
-<li>第十三讲 FashionMNIST图像生成：生成对抗网原理及应用</li>
-<li>第十四讲 鸢尾花品种——网页落地</li>
-<li>第十五讲 花卉识别——移动应用落地</li>
-<li>第十六讲 课程回顾与大作业<ol>
-<li>Final Project以PPT+源代码+多样性展现形式</li>
-<li>有展示答辩<h1 id="线下课程实施经验"><a href="#线下课程实施经验" class="headerlink" title="线下课程实施经验"></a>线下课程实施经验</h1></li>
-</ol>
-</li>
-</ol>
-<ul>
-<li>偏理工科学生兴趣</li>
-<li>1、2年级学生修读积极</li>
-<li>Talk is cheap, show me the code<h1 id="网课经验"><a href="#网课经验" class="headerlink" title="网课经验"></a>网课经验</h1></li>
-<li>网易云课堂、MOOC</li>
-<li>人出镜减少工作量</li>
-<li>设备：摄像头、背景板、补光、电脑、美颜相机</li>
-<li>适时缩放屏幕，突出焦点，以学习体验为本</li>
-<li>增加激光笔强调鼠标所在位置</li>
-<li>重点内容加字幕提醒</li>
-<li>音量比音质更重要</li>
-<li>提前进入状态</li>
-<li>不一定写出每一句的脚本，做好准备灵活发挥更重要<h1 id="误区"><a href="#误区" class="headerlink" title="误区"></a>误区</h1></li>
-<li>教学中设备不要求高</li>
-<li>先知识后能力——先能力后知识</li>
-<li>需要补充一些相关知识：Python、线性代数、应用开发等<h1 id="讲课要点"><a href="#讲课要点" class="headerlink" title="讲课要点"></a>讲课要点</h1></li>
-<li>核心步骤<ul>
-<li>训练数据的生成和整理</li>
-<li>训练模型的设计和构建</li>
-<li>训练模型</li>
-<li>优化模型</li>
-</ul>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>教学研讨</category>
-      </categories>
-      <tags>
-        <tag>Tensorflow</tag>
-        <tag>AI</tag>
       </tags>
   </entry>
   <entry>
@@ -851,6 +851,32 @@
       </tags>
   </entry>
   <entry>
+    <title>搭建hexo个人博客</title>
+    <url>/2019/11/25/%E6%90%AD%E5%BB%BAhexo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<h1 id="环境搭建（现在官网有MacOS安装包，傻瓜操作无需以下步骤）"><a href="#环境搭建（现在官网有MacOS安装包，傻瓜操作无需以下步骤）" class="headerlink" title="环境搭建（现在官网有MacOS安装包，傻瓜操作无需以下步骤）"></a>环境搭建（现在官网有MacOS安装包，傻瓜操作无需以下步骤）</h1><ol>
+<li>node.js安装官网</li>
+<li>npm或cnpm <code>npm install -g cnpm --registry-https://registry.npm.taobao.org</code></li>
+<li>验证版本<code>node -v</code> <code>npm -v</code>或<code>cnpm -v</code></li>
+<li>安装hexo <code>cnpm install -g hexo-cli</code></li>
+</ol>
+<h1 id="创建本地Blog"><a href="#创建本地Blog" class="headerlink" title="创建本地Blog"></a>创建本地Blog</h1><ol>
+<li>建立空文件夹作为博客地址，<code>mkdir Blog</code></li>
+<li>前往该文件夹 <code>cd Blog/</code></li>
+<li>初始化hexo <code>hexo init</code> 这里使用命令创建文件夹是因为我通过<code>cmd + N</code>方式创建文件夹会提示为非空导致无法初始化hexo</li>
+<li>启动hexo 服务 <code>hexo s</code> 成功后可访问 <a href="http://localhost:4000/">http://localhost:4000/</a> ，使用 <code>ctl+C</code> 结束服务</li>
+<li>创建一篇Blog <code>hexo n &quot;文件名&quot;</code>，生成的Blog是markdown格式，会在 source&#x2F;_posts&#x2F; 这个文件夹下</li>
+<li>清理缓存<code>hexo clean</code>，生成博客 <code>hexo g</code></li>
+<li>本地启动hexo测试效果 <code>hexo s</code></li>
+</ol>
+]]></content>
+      <categories>
+        <category>博客</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>博客搭建Q&amp;A</title>
     <url>/2022/06/11/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BAQ&amp;A/</url>
     <content><![CDATA[<h1 id="Github部署问题"><a href="#Github部署问题" class="headerlink" title="Github部署问题"></a>Github部署问题</h1><p>2022年，Github更新了安全措施，舍弃账号密码登陆方式进行项目部署，采用ssh的方式，更加安全和便捷。所以老版本username+password可能会造成 hexo d 失败的情况。解决方案如下：</p>
@@ -875,6 +901,16 @@
 </ul>
 </li>
 </ul>
+<h1 id="想要忽略一些文件不参与编译"><a href="#想要忽略一些文件不参与编译" class="headerlink" title="想要忽略一些文件不参与编译"></a>想要忽略一些文件不参与编译</h1><p>有时会有一些demo或者模板文件存放在source中，但不需要放在博客上，这时候需要在编译时忽略它们</p>
+<ul>
+<li>打开博客配置文件 <code>_config.yml</code>，找到 <code>skip_render:</code></li>
+<li>以模板文件夹template为例，按相对路径进行修改：<code>skip_render: _posts/template/**</code> <ul>
+<li>单个文件夹下全部文件：<code>skip_render: demo/*</code></li>
+<li>单个文件夹下指定类型文件：<code>skip_render: demo/*.html</code></li>
+<li>单个文件夹下全部文件以及子目录：<code>skip_render: demo/**</code></li>
+</ul>
+</li>
+</ul>
 ]]></content>
       <categories>
         <category>博客</category>
@@ -882,32 +918,6 @@
       <tags>
         <tag>hexo</tag>
         <tag>Github</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>搭建hexo个人博客</title>
-    <url>/2019/11/25/%E6%90%AD%E5%BB%BAhexo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<h1 id="环境搭建（现在官网有MacOS安装包，傻瓜操作无需以下步骤）"><a href="#环境搭建（现在官网有MacOS安装包，傻瓜操作无需以下步骤）" class="headerlink" title="环境搭建（现在官网有MacOS安装包，傻瓜操作无需以下步骤）"></a>环境搭建（现在官网有MacOS安装包，傻瓜操作无需以下步骤）</h1><ol>
-<li>node.js安装官网</li>
-<li>npm或cnpm <code>npm install -g cnpm --registry-https://registry.npm.taobao.org</code></li>
-<li>验证版本<code>node -v</code> <code>npm -v</code>或<code>cnpm -v</code></li>
-<li>安装hexo <code>cnpm install -g hexo-cli</code></li>
-</ol>
-<h1 id="创建本地Blog"><a href="#创建本地Blog" class="headerlink" title="创建本地Blog"></a>创建本地Blog</h1><ol>
-<li>建立空文件夹作为博客地址，<code>mkdir Blog</code></li>
-<li>前往该文件夹 <code>cd Blog/</code></li>
-<li>初始化hexo <code>hexo init</code> 这里使用命令创建文件夹是因为我通过<code>cmd + N</code>方式创建文件夹会提示为非空导致无法初始化hexo</li>
-<li>启动hexo 服务 <code>hexo s</code> 成功后可访问 <a href="http://localhost:4000/">http://localhost:4000/</a> ，使用 <code>ctl+C</code> 结束服务</li>
-<li>创建一篇Blog <code>hexo n &quot;文件名&quot;</code>，生成的Blog是markdown格式，会在 source&#x2F;_posts&#x2F; 这个文件夹下</li>
-<li>清理缓存<code>hexo clean</code>，生成博客 <code>hexo g</code></li>
-<li>本地启动hexo测试效果 <code>hexo s</code></li>
-</ol>
-]]></content>
-      <categories>
-        <category>博客</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
       </tags>
   </entry>
   <entry>
