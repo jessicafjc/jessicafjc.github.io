@@ -368,7 +368,8 @@
 <li>软硬件：网络通畅、Window 或 Mac OS、HBuilder</li>
 <li>课程成果：PDF报告文档 + 程序zip || 小组答辩</li>
 <li>课程资源包链接: <a href="https://pan.baidu.com/s/1NjywWfwBRZQKcN9K59yGeA">https://pan.baidu.com/s/1NjywWfwBRZQKcN9K59yGeA</a> 提取码: spo3 </li>
-<li>主讲：傅佳晨  <a href="mailto:&#102;&#x75;&#x6a;&#x69;&#x61;&#x63;&#104;&#101;&#110;&#x40;&#x71;&#x69;&#110;&#103;&#x6d;&#x61;&#x6f;&#101;&#100;&#x75;&#46;&#x63;&#111;&#x6d;">&#102;&#x75;&#x6a;&#x69;&#x61;&#x63;&#104;&#101;&#110;&#x40;&#x71;&#x69;&#110;&#103;&#x6d;&#x61;&#x6f;&#101;&#100;&#x75;&#46;&#x63;&#111;&#x6d;</a></li>
+<li>答辩分组表：<a href="https://tvxowtva4k.feishu.cn/base/bascnmW7ddCpWoMitEGbms2QuZe?from=from_copylink">https://tvxowtva4k.feishu.cn/base/bascnmW7ddCpWoMitEGbms2QuZe?from=from_copylink</a> </li>
+<li>主讲：傅佳晨  <a href="mailto:&#x66;&#117;&#x6a;&#105;&#x61;&#x63;&#x68;&#x65;&#x6e;&#64;&#113;&#105;&#x6e;&#103;&#109;&#x61;&#111;&#x65;&#100;&#x75;&#x2e;&#99;&#x6f;&#109;">&#x66;&#117;&#x6a;&#105;&#x61;&#x63;&#x68;&#x65;&#x6e;&#64;&#113;&#105;&#x6e;&#103;&#109;&#x61;&#111;&#x65;&#100;&#x75;&#x2e;&#99;&#x6f;&#109;</a></li>
 <li>答疑：<a href="https://jessicafjc.github.io/2022/06/12/WEB%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">个人博客</a></li>
 </ul>
 <h1 id="课程大纲"><a href="#课程大纲" class="headerlink" title="课程大纲"></a>课程大纲</h1><ol>
@@ -584,6 +585,21 @@
       </tags>
   </entry>
   <entry>
+    <title>Swift5.0 UI代码Tips</title>
+    <url>/2019/12/02/swift5.0-UI%E4%BB%A3%E7%A0%81Tips/</url>
+    <content><![CDATA[<blockquote>
+<p>记录开发过程中用到的纯代码写UI及一些经验心得<br>记录一些自己写的UI库封装<br>记录一些用过的第三方UI类库</p>
+</blockquote>
+<h1 id="文字类"><a href="#文字类" class="headerlink" title="文字类"></a>文字类</h1><h2 id="label圆角"><a href="#label圆角" class="headerlink" title="label圆角"></a>label圆角</h2><figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="attr">label.layer.cornerRadius</span> = <span class="number">5</span><span class="comment">;</span></span><br><span class="line"><span class="attr">label.clipsToBounds</span> = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<h1 id="按钮类"><a href="#按钮类" class="headerlink" title="按钮类"></a>按钮类</h1><h1 id="图片类"><a href="#图片类" class="headerlink" title="图片类"></a>图片类</h1>]]></content>
+      <categories>
+        <category>散装知识</category>
+      </categories>
+      <tags>
+        <tag>Swift</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>vue安装及创建新项目</title>
     <url>/2019/11/28/vue%E5%AE%89%E8%A3%85%E5%8F%8A%E5%88%9B%E5%BB%BA%E6%96%B0%E9%A1%B9%E7%9B%AE/</url>
     <content><![CDATA[<h1 id="Vue了解"><a href="#Vue了解" class="headerlink" title="Vue了解"></a>Vue了解</h1><p>渐进式JavaScript 框架</p>
@@ -630,21 +646,6 @@
       </categories>
       <tags>
         <tag>Vue</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Swift5.0 UI代码Tips</title>
-    <url>/2019/12/02/swift5.0-UI%E4%BB%A3%E7%A0%81Tips/</url>
-    <content><![CDATA[<blockquote>
-<p>记录开发过程中用到的纯代码写UI及一些经验心得<br>记录一些自己写的UI库封装<br>记录一些用过的第三方UI类库</p>
-</blockquote>
-<h1 id="文字类"><a href="#文字类" class="headerlink" title="文字类"></a>文字类</h1><h2 id="label圆角"><a href="#label圆角" class="headerlink" title="label圆角"></a>label圆角</h2><figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="attr">label.layer.cornerRadius</span> = <span class="number">5</span><span class="comment">;</span></span><br><span class="line"><span class="attr">label.clipsToBounds</span> = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-<h1 id="按钮类"><a href="#按钮类" class="headerlink" title="按钮类"></a>按钮类</h1><h1 id="图片类"><a href="#图片类" class="headerlink" title="图片类"></a>图片类</h1>]]></content>
-      <categories>
-        <category>散装知识</category>
-      </categories>
-      <tags>
-        <tag>Swift</tag>
       </tags>
   </entry>
   <entry>
@@ -1054,6 +1055,52 @@
       </tags>
   </entry>
   <entry>
+    <title>机器学习Tensorflow框架安装</title>
+    <url>/2019/12/15/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0Tensorflow%E6%A1%86%E6%9E%B6%E5%AE%89%E8%A3%85/</url>
+    <content><![CDATA[<h1 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h1><ul>
+<li><p>查看本机Python版本<code>python -V</code>，我的默认版本是2.7，去Python<a href="https://www.python.org/downloads/macos/">官网下载</a>一个3.7的版本进行安装。</p>
+</li>
+<li><p>安装完成后，修改默认启动版本为3.7版本</p>
+<ul>
+<li>打开<code>open ~/.bash_profile</code></li>
+<li>添加<code>alias python=&quot;/usr/local/bin/python3.7&quot;</code></li>
+<li>不要忘记<code>source ~/.bash_profile</code>重新加载一下</li>
+<li>再次<code>python -V</code>发现Python成功变成3.7版本。</li>
+</ul>
+</li>
+<li><p>前往Anaconda<a href="https://www.anaconda.com/">官网</a>下载对应的安装包，进行安装。</p>
+</li>
+<li><p>安装Tensorflow，先查看是否有<code>conda --version</code>，有可能报错<strong>conda command not found</strong></p>
+<ul>
+<li><p>先检查anaconda中的bin文件夹内是否有（有）</p>
+</li>
+<li><p>在<code>vi ~/.zshrc</code>中添加<code>export PATH=/Users/jiachenfu/anaconda3/bin:$PATH</code></p>
+</li>
+<li><p>然后<code>source ~/.zshrc</code>，检查一下<code>conda --version</code>成功</p>
+</li>
+<li><p>更改下载源为清华镜像<code>conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</code>，然后<code>conda config --set show_channel_urls yes</code></p>
+</li>
+<li><p>最后安装Tensorflow<code>conda install tensorflow</code></p>
+</li>
+<li><p>打开Anaconda中的jupyter,新建一个Python3文件,运行</p>
+  <figure class="highlight elm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf </span><br><span class="line"><span class="title">tf</span>.__version__</span><br></pre></td></tr></table></figure>
+
+<p>  成功输出1.1.0</p>
+</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>实践</tag>
+        <tag>Tensorflow</tag>
+        <tag>AI</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>框架vue-element-admin初探</title>
     <url>/2020/05/20/%E6%A1%86%E6%9E%B6vue-element-admin%E5%88%9D%E6%8E%A2/</url>
     <content><![CDATA[<h1 id="获取vue-element-admin"><a href="#获取vue-element-admin" class="headerlink" title="获取vue-element-admin"></a>获取vue-element-admin</h1><ol>
@@ -1110,52 +1157,6 @@
       </categories>
       <tags>
         <tag>Vue</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>机器学习Tensorflow框架安装</title>
-    <url>/2019/12/15/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0Tensorflow%E6%A1%86%E6%9E%B6%E5%AE%89%E8%A3%85/</url>
-    <content><![CDATA[<h1 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h1><ul>
-<li><p>查看本机Python版本<code>python -V</code>，我的默认版本是2.7，去Python<a href="https://www.python.org/downloads/macos/">官网下载</a>一个3.7的版本进行安装。</p>
-</li>
-<li><p>安装完成后，修改默认启动版本为3.7版本</p>
-<ul>
-<li>打开<code>open ~/.bash_profile</code></li>
-<li>添加<code>alias python=&quot;/usr/local/bin/python3.7&quot;</code></li>
-<li>不要忘记<code>source ~/.bash_profile</code>重新加载一下</li>
-<li>再次<code>python -V</code>发现Python成功变成3.7版本。</li>
-</ul>
-</li>
-<li><p>前往Anaconda<a href="https://www.anaconda.com/">官网</a>下载对应的安装包，进行安装。</p>
-</li>
-<li><p>安装Tensorflow，先查看是否有<code>conda --version</code>，有可能报错<strong>conda command not found</strong></p>
-<ul>
-<li><p>先检查anaconda中的bin文件夹内是否有（有）</p>
-</li>
-<li><p>在<code>vi ~/.zshrc</code>中添加<code>export PATH=/Users/jiachenfu/anaconda3/bin:$PATH</code></p>
-</li>
-<li><p>然后<code>source ~/.zshrc</code>，检查一下<code>conda --version</code>成功</p>
-</li>
-<li><p>更改下载源为清华镜像<code>conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</code>，然后<code>conda config --set show_channel_urls yes</code></p>
-</li>
-<li><p>最后安装Tensorflow<code>conda install tensorflow</code></p>
-</li>
-<li><p>打开Anaconda中的jupyter,新建一个Python3文件,运行</p>
-  <figure class="highlight elm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf </span><br><span class="line"><span class="title">tf</span>.__version__</span><br></pre></td></tr></table></figure>
-
-<p>  成功输出1.1.0</p>
-</li>
-</ul>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>机器学习</category>
-      </categories>
-      <tags>
-        <tag>实践</tag>
-        <tag>Tensorflow</tag>
-        <tag>AI</tag>
       </tags>
   </entry>
   <entry>
