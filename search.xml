@@ -1186,4 +1186,25 @@
         <tag>服务器</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Discourse论坛框架部署</title>
+    <url>/2022/10/24/Discourse%E8%AE%BA%E5%9D%9B%E6%A1%86%E6%9E%B6%E9%83%A8%E7%BD%B2/</url>
+    <content><![CDATA[<ol>
+<li>升级系统 <code>yum update -y</code></li>
+<li>安装git <code>yum install -y git</code></li>
+<li>安装docker  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo</span><br><span class="line">yum install -y docker-ce docker-ce-cli containerd.io</span><br></pre></td></tr></table></figure></li>
+<li>启动docker <code>systemctl start docker</code></li>
+<li>获取 <figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">sudo -s</span><br><span class="line">git clone https:<span class="regexp">//gi</span>thub.com<span class="regexp">/discourse/</span>discourse_docker.git <span class="regexp">/var/</span>discourse</span><br><span class="line">cd <span class="regexp">/var/</span>discourse</span><br><span class="line">chmod <span class="number">700</span> containers</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a href="https://blog.csdn.net/dongzechangjiu/article/details/120202174">https://blog.csdn.net/dongzechangjiu/article/details/120202174</a><br><a href="https://github.com/discourse/discourse">https://github.com/discourse/discourse</a><br><a href="https://github.com/discourse/discourse/blob/main/docs/INSTALL-cloud.md#5-install-discourse">https://github.com/discourse/discourse/blob/main/docs/INSTALL-cloud.md#5-install-discourse</a></p>
+]]></content>
+      <categories>
+        <category>社群</category>
+      </categories>
+      <tags>
+        <tag>实践</tag>
+        <tag>ECS</tag>
+        <tag>Ruby</tag>
+      </tags>
+  </entry>
 </search>
