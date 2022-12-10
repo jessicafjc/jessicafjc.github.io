@@ -3,7 +3,7 @@
   <entry>
     <title>Discourse论坛框架部署</title>
     <url>/2022/10/24/Discourse%E8%AE%BA%E5%9D%9B%E6%A1%86%E6%9E%B6%E9%83%A8%E7%BD%B2%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/</url>
-    <content><![CDATA[<p>详细的安装教程网上太多，这里主要记录几个踩坑经历</p>
+    <content><![CDATA[<p>详细的安装教程网上太多，这里主要记录几个踩坑经历，欢迎来论坛社区<a href="www.create4world.com">逛逛</a></p>
 <h1 id="环境与准备工作"><a href="#环境与准备工作" class="headerlink" title="环境与准备工作"></a>环境与准备工作</h1><ul>
 <li>服务器（选的腾讯云）<ul>
 <li>1核2G的服务器不行的，亲测安装会卡死</li>
