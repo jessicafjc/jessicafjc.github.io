@@ -20,19 +20,18 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="欢迎来论坛灌水 create4world.com">
+  <meta name="description" content="欢迎来论坛社区[逛逛](www.create4world.com)">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Discourse论坛框架部署">
 <meta property="og:url" content="http://example.com/2022/10/24/Discourse%E8%AE%BA%E5%9D%9B%E6%A1%86%E6%9E%B6%E9%83%A8%E7%BD%B2%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/index.html">
 <meta property="og:site_name" content="FjC的个人博客">
-<meta property="og:description" content="欢迎来论坛灌水 create4world.com">
+<meta property="og:description" content="欢迎来论坛社区[逛逛](www.create4world.com)">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-10-24T13:10:24.000Z">
-<meta property="article:modified_time" content="2022-11-23T05:34:32.263Z">
+<meta property="article:modified_time" content="2022-12-10T05:15:43.120Z">
 <meta property="article:author" content="Jiachen Fu">
-<meta property="article:tag" content="ECS">
+<meta property="article:tag" content="discourse">
 <meta property="article:tag" content="Ruby">
-<meta property="article:tag" content="实践">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://example.com/2022/10/24/Discourse%E8%AE%BA%E5%9D%9B%E6%A1%86%E6%9E%B6%E9%83%A8%E7%BD%B2%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/">
@@ -134,12 +133,12 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">25</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">26</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">6</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">7</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
@@ -228,7 +227,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-11-23 13:34:32" itemprop="dateModified" datetime="2022-11-23T13:34:32+08:00">2022-11-23</time>
+                <time title="修改时间：2022-12-10 13:15:43" itemprop="dateModified" datetime="2022-12-10T13:15:43+08:00">2022-12-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -236,7 +235,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%A4%BE%E7%BE%A4/" itemprop="url" rel="index"><span itemprop="name">社群</span></a>
+                  <a href="/categories/%E7%A4%BE%E5%8C%BA/" itemprop="url" rel="index"><span itemprop="name">社区</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%A4%BE%E5%8C%BA/%E5%AE%9E%E8%B7%B5/" itemprop="url" rel="index"><span itemprop="name">实践</span></a>
                 </span>
             </span>
 
@@ -262,7 +265,7 @@
   </span>
   
   
-            <div class="post-description">欢迎来论坛灌水 create4world.com</div>
+            <div class="post-description">欢迎来论坛社区[逛逛](www.create4world.com)</div>
 
         </div>
       </header>
@@ -273,11 +276,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>详细的安装教程网上太多，这里主要记录几个踩坑经历，欢迎来论坛灌水 <a href="create4world.com">点击这里直达论坛</a></p>
+        <p>详细的安装教程网上太多，这里主要记录几个踩坑经历</p>
 <h1 id="环境与准备工作"><a href="#环境与准备工作" class="headerlink" title="环境与准备工作"></a>环境与准备工作</h1><ul>
 <li>服务器（选的腾讯云）<ul>
 <li>1核2G的服务器不行的，亲测安装会卡死</li>
-<li>最低配置是2核4G服务器</li>
+<li>最低配置是2核4G服务器 </li>
 <li>个人采用的 Ubuntu 系统 v20<ul>
 <li>云服务器不用担心买错系统，可以免费一键换系统的</li>
 <li>官方有其他系统的安装教程，可以自行探索</li>
@@ -295,7 +298,7 @@
 <li>要确认好你所采用的邮箱是否开通SMTP（亲测网易163可以），没有开的记得去开</li>
 <li>记录好开通时的令牌，要填写在 <code>app.yml</code> 中 <code>DISCOURSE_SMTP_PASSWORD</code> 这里</li>
 <li>注意不同邮箱的SMTP端口不同，例如 <strong>163 邮箱</strong>需用 <strong>25 端口</strong><ul>
-<li>云服务器需要手动解除25端口限制</li>
+<li>云服务器需要手动解除25端口限制<a target="_blank" rel="noopener" href="https://console.cloud.tencent.com/secctrl/smtp">腾讯云修改地址</a> </li>
 <li><strong>app.yml</strong> 中<ul>
 <li><code>DISCOURSE_SMTP_PORT</code> 记得改为25</li>
 <li>expose下方添加 <code>- &quot;25:25&quot; # SMTP</code></li>
@@ -307,7 +310,7 @@
 </li>
 </ul>
 <h2 id="国内网络问题"><a href="#国内网络问题" class="headerlink" title="国内网络问题"></a>国内网络问题</h2><ul>
-<li>尽量把能换掉的源换为国内的，否则在 docker 安装时会出现：<ul>
+<li>尽量把能换掉的源换为国内gitee的，否则在 docker 安装时会出现：<ul>
 <li>1小时可能都跑不完安装</li>
 <li>ssh断了导致重新来</li>
 <li>部分依赖获取失败，git clone 失败</li>
@@ -324,6 +327,7 @@
 <li>仔细检查 log 看看具体哪里失败</li>
 </ul>
 </li>
+<li></li>
 </ul>
 </li>
 </ul>
@@ -344,17 +348,23 @@
 </ol>
 </li>
 </ul>
-<h1 id="安装常用命令记录"><a href="#安装常用命令记录" class="headerlink" title="安装常用命令记录"></a>安装常用命令记录</h1><h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt upgrade</span><br><span class="line">sudo apt install net-tools</span><br><span class="line">sudo apt install docker.io</span><br><span class="line">sudo systemctl start docker</span><br><span class="line">sudo systemctl enable docker</span><br><span class="line"></span><br><span class="line">apt install git</span><br><span class="line"></span><br><span class="line">apt install ruby</span><br><span class="line"></span><br><span class="line">apt install rubygems -y</span><br><span class="line"></span><br><span class="line">gem sources --remove https:<span class="regexp">//</span>rubygems.org<span class="regexp">/  -a https:/</span><span class="regexp">/mirrors.cloud.tencent.com/</span>rubygems/</span><br><span class="line"></span><br><span class="line">gem sources -u</span><br><span class="line"></span><br><span class="line">gem install bundler</span><br><span class="line"></span><br><span class="line">git config --global --unset http.https:<span class="regexp">//gi</span>thub.com.proxy</span><br><span class="line"></span><br><span class="line">git clone https:<span class="regexp">//gi</span>thub.com<span class="regexp">/discourse/</span>discourse_docker.git <span class="regexp">/var/</span>discourse</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1 id="安装常用命令记录"><a href="#安装常用命令记录" class="headerlink" title="安装常用命令记录"></a>安装常用命令记录</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt upgrade</span><br><span class="line">sudo apt install net-tools</span><br><span class="line">sudo apt install docker.io</span><br><span class="line">sudo systemctl start docker</span><br><span class="line">sudo systemctl enable docker</span><br><span class="line"></span><br><span class="line">apt install git</span><br><span class="line"></span><br><span class="line">apt install ruby</span><br><span class="line"></span><br><span class="line">apt install rubygems -y</span><br><span class="line"></span><br><span class="line">gem sources --remove https:<span class="regexp">//</span>rubygems.org<span class="regexp">/  -a https:/</span><span class="regexp">/mirrors.cloud.tencent.com/</span>rubygems/</span><br><span class="line"></span><br><span class="line">gem sources -u</span><br><span class="line"></span><br><span class="line">gem install bundler</span><br><span class="line"></span><br><span class="line">git config --global --unset http.https:<span class="regexp">//gi</span>thub.com.proxy</span><br><span class="line"></span><br><span class="line">git clone https:<span class="regexp">//gi</span>thub.com<span class="regexp">/discourse/</span>discourse_docker.git <span class="regexp">/var/</span>discourse</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<h1 id="重建"><a href="#重建" class="headerlink" title="重建"></a>重建</h1><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ssh -t &#x27;root@118.195.249.198&#x27; &#x27;<span class="keyword">cd</span> <span class="string">&quot;/var/discourse&quot;</span>; eval <span class="string">&quot;$SHELL -il&quot;</span>&#x27;</span><br><span class="line"></span><br><span class="line"><span class="keyword">cd</span> <span class="string">/root</span> &amp;&amp; git clone <span class="params">--branch</span> 2.9.0 <span class="params">--depth</span> 1 https:<span class="string">//github.com/acmesh-official/acme.sh.git</span> &amp;&amp; <span class="keyword">cd</span> <span class="string">/root/acme.sh</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">cd</span> <span class="string">/var/discourse</span> &amp;&amp; <span class="string">./launcher</span> rebuild app</span><br><span class="line"></span><br><span class="line"><span class="string">./discourse-setup</span></span><br><span class="line"><span class="string">./launcher</span> rebuild app</span><br><span class="line"><span class="string">./launcher</span> restart app</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="重建"><a href="#重建" class="headerlink" title="重建"></a>重建</h2><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">ssh -t &#x27;root@118.195.249.198&#x27; &#x27;<span class="keyword">cd</span> <span class="string">&quot;/var/discourse&quot;</span>; eval <span class="string">&quot;$SHELL -il&quot;</span>&#x27;</span><br><span class="line"></span><br><span class="line">git config <span class="params">--global</span> <span class="params">--unset</span> http.https:<span class="string">//github.com.proxy</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">cd</span> <span class="string">/root</span> &amp;&amp; rm -rf acme.sh</span><br><span class="line"></span><br><span class="line"><span class="keyword">cd</span> <span class="string">/root</span> &amp;&amp; git clone <span class="params">--branch</span> 2.9.0 <span class="params">--depth</span> 1 https:<span class="string">//github.com/acmesh-official/acme.sh.git</span> &amp;&amp; <span class="keyword">cd</span> <span class="string">/root/acme.sh</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">cd</span> <span class="string">/root</span> &amp;&amp; git clone <span class="params">--branch</span> 2.9.0 <span class="params">--depth</span> 1 https:<span class="string">//gitee.com/jiachen-fu/acme.sh.git</span> &amp;&amp; <span class="keyword">cd</span> <span class="string">/root/acme.sh</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">cd</span> <span class="string">/var/discourse</span> &amp;&amp; <span class="string">./launcher</span> rebuild app</span><br><span class="line"></span><br><span class="line"><span class="string">./discourse-setup</span></span><br><span class="line"><span class="string">./launcher</span> rebuild app</span><br><span class="line"><span class="string">./launcher</span> restart app</span><br></pre></td></tr></table></figure>
 
 <h1 id="Docker-常用命令"><a href="#Docker-常用命令" class="headerlink" title="Docker 常用命令"></a>Docker 常用命令</h1><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">docker images</span><br><span class="line"></span><br><span class="line">docker ps -a</span><br><span class="line"></span><br><span class="line">docker image prune</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<h1 id="插件-amp-主题"><a href="#插件-amp-主题" class="headerlink" title="插件&amp;主题"></a>插件&amp;主题</h1><p><a target="_blank" rel="noopener" href="https://meta.discourse.org/t/welcome-link-banner/218743">https://meta.discourse.org/t/welcome-link-banner/218743</a></p>
-<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://github.com/discourse/discourse">https://github.com/discourse/discourse</a><br><a target="_blank" rel="noopener" href="https://github.com/discourse/discourse/blob/main/docs/INSTALL-cloud.md#5-install-discourse">https://github.com/discourse/discourse/blob/main/docs/INSTALL-cloud.md#5-install-discourse</a></p>
-<h2 id="修改域名后批量换post"><a href="#修改域名后批量换post" class="headerlink" title="修改域名后批量换post"></a>修改域名后批量换post</h2><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">./launcher enter app</span><br><span class="line"></span><br><span class="line">discourse remap create4world<span class="selector-class">.com</span> create4world<span class="selector-class">.qingmaoedu</span><span class="selector-class">.com</span></span><br><span class="line"></span><br><span class="line">rake posts:rebake</span><br></pre></td></tr></table></figure>
+<h2 id="插件-amp-主题"><a href="#插件-amp-主题" class="headerlink" title="插件&amp;主题"></a>插件&amp;主题</h2><p><a target="_blank" rel="noopener" href="https://meta.discourse.org/t/welcome-link-banner/218743">https://meta.discourse.org/t/welcome-link-banner/218743</a></p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a target="_blank" rel="noopener" href="https://github.com/discourse/discourse">https://github.com/discourse/discourse</a><br><a target="_blank" rel="noopener" href="https://github.com/discourse/discourse/blob/main/docs/INSTALL-cloud.md#5-install-discourse">https://github.com/discourse/discourse/blob/main/docs/INSTALL-cloud.md#5-install-discourse</a></p>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><h2 id="修改域名后批量换post"><a href="#修改域名后批量换post" class="headerlink" title="修改域名后批量换post"></a>修改域名后批量换post</h2><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">./launcher enter app</span><br><span class="line"></span><br><span class="line">discourse remap create4world<span class="selector-class">.com</span> create4world<span class="selector-class">.qingmaoedu</span><span class="selector-class">.com</span></span><br><span class="line"></span><br><span class="line">rake posts:rebake</span><br></pre></td></tr></table></figure>
 
 <p>参考：<br><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/8712ff48cadb">https://www.jianshu.com/p/8712ff48cadb</a></p>
+<h2 id="打开badges-SQL"><a href="#打开badges-SQL" class="headerlink" title="打开badges SQL"></a>打开badges SQL</h2><figure class="highlight node-repl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">./launcher enter app </span><br><span class="line">rails c </span><br><span class="line"><span class="meta">&gt;</span> <span class="language-javascript"><span class="title class_">SiteSetting</span>.<span class="property">enable_badge_sql</span> = <span class="literal">true</span></span></span><br></pre></td></tr></table></figure>
+
+<p>参考：<br><a target="_blank" rel="noopener" href="https://meta.discourse.org/t/enable-badge-sql/47894">https://meta.discourse.org/t/enable-badge-sql/47894</a><br><a target="_blank" rel="noopener" href="https://meta.discourse.org/t/some-common-badge-queries/31859">https://meta.discourse.org/t/some-common-badge-queries/31859</a><br><a target="_blank" rel="noopener" href="https://meta.discourse.org/t/what-cool-badge-queries-have-you-come-up-with/18978">https://meta.discourse.org/t/what-cool-badge-queries-have-you-come-up-with/18978</a></p>
+<h2 id="right-sidar-创建频道失败"><a href="#right-sidar-创建频道失败" class="headerlink" title="right sidar 创建频道失败"></a>right sidar 创建频道失败</h2><p>设置中修改此参数，默认为none</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">slug_generation_method</span> = encoded</span><br></pre></td></tr></table></figure>
+<h2 id="隐藏post-history"><a href="#隐藏post-history" class="headerlink" title="隐藏post history"></a>隐藏post history</h2><p> edit history visible to public 取消</p>
 <hr>
 <h1 id="Mac本地部署-discourse-测试"><a href="#Mac本地部署-discourse-测试" class="headerlink" title="Mac本地部署 discourse 测试"></a>Mac本地部署 discourse 测试</h1><ul>
 <li>安装homebrew &#96;&#x2F;bin&#x2F;zsh -c “$(curl -fsSL <a target="_blank" rel="noopener" href="https://gitee.com/cunkai/HomebrewCN/raw/master/Homebrew.sh)&quot;">https://gitee.com/cunkai/HomebrewCN/raw/master/Homebrew.sh)&quot;</a></li>
@@ -373,9 +383,8 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/ECS/" rel="tag"># ECS</a>
+              <a href="/tags/discourse/" rel="tag"># discourse</a>
               <a href="/tags/Ruby/" rel="tag"># Ruby</a>
-              <a href="/tags/%E5%AE%9E%E8%B7%B5/" rel="tag"># 实践</a>
           </div>
 
         
@@ -447,7 +456,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E4%B8%8E%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-text">环境与准备工作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BD%E5%86%85%E7%BD%91%E7%BB%9C%E9%97%AE%E9%A2%98"><span class="nav-text">国内网络问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#rebuild-%E9%97%AE%E9%A2%98"><span class="nav-text">rebuild 问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E9%97%AE%E9%A2%98"><span class="nav-text">其他问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%AE%B0%E5%BD%95"><span class="nav-text">安装常用命令记录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-text">安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%87%8D%E5%BB%BA"><span class="nav-text">重建</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Docker-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="nav-text">Docker 常用命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8F%92%E4%BB%B6-amp-%E4%B8%BB%E9%A2%98"><span class="nav-text">插件&amp;主题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-text">参考资料</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E5%9F%9F%E5%90%8D%E5%90%8E%E6%89%B9%E9%87%8F%E6%8D%A2post"><span class="nav-text">修改域名后批量换post</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Mac%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2-discourse-%E6%B5%8B%E8%AF%95"><span class="nav-text">Mac本地部署 discourse 测试</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%95%E8%BF%87%E9%82%AE%E4%BB%B6%E7%B3%BB%E7%BB%9F%E8%AE%BE%E7%BD%AE%E7%AE%A1%E7%90%86%E5%91%98"><span class="nav-text">绕过邮件系统设置管理员</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E4%B8%8E%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-text">环境与准备工作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BD%E5%86%85%E7%BD%91%E7%BB%9C%E9%97%AE%E9%A2%98"><span class="nav-text">国内网络问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#rebuild-%E9%97%AE%E9%A2%98"><span class="nav-text">rebuild 问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E9%97%AE%E9%A2%98"><span class="nav-text">其他问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%AE%B0%E5%BD%95"><span class="nav-text">安装常用命令记录</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E5%BB%BA"><span class="nav-text">重建</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Docker-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="nav-text">Docker 常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%92%E4%BB%B6-amp-%E4%B8%BB%E9%A2%98"><span class="nav-text">插件&amp;主题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-text">参考资料</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-text">其他</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E5%9F%9F%E5%90%8D%E5%90%8E%E6%89%B9%E9%87%8F%E6%8D%A2post"><span class="nav-text">修改域名后批量换post</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%93%E5%BC%80badges-SQL"><span class="nav-text">打开badges SQL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#right-sidar-%E5%88%9B%E5%BB%BA%E9%A2%91%E9%81%93%E5%A4%B1%E8%B4%A5"><span class="nav-text">right sidar 创建频道失败</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9A%90%E8%97%8Fpost-history"><span class="nav-text">隐藏post history</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Mac%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2-discourse-%E6%B5%8B%E8%AF%95"><span class="nav-text">Mac本地部署 discourse 测试</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%95%E8%BF%87%E9%82%AE%E4%BB%B6%E7%B3%BB%E7%BB%9F%E8%AE%BE%E7%BD%AE%E7%AE%A1%E7%90%86%E5%91%98"><span class="nav-text">绕过邮件系统设置管理员</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -470,13 +479,13 @@
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
