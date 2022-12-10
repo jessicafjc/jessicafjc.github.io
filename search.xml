@@ -1026,6 +1026,7 @@
 <li>找到博客配置文件 <code>_config.yml</code> ，在文件最底处修改内容如下：   <figure class="highlight avrasm"><table><tr><td class="code"><pre><span class="line"><span class="symbol">deploy:</span> </span><br><span class="line"><span class="symbol">type:</span> git</span><br><span class="line"><span class="symbol">repo:</span> git@github.com:yourname/yourname.github.io.git  <span class="meta">#yourname，自己Github用户名</span></span><br><span class="line"><span class="symbol">branch:</span> master		<span class="meta"># 设置分支管理</span></span><br></pre></td></tr></table></figure></li>
 <li>清理一下 <code>hexo clean</code> 重新部署看看 <code>hexo d -g</code></li>
 </ul>
+<p>注意：<code>Enter passphrase for key &#39;xxxx/.ssh/id_rsa&#39;:</code> 这里可以直接回车设置为空，免去每次输入密码的麻烦</p>
 <h1 id="阅读统计数据异常-LeanCloud"><a href="#阅读统计数据异常-LeanCloud" class="headerlink" title="阅读统计数据异常 LeanCloud"></a>阅读统计数据异常 LeanCloud</h1><p><code>Code 504: The app is archived, please restore in console before use. [400 GET https://tgi6isll.api.l</code></p>
 <ul>
 <li>应用因为超过 30 天没有访问，已经被归档。需要前往控制台应用列表点击「激活」按钮，自助重启应用。</li>
