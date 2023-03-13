@@ -1105,19 +1105,39 @@
     <title>搭建hexo个人博客</title>
     <url>/2019/11/25/%E6%90%AD%E5%BB%BAhexo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
     <content><![CDATA[<h1 id="环境搭建（现在官网有MacOS安装包，傻瓜操作无需以下步骤）"><a href="#环境搭建（现在官网有MacOS安装包，傻瓜操作无需以下步骤）" class="headerlink" title="环境搭建（现在官网有MacOS安装包，傻瓜操作无需以下步骤）"></a>环境搭建（现在官网有MacOS安装包，傻瓜操作无需以下步骤）</h1><ol>
-<li>node.js安装官网</li>
-<li>npm或cnpm <code>npm install -g cnpm --registry-https://registry.npm.taobao.org</code></li>
-<li>验证版本<code>node -v</code> <code>npm -v</code>或<code>cnpm -v</code></li>
-<li>安装hexo <code>cnpm install -g hexo-cli</code></li>
+<li><p>node.js安装 </p>
+<ol>
+<li>下载 <a href="https://nodejs.org/dist/v17.8.0/">https://nodejs.org/dist/v17.8.0/</a></li>
+<li>解压 tar.xz <code>tar xvJf xxxx.tar.xz</code></li>
+<li>修改文件夹名字 <code>mv xxxx nodejs</code></li>
+<li>添加软连接 ln -s &#x2F;root&#x2F;nodejs&#x2F;bin&#x2F;node &#x2F;usr&#x2F;local&#x2F;bin</li>
+<li>添加软连接 ln -s &#x2F;root&#x2F;nodejs&#x2F;bin&#x2F;npm &#x2F;usr&#x2F;local&#x2F;bin</li>
 </ol>
-<h1 id="创建本地Blog"><a href="#创建本地Blog" class="headerlink" title="创建本地Blog"></a>创建本地Blog</h1><ol>
-<li>建立空文件夹作为博客地址，<code>mkdir Blog</code></li>
-<li>前往该文件夹 <code>cd Blog/</code></li>
-<li>初始化hexo <code>hexo init</code> 这里使用命令创建文件夹是因为我通过<code>cmd + N</code>方式创建文件夹会提示为非空导致无法初始化hexo</li>
-<li>启动hexo 服务 <code>hexo s</code> 成功后可访问 <a href="http://localhost:4000/">http://localhost:4000/</a> ，使用 <code>ctl+C</code> 结束服务</li>
-<li>创建一篇Blog <code>hexo n &quot;文件名&quot;</code>，生成的Blog是markdown格式，会在 source&#x2F;_posts&#x2F; 这个文件夹下</li>
-<li>清理缓存<code>hexo clean</code>，生成博客 <code>hexo g</code></li>
-<li>本地启动hexo测试效果 <code>hexo s</code></li>
+</li>
+<li><p>可选</p>
+<ol>
+<li>安装 cnpm <code>npm install -g cnpm --registry-https://registry.npmmirror.com</code></li>
+<li>修改镜像源，先查看 <code>npm config get registry</code> 然后修改为国内阿里云 <code>npm config set registry https://registry.npmmirror.com</code></li>
+</ol>
+</li>
+<li><p>验证版本<code>node -v</code> <code>npm -v</code>或<code>cnpm -v</code></p>
+</li>
+<li><p>安装hexo <code>npm install -g hexo-cli</code> 或 <code>cnpm install -g hexo-cli</code><br>参考：<a href="https://help.aliyun.com/document_detail/50775.html">阿里云参考</a></p>
+<h1 id="创建本地Blog"><a href="#创建本地Blog" class="headerlink" title="创建本地Blog"></a>创建本地Blog</h1></li>
+<li><p>建立空文件夹作为博客地址，<code>mkdir Blog</code></p>
+</li>
+<li><p>前往该文件夹 <code>cd Blog/</code></p>
+</li>
+<li><p>初始化hexo <code>hexo init</code> 这里使用命令创建文件夹是因为我通过<code>cmd + N</code>方式创建文件夹会提示为非空导致无法初始化hexo</p>
+</li>
+<li><p>启动hexo 服务 <code>hexo s</code> 成功后可访问 <a href="http://localhost:4000/">http://localhost:4000/</a> ，使用 <code>ctl+C</code> 结束服务</p>
+</li>
+<li><p>创建一篇Blog <code>hexo n &quot;文件名&quot;</code>，生成的Blog是markdown格式，会在 source&#x2F;_posts&#x2F; 这个文件夹下</p>
+</li>
+<li><p>清理缓存<code>hexo clean</code>，生成博客 <code>hexo g</code></p>
+</li>
+<li><p>本地启动hexo测试效果 <code>hexo s</code></p>
+</li>
 </ol>
 <h1 id="Bug-Fixed-Record"><a href="#Bug-Fixed-Record" class="headerlink" title="Bug Fixed Record"></a>Bug Fixed Record</h1><ul>
 <li><p>bug</p>
